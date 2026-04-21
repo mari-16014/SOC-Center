@@ -1,0 +1,552 @@
+/* ============================================================
+   WIDGET — Dashboard widget cards, grid layout, chart containers
+   Captured from Figma Elegant Components 1.0 via MCP inspection
+   Frame: "1" (531:31621) — SOC Alerts Overview dashboard
+
+   FIGMA STRUCTURE:
+     Dashboard (INSTANCE 1568x2042)
+     ├── Header row (28px: title + date range + refresh + filter)
+     └── Body (VERTICAL gap:4)
+         ├── Row (HORIZONTAL gap:4)
+         │   ├── Widget Card (bg:#FFF, border:1px #E9E9E9, radius:4, pad:24)
+         │   └── Widget Card ...
+         ├── Row ...
+         └── Row ...
+
+   CAPTURED TOKENS (from Figma):
+     Widget bg: #FFFFFF
+     Widget border: 1px solid #E9E9E9 (233,233,233)
+     Widget border-radius: 4px
+     Widget padding: 24px all sides
+     Dashboard bg: #F5F5F5 (245,245,245)
+     Row/col gap: 4px
+     Title: 14px/600 #000000
+     Label: 11px/400 #626262
+     Value (sm): 20px/400 #000000
+     Value (lg): 28px/400 #000000
+     Toolbar icon: 24x24, bg:#D9D9D9, radius:2, pad:5
+   ============================================================ */
+
+/* ── Dashboard grid container ── */
+.dash {
+  background: var(--dash-bg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--dash-gap);
+}
+
+/* ── Dashboard header bar ── */
+.dash__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--dash-header-height);
+  padding: 4px 0 0;
+}
+.dash__header-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.dash__header-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.dash__title {
+  font-size: var(--widget-title-fs);
+  font-weight: var(--widget-title-fw);
+  color: var(--widget-title-color);
+}
+.dash__subtitle {
+  font-size: var(--widget-label-fs);
+  color: var(--widget-label-color);
+}
+
+/* ── Widget grid row ── */
+.dash__row {
+  display: flex;
+  gap: var(--dash-gap);
+}
+.dash__row > * {
+  flex: 1;
+  min-width: 0;
+}
+
+/* ── Widget card ── */
+.widget {
+  background: var(--widget-bg);
+  border: 1px solid var(--widget-border);
+  border-radius: var(--widget-radius);
+  padding: var(--widget-padding);
+  display: flex;
+  flex-direction: column;
+  gap: var(--widget-title-gap);
+}
+.widget--gap-lg {
+  gap: var(--widget-content-gap);
+}
+.widget--no-flex {
+  flex: none;
+}
+
+/* ── Widget header (title + toolbar) ── */
+.widget__header {
+  display: flex;
+  align-items: center;
+  gap: var(--widget-title-gap);
+  min-height: 24px;
+}
+.widget__title {
+  font-size: var(--widget-title-fs);
+  font-weight: var(--widget-title-fw);
+  color: var(--widget-title-color);
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ── Widget toolbar (maximize / refresh / more icons) ──
+   BEHAVIOR: Hidden by default. Appears on widget hover.
+   Individual icon bg is transparent; shows grey bg only on icon hover.
+   Each button supports a tooltip via title="" or data-tooltip="". */
+.widget__toolbar {
+  display: flex;
+  align-items: center;
+  gap: var(--widget-toolbar-gap);
+  flex-shrink: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+.widget:hover > .widget__header > .widget__toolbar,
+.widget:hover > .ch > .widget__toolbar,
+.card:hover > .ch > .widget__toolbar {
+  opacity: 1;
+  pointer-events: auto;
+}
+.widget__toolbar-btn {
+  position: relative;
+  width: var(--widget-toolbar-icon-size);
+  height: var(--widget-toolbar-icon-size);
+  background: transparent;
+  border-radius: var(--widget-toolbar-icon-radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--widget-toolbar-icon-pad);
+  border: none;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.widget__toolbar-btn:hover {
+  background: var(--widget-toolbar-icon-bg);
+}
+.widget__toolbar-btn img {
+  width: 14px;
+  height: 14px;
+}
+
+/* Tooltip — appears below the icon on hover */
+.widget__toolbar-btn::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 4px 8px;
+  background: #272D42;
+  color: #FFFFFF;
+  font-size: 11px;
+  font-weight: 400;
+  white-space: nowrap;
+  border-radius: 4px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  z-index: 10;
+}
+.widget__toolbar-btn:hover::after {
+  opacity: 1;
+}
+.widget__toolbar-btn:not([data-tooltip])::after,
+.widget__toolbar-btn[data-tooltip=""]::after {
+  display: none;
+}
+
+/* ── Widget body / content area ── */
+.widget__body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--widget-content-gap);
+  min-height: 0;
+}
+
+/* ── Value typography ── */
+.widget__value {
+  font-size: var(--widget-value-fs);
+  font-weight: var(--widget-value-fw);
+  color: var(--widget-value-color);
+  line-height: 1.2;
+}
+.widget__value--lg {
+  font-size: var(--widget-value-lg-fs);
+  font-weight: 400;
+}
+.widget__value--xl {
+  font-size: var(--widget-value-xl-fs);
+  font-weight: var(--widget-value-xl-fw);
+}
+.widget__label {
+  font-size: var(--widget-label-fs);
+  font-weight: var(--widget-label-fw);
+  color: var(--widget-label-color);
+}
+.widget__pct {
+  font-size: var(--widget-pct-fs);
+  font-weight: var(--widget-pct-fw);
+  color: var(--widget-pct-color);
+}
+.widget__sub {
+  font-size: var(--widget-sub-fs);
+  color: var(--widget-sub-color);
+}
+
+/* ── Stat row (icon/label + value inline) ── */
+.stat-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.stat-row__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.stat-row__icon {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+/* ── Stat KV pair (label left, value right) ── */
+.stat-kv {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 0;
+  border-bottom: 1px solid var(--widget-border);
+}
+.stat-kv:last-child {
+  border-bottom: none;
+}
+
+/* ── Legend (chart legends) ── */
+.chart-legend {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.chart-legend__item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: var(--widget-label-fs);
+  color: var(--widget-label-color);
+}
+.chart-legend__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* ── Horizontal bar chart (pure CSS) ── */
+.hbar {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.hbar__row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.hbar__label {
+  font-size: 11px;
+  color: var(--widget-label-color);
+  width: 80px;
+  text-align: right;
+  flex-shrink: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.hbar__track {
+  flex: 1;
+  background: var(--chart-grid);
+  border-radius: 2px;
+  height: 16px;
+  overflow: hidden;
+}
+.hbar__fill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.6s ease-out;
+}
+.hbar__value {
+  font-size: 28px;
+  font-weight: 300;
+  width: 48px;
+  text-align: right;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+/* ── Severity badge ── */
+.sev-badge {
+  display: inline-block;
+  padding: var(--sev-badge-pad);
+  border-radius: var(--sev-badge-radius);
+  font-size: var(--sev-badge-fs);
+  font-weight: var(--sev-badge-fw);
+  color: var(--sev-badge-text);
+  white-space: nowrap;
+  line-height: 1.3;
+}
+.sev-badge--critical { background: var(--sev-critical-bg); }
+.sev-badge--high     { background: var(--sev-high-bg); }
+.sev-badge--medium   { background: var(--sev-medium-bg); color: #000; }
+.sev-badge--low      { background: var(--sev-low-bg); }
+.sev-badge--verylow  { background: var(--sev-verylow-bg); }
+
+/* ── Alert card (Recent Alerts feed) ── */
+.alert-feed {
+  display: flex;
+  flex-direction: column;
+  gap: var(--alert-card-list-gap);
+  overflow-y: auto;
+  flex: 1;
+}
+.alert-card {
+  background: var(--alert-card-bg);
+  border: 1px solid var(--alert-card-border);
+  border-radius: var(--alert-card-radius);
+  padding: var(--alert-card-padding);
+  display: flex;
+  flex-direction: column;
+  gap: var(--alert-card-gap);
+}
+.alert-card__header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.alert-card__icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 12px;
+  color: #FFFFFF;
+}
+.alert-card__icon--critical { background: var(--sev-critical-bg); }
+.alert-card__icon--high     { background: var(--sev-high-bg); }
+.alert-card__icon--medium   { background: var(--sev-medium-bg); }
+.alert-card__icon--low      { background: var(--sev-low-bg); }
+.alert-card__name {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--widget-title-color);
+  flex: 1;
+}
+.alert-card__body {
+  font-size: var(--alert-card-body-fs);
+  color: var(--alert-card-body-color);
+  line-height: 1.5;
+}
+.alert-card__meta {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: var(--widget-label-fs);
+  color: var(--widget-label-color);
+}
+
+/* ── Donut / ring indicator ── */
+.donut-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.donut-wrap canvas {
+  display: block;
+}
+.donut-center {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.donut-center__value {
+  font-size: var(--widget-pct-fs);
+  font-weight: var(--widget-pct-fw);
+  color: var(--widget-pct-color);
+  line-height: 1.2;
+}
+.donut-center__label {
+  font-size: 9px;
+  color: var(--widget-label-color);
+}
+
+/* ── Priority score bar (segmented horizontal) ── */
+.prio-bar {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.prio-bar__track {
+  display: flex;
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.prio-bar__segment {
+  height: 100%;
+  transition: width 0.5s ease-out;
+}
+.prio-bar__labels {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.prio-bar__label {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.prio-bar__label-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+.prio-bar__label-text {
+  font-size: 11px;
+  color: var(--widget-label-color);
+}
+.prio-bar__label-value {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--widget-title-color);
+}
+
+/* ── Chart container (for Chart.js canvas) ── */
+.chart-container {
+  position: relative;
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+}
+.chart-container canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* ── Responder card (avatar + stats) ── */
+.responder-strip {
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+.responder-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  min-width: 120px;
+  flex-shrink: 0;
+}
+.responder-card__avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--chart-grid);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.responder-card__avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.responder-card__name {
+  font-size: 11px;
+  color: var(--widget-title-color);
+  text-align: center;
+}
+.responder-card__stat {
+  font-size: var(--widget-value-lg-fs);
+  font-weight: 400;
+  color: var(--widget-value-color);
+}
+.responder-card__label {
+  font-size: 9px;
+  color: var(--widget-label-color);
+  text-align: center;
+}
+.responder-card__bar {
+  width: 100%;
+  height: 4px;
+  border-radius: 2px;
+  overflow: hidden;
+}
+.responder-card__bar-fill {
+  height: 100%;
+  border-radius: 2px;
+}
+
+/* ── Divider (thin line between sections inside a widget) ── */
+.widget__divider {
+  border: none;
+  border-top: 1px solid var(--widget-border);
+  margin: 0;
+}
+
+/* ── Color utility classes ── */
+.c-red      { color: var(--chart-red); }
+.c-green    { color: var(--chart-green); }
+.c-blue     { color: var(--chart-blue); }
+.c-amber    { color: var(--chart-amber); }
+.c-orange   { color: var(--chart-orange); }
+.c-purple   { color: var(--chart-purple); }
+.c-teal     { color: var(--chart-teal); }
+.c-grey     { color: var(--widget-label-color); }
+.c-black    { color: var(--widget-title-color); }
+.bg-red     { background: var(--chart-red); }
+.bg-green   { background: var(--chart-green); }
+.bg-blue    { background: var(--chart-blue); }
+.bg-amber   { background: var(--chart-amber); }
+.bg-orange  { background: var(--chart-orange); }
+.bg-purple  { background: var(--chart-purple); }
+.bg-teal    { background: var(--chart-teal); }
+
+/* ── Responsive collapse ── */
+@media (max-width: 1024px) {
+  .dash__row {
+    flex-direction: column;
+  }
+}

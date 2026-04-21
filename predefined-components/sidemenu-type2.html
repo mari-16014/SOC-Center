@@ -1,0 +1,182 @@
+<!--
+  ============================================================
+  SIDEMENU TYPE 2 — Reports variant (flat accordion + OS dropdown)
+  ============================================================
+
+  CONFIGURATION:
+  ─────────────
+  Set data-active-item="ItemName" on the <aside> to auto-highlight
+  a menu item. For L1-level highlighting (no sub-items), the L1
+  button itself gets highlighted.
+
+  OS DROPDOWN:
+  The dropdown at the top switches between Windows and Unix/Linux.
+  When switching, the OS icon next to the label swaps automatically.
+  Set data-os="windows" (default) or data-os="linux" on the aside.
+
+  CSS:  tokens.css + sidemenu.css (includes Type 2 rules)
+  JS:   sidemenu.js (includes OS dropdown + flat accordion logic)
+  ============================================================
+-->
+
+<!-- ═══════ SIDEMENU TYPE 2 (w=240) — Reports ═══════ -->
+<aside class="sidemenu sidemenu--type2" data-active-item="All Events">
+  <div class="sidemenu__scroll scrollbar-thin">
+
+    <!-- OS Dropdown + divider + Search -->
+    <div class="sidemenu__os-dropdown-wrap">
+      <div class="sidemenu__os-dropdown">
+        <img src="../assets/icons/icon-os-windows.svg" alt="" class="sidemenu__os-icon" />
+        <span class="sidemenu__os-label">Windows</span>
+        <div class="sidemenu__os-arrow">
+          <img src="../assets/icons/icon-sm-chevron-down.svg" alt="" />
+        </div>
+        <!-- Dropdown options -->
+        <div class="sidemenu__os-options">
+          <div class="sidemenu__os-option" data-label="Windows" data-icon="../assets/icons/icon-os-windows.svg">
+            <img src="../assets/icons/icon-os-windows.svg" alt="" /> Windows
+          </div>
+          <div class="sidemenu__os-option" data-label="Unix/Linux" data-icon="../assets/icons/icon-os-linux.svg">
+            <img src="../assets/icons/icon-os-linux.svg" alt="" /> Unix/Linux
+          </div>
+        </div>
+      </div>
+
+      <div class="sidemenu__divider"></div>
+
+      <div class="sidemenu__search">
+        <img src="../assets/icons/icon-search-settings.svg" alt="" />
+        <input type="text" placeholder="Search Reports" />
+      </div>
+    </div>
+
+    <!-- ── Flat accordion menu items ── -->
+
+    <div class="sidemenu__section">
+      <button class="sidemenu__l1 sidemenu__l1--flat">
+        <img src="../assets/icons/icon-sm-chevron-right.svg" alt="" class="sidemenu__chevron" />
+        <span>Unix Events</span>
+      </button>
+      <a href="#" class="sidemenu__item" style="display:none">All Events</a>
+      <a href="#" class="sidemenu__item" style="display:none">Important Events</a>
+    </div>
+
+    <div class="sidemenu__section">
+      <button class="sidemenu__l1 sidemenu__l1--flat">
+        <img src="../assets/icons/icon-sm-chevron-right.svg" alt="" class="sidemenu__chevron" />
+        <span>Logon Reports</span>
+      </button>
+      <a href="#" class="sidemenu__item" style="display:none">Successful Logons</a>
+      <a href="#" class="sidemenu__item" style="display:none">Failed Logons</a>
+    </div>
+
+    <div class="sidemenu__section">
+      <button class="sidemenu__l1 sidemenu__l1--flat">
+        <img src="../assets/icons/icon-sm-chevron-right.svg" alt="" class="sidemenu__chevron" />
+        <span>Logoff Reports</span>
+      </button>
+    </div>
+
+    <div class="sidemenu__section">
+      <button class="sidemenu__l1 sidemenu__l1--flat">
+        <img src="../assets/icons/icon-sm-chevron-right.svg" alt="" class="sidemenu__chevron" />
+        <span>Trend Reports</span>
+      </button>
+    </div>
+
+    <div class="sidemenu__section">
+      <button class="sidemenu__l1 sidemenu__l1--flat">
+        <img src="../assets/icons/icon-sm-chevron-right.svg" alt="" class="sidemenu__chevron" />
+        <span>Failed Logon Reports</span>
+      </button>
+    </div>
+
+    <div class="sidemenu__section">
+      <button class="sidemenu__l1 sidemenu__l1--flat">
+        <img src="../assets/icons/icon-sm-chevron-right.svg" alt="" class="sidemenu__chevron" />
+        <span>User Account Management</span>
+      </button>
+    </div>
+
+    <div class="sidemenu__section">
+      <button class="sidemenu__l1 sidemenu__l1--flat">
+        <img src="../assets/icons/icon-sm-chevron-right.svg" alt="" class="sidemenu__chevron" />
+        <span>Removable Disk Auditing</span>
+      </button>
+    </div>
+
+    <div class="sidemenu__section">
+      <button class="sidemenu__l1 sidemenu__l1--flat">
+        <img src="../assets/icons/icon-sm-chevron-right.svg" alt="" class="sidemenu__chevron" />
+        <span>SUDO Commands</span>
+      </button>
+    </div>
+
+    <div class="sidemenu__section">
+      <button class="sidemenu__l1 sidemenu__l1--flat">
+        <img src="../assets/icons/icon-sm-chevron-right.svg" alt="" class="sidemenu__chevron" />
+        <span>Mail Server Reports</span>
+      </button>
+    </div>
+
+    <div class="sidemenu__section">
+      <button class="sidemenu__l1 sidemenu__l1--flat">
+        <img src="../assets/icons/icon-sm-chevron-right.svg" alt="" class="sidemenu__chevron" />
+        <span>Threats Reports</span>
+      </button>
+    </div>
+
+    <div class="sidemenu__section">
+      <button class="sidemenu__l1 sidemenu__l1--flat">
+        <img src="../assets/icons/icon-sm-chevron-right.svg" alt="" class="sidemenu__chevron" />
+        <span>NFS Reports</span>
+      </button>
+    </div>
+
+    <div class="sidemenu__section">
+      <button class="sidemenu__l1 sidemenu__l1--flat">
+        <img src="../assets/icons/icon-sm-chevron-right.svg" alt="" class="sidemenu__chevron" />
+        <span>Others</span>
+      </button>
+    </div>
+
+    <div class="sidemenu__section">
+      <button class="sidemenu__l1 sidemenu__l1--flat">
+        <img src="../assets/icons/icon-sm-chevron-right.svg" alt="" class="sidemenu__chevron" />
+        <span>FTP Server Reports</span>
+      </button>
+    </div>
+
+    <div class="sidemenu__section">
+      <button class="sidemenu__l1 sidemenu__l1--flat">
+        <img src="../assets/icons/icon-sm-chevron-right.svg" alt="" class="sidemenu__chevron" />
+        <span>System Events</span>
+      </button>
+    </div>
+
+    <div class="sidemenu__section">
+      <button class="sidemenu__l1 sidemenu__l1--flat">
+        <img src="../assets/icons/icon-sm-chevron-right.svg" alt="" class="sidemenu__chevron" />
+        <span>Device Severity Reports</span>
+      </button>
+    </div>
+
+  </div>
+
+  <!-- Bottom links -->
+  <div class="sidemenu__bottom-links">
+    <a href="#" class="sidemenu__bottom-link">Scheduled Reports</a>
+    <a href="#" class="sidemenu__bottom-link">Manage Reports</a>
+    <a href="#" class="sidemenu__bottom-link">
+      <img src="../assets/icons/icon-bulb.svg" alt="" />
+      Need New Reports ?
+    </a>
+  </div>
+
+  <!-- Bottom bar -->
+  <div class="sidemenu__bottom">
+    <button class="sidemenu__bottom-btn" title="Collapse sidebar">
+      <img src="../assets/icons/icon-slider-close.svg" alt="" />
+    </button>
+  </div>
+</aside>

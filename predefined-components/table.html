@@ -1,0 +1,150 @@
+<!--
+  ============================================================
+  DATA TABLE — Predefined HTML Component
+  ============================================================
+
+  CONFIGURATION:
+  - Columns:     Update <colgroup> widths and <th> headers
+  - Body:        Populate <tbody> with rows (static or via JS)
+  - Column types: Use these cell classes:
+      .cell-checkbox    — 16x16 checkbox (auto-handled by table.js)
+      .cell-actions     — Row of 24x24 action icons, gap 8px
+      .cell-icon-text   — 14x14 icon + text, gap 8px
+      .cell-status      — 14x14 status icon + text, gap 6px
+      .cell-link        — Blue clickable link text
+      (plain <td>)      — Regular text cell
+
+  CHECKBOX BEHAVIOUR (powered by table.js):
+    table.js auto-replaces any <img> inside .cell-checkbox with inline SVG.
+    Three visual states from Figma Elegant 1.0:
+      unchecked     — white fill, #ABABAB border
+      checked       — #2C66DD blue fill, white checkmark
+      indeterminate — white fill, #2C66DD border + blue dash
+
+    - Click a body checkbox  → toggles checked/unchecked, row gets
+      .data-table__row--selected (light blue bg)
+    - Header checkbox:
+        all unchecked → click → checks ALL rows
+        all checked   → click → unchecks ALL rows
+        some checked  → header shows indeterminate; click → checks ALL
+    - Fires custom event "table:selectionchange" on the <table>
+      with detail { selectedIndices: [...], count: N }
+
+    Public JS API (window.TableCheckbox):
+      TableCheckbox.getSelectedRows(tableEl)   → Array of <tr>
+      TableCheckbox.getSelectedCount(tableEl)   → Number
+      TableCheckbox.selectAll(tableEl)
+      TableCheckbox.deselectAll(tableEl)
+
+  AVAILABLE COLUMN ICONS:
+    Checkbox:  icon-checkbox.svg / icon-checkbox-checked.svg /
+               icon-checkbox-indeterminate.svg  (SVGs in assets/icons)
+    Actions:   icon-action-approve.svg, icon-action-edit.svg,
+               icon-action-delete.svg, icon-action-more.svg
+    Agent:     icon-agent.svg
+    Status (14 types):
+      icon-status-success.svg         — Success (green checkmark)
+      icon-status-warning.svg         — Warning (amber triangle)
+      icon-status-stopped.svg         — Stopped (red circle X)
+      icon-status-on-hold.svg         — On hold (blue pause)
+      icon-status-not-started.svg     — Not started (gray circle)
+      icon-status-partial.svg         — Partial (orange half-circle)
+      icon-status-waiting.svg         — Waiting (blue hourglass)
+      icon-status-partial-success.svg — Partial Success (green half-check)
+      icon-status-info-low.svg        — Info - low (blue circle i)
+      icon-status-skipped.svg         — Skipped (gray skip arrow)
+      icon-status-info-medium.svg     — Info - Medium (orange circle i)
+      icon-status-info-high.svg       — Info - High (red circle i)
+      icon-status-disabled.svg        — Disabled (red circle X)
+      icon-status-enabled.svg         — Enabled (green checkmark)
+
+  STATUS ICON JS MAP (use in inline <script> for data population):
+    var statusMap = {
+      'Success':         'icon-status-success.svg',
+      'Warning':         'icon-status-warning.svg',
+      'Stopped':         'icon-status-stopped.svg',
+      'On hold':         'icon-status-on-hold.svg',
+      'Not started':     'icon-status-not-started.svg',
+      'Partial':         'icon-status-partial.svg',
+      'Waiting':         'icon-status-waiting.svg',
+      'Partial Success': 'icon-status-partial-success.svg',
+      'Info - low':      'icon-status-info-low.svg',
+      'Skipped':         'icon-status-skipped.svg',
+      'Info - Medium':   'icon-status-info-medium.svg',
+      'Info - High':     'icon-status-info-high.svg',
+      'Disabled':        'icon-status-disabled.svg',
+      'Enabled':         'icon-status-enabled.svg'
+    };
+
+  TABLE ROW COLORS:
+    Header bg:           #F5F5F5  (--table-header-bg)
+    Row hover:           #FAFAFA  (--table-hover-bg)
+    Row selected:        #F9FBFF  (--table-selected-bg)
+    Row selected+hover:  #F0F5FF  (--table-selected-hover-bg)
+
+  CSS:  tokens.css + table.css
+  JS:   table.js  (checkbox 3-state toggle, row highlight, refresh spin)
+  ============================================================
+-->
+
+<div class="data-table-wrap">
+  <table class="data-table">
+    <colgroup>
+      <col style="width:48px;" />   <!-- Checkbox -->
+      <col style="width:130px;" />  <!-- Actions -->
+      <col style="width:120px;" />  <!-- Column 1 -->
+      <col style="width:140px;" />  <!-- Column 2 -->
+      <col style="width:130px;" />  <!-- Column 3 -->
+      <col style="width:155px;" />  <!-- Column 4 -->
+      <col style="width:100px;" />  <!-- Column 5 -->
+      <col style="width:90px;" />   <!-- Column 6 -->
+      <col style="width:130px;" />  <!-- Column 7 -->
+    </colgroup>
+    <thead>
+      <tr>
+        <th class="cell-checkbox"><img src="../assets/icons/icon-checkbox.svg" alt="" /></th>
+        <th>Actions</th>
+        <th>Column 1</th>
+        <th>Column 2</th>
+        <th>Column 3</th>
+        <th>Column 4</th>
+        <th>Column 5</th>
+        <th>Column 6</th>
+        <th>Column 7</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Static row example: -->
+      <!--
+      <tr>
+        <td class="cell-checkbox"><img src="../assets/icons/icon-checkbox.svg" alt="" /></td>
+        <td>
+          <div class="cell-actions">
+            <img src="../assets/icons/icon-action-approve.svg" alt="Approve" />
+            <img src="../assets/icons/icon-action-edit.svg" alt="Edit" />
+            <img src="../assets/icons/icon-action-delete.svg" alt="Delete" />
+            <img src="../assets/icons/icon-action-more.svg" alt="More" />
+          </div>
+        </td>
+        <td>Value</td>
+        <td>Value</td>
+        <td>
+          <div class="cell-icon-text">
+            <img src="../assets/icons/icon-agent.svg" alt="" />
+            <span>Agent name</span>
+          </div>
+        </td>
+        <td>2026-01-13 15:51:34</td>
+        <td>-</td>
+        <td>
+          <div class="cell-status">
+            <img src="../assets/icons/icon-status-disabled.svg" alt="" />
+            <span>Disabled</span>
+          </div>
+        </td>
+        <td><a href="#" class="cell-link">View Reports</a></td>
+      </tr>
+      -->
+    </tbody>
+  </table>
+</div>

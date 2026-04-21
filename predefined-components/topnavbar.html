@@ -1,0 +1,137 @@
+<!--
+  ============================================================
+  TOPNAVBAR — Predefined HTML Component
+  ============================================================
+  Height: 78px (Row1=44 + Row2=34)
+
+  CONFIGURATION (data- attribute):
+  ─────────────────────────────────
+  Set data-active-tab="TabName" on the <header> element.
+  The JS (topnavbar.js) reads this attribute on page load and
+  automatically applies topnavbar__tab--selected to the matching tab.
+  All tabs start as --unselected in the HTML — no manual class editing needed.
+
+  AVAILABLE TAB NAMES (case-sensitive, must match text exactly):
+    Dashboard | Reports | Compliance | Search | Correlation
+    Alert | Cloud Protection | Settings | Support
+
+  EXAMPLE:
+    <header class="topnavbar" data-active-tab="Settings">
+    <header class="topnavbar" data-active-tab="Reports">
+    <header class="topnavbar" data-active-tab="Dashboard">
+
+  RESPONSIVE — Priority+ Navigation (mobile/tablet):
+  As the screen shrinks below 1024px, tabs overflow one by one
+  from the right. The active tab is ALWAYS kept visible.
+  Overflowed tabs are pushed to the "..." bottom sheet.
+  The "..." button auto-appears when any tab overflows.
+  User can click visible tabs directly, or click "..." to see
+  the rest and switch from the bottom sheet.
+  The bottom sheet HTML must also be included (see nav-bottom-sheet below).
+
+  ICONS:
+    Uses LOCAL Figma-exported SVG icons from assets/icons/.
+    Hamburger: <img src="./assets/icons/icon-menu.svg" /> (white strokes)
+    More tabs: <img src="./assets/icons/icon-ab-more.svg" /> (with filter:brightness(10) for white)
+    ICON PRIORITY: (1) assets/icons/ local SVGs FIRST → (2) Lucide CDN ONLY for
+    48px tile icons needing dynamic color. NEVER use Lucide CDN when a local icon exists.
+
+  CSS:  tokens.css + topnavbar.css + responsive.css
+  JS:   topnavbar.js  (reads data-active-tab + click switching + bottom sheet)
+  ============================================================
+-->
+
+<header class="topnavbar" data-active-tab="Settings">
+
+  <!-- Row 1: Brand Bar (h=44, bg=#272D42) -->
+  <div class="topnavbar__row1">
+      <div class="topnavbar__row1-container">
+        <button class="topnavbar__hamburger" title="Menu" aria-label="Toggle navigation">
+          <img src="./assets/icons/icon-menu.svg" alt="" style="width:20px;height:20px;" />
+        </button>
+        <a href="#" class="topnavbar__logo">
+          <img class="topnavbar__logo-icon" src="../assets/icons/logo-log360.svg" alt="Log360" />
+          <span class="topnavbar__logo-text">Log360 Cloud</span>
+        </a>
+
+      <div class="topnavbar__right">
+        <span class="topnavbar__subscription">Subscription</span>
+        <div class="topnavbar__divider"></div>
+
+        <div class="topnavbar__icons">
+          <button class="topnavbar__icon-btn" title="Notifications">
+            <img src="../assets/icons/icon-notification.svg" alt="" />
+            <span class="topnavbar__badge topnavbar__badge--blue">8</span>
+          </button>
+          <button class="topnavbar__icon-btn" title="Alerts">
+            <img src="../assets/icons/icon-notification.svg" alt="" />
+            <span class="topnavbar__badge topnavbar__badge--red">9+</span>
+          </button>
+          <button class="topnavbar__icon-btn" title="Help">
+            <img src="../assets/icons/icon-question.svg" alt="" />
+          </button>
+        </div>
+
+        <button class="topnavbar__avatar" title="Account">
+          <img src="../assets/icons/icon-user-avatar.svg" alt="User" />
+        </button>
+
+        <button class="topnavbar__grid" title="Apps">
+          <img src="../assets/icons/icon-apps-grid.svg" alt="" />
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Row 2: Nav Tabs + Search (h=34, bg=#343B52) -->
+  <div class="topnavbar__row2">
+    <div class="topnavbar__row2-container">
+      <nav class="topnavbar__tabs">
+        <a href="#" class="topnavbar__tab topnavbar__tab--unselected">Dashboard</a>
+        <a href="#" class="topnavbar__tab topnavbar__tab--unselected">Reports</a>
+        <a href="#" class="topnavbar__tab topnavbar__tab--unselected">Compliance</a>
+        <a href="#" class="topnavbar__tab topnavbar__tab--unselected">Search</a>
+        <a href="#" class="topnavbar__tab topnavbar__tab--unselected">Thread Hub</a>
+        <a href="#" class="topnavbar__tab topnavbar__tab--unselected">Cloud Protection</a>
+        <a href="#" class="topnavbar__tab topnavbar__tab--unselected">Settings</a>
+        <a href="#" class="topnavbar__tab topnavbar__tab--unselected">Support</a>
+      </nav>
+      <button class="topnavbar__more" title="More tabs" aria-label="Show all tabs">
+        <img src="./assets/icons/icon-ab-more.svg" alt="" style="width:18px;height:18px;filter:brightness(10);" />
+      </button>
+
+      <div class="topnavbar__segment">
+        <div class="topnavbar__search">
+          <img src="../assets/icons/icon-search.svg" alt="" style="width:14px;height:14px;" />
+          <input type="text" placeholder="Log Search" />
+        </div>
+        <button class="topnavbar__add-btn">
+          <img src="../assets/icons/icon-plus.svg" alt="" style="width:10px;height:10px;" />
+          <span>Add</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!--
+  NAV BOTTOM SHEET — Place this OUTSIDE <div class="app-shell">, right before <script> tags.
+  The JS (topnavbar.js) auto-syncs the active item with data-active-tab.
+-->
+<div class="nav-bottom-sheet" id="navBottomSheet">
+  <div class="nav-bottom-sheet__backdrop"></div>
+  <div class="nav-bottom-sheet__panel">
+    <div class="nav-bottom-sheet__handle"></div>
+    <ul class="nav-bottom-sheet__list">
+      <li><button class="nav-bottom-sheet__item" data-tab="Dashboard">Dashboard</button></li>
+      <li><button class="nav-bottom-sheet__item" data-tab="Reports">Reports</button></li>
+      <li><button class="nav-bottom-sheet__item" data-tab="Compliance">Compliance</button></li>
+      <li><button class="nav-bottom-sheet__item" data-tab="Search">Search</button></li>
+      <li><button class="nav-bottom-sheet__item" data-tab="Correlation">Correlation</button></li>
+      <li><button class="nav-bottom-sheet__item" data-tab="Alert">Alert</button></li>
+      <li><button class="nav-bottom-sheet__item" data-tab="Cloud Protection">Cloud Protection</button></li>
+      <li><button class="nav-bottom-sheet__item" data-tab="Settings">Settings</button></li>
+      <li><button class="nav-bottom-sheet__item" data-tab="Support">Support</button></li>
+    </ul>
+  </div>
+</div>

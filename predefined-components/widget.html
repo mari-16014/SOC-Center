@@ -1,0 +1,315 @@
+<!-- ═══════════════════════════════════════════════════════════
+  WIDGET COMPONENT — Predefined HTML templates
+  Captured from Figma Elegant Components 1.0 — SOC Alerts Overview
+
+  USAGE: Copy the widget patterns you need into your page's
+  <main class="main-content"> area. Wrap all widgets inside
+  a <div class="dash"> container.
+
+  TOOLBAR BEHAVIOR:
+    - Icons are HIDDEN by default (opacity: 0)
+    - On WIDGET HOVER → toolbar fades in (opacity: 1)
+    - Individual icons have NO background by default (transparent)
+    - On ICON HOVER → grey background appears + tooltip below
+    - Add data-tooltip="Label" to each button for tooltip text
+
+  FIGMA SOURCE TOKENS:
+    Widget card: bg #FFFFFF, border 1px #E9E9E9, radius 4px, pad 24px
+    Title: Zoho Puvi 14px/600 #000000
+    Label: Zoho Puvi 11px/400 #626262
+    Value: Zoho Puvi 20-28px/400 #000000
+    Toolbar icons: 24x24, transparent bg, radius 2px, hover bg #D9D9D9
+    Row gap: 4px, column gap: 4px
+═══════════════════════════════════════════════════════════ -->
+
+<!-- ── DASHBOARD CONTAINER ── -->
+<!--
+<div class="dash">
+  <div class="dash__header">
+    <div class="dash__header-left">
+      <span class="dash__title">Alerts Overview</span>
+      <span class="dash__subtitle">▾</span>
+    </div>
+    <div class="dash__header-right">
+      <button class="widget__toolbar-btn"><img src="../assets/icons/icon-refresh.svg" alt="Refresh"></button>
+      <button class="widget__toolbar-btn"><img src="../assets/icons/icon-filter.svg" alt="Filter"></button>
+      <span class="widget__label">Last 7 Days</span>
+    </div>
+  </div>
+
+  <div class="dash__row"> ... widgets ... </div>
+  <div class="dash__row"> ... widgets ... </div>
+</div>
+-->
+
+
+<!-- ══════════════════════════════════════════════════════
+     PATTERN 1: STAT CARD (Active Alerts style)
+     Large number + sparkline + severity breakdown
+     Figma: pad 24, gap 8, title 14/600 #000, value 28/400 #000
+══════════════════════════════════════════════════════ -->
+<!--
+<div class="widget">
+  <div class="widget__header">
+    <span class="widget__title">Active Alerts</span>
+    <div class="widget__toolbar">
+      <button class="widget__toolbar-btn" data-tooltip="Maximize"><img src="../assets/icons/icon-widget-maximize.svg" alt=""></button>
+      <button class="widget__toolbar-btn" data-tooltip="Refresh"><img src="../assets/icons/icon-refresh.svg" alt=""></button>
+      <button class="widget__toolbar-btn" data-tooltip="More"><img src="../assets/icons/icon-more.svg" alt=""></button>
+    </div>
+  </div>
+  <div class="widget__body">
+    <div style="display:flex;gap:8px;align-items:flex-end">
+      <div>
+        <div class="widget__value--lg">10,000</div>
+        <div class="widget__sub" style="color:var(--chart-red)">↑20%</div>
+      </div>
+      <div class="chart-container" style="height:48px;flex:1"><canvas id="sparkline-1"></canvas></div>
+    </div>
+    <div style="display:flex;gap:24px;flex-wrap:wrap">
+      <div class="stat-row"><span class="widget__label">Alert Severity</span></div>
+      <div class="stat-row"><img class="stat-row__icon" src="../assets/icons/icon-status-disabled.svg"><span class="widget__value" style="font-size:20px">560</span></div>
+      <div class="stat-row"><img class="stat-row__icon" src="../assets/icons/icon-status-disabled.svg"><span class="widget__value" style="font-size:20px">220</span></div>
+    </div>
+  </div>
+</div>
+-->
+
+
+<!-- ══════════════════════════════════════════════════════
+     PATTERN 2: PRIORITY SCORE BAR
+     Segmented horizontal bar + labels below
+     Figma: 5 segments, labels with dot + text + value
+══════════════════════════════════════════════════════ -->
+<!--
+<div class="widget">
+  <div class="widget__header">
+    <span class="widget__title">Priority Score</span>
+    <div class="widget__toolbar">
+      <button class="widget__toolbar-btn" data-tooltip="Maximize"><img src="../assets/icons/icon-widget-maximize.svg" alt=""></button>
+      <button class="widget__toolbar-btn" data-tooltip="Refresh"><img src="../assets/icons/icon-refresh.svg" alt=""></button>
+      <button class="widget__toolbar-btn" data-tooltip="More"><img src="../assets/icons/icon-more.svg" alt=""></button>
+    </div>
+  </div>
+  <div class="prio-bar">
+    <div class="prio-bar__track">
+      <div class="prio-bar__segment bg-red" style="width:33%"></div>
+      <div class="prio-bar__segment bg-orange" style="width:27%"></div>
+      <div class="prio-bar__segment bg-amber" style="width:17%"></div>
+      <div class="prio-bar__segment bg-blue" style="width:10%"></div>
+      <div class="prio-bar__segment bg-green" style="width:13%"></div>
+    </div>
+    <div class="prio-bar__labels">
+      <div class="prio-bar__label"><span class="prio-bar__label-dot bg-red"></span><span class="prio-bar__label-text">Critical 81-100</span><span class="prio-bar__label-value">100</span></div>
+      <div class="prio-bar__label"><span class="prio-bar__label-dot bg-orange"></span><span class="prio-bar__label-text">High 71-80</span><span class="prio-bar__label-value">80</span></div>
+      <div class="prio-bar__label"><span class="prio-bar__label-dot bg-amber"></span><span class="prio-bar__label-text">Medium 51-70</span><span class="prio-bar__label-value">50</span></div>
+      <div class="prio-bar__label"><span class="prio-bar__label-dot bg-blue"></span><span class="prio-bar__label-text">Low 26-50</span><span class="prio-bar__label-value">30</span></div>
+      <div class="prio-bar__label"><span class="prio-bar__label-dot bg-green"></span><span class="prio-bar__label-text">Very Low 0-25</span><span class="prio-bar__label-value">50</span></div>
+    </div>
+  </div>
+</div>
+-->
+
+
+<!-- ══════════════════════════════════════════════════════
+     PATTERN 3: DONUT CHART (Alerts Intelligence style)
+     Ring donut with center percentage + side stats
+     Uses Chart.js for rendering
+══════════════════════════════════════════════════════ -->
+<!--
+<div class="widget widget--gap-lg">
+  <div class="widget__header">
+    <span class="widget__title">Alerts Intelligence</span>
+    <div class="widget__toolbar">
+      <button class="widget__toolbar-btn" data-tooltip="Maximize"><img src="../assets/icons/icon-widget-maximize.svg" alt=""></button>
+      <button class="widget__toolbar-btn" data-tooltip="Refresh"><img src="../assets/icons/icon-refresh.svg" alt=""></button>
+      <button class="widget__toolbar-btn" data-tooltip="More"><img src="../assets/icons/icon-more.svg" alt=""></button>
+    </div>
+  </div>
+  <div class="widget__body" style="flex-direction:row;gap:24px;align-items:center">
+    <div class="donut-wrap" style="width:120px;height:120px">
+      <canvas id="donut-1"></canvas>
+      <div class="donut-center">
+        <span class="donut-center__value">7.3%</span>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <div><div class="sev-badge sev-badge--critical" style="margin-bottom:4px">Analysed</div><div class="widget__value--lg">2.5M</div><div class="widget__sub">Logs</div></div>
+      <div><div class="sev-badge sev-badge--high" style="margin-bottom:4px">Detected</div><div class="widget__value--lg">5.3K</div><div class="widget__sub">Alerts</div></div>
+    </div>
+  </div>
+</div>
+-->
+
+
+<!-- ══════════════════════════════════════════════════════
+     PATTERN 4: HORIZONTAL BAR CHART (Top 5 Suspects)
+     Label + bar + large number
+     Figma: label 80px right-aligned, bar flex-1, value 28-32px
+══════════════════════════════════════════════════════ -->
+<!--
+<div class="widget widget--gap-lg">
+  <div class="widget__header">
+    <span class="widget__title">Top 5 Suspects</span>
+    <div class="widget__toolbar">
+      <button class="widget__toolbar-btn" data-tooltip="Maximize"><img src="../assets/icons/icon-widget-maximize.svg" alt=""></button>
+      <button class="widget__toolbar-btn" data-tooltip="Refresh"><img src="../assets/icons/icon-refresh.svg" alt=""></button>
+      <button class="widget__toolbar-btn" data-tooltip="More"><img src="../assets/icons/icon-more.svg" alt=""></button>
+    </div>
+  </div>
+  <div class="hbar" id="hbar-suspects">
+    <!-- JS populates rows -->
+  </div>
+</div>
+-->
+
+
+<!-- ══════════════════════════════════════════════════════
+     PATTERN 5: RECENT ALERTS FEED (scrollable card list)
+     Each card: icon + title + badge + body text + meta
+     Figma: card pad 12, gap 8, body 11px/#626262
+══════════════════════════════════════════════════════ -->
+<!--
+<div class="widget" style="max-height:600px">
+  <div class="widget__header">
+    <span class="widget__title">Recent Alerts</span>
+    <img src="../assets/icons/icon-widget-notification.svg" alt="" style="width:14px;height:14px">
+    <div class="widget__toolbar">
+      <button class="widget__toolbar-btn" data-tooltip="Maximize"><img src="../assets/icons/icon-widget-maximize.svg" alt=""></button>
+      <button class="widget__toolbar-btn" data-tooltip="Refresh"><img src="../assets/icons/icon-refresh.svg" alt=""></button>
+      <button class="widget__toolbar-btn" data-tooltip="More"><img src="../assets/icons/icon-more.svg" alt=""></button>
+    </div>
+  </div>
+  <div class="alert-feed scrollbar-thin" id="alert-feed-1">
+    <!-- JS populates alert cards -->
+  </div>
+</div>
+-->
+
+
+<!-- ══════════════════════════════════════════════════════
+     PATTERN 6: RADAR / SPIDER CHART
+     Uses Chart.js radar type
+══════════════════════════════════════════════════════ -->
+<!--
+<div class="widget widget--gap-lg">
+  <div class="widget__header">
+    <span class="widget__title">Alerts Status and Severity</span>
+  </div>
+  <div style="display:flex;gap:24px;align-items:center">
+    <div class="chart-container" style="width:200px;height:200px;flex-shrink:0">
+      <canvas id="radar-1"></canvas>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div class="stat-row"><span class="stat-row__dot bg-red"></span><span class="widget__label">Open</span></div>
+      <div style="display:flex;align-items:baseline;gap:8px"><span class="widget__value" style="font-size:20px">250</span><span class="widget__sub">Critical</span></div>
+      <div style="display:flex;align-items:baseline;gap:8px"><span class="widget__value" style="font-size:20px">50</span><span class="widget__sub">Trouble</span></div>
+      <div style="display:flex;align-items:baseline;gap:8px"><span class="widget__value" style="font-size:20px">50</span><span class="widget__sub">Attention</span></div>
+    </div>
+  </div>
+</div>
+-->
+
+
+<!-- ══════════════════════════════════════════════════════
+     PATTERN 7: DONUT WITH SIDE LEGEND (SLA Violations)
+     Chart.js doughnut + right-aligned legend list
+══════════════════════════════════════════════════════ -->
+<!--
+<div class="widget widget--gap-lg">
+  <div class="widget__header">
+    <span class="widget__title">SLA Violations by Priority Score</span>
+    <img src="../assets/icons/icon-widget-schedule.svg" alt="" style="width:14px;height:14px">
+  </div>
+  <div style="display:flex;gap:24px;align-items:center">
+    <div class="chart-container" style="width:180px;height:180px;flex-shrink:0">
+      <canvas id="donut-sla"></canvas>
+    </div>
+    <div class="chart-legend" style="flex-direction:column;align-items:flex-start;gap:8px">
+      <div class="chart-legend__item"><span class="chart-legend__dot bg-blue"></span>Acknowledged</div>
+      <div class="chart-legend__item"><span class="chart-legend__dot bg-green"></span>Assigned</div>
+      <div class="chart-legend__item"><span class="chart-legend__dot bg-orange"></span>Under Investigation</div>
+    </div>
+  </div>
+</div>
+-->
+
+
+<!-- ══════════════════════════════════════════════════════
+     PATTERN 8: BUBBLE / CONCENTRIC RINGS (Alerts State Analysis)
+     Custom rendering via Chart.js bubble or SVG
+══════════════════════════════════════════════════════ -->
+<!--
+<div class="widget widget--gap-lg">
+  <div class="widget__header">
+    <span class="widget__title">Alerts State Analysis</span>
+    <div class="widget__toolbar">
+      <button class="widget__toolbar-btn" data-tooltip="Maximize"><img src="../assets/icons/icon-widget-maximize.svg" alt=""></button>
+      <button class="widget__toolbar-btn" data-tooltip="Refresh"><img src="../assets/icons/icon-refresh.svg" alt=""></button>
+      <button class="widget__toolbar-btn" data-tooltip="More"><img src="../assets/icons/icon-more.svg" alt=""></button>
+    </div>
+  </div>
+  <div style="display:flex;gap:16px;align-items:flex-end">
+    <div class="chart-container" style="height:160px;flex:1">
+      <canvas id="bubble-analysis"></canvas>
+    </div>
+  </div>
+  <div class="chart-legend">
+    <div class="chart-legend__item"><span class="chart-legend__dot bg-blue"></span>Open</div>
+    <div class="chart-legend__item"><span class="chart-legend__dot bg-teal"></span>Assigned</div>
+    <div class="chart-legend__item"><span class="chart-legend__dot bg-purple"></span>Under Investigation</div>
+    <div class="chart-legend__item"><span class="chart-legend__dot bg-orange"></span>Under Remediation</div>
+    <div class="chart-legend__item"><span class="chart-legend__dot bg-green"></span>Closed</div>
+  </div>
+</div>
+-->
+
+
+<!-- ══════════════════════════════════════════════════════
+     PATTERN 9: LINE + BAR COMBO (Top 5 Affected Log Sources)
+     Chart.js mixed chart: bars + line overlay
+══════════════════════════════════════════════════════ -->
+<!--
+<div class="widget widget--gap-lg">
+  <div class="widget__header">
+    <span class="widget__title">Top 5 Affected Log Sources</span>
+  </div>
+  <div class="chart-container" style="height:200px">
+    <canvas id="combo-logs"></canvas>
+  </div>
+  <div class="chart-legend">
+    <div class="chart-legend__item"><span class="chart-legend__dot bg-red"></span>Critical</div>
+    <div class="chart-legend__item"><span class="chart-legend__dot bg-orange"></span>Trouble</div>
+    <div class="chart-legend__item"><span class="chart-legend__dot bg-amber"></span>Attention</div>
+    <div class="chart-legend__item"><span class="chart-legend__dot" style="border:2px solid var(--chart-blue);background:transparent"></span>Risk Score</div>
+  </div>
+</div>
+-->
+
+
+<!-- ══════════════════════════════════════════════════════
+     PATTERN 10: PIE / DONUT WITH SIDE LEGEND (Closed Alerts State)
+     Large donut with center number + right-side legend
+══════════════════════════════════════════════════════ -->
+<!--
+<div class="widget widget--gap-lg">
+  <div class="widget__header">
+    <span class="widget__title">Closed Alerts State</span>
+  </div>
+  <div style="display:flex;gap:24px;align-items:center">
+    <div class="donut-wrap" style="width:180px;height:180px">
+      <canvas id="donut-closed"></canvas>
+      <div class="donut-center">
+        <span class="widget__value--xl" style="font-size:50px;font-weight:600">60</span>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:8px">
+      <div class="chart-legend__item"><span class="chart-legend__dot bg-red"></span><span class="widget__label">Remediated</span><span class="widget__value" style="font-size:11px;font-weight:600;margin-left:auto">20</span></div>
+      <div class="chart-legend__item"><span class="chart-legend__dot bg-orange"></span><span class="widget__label">Moved to Incident</span><span class="widget__value" style="font-size:11px;font-weight:600;margin-left:auto">20</span></div>
+      <div class="chart-legend__item"><span class="chart-legend__dot bg-amber"></span><span class="widget__label">False positive</span><span class="widget__value" style="font-size:11px;font-weight:600;margin-left:auto">20</span></div>
+      <div class="chart-legend__item"><span class="chart-legend__dot bg-green"></span><span class="widget__label">Benign positive</span><span class="widget__value" style="font-size:11px;font-weight:600;margin-left:auto">20</span></div>
+      <div class="chart-legend__item"><span class="chart-legend__dot bg-blue"></span><span class="widget__label">Custom</span><span class="widget__value" style="font-size:11px;font-weight:600;margin-left:auto">20</span></div>
+    </div>
+  </div>
+</div>
+-->

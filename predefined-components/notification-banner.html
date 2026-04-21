@@ -1,0 +1,102 @@
+<!--
+  ============================================================
+  NOTIFICATION BANNER — Predefined HTML Component
+  ============================================================
+  Overlay banner centered horizontally on main-content area.
+  Auto-dismisses after 5 seconds. Close button (X) for manual dismiss.
+
+  Figma Component: "Notification Banner"
+  Variant Properties:
+    State:       Inside Table | In Page Width Status Bar | Push Notification
+    Style:       Success | Error | Info | Warning | Prerequisite
+    Text Length: Single Line | Multi Line
+    Loading Icon: yes | no
+    Action:      boolean (show/hide action link)
+    Close:       boolean (show/hide close button)
+
+  ICON PRIORITY:
+    Uses Figma-exported SVG icons from assets/icons/ ONLY.
+    NEVER use Lucide CDN for notification banner icons.
+
+  ICONS (exported from Figma MCP):
+    icon-notif-success.svg  — green filled circle with white checkmark (#198019)
+    icon-notif-error.svg    — red filled circle with white X (#DD1616)
+    icon-notif-info.svg     — blue filled circle with white i (#0098C5)
+    icon-notif-warning.svg  — orange filled triangle with white ! (#AC6602)
+    icon-notif-close.svg    — 10×10 grey X stroke (#626262)
+
+  BACKGROUND COLORS (from Figma):
+    Success: #E8F2E8 (light green tint)
+    Error:   #FCE8E8 (light red tint)
+    Info:    #EDF7FA (light blue tint)
+    Warning: #F7F0E6 (light warm tint)
+
+  TEXT: #000000 (black), Zoho Puvi Regular 12px
+
+  POSITIONING:
+    Centered overlay on the main-content area, below the page header.
+    Uses position:fixed with JS positioning (positionBanner) to center
+    relative to .main-content element.
+    z-index: 1500 (above content, below drawers/modals at 2000+).
+
+  JS API (notification-banner.js):
+    ElegantNotif.show(message, type, duration)
+      - message: string — the notification text
+      - type: 'success' | 'warning' | 'error' | 'info' (default: 'success')
+      - duration: number in ms (default: 5000, set 0 for persistent)
+    ElegantNotif.hide()
+      - Manually dismiss the current notification
+
+  CSS:  notification-banner.css
+  JS:   notification-banner.js
+  ============================================================
+-->
+
+<!-- RECOMMENDED: Use the JS API which auto-creates the DOM element.
+     Just include notification-banner.css + notification-banner.js and call:
+     ElegantNotif.show('Data saved successfully', 'success');
+-->
+
+<!-- TYPE 1: Success (light green bg, green check icon, dark text) -->
+<!--
+<div class="notif-banner notif-banner--success notif-banner--visible" id="notifBanner">
+  <span class="notif-banner__icon"><img src="./assets/icons/icon-notif-success.svg" alt="" /></span>
+  <span class="notif-banner__msg">Data saved successfully</span>
+  <button class="notif-banner__close" aria-label="Close" onclick="ElegantNotif.hide()">
+    <img src="./assets/icons/icon-notif-close.svg" alt="" />
+  </button>
+</div>
+-->
+
+<!-- TYPE 2: Warning (light warm bg, orange triangle icon, dark text) -->
+<!--
+<div class="notif-banner notif-banner--warning notif-banner--visible" id="notifBanner">
+  <span class="notif-banner__icon"><img src="./assets/icons/icon-notif-warning.svg" alt="" /></span>
+  <span class="notif-banner__msg">Changes have not been saved</span>
+  <button class="notif-banner__close" aria-label="Close" onclick="ElegantNotif.hide()">
+    <img src="./assets/icons/icon-notif-close.svg" alt="" />
+  </button>
+</div>
+-->
+
+<!-- TYPE 3: Error (light red bg, red circle X icon, dark text) -->
+<!--
+<div class="notif-banner notif-banner--error notif-banner--visible" id="notifBanner">
+  <span class="notif-banner__icon"><img src="./assets/icons/icon-notif-error.svg" alt="" /></span>
+  <span class="notif-banner__msg">Failed to save data</span>
+  <button class="notif-banner__close" aria-label="Close" onclick="ElegantNotif.hide()">
+    <img src="./assets/icons/icon-notif-close.svg" alt="" />
+  </button>
+</div>
+-->
+
+<!-- TYPE 4: Info (light blue bg, blue circle i icon, dark text) -->
+<!--
+<div class="notif-banner notif-banner--info notif-banner--visible" id="notifBanner">
+  <span class="notif-banner__icon"><img src="./assets/icons/icon-notif-info.svg" alt="" /></span>
+  <span class="notif-banner__msg">Your session will expire in 5 minutes</span>
+  <button class="notif-banner__close" aria-label="Close" onclick="ElegantNotif.hide()">
+    <img src="./assets/icons/icon-notif-close.svg" alt="" />
+  </button>
+</div>
+-->

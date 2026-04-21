@@ -1,0 +1,251 @@
+<!--
+  ============================================================
+  DRAWER — Predefined HTML Component
+  Captured from Figma Elegant Components 1.0 via MCP
+  Frame: Drawer (650:42237)
+  ============================================================
+
+  VARIANTS (set via class modifier on .drawer):
+    .drawer--sm     → 480px width (default — forms, settings)
+    .drawer--md     → 600px width (medium content)
+    .drawer--lg     → 800px width (tables, large forms)
+    .drawer--xl     → 1000px width (extra-large)
+    .drawer--auto   → fit-content (dynamic, capped at 90vw)
+    .drawer--grid6  → 948px (fixed, fits 6-col card grid + 24px padding)
+    .drawer--grid5  → 796px (fixed, fits 5-col card grid + 24px padding)
+    .drawer--grid4  → 644px (fixed, fits 4-col card grid + 24px padding)
+
+  ICONS:
+    Uses LOCAL Figma-exported SVG icons from assets/icons/.
+    Close button: <img src="./assets/icons/icon-close.svg" />
+    ICON PRIORITY: (1) assets/icons/ local SVGs FIRST → (2) Lucide CDN ONLY for
+    48px tile icons needing dynamic color. NEVER use Lucide CDN when a local
+    Figma-exported icon exists.
+
+  STRUCTURE:
+    .drawer-backdrop[data-drawer="ID"]
+    .drawer#ID.drawer--{size}
+      .drawer__main
+        .drawer__top         — h=40, title + close (X via Lucide)
+        .drawer__body        — scrollable content area
+        .drawer__footer      — h=60, divider + Save/Cancel
+      .drawer__rhs           — optional 30px icon strip
+
+  TOP BAR BOOLEANS (show/hide via presence of elements):
+    Icon            → Add <img> before .drawer__title
+    Back Arrow      → Add back-arrow <button> before title
+    Subtitle        → Add .drawer__title-sep + .drawer__subtitle
+    Close Icon      → .drawer__close (always present by default)
+    Link text       → Add .drawer__top-link in .drawer__top-actions
+    Button          → Add <button> in .drawer__top-actions
+    Export As       → Add export dropdown in .drawer__top-actions
+
+  FOOTER VARIANTS (Style property):
+    Save Cancel     → Save + Cancel buttons
+    Show All        → "Show All" link instead of buttons
+    Link Text       → Primary Link on the right side
+
+  OPEN/CLOSE:
+    drawer.js auto-binds:
+      data-drawer-open="drawerId"   → opens drawer on click
+      data-drawer-close              → closes parent drawer
+      .drawer__close                 → auto-bound close
+      Backdrop click                 → closes drawer
+      Escape key                     → closes topmost drawer
+
+    JS API:
+      ElegantDrawer.open('drawerId')
+      ElegantDrawer.close('drawerId')
+      ElegantDrawer.toggle('drawerId')
+
+  CSS:  tokens.css + drawer.css
+  JS:   drawer.js
+  ============================================================
+-->
+
+<!-- ── Backdrop ── -->
+<div class="drawer-backdrop" data-drawer="myDrawer"></div>
+
+<!-- ── TYPE 1: Small Drawer (480px) with Save/Cancel ── -->
+<div class="drawer drawer--sm" id="myDrawer">
+  <div class="drawer__main">
+    <div class="drawer__top">
+      <div class="drawer__title-area">
+        <span class="drawer__title">Drawer Title</span>
+        <span class="drawer__title-sep">–</span>
+        <span class="drawer__subtitle">Subtitle</span>
+      </div>
+      <button class="drawer__close" aria-label="Close">
+        <img src="./assets/icons/icon-close.svg" alt="" style="width:14px;height:14px;" />
+      </button>
+    </div>
+    <div class="drawer__body">
+      <!-- Your content here -->
+    </div>
+    <div class="drawer__footer">
+      <div class="drawer__footer-line"></div>
+      <div class="drawer__footer-actions">
+        <div class="drawer__footer-left">
+          <button class="drawer__btn-save">Save</button>
+          <button class="drawer__btn-cancel" data-drawer-close>Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── TYPE 2: Large Drawer (800px) with RHS Menu + Save/Cancel + Link ── -->
+<!--
+<div class="drawer-backdrop" data-drawer="lgDrawer"></div>
+<div class="drawer drawer--lg" id="lgDrawer">
+  <div class="drawer__main">
+    <div class="drawer__top">
+      <div class="drawer__title-area">
+        <span class="drawer__title">Large Drawer</span>
+        <span class="drawer__title-sep">–</span>
+        <span class="drawer__subtitle">Subtitle</span>
+      </div>
+      <div class="drawer__top-actions">
+        <a href="#" class="drawer__top-link">Primary Link</a>
+      </div>
+      <button class="drawer__close" aria-label="Close">
+        <img src="./assets/icons/icon-close.svg" alt="" style="width:14px;height:14px;" />
+      </button>
+    </div>
+    <div class="drawer__body">
+    </div>
+    <div class="drawer__footer">
+      <div class="drawer__footer-line"></div>
+      <div class="drawer__footer-actions">
+        <div class="drawer__footer-left">
+          <button class="drawer__btn-save">Save</button>
+          <button class="drawer__btn-cancel" data-drawer-close>Cancel</button>
+        </div>
+        <div class="drawer__footer-right">
+          <a href="#" class="drawer__footer-link">Primary Link</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="drawer__rhs">
+    <div class="drawer__rhs-group">
+      <button class="drawer__rhs-btn" title="Help"><img src="../assets/icons/icon-question.svg" alt="" /></button>
+      <button class="drawer__rhs-btn" title="Bot"><img src="../assets/icons/icon-help.svg" alt="" /></button>
+    </div>
+    <div class="drawer__rhs-group">
+      <button class="drawer__rhs-btn" title="Theme"><img src="../assets/icons/icon-dd-settings.svg" alt="" /></button>
+    </div>
+  </div>
+</div>
+-->
+
+<!-- ── TYPE 3: Auto-width Drawer (fits content) ── -->
+<!--
+<div class="drawer-backdrop" data-drawer="autoDrawer"></div>
+<div class="drawer drawer--auto" id="autoDrawer">
+  <div class="drawer__main">
+    <div class="drawer__top">
+      <div class="drawer__title-area">
+        <span class="drawer__title">Auto Width</span>
+      </div>
+      <button class="drawer__close" aria-label="Close">
+        <img src="./assets/icons/icon-close.svg" alt="" style="width:14px;height:14px;" />
+      </button>
+    </div>
+    <div class="drawer__body">
+    </div>
+    <div class="drawer__footer">
+      <div class="drawer__footer-line"></div>
+      <div class="drawer__footer-actions">
+        <div class="drawer__footer-left">
+          <button class="drawer__btn-save">Save</button>
+          <button class="drawer__btn-cancel" data-drawer-close>Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+-->
+
+<!-- ── TYPE 4: Auto-width Drawer with Card Grid + Detail Panel ── -->
+<!--
+  CARD GRID: A reusable tile picker layout for drawers.
+  Use .drawer-grid with a column modifier (.drawer-grid--6col, --5col, --4col)
+  inside .drawer__body.
+
+  CARDS:
+    .drawer-card           — white card (1px border, 4px radius, 140x140)
+    .drawer-card--muted    — grey card (for "Add Custom"-type tiles)
+    .drawer-card.selected  — blue border highlight
+    .drawer-card__icon     — 48x48 icon container (no background)
+    .drawer-card__label    — 12px bold center text
+    .drawer-card__badge    — absolute-positioned green badge ("NEW")
+
+  DETAIL PANEL:
+    .drawer-detail          — hidden by default, .visible shows as flex row
+    .drawer-detail__info    — left side: title, fields, description, chart list (scrollable)
+    .drawer-detail__preview — right side: 300x180 preview image area
+
+  Combine with .drawer--auto for content-driven width.
+  Detail text wraps naturally — does NOT expand the drawer width.
+
+  CSS:  drawer.css (includes .drawer-grid, .drawer-card, .drawer-detail)
+-->
+<!--
+<div class="drawer-backdrop" data-drawer="cardDrawer"></div>
+<div class="drawer drawer--grid6" id="cardDrawer">
+  <div class="drawer__main">
+    <div class="drawer__top">
+      <div class="drawer__title-area">
+        <span class="drawer__title">Pick an Item</span>
+      </div>
+      <button class="drawer__close" aria-label="Close">
+        <img src="./assets/icons/icon-close.svg" alt="" style="width:14px;height:14px;" />
+      </button>
+    </div>
+    <div class="drawer__body" style="padding:16px 24px;">
+      <div class="drawer-grid drawer-grid--6col">
+        <div class="drawer-card drawer-card--muted">
+          <div class="drawer-card__icon"><img src="../assets/icons/icon-tab-add-custom.svg" alt="" /></div>
+          <div class="drawer-card__label">Add Custom</div>
+        </div>
+        <div class="drawer-card selected">
+          <div class="drawer-card__icon"><img src="../assets/icons/icon-tab-network-overview.svg" alt="" /></div>
+          <div class="drawer-card__label">Network Overview</div>
+        </div>
+        <div class="drawer-card">
+          <div class="drawer-card__icon"><img src="../assets/icons/icon-tab-aws-overview.svg" alt="" /></div>
+          <div class="drawer-card__label">AWS Overview</div>
+        </div>
+      </div>
+      <div class="drawer-detail visible">
+        <div class="drawer-detail__info">
+          <div class="drawer-detail__title">Network Overview</div>
+          <div class="drawer-detail__field">
+            <label>Tab Name</label>
+            <span>Network Overview</span>
+          </div>
+          <div class="drawer-detail__desc">Visibility into network traffic from routers, switches, firewalls, and IDS/IPS devices.</div>
+          <ul class="drawer-detail__charts">
+            <li>Traffic by Device</li>
+            <li>Top Talkers</li>
+            <li>Denied Connections</li>
+          </ul>
+        </div>
+        <div class="drawer-detail__preview">
+          <span class="drawer-detail__no-preview">No preview</span>
+        </div>
+      </div>
+    </div>
+    <div class="drawer__footer">
+      <div class="drawer__footer-line"></div>
+      <div class="drawer__footer-actions">
+        <div class="drawer__footer-left">
+          <button class="drawer__btn-save">Add</button>
+          <button class="drawer__btn-cancel" data-drawer-close>Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+-->

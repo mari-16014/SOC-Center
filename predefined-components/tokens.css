@@ -1,0 +1,278 @@
+/* ============================================================
+   DESIGN TOKENS — Extracted from Figma Elegant Components 1.0 via MCP
+   Font: Zoho Puvi — self-hosted from static.zohocdn.com
+   ============================================================ */
+
+@font-face {
+  font-family: 'Zoho Puvi';
+  src: url('../assets/fonts/Zoho_Puvi_Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Zoho Puvi';
+  src: url('../assets/fonts/Zoho_Puvi_Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Zoho Puvi';
+  src: url('../assets/fonts/Zoho_Puvi_Semibold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Zoho Puvi';
+  src: url('../assets/fonts/Zoho_Puvi_Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* ── Font Stack ── */
+  --font-family: 'Zoho Puvi', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  /* ── TopNavBar Row 1 ── */
+  --topnav-row1-bg: #272D42;       /* Figma: rgb(0.153,0.176,0.259) */
+  --topnav-row1-height: 44px;
+  --topnav-row1-padding: 3px 16px 3px 8px;
+
+  /* ── TopNavBar Row 2 ── */
+  --topnav-row2-bg: #343B52;       /* Figma: rgb(0.204,0.231,0.322) */
+  --topnav-row2-height: 34px;
+  --topnav-row2-padding: 0 8px;
+
+  /* ── TopNavBar Logo ── */
+  --logo-font-size: 18px;
+  --logo-font-weight: 600;         /* Zoho Puvi Semibold */
+  --logo-color: #FFFFFF;
+  --logo-icon-size: 24px;
+  --logo-area-padding: 4px 8px;
+  --logo-area-gap: 8px;
+
+  /* ── TopNavBar Tabs (in Row 2) ── */
+  --nav-tab-height: 34px;
+  --nav-tab-padding: 8px 12px;      /* Figma: 8px 16px — reduced 4px for browser font width */
+  --nav-tab-font-size: 14px;        /* Figma: 14px Zoho Puvi */
+  --nav-tab-font-weight: 400;      /* Zoho Puvi Regular */
+  --nav-tab-unselected-bg: #343B52;
+  --nav-tab-unselected-text: #D6D7DC;  /* Figma: rgb(0.839,0.843,0.863) */
+  --nav-tab-selected-bg: #FFFFFF;
+  --nav-tab-selected-text: #000000;
+
+  /* ── TopNavBar Subscription ── */
+  --subscription-bg: #272D42;
+  --subscription-text: #D6D7DC;
+  --subscription-font-size: 13px;
+  --subscription-padding: 8px;
+  --subscription-radius: 8px;
+
+  /* ── TopNavBar Right Icons ── */
+  --icon-container-size: 32px;
+  --icon-container-radius: 8px;
+  --icon-container-hover-bg: #3D4255;
+  --icon-gap: 16px;
+  --badge-font-size: 11px;
+  --badge-radius: 10px;
+  --badge-blue: #2C66DD;            /* Figma: rgb(0.173,0.400,0.867) */
+  --badge-red: #DD1616;             /* Figma: rgb(0.867,0.086,0.086) */
+  --badge-text: #FFFFFF;
+
+  /* ── TopNavBar Search (Row 2 right) ── */
+  --search-width: 200px;
+  --search-height: 24px;
+  --search-stroke: #586B7D;         /* Figma: rgb(0.345,0.376,0.490) */
+  --search-radius: 4px;
+  --search-padding: 0 6px 2px 6px;
+  --search-font-size: 13px;
+  --search-placeholder: #7E88AB;    /* Figma: rgb(0.494,0.533,0.669) */
+
+  /* ── TopNavBar Add Button (Row 2 right) ── */
+  --add-btn-bg: #6B7495;            /* Figma: rgb(0.420,0.455,0.584) */
+  --add-btn-radius: 4px;
+  --add-btn-padding: 4px 8px;
+  --add-btn-font-size: 13px;
+  --add-btn-height: 24px;
+  --add-btn-gap: 6px;
+
+  /* ── Sidebar ── */
+  --sidebar-width: 240px;
+  --sidebar-bg: #E9E9E9;            /* Figma: rgb(0.914,0.914,0.914) */
+  --sidebar-stroke: #E9E9E9;
+  --sidebar-active-bg: #DCDCDC;     /* Figma: rgb(0.863,0.863,0.863) */
+  --sidebar-active-border: #2C66DD;
+  --sidebar-item-height: 32px;
+  --sidebar-l1-font-size: 13px;
+  --sidebar-l1-font-weight: 500;    /* Zoho Puvi Medium */
+  --sidebar-l1-padding-left: 12px;
+  --sidebar-l2-subheader-padding-left: 32px;
+  --sidebar-l2-item-padding-left: 54px;
+  --sidebar-item-font-size: 12px;
+  --sidebar-text-primary: #000000;
+  --sidebar-text-secondary: #626262; /* Figma: rgb(0.384,0.384,0.384) */
+  --sidebar-search-placeholder: #939393; /* Figma: rgb(0.576,0.576,0.576) */
+
+  /* ── Header ── */
+  --header-height: 40px;
+  --header-title-font-size: 16px;
+  --header-title-font-weight: 600;  /* Zoho Puvi Semibold */
+  --header-title-color: #000000;
+  --header-gap: 8px;                /* Figma: itemSpacing 8 */
+  --header-border-bottom: #E9E9E9;  /* Figma: strokeBottomWeight 1, rgb(0.914) */
+  --header-help-icon-size: 14px;
+  --header-help-icon-color: #626262;
+
+  /* ── Classic Tab ── */
+  --classic-tab-padding-top: 16px;
+  --classic-tab-header-height: 32px;
+  --classic-tab-header-spacing: -1px;
+  --classic-tab-selected-bg: #FFFFFF;
+  --classic-tab-unselected-bg: #E9E9E9;
+  --classic-tab-stroke: #DCDCDC;     /* Figma: rgb(0.863,0.863,0.863) */
+  --classic-tab-font-size: 12px;
+  --classic-tab-padding: 9px 16px;
+  --classic-tab-body-bg: #FFFFFF;
+  --classic-tab-body-padding: 16px;
+
+  /* ── Button Row ── */
+  --button-row-padding-top: 16px;
+  --button-row-padding-bottom: 12px;
+
+  /* ── Primary Button ── */
+  --btn-primary-bg: #2C66DD;
+  --btn-primary-text: #FFFFFF;
+  --btn-primary-font-size: 12px;
+  --btn-primary-height: 28px;
+  --btn-primary-radius: 2px;
+  --btn-primary-padding: 0 16px;
+
+  /* ── Table ── */
+  --table-header-bg: #F5F5F5;
+  --table-header-font-size: 12px;
+  --table-header-font-weight: 500;    /* Zoho Puvi Medium */
+  --table-header-color: #000000;      /* Figma: rgb(0,0,0) — BLACK not grey */
+  --table-header-height: 32px;
+  --table-row-height: 40px;
+  --table-border: #DCDCDC;
+  --table-hover-bg: #FAFAFA;
+  --table-selected-bg: #F9FBFF;
+  --table-selected-hover-bg: #F0F5FF;
+  --table-font-size: 12px;
+  --table-text-primary: #000000;
+
+  /* ── Links ── */
+  --link-color: #006AFF;
+  --link-hover: #0055D4;
+
+  /* ── Status Icons ── */
+  --status-disabled: #DD1616;
+  --status-enabled: #198019;
+
+  /* ── ActionBar ── */
+  --actionbar-height: 36px;
+  --actionbar-bg: #FFFFFF;
+  --actionbar-border: #DCDCDC;
+  --actionbar-icon-size: 24px;           /* Figma: icons are 24x24 containers */
+  --actionbar-gap: 8px;                  /* Figma: itemSpacing 8 */
+  --actionbar-padding: 6px 4px;          /* Figma: padding 6 4 6 4 */
+  --actionbar-separator-height: 16px;
+  --actionbar-pagination-font-size: 12px;
+
+  /* ── Table Actions Column ── */
+  --table-action-icon-size: 24px;        /* Figma: action icons 24x24 */
+  --table-action-icon-gap: 8px;          /* Figma: itemSpacing 8 */
+
+  /* ── Main Content ── */
+  --main-content-bg: #FFFFFF;
+  --main-content-padding: 0 16px;
+
+  /* ── Dashboard / Widget Grid ── */
+  --dash-bg: #F5F5F5;
+  --dash-gap: 4px;
+  --dash-header-height: 28px;
+
+  /* ── Widget Card ── */
+  --widget-bg: #FFFFFF;
+  --widget-border: #E9E9E9;
+  --widget-radius: 4px;
+  --widget-padding: 24px;
+  --widget-title-gap: 8px;
+  --widget-content-gap: 20px;
+
+  /* ── Widget Typography ── */
+  --widget-title-fs: 14px;
+  --widget-title-fw: 600;
+  --widget-title-color: #000000;
+  --widget-label-fs: 11px;
+  --widget-label-fw: 400;
+  --widget-label-color: #626262;
+  --widget-value-fs: 20px;
+  --widget-value-fw: 400;
+  --widget-value-color: #000000;
+  --widget-value-lg-fs: 28px;
+  --widget-value-xl-fs: 50px;
+  --widget-value-xl-fw: 600;
+  --widget-pct-fs: 12px;
+  --widget-pct-fw: 600;
+  --widget-pct-color: #000000;
+  --widget-sub-fs: 11px;
+  --widget-sub-color: #626262;
+
+  /* ── Widget Toolbar Icons ── */
+  --widget-toolbar-icon-size: 24px;
+  --widget-toolbar-icon-bg: #D9D9D9;
+  --widget-toolbar-icon-radius: 2px;
+  --widget-toolbar-icon-pad: 5px;
+  --widget-toolbar-gap: 8px;
+
+  /* ── Widget Chart Colors ── */
+  --chart-blue: #2C66DD;
+  --chart-teal: #009CBB;
+  --chart-purple: #A51C50;
+  --chart-orange: #D14900;
+  --chart-green: #198019;
+  --chart-red: #DD1616;
+  --chart-amber: #FABB34;
+  --chart-light-blue: #4A90D9;
+  --chart-grid: #E9E9E9;
+
+  /* ── Alert Card (inside Recent Alerts widget) ── */
+  --alert-card-bg: #FFFFFF;
+  --alert-card-border: #E9E9E9;
+  --alert-card-radius: 4px;
+  --alert-card-padding: 12px;
+  --alert-card-gap: 8px;
+  --alert-card-body-fs: 11px;
+  --alert-card-body-color: #626262;
+  --alert-card-list-gap: 12px;
+
+  /* ── Severity Badge Colors ── */
+  --sev-critical-bg: #DD1616;
+  --sev-high-bg: #FF5900;
+  --sev-medium-bg: #FABB34;
+  --sev-low-bg: #198019;
+  --sev-verylow-bg: #626262;
+  --sev-badge-text: #FFFFFF;
+  --sev-badge-fs: 11px;
+  --sev-badge-fw: 600;
+  --sev-badge-radius: 4px;
+  --sev-badge-pad: 2px 8px;
+}
+
+/* ── Base Reset ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: var(--font-family);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
+}
+
+/* ── Scrollbar ── */
+.scrollbar-thin::-webkit-scrollbar { width: 5px; }
+.scrollbar-thin::-webkit-scrollbar-track { background: transparent; }
+.scrollbar-thin::-webkit-scrollbar-thumb { background: #c4c4c4; border-radius: 3px; }

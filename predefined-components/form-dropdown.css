@@ -1,0 +1,277 @@
+/* ============================================================
+   FORM DROPDOWN — Predefined Component
+   Extracted from Figma "Dropdown" component
+   ──────────────────────────────────────────────────────────────
+   6 TYPES:
+     Type 1 — Basic (plain text items)
+     Type 2 — Checkbox multi-select
+     Type 3 — Searchable (search bar + scroll)
+     Type 4 — Search + Radio (single select with search)
+     Type 5 — No Data state (radio + pagination + empty)
+     Type 6 — Apply/Cancel footer (radio + pagination + buttons)
+   ──────────────────────────────────────────────────────────────
+   SPECS (from Figma):
+     Container: 280px wide, bg #FFF, border 1px #DCDCDC, radius 2px
+     Padding: 8px top/bottom, 0 left/right
+     Item row: 26px height, padding 6px 12px (basic) / 5px 12px (checkbox/radio)
+     Item gap: 0 between items
+     Hover: bg #E9E9E9
+     Selected text: color #006AFF
+     Search bar: 40px total, inner input 24px, border #C4C4C4
+     Scrollbar: 6px wide, #939393
+     Footer (Apply/Cancel): 52px, separator #E9E9E9
+   ============================================================ */
+
+/* ── Dropdown Container ── */
+.form-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 280px;
+  background: #fff;
+  border: 1px solid #DCDCDC;
+  border-radius: 2px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  box-sizing: border-box;
+  font-family: var(--font-family);
+  display: none;
+}
+.form-dropdown--open { display: block; }
+
+/* For demo: static display */
+.form-dropdown--static {
+  position: static;
+  display: block;
+  box-shadow: none;
+}
+
+/* ── Dropdown List ── */
+.form-dropdown__list {
+  padding: 8px 0;
+  max-height: 210px;
+  overflow-y: auto;
+}
+.form-dropdown__list::-webkit-scrollbar { width: 6px; }
+.form-dropdown__list::-webkit-scrollbar-track { background: transparent; }
+.form-dropdown__list::-webkit-scrollbar-thumb { background: #939393; border-radius: 3px; }
+
+/* ── Item Row (basic) ── */
+.form-dropdown__item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 26px;
+  padding: 6px 12px;
+  font-size: 12px;
+  color: #000;
+  cursor: pointer;
+  box-sizing: border-box;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  user-select: none;
+}
+.form-dropdown__item:hover { background: #E9E9E9; }
+.form-dropdown__item--selected { color: #006AFF; }
+.form-dropdown__item--active { background: #E9E9E9; }
+
+/* ── Item Row (checkbox / radio) ── */
+.form-dropdown__item--check,
+.form-dropdown__item--radio {
+  gap: 8px;
+  padding: 5px 12px;
+}
+.form-dropdown__item-icon {
+  flex: 0 0 16px;
+  width: 16px;
+  height: 16px;
+}
+
+/* ── Select All row ── */
+.form-dropdown__select-all {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 26px;
+  padding: 5px 12px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #000;
+  cursor: pointer;
+  border-bottom: 1px solid #E9E9E9;
+  box-sizing: border-box;
+  user-select: none;
+}
+.form-dropdown__select-all:hover { background: #E9E9E9; }
+
+/* ── Search Bar ── */
+.form-dropdown__search {
+  display: flex;
+  align-items: center;
+  padding: 4px 12px 12px 12px;
+}
+.form-dropdown__search-inner {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 24px;
+  padding: 3px 12px;
+  background: #fff;
+  border: 1px solid #C4C4C4;
+  border-radius: 2px;
+  box-sizing: border-box;
+  gap: 8px;
+}
+.form-dropdown__search-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-family: var(--font-family);
+  font-size: 12px;
+  color: #000;
+  background: transparent;
+  min-width: 0;
+}
+.form-dropdown__search-input::placeholder { color: #939393; }
+.form-dropdown__search-clear {
+  flex: 0 0 12px;
+  width: 12px;
+  height: 12px;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+.form-dropdown__search-inner:focus-within .form-dropdown__search-clear,
+.form-dropdown__search-clear--visible { opacity: 1; }
+
+/* ── Add Custom Value ── */
+.form-dropdown__custom {
+  display: flex;
+  align-items: center;
+  height: 26px;
+  padding: 6px 12px;
+  font-size: 12px;
+  color: #626262;
+  border-top: 1px solid #E9E9E9;
+  cursor: text;
+  box-sizing: border-box;
+}
+
+/* ── Manage / Settings Row ── */
+.form-dropdown__manage {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 26px;
+  padding: 6px 12px;
+  font-size: 12px;
+  color: #006AFF;
+  cursor: pointer;
+  border-top: 1px solid #E9E9E9;
+  box-sizing: border-box;
+}
+.form-dropdown__manage img { width: 14px; height: 14px; }
+.form-dropdown__manage:hover { background: #F0F6FF; }
+
+/* ── No Data State ── */
+.form-dropdown__no-data {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 24px 12px;
+  text-align: center;
+}
+.form-dropdown__no-data-text {
+  font-size: 12px;
+  color: #000;
+}
+.form-dropdown__no-data-link {
+  font-size: 12px;
+  color: #006AFF;
+  cursor: pointer;
+  text-decoration: none;
+}
+.form-dropdown__no-data-link:hover { text-decoration: underline; }
+
+/* ── Pagination Row ── */
+.form-dropdown__pagination {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 4px;
+  height: 26px;
+  padding: 0 12px;
+  font-size: 11px;
+  color: #626262;
+  border-top: 1px solid #E9E9E9;
+}
+.form-dropdown__pagination-link {
+  font-size: 11px;
+  color: #006AFF;
+  cursor: pointer;
+  text-decoration: none;
+}
+.form-dropdown__pagination-link:hover { text-decoration: underline; }
+
+/* ── Apply / Cancel Footer ── */
+.form-dropdown__footer {
+  display: flex;
+  flex-direction: column;
+  padding: 12px 8px 4px 8px;
+  gap: 12px;
+}
+.form-dropdown__footer-line {
+  height: 1px;
+  background: #E9E9E9;
+}
+.form-dropdown__footer-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.form-dropdown__footer .btn-apply {
+  font-family: var(--font-family);
+  font-size: 12px;
+  font-weight: 400;
+  height: 24px;
+  padding: 0 16px;
+  background: #2C66DD;
+  color: #fff;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+}
+.form-dropdown__footer .btn-apply:hover { background: #2458C4; }
+.form-dropdown__footer .btn-cancel {
+  font-family: var(--font-family);
+  font-size: 12px;
+  font-weight: 400;
+  height: 24px;
+  padding: 0 16px;
+  background: #fff;
+  color: #000;
+  border: 1px solid #ABABAB;
+  border-radius: 2px;
+  cursor: pointer;
+}
+.form-dropdown__footer .btn-cancel:hover { background: #F5F5F5; }
+.form-dropdown__footer .btn-clear {
+  font-family: var(--font-family);
+  font-size: 12px;
+  color: #006AFF;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin-left: auto;
+}
+.form-dropdown__footer .btn-clear:hover { text-decoration: underline; }
+
+/* ── Wrapper (trigger + dropdown) ── */
+.form-dropdown-wrap {
+  position: relative;
+  display: inline-block;
+}

@@ -1,0 +1,228 @@
+<!--
+  ============================================================
+  ACTIONBAR — Predefined HTML Component (7 Variants)
+  ============================================================
+  Table toolbar: search, bulk actions, filter, pagination,
+  view toggle, refresh, selected count.
+
+  VARIANTS:
+    Type 1 — Search + Pagination (Minimal)
+    Type 2 — Search + Bulk Actions (Enable/Disable/Delete/More) + Pagination
+    Type 3 — Search + Pagination + Refresh
+    Type 4 — Search + Pagination + Table View Type (Dropdown)
+    Type 5 — Search + Filter Dropdown ("Showing All") + Pagination
+    Type 6 — Search + Pagination + Toggle View (List/Consolidated)
+    Type 7 — Search + Selected Count + Clear All + Pagination
+
+  CONFIGURATION:
+  - Left icons:      Add/remove icon buttons in actionbar__left
+  - Pagination:      Update text in actionbar__pagination
+  - Right icons:     Add/remove icon buttons in actionbar__right
+  - Bulk actions:    Add .actionbar__actions group with .actionbar__action buttons
+  - Filter dropdown: Add .actionbar__filter-dropdown with <select>
+  - Toggle view:     Add .actionbar__icon-btn--toggle
+  - Selected count:  Add .actionbar__selected-count with .actionbar__clear-all
+
+  AVAILABLE ICON BUTTONS:
+    icon-actionbar-search.svg   — Search
+    icon-actionbar-filter.svg   — Filter
+    icon-chevron-left.svg       — Previous page
+    icon-chevron-right.svg      — Next page
+    icon-actionbar-refresh.svg  — Refresh
+    icon-ab-enable.svg          — Enable action
+    icon-ab-disable.svg         — Disable action
+    icon-ab-delete.svg          — Delete action
+    icon-ab-more.svg            — More actions
+    icon-ab-table-view.svg      — Table view type dropdown
+    icon-ab-toggle-view.svg     — List/Consolidated toggle
+
+  ACTION BUTTON STATES (Type 2):
+    Default:  background #FFFFFF
+    Hover:    background #E9E9E9
+    Active:   background #EAF0FC
+
+  CSS:  tokens.css + table.css
+  JS:   table.js  (refresh spin animation, action bar state management)
+  ============================================================
+-->
+
+<!-- ── TYPE 1 — Search + Pagination (Minimal) ── -->
+<div class="actionbar">
+  <div class="actionbar__left">
+    <button class="actionbar__icon-btn" title="Search">
+      <img src="../assets/icons/icon-actionbar-search.svg" alt="" />
+    </button>
+  </div>
+  <div class="actionbar__right">
+    <span class="actionbar__pagination">1-25 <i>of</i> <b>100</b></span>
+    <button class="actionbar__nav-btn" title="Previous">
+      <img src="../assets/icons/icon-chevron-left.svg" alt="" />
+    </button>
+    <button class="actionbar__nav-btn" title="Next">
+      <img src="../assets/icons/icon-chevron-right.svg" alt="" />
+    </button>
+  </div>
+</div>
+
+<!-- ── TYPE 2 — Search + Bulk Actions + Pagination ── -->
+<!--
+<div class="actionbar">
+  <div class="actionbar__left">
+    <button class="actionbar__icon-btn" title="Search">
+      <img src="../assets/icons/icon-actionbar-search.svg" alt="" />
+    </button>
+    <div class="actionbar__separator"></div>
+    <div class="actionbar__actions">
+      <button class="actionbar__action" data-ab-action>
+        <img src="../assets/icons/icon-ab-enable.svg" alt="" />
+        <span>Enable</span>
+      </button>
+      <button class="actionbar__action" data-ab-action>
+        <img src="../assets/icons/icon-ab-disable.svg" alt="" />
+        <span>Disable</span>
+      </button>
+      <button class="actionbar__action" data-ab-action>
+        <img src="../assets/icons/icon-ab-delete.svg" alt="" />
+        <span>Delete</span>
+      </button>
+      <button class="actionbar__action actionbar__action--more" data-ab-action title="More actions">
+        <img src="../assets/icons/icon-ab-more.svg" alt="" />
+      </button>
+    </div>
+  </div>
+  <div class="actionbar__right">
+    <span class="actionbar__pagination">1-25 <i>of</i> <b>100</b></span>
+    <button class="actionbar__nav-btn" title="Previous">
+      <img src="../assets/icons/icon-chevron-left.svg" alt="" />
+    </button>
+    <button class="actionbar__nav-btn" title="Next">
+      <img src="../assets/icons/icon-chevron-right.svg" alt="" />
+    </button>
+  </div>
+</div>
+-->
+
+<!-- ── TYPE 3 — Search + Pagination + Refresh ── -->
+<!--
+<div class="actionbar">
+  <div class="actionbar__left">
+    <button class="actionbar__icon-btn" title="Search">
+      <img src="../assets/icons/icon-actionbar-search.svg" alt="" />
+    </button>
+  </div>
+  <div class="actionbar__right">
+    <span class="actionbar__pagination">1-25 <i>of</i> <b>100</b></span>
+    <button class="actionbar__nav-btn" title="Previous">
+      <img src="../assets/icons/icon-chevron-left.svg" alt="" />
+    </button>
+    <button class="actionbar__nav-btn" title="Next">
+      <img src="../assets/icons/icon-chevron-right.svg" alt="" />
+    </button>
+    <div class="actionbar__separator"></div>
+    <button class="actionbar__icon-btn" title="Refresh">
+      <img src="../assets/icons/icon-actionbar-refresh.svg" alt="" />
+    </button>
+  </div>
+</div>
+-->
+
+<!-- ── TYPE 4 — Search + Pagination + Table View Type (Dropdown) ── -->
+<!--
+<div class="actionbar">
+  <div class="actionbar__left">
+    <button class="actionbar__icon-btn" title="Search">
+      <img src="../assets/icons/icon-actionbar-search.svg" alt="" />
+    </button>
+  </div>
+  <div class="actionbar__right">
+    <span class="actionbar__pagination">1-25 <i>of</i> <b>100</b></span>
+    <button class="actionbar__nav-btn" title="Previous">
+      <img src="../assets/icons/icon-chevron-left.svg" alt="" />
+    </button>
+    <button class="actionbar__nav-btn" title="Next">
+      <img src="../assets/icons/icon-chevron-right.svg" alt="" />
+    </button>
+    <div class="actionbar__separator"></div>
+    <button class="actionbar__icon-btn actionbar__icon-btn--table-view" title="Table View">
+      <img src="../assets/icons/icon-ab-table-view.svg" alt="" />
+    </button>
+  </div>
+</div>
+-->
+
+<!-- ── TYPE 5 — Search + Filter Dropdown + Pagination ── -->
+<!--
+<div class="actionbar">
+  <div class="actionbar__left">
+    <button class="actionbar__icon-btn" title="Search">
+      <img src="../assets/icons/icon-actionbar-search.svg" alt="" />
+    </button>
+  </div>
+  <div class="actionbar__right">
+    <div class="actionbar__filter-dropdown">
+      <span>Showing</span>
+      <select>
+        <option>All</option>
+        <option>Enabled</option>
+        <option>Disabled</option>
+      </select>
+    </div>
+    <span class="actionbar__pagination">1-25 <i>of</i> <b>100</b></span>
+    <button class="actionbar__nav-btn" title="Previous">
+      <img src="../assets/icons/icon-chevron-left.svg" alt="" />
+    </button>
+    <button class="actionbar__nav-btn" title="Next">
+      <img src="../assets/icons/icon-chevron-right.svg" alt="" />
+    </button>
+  </div>
+</div>
+-->
+
+<!-- ── TYPE 6 — Search + Pagination + Toggle View ── -->
+<!--
+<div class="actionbar">
+  <div class="actionbar__left">
+    <button class="actionbar__icon-btn" title="Search">
+      <img src="../assets/icons/icon-actionbar-search.svg" alt="" />
+    </button>
+  </div>
+  <div class="actionbar__right">
+    <span class="actionbar__pagination">1-25 <i>of</i> <b>100</b></span>
+    <button class="actionbar__nav-btn" title="Previous">
+      <img src="../assets/icons/icon-chevron-left.svg" alt="" />
+    </button>
+    <button class="actionbar__nav-btn" title="Next">
+      <img src="../assets/icons/icon-chevron-right.svg" alt="" />
+    </button>
+    <div class="actionbar__separator"></div>
+    <button class="actionbar__icon-btn actionbar__icon-btn--toggle" title="Toggle View">
+      <img src="../assets/icons/icon-ab-toggle-view.svg" alt="" />
+    </button>
+  </div>
+</div>
+-->
+
+<!-- ── TYPE 7 — Search + Selected Count + Clear All + Pagination ── -->
+<!--
+<div class="actionbar">
+  <div class="actionbar__left">
+    <button class="actionbar__icon-btn" title="Search">
+      <img src="../assets/icons/icon-actionbar-search.svg" alt="" />
+    </button>
+    <div class="actionbar__separator"></div>
+    <div class="actionbar__selected-count">
+      <span>Selected Count: <b>06</b></span>
+      <button class="actionbar__clear-all">Clear All</button>
+    </div>
+  </div>
+  <div class="actionbar__right">
+    <span class="actionbar__pagination">1-25 <i>of</i> <b>100</b></span>
+    <button class="actionbar__nav-btn" title="Previous">
+      <img src="../assets/icons/icon-chevron-left.svg" alt="" />
+    </button>
+    <button class="actionbar__nav-btn" title="Next">
+      <img src="../assets/icons/icon-chevron-right.svg" alt="" />
+    </button>
+  </div>
+</div>
+-->

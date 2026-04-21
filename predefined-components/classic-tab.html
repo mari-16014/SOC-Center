@@ -1,0 +1,41 @@
+<!--
+  ============================================================
+  CLASSIC TAB — Predefined HTML Component
+  ============================================================
+
+  CONFIGURATION:
+  - Set tab count:   Add/remove <button> elements in classic-tab__headers
+  - Set active tab:  Add class "classic-tab__header--selected" to ONE tab,
+                     all others get "classic-tab__header--unselected"
+  - Tab content:     Place content inside <div class="classic-tab__content">
+                     Add multiple classic-tab__content divs for multi-tab panels
+                     (hide non-active with style="display:none")
+
+  CSS:  tokens.css + classic-tab.css
+  JS:   classic-tab.js  (auto tab-switching on click)
+  ============================================================
+-->
+
+<div class="classic-tab">
+  <div class="classic-tab__headers">
+    <button class="classic-tab__header classic-tab__header--selected">Tab 1</button>
+    <button class="classic-tab__header classic-tab__header--unselected">Tab 2</button>
+    <button class="classic-tab__header classic-tab__header--unselected">Tab 3</button>
+    <div class="classic-tab__filler"></div>
+  </div>
+
+  <div class="classic-tab__body scrollbar-thin">
+    <!-- Tab 1 content (visible by default) -->
+    <div class="classic-tab__content">
+      <!-- Place your content here: button-row, actionbar, table, form, etc. -->
+    </div>
+
+    <!-- Tab 2 content (hidden by default) -->
+    <div class="classic-tab__content" style="display:none">
+    </div>
+
+    <!-- Tab 3 content (hidden by default) -->
+    <div class="classic-tab__content" style="display:none">
+    </div>
+  </div>
+</div>

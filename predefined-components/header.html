@@ -1,0 +1,35 @@
+<!--
+  ============================================================
+  HEADER — Predefined HTML Component
+  ============================================================
+  Height: 40px, border-bottom #E9E9E9
+
+  VARIANT 1 — Default (with Help Icon):
+  - Set page title:  Change text inside <h1 class="page-header__title">
+  - Help icon:       Remove the button if help icon not needed
+
+  VARIANT 2 — With Back Button:
+  - Back button:     24x24 bordered frame with left-arrow icon (icon-back-arrow.svg)
+  - Set page title:  Change text inside <h1 class="page-header__title">
+  - Help icon:       Optional — add <button class="page-header__help"> if needed
+  - Back action:     Set onclick on the .page-header__back button
+
+  CSS:  tokens.css + header.css
+  ============================================================
+-->
+
+<!-- VARIANT 1: Default — With Help Icon -->
+<div class="page-header">
+  <h1 class="page-header__title">Page Title</h1>
+  <button class="page-header__help" title="Help">
+    <img src="../assets/icons/icon-help.svg" alt="" style="width:14px;height:14px;" />
+  </button>
+</div>
+
+<!-- VARIANT 2: With Back Button -->
+<div class="page-header">
+  <button class="page-header__back" onclick="history.back()" title="Back">
+    <img src="../assets/icons/icon-back-arrow.svg" alt="" />
+  </button>
+  <h1 class="page-header__title">Page Title</h1>
+</div>

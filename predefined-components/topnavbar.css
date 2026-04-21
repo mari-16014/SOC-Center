@@ -1,0 +1,288 @@
+/* ============================================================
+   TOPNAVBAR — Captured from Figma MCP
+   Structure: Row1 (logo + icons) | Row2 (nav tabs + search)
+   Total height: 78px (44 + 34)
+   ============================================================ */
+
+.topnavbar {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 78px;
+  flex-shrink: 0;
+}
+
+/* ── Row 1: Brand bar (h=44) ── */
+.topnavbar__row1 {
+  height: var(--topnav-row1-height);
+  background: var(--topnav-row1-bg);
+  padding: var(--topnav-row1-padding);
+  display: flex;
+  align-items: center;
+}
+
+.topnavbar__row1-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+}
+
+/* Logo area */
+.topnavbar__logo {
+  display: flex;
+  align-items: center;
+  gap: var(--logo-area-gap);
+  padding: var(--logo-area-padding);
+  text-decoration: none;
+  height: 100%;
+}
+
+.topnavbar__logo-icon {
+  width: var(--logo-icon-size);
+  height: var(--logo-icon-size);
+  flex-shrink: 0;
+}
+
+.topnavbar__logo-text {
+  color: var(--logo-color);
+  font-size: var(--logo-font-size);
+  font-weight: var(--logo-font-weight);
+  white-space: nowrap;
+  line-height: 1;
+}
+
+/* Right section: Subscription + divider + icons + avatar + grid */
+.topnavbar__right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 100%;
+  flex-shrink: 0;
+}
+
+.topnavbar__subscription {
+  background: var(--subscription-bg);
+  padding: var(--subscription-padding);
+  border-radius: var(--subscription-radius);
+  color: var(--subscription-text);
+  font-size: var(--subscription-font-size);
+  white-space: nowrap;
+  line-height: 1;
+}
+
+.topnavbar__divider {
+  width: 1px;
+  height: 16px;
+  background: rgba(255, 255, 255, 0.2);
+  flex-shrink: 0;
+}
+
+/* Icon container (notification, help) */
+.topnavbar__icons {
+  display: flex;
+  align-items: center;
+  gap: var(--icon-gap);
+}
+
+.topnavbar__icon-btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--icon-container-size);
+  height: var(--icon-container-size);
+  border-radius: var(--icon-container-radius);
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  transition: background 0.15s;
+  padding: 0;
+}
+.topnavbar__icon-btn:hover {
+  background: var(--icon-container-hover-bg);
+}
+
+.topnavbar__icon-btn svg,
+.topnavbar__icon-btn img {
+  width: 16px;
+  height: 16px;
+}
+
+.topnavbar__badge {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  min-width: 16px;
+  height: 16px;
+  border-radius: var(--badge-radius);
+  font-size: var(--badge-font-size);
+  font-weight: 700;
+  color: var(--badge-text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  padding: 0 3px;
+}
+.topnavbar__badge--blue { background: var(--badge-blue); }
+.topnavbar__badge--red  { background: var(--badge-red); }
+
+/* Avatar */
+.topnavbar__avatar {
+  width: var(--icon-container-size);
+  height: var(--icon-container-size);
+  border-radius: 50%;
+  overflow: hidden;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+}
+.topnavbar__avatar img,
+.topnavbar__avatar svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Apps grid icon */
+.topnavbar__grid {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+}
+.topnavbar__grid img {
+  width: 16px;
+  height: 16px;
+}
+
+/* ── Row 2: Nav tabs + Search (h=34) ── */
+.topnavbar__row2 {
+  height: var(--topnav-row2-height);
+  background: var(--topnav-row2-bg);
+  padding: var(--topnav-row2-padding);
+  display: flex;
+  align-items: center;
+}
+
+.topnavbar__row2-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+}
+
+/* Nav tabs slider */
+.topnavbar__tabs {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.topnavbar__tab {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--nav-tab-height);
+  padding: var(--nav-tab-padding);
+  font-size: var(--nav-tab-font-size);
+  font-weight: var(--nav-tab-font-weight);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.15s, color 0.15s;
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
+  line-height: 1;
+}
+
+.topnavbar__tab--unselected {
+  background: var(--nav-tab-unselected-bg);
+  color: var(--nav-tab-unselected-text);
+}
+.topnavbar__tab--unselected:hover {
+  background: #3d4460;
+  color: #eeeef2;
+}
+
+.topnavbar__tab--selected {
+  background: var(--nav-tab-selected-bg);
+  color: var(--nav-tab-selected-text);
+}
+
+/* Search + Add segment */
+.topnavbar__segment {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.topnavbar__search {
+  display: flex;
+  align-items: center;
+  width: var(--search-width);
+  height: var(--search-height);
+  border: 1px solid var(--search-stroke);
+  border-radius: var(--search-radius);
+  padding: var(--search-padding);
+  gap: 6px;
+}
+.topnavbar__search svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+.topnavbar__search input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #FFFFFF;
+  font-size: var(--search-font-size);
+  font-family: inherit;
+  width: 100%;
+  line-height: 1;
+}
+.topnavbar__search input::placeholder {
+  color: var(--search-placeholder);
+}
+
+.topnavbar__add-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--add-btn-gap);
+  height: var(--add-btn-height);
+  padding: var(--add-btn-padding);
+  background: var(--add-btn-bg);
+  border: none;
+  border-radius: var(--add-btn-radius);
+  color: #FFFFFF;
+  font-size: var(--add-btn-font-size);
+  font-family: inherit;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s;
+}
+.topnavbar__add-btn:hover {
+  background: #7d86a8;
+}
+.topnavbar__add-btn svg,
+.topnavbar__add-btn img {
+  width: 10px;
+  height: 10px;
+  flex-shrink: 0;
+}

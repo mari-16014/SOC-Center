@@ -1,0 +1,409 @@
+/* ============================================================
+   TABLE TYPE 2 — Card-Row Alert Table
+   From Figma: each row is a card (82-103px tall) with:
+     Left sidebar (checkbox + thumbsup + count badge)
+     Main: severity icon + title + priority badge + description
+     Columns: Time Generated | Assignee | Status | Remediation
+   ============================================================ */
+
+/* ── View Selector Bar (top toolbar) ── */
+.t2-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 0;
+  font-size: 12px;
+  font-family: var(--font-family);
+}
+.t2-toolbar__left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.t2-toolbar__label {
+  color: #626262;
+  font-weight: 400;
+}
+.t2-toolbar__select {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #000;
+  font-weight: 400;
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-family: var(--font-family);
+  font-size: 12px;
+  padding: 4px 0;
+}
+.t2-toolbar__select img {
+  width: 12px;
+  height: 12px;
+  opacity: 0.5;
+}
+.t2-toolbar__divider {
+  width: 1px;
+  height: 16px;
+  background: #DCDCDC;
+}
+.t2-toolbar__filter {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 2px;
+  padding: 0;
+}
+.t2-toolbar__filter:hover { background: #F5F5F5; }
+.t2-toolbar__filter img { width: 14px; height: 14px; }
+
+.t2-toolbar__right {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #626262;
+}
+.t2-toolbar__right img { width: 14px; height: 14px; }
+
+/* ── Card-Row Table Container ── */
+.t2-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-family);
+  font-size: 12px;
+  table-layout: fixed;
+}
+
+/* ── Header ── */
+.t2-table thead th {
+  background: var(--table-header-bg, #F5F5F5);
+  font-weight: 500;
+  font-size: 12px;
+  color: #000;
+  text-align: left;
+  padding: 0 12px;
+  height: 32px;
+  border-bottom: 1px solid #E9E9E9;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.t2-table thead th.t2-th-check {
+  width: 90px;
+  min-width: 90px;
+  padding: 0;
+  text-align: center;
+}
+.t2-table thead th.t2-th-details {
+  width: auto;
+}
+.t2-table thead th .t2-sort {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+}
+.t2-table thead th .t2-sort::after {
+  content: '';
+  display: inline-block;
+  width: 0; height: 0;
+  border-left: 3.5px solid transparent;
+  border-right: 3.5px solid transparent;
+  border-bottom: 5px solid #000;
+}
+
+/* ── Row Cards ── */
+.t2-table tbody tr {
+  background: #fff;
+  border-bottom: 1px solid #E9E9E9;
+  transition: background 0.12s;
+}
+.t2-table tbody tr:hover {
+  background: var(--table-hover-bg, #FAFAFA);
+}
+.t2-table tbody tr.t2-row--selected {
+  background: var(--table-selected-bg, #F9FBFF);
+}
+.t2-table tbody tr.t2-row--selected:hover {
+  background: var(--table-selected-hover-bg, #F0F5FF);
+}
+
+.t2-table tbody td {
+  padding: 10px 12px;
+  vertical-align: top;
+  font-size: 11px;
+  color: #000;
+  border: none;
+}
+
+/* ── Left Column (Checkbox + ThumbsUp + Badge) ── */
+.t2-cell-left {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+  height: 100%;
+}
+.t2-cell-left__check {
+  flex: 0 0 16px;
+  cursor: pointer;
+}
+.t2-cell-left__check img {
+  width: 16px;
+  height: 16px;
+}
+.t2-cell-left__sep {
+  width: 1px;
+  height: 40px;
+  background: #DCDCDC;
+  margin: 0 8px;
+  flex-shrink: 0;
+}
+.t2-cell-left__meta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+.t2-cell-left__icon {
+  width: 16px;
+  height: 16px;
+}
+.t2-cell-left__badge {
+  font-size: 11px;
+  color: #525354;
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+/* ── Details Column (Title + Priority + Description) ── */
+.t2-details {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.t2-details__row1 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.t2-details__severity {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+.t2-details__title {
+  font-size: 12px;
+  font-weight: 400;
+  color: #000;
+}
+.t2-details__icons {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.t2-details__icons img {
+  width: 14px;
+  height: 14px;
+}
+
+/* Priority Badge — fully rounded pill matching Figma (cornerRadius: 1000) */
+.t2-priority {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 7px;
+  border-radius: 1000px;
+  font-size: 11px;
+  font-weight: 400;
+  color: #000;
+  white-space: nowrap;
+}
+.t2-priority--critical {
+  background: #EFDFDD;
+  border: 1px solid #95291D;
+}
+.t2-priority--high {
+  background: #FCE8E8;
+  border: 1px solid #DD1616;
+}
+.t2-priority--medium {
+  background: #FFDECC;
+  border: 1px solid #FF5900;
+}
+.t2-priority--low {
+  background: #F7F0E6;
+  border: 1px solid #AC6602;
+}
+.t2-priority--verylow {
+  background: #E8F2E8;
+  border: 1px solid #198019;
+}
+.t2-priority__score {
+  font-weight: 600;
+}
+.t2-priority__score--critical { color: #95291D; }
+.t2-priority__score--high { color: #DD1616; }
+.t2-priority__score--medium { color: #FF5900; }
+.t2-priority__score--low { color: #AC6602; }
+.t2-priority__score--verylow { color: #198019; }
+
+/* Description */
+.t2-details__desc {
+  font-size: 11px;
+  color: #626262;
+  line-height: 1.5;
+  word-break: break-word;
+}
+
+/* ── Time Generated ── */
+.t2-time {
+  font-size: 11px;
+  color: #000;
+  white-space: nowrap;
+}
+
+/* ── Assignee ── */
+.t2-assignee {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.t2-assignee__avatar {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.t2-assignee__name {
+  font-size: 12px;
+  color: #000;
+  white-space: nowrap;
+}
+.t2-assignee__chevron {
+  width: 12px;
+  height: 12px;
+  opacity: 0.4;
+}
+
+/* ── Status — Rounded pill matching Figma (cornerRadius: 32, 10% opacity fill + 1px border) ── */
+.t2-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3.5px 8px;
+  border-radius: 32px;
+  font-size: 11px;
+  white-space: nowrap;
+  border: 1px solid transparent;
+}
+.t2-status--open {
+  color: #2C66DD;
+  background: rgba(44,102,221,0.1);
+  border-color: #2C66DD;
+}
+.t2-status--acknowledge,
+.t2-status--assigned,
+.t2-status--investigation {
+  color: #AC6602;
+  background: rgba(172,102,2,0.1);
+  border-color: #AC6602;
+}
+.t2-status--remediation {
+  color: #AC6602;
+  background: rgba(172,102,2,0.1);
+  border-color: #AC6602;
+}
+.t2-status--remediated,
+.t2-status--benign {
+  color: #198019;
+  background: rgba(25,128,25,0.1);
+  border-color: #198019;
+}
+.t2-status--false-positive {
+  color: #198019;
+  background: rgba(25,128,25,0.1);
+  border-color: #198019;
+}
+.t2-status__chevron {
+  width: 11px;
+  height: 11px;
+  flex-shrink: 0;
+}
+
+/* ── Remediation ── */
+.t2-remediation {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+}
+.t2-remediation__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: #2C66DD;
+  text-decoration: none;
+  font-size: 12px;
+  border: 1px solid #2C66DD;
+  border-radius: 2px;
+  padding: 4px 10px;
+  background: none;
+  cursor: pointer;
+  font-family: var(--font-family);
+  white-space: nowrap;
+  transition: background 0.12s;
+}
+.t2-remediation__link:hover {
+  background: #F0F6FF;
+}
+.t2-remediation__link img {
+  width: 12px;
+  height: 12px;
+}
+.t2-remediation__status {
+  font-size: 12px;
+  color: #000;
+}
+.t2-remediation__status-link {
+  color: #2C66DD;
+  text-decoration: none;
+  cursor: pointer;
+}
+.t2-remediation__status-link:hover {
+  text-decoration: underline;
+}
+.t2-remediation__status--success {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.t2-remediation__status--failed {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.t2-remediation__executing {
+  font-size: 12px;
+  color: #000;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.t2-remediation__icon {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+.t2-remediation__executing .t2-remediation__icon {
+  animation: t2-spin 1.2s linear infinite;
+}
+@keyframes t2-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}

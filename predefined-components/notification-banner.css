@@ -1,0 +1,125 @@
+/* ============================================================
+   NOTIFICATION BANNER — Predefined CSS
+   Overlay banner centered on main-content area.
+   Auto-dismisses after 5s. Close button (X) for manual dismiss.
+
+   Figma Component: "Notification Banner"
+   States: Inside Table | In Page Width Status Bar | Push Notification
+   Styles: Success | Error | Info | Warning | Prerequisite
+
+   ICON PRIORITY: Tier 1 (assets/icons/) ONLY. No Lucide CDN.
+   Icons exported from Figma: icon-notif-success/error/info/warning/close.svg
+
+   TYPES:
+     .notif-banner--success  → green bg #E8F2E8, green circle check icon
+     .notif-banner--warning  → warm bg #F7F0E6, orange triangle icon
+     .notif-banner--error    → red bg #FCE8E8, red circle X icon
+     .notif-banner--info     → blue bg #EDF7FA, blue circle i icon
+
+   USAGE:
+     ElegantNotif.show('Message text', 'success');
+     ElegantNotif.show('Warning!', 'warning', 8000);
+     ElegantNotif.show('Error occurred', 'error');
+     ElegantNotif.show('Info note', 'info');
+   ============================================================ */
+
+.notif-banner {
+  position: fixed;
+  top: 120px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-20px);
+  z-index: 1500;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-family: var(--font-family, 'Zoho Puvi', sans-serif);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: #000000;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  white-space: nowrap;
+  max-width: 90vw;
+}
+
+.notif-banner.notif-banner--visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Icon container */
+.notif-banner__icon {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.notif-banner__icon img {
+  width: 14px;
+  height: 14px;
+}
+
+/* Message text */
+.notif-banner__msg {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Close button */
+.notif-banner__close {
+  width: 10px;
+  height: 10px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  margin-left: 10px;
+  opacity: 0.7;
+  transition: opacity 0.15s;
+  border-radius: 2px;
+}
+.notif-banner__close:hover {
+  opacity: 1;
+}
+.notif-banner__close img {
+  width: 10px;
+  height: 10px;
+}
+
+/* ── Type 1: Success — Figma bg #E8F2E8, icon green circle check ── */
+.notif-banner--success {
+  background: #E8F2E8;
+  color: #000000;
+}
+
+/* ── Type 2: Warning — Figma bg #F7F0E6, icon orange triangle ── */
+.notif-banner--warning {
+  background: #F7F0E6;
+  color: #000000;
+}
+
+/* ── Type 3: Error — Figma bg #FCE8E8, icon red circle X ── */
+.notif-banner--error {
+  background: #FCE8E8;
+  color: #000000;
+}
+
+/* ── Type 4: Info — Figma bg #EDF7FA, icon blue circle i ── */
+.notif-banner--info {
+  background: #EDF7FA;
+  color: #000000;
+}

@@ -1,0 +1,403 @@
+<!-- ============================================================
+     FORM INPUT — Predefined HTML Templates
+     All form input types from Figma "Textbox with Label" component
+     ════════════════════════════════════════════════════════════
+     STRICT RULE: 3 fixed input widths (NEVER fill container)
+       Default = 280px  →  class="form-row__input" (or form-row__input--default)
+       Medium  = 160px  →  class="form-row__input form-row__input--medium"
+       Small   = 100px  →  class="form-row__input form-row__input--small"
+     ============================================================ -->
+
+<!-- ────────────────────────────────────────────────────────────
+     TYPE 1: Standard Text Input (Label + Textbox) — Default 280px
+     Figma: innerType="Standard", mandatory=false
+     ──────────────────────────────────────────────────────────── -->
+<!--
+<div class="form-row">
+  <label class="form-row__label">Label Name</label>
+  <div class="form-row__input">
+    <input class="form-input form-input--text" type="text" placeholder="Enter a unique name" />
+  </div>
+</div>
+-->
+
+<!-- ────────────────────────────────────────────────────────────
+     TYPE 2: Standard Text with Mandatory (*)
+     Figma: innerType="Standard", mandatory=true
+     ──────────────────────────────────────────────────────────── -->
+<!--
+<div class="form-row">
+  <label class="form-row__label">Label Name <span class="form-row__mandatory">*</span></label>
+  <div class="form-row__input">
+    <input class="form-input form-input--text" type="text" placeholder="Enter a unique name" />
+  </div>
+</div>
+-->
+
+<!-- ────────────────────────────────────────────────────────────
+     TYPE 3: Description / Textarea
+     Figma: innerType="Description", h=68px
+     ──────────────────────────────────────────────────────────── -->
+<!--
+<div class="form-row">
+  <label class="form-row__label">Description <span class="form-row__mandatory">*</span></label>
+  <div class="form-row__input">
+    <textarea class="form-input form-input--textarea" placeholder="Enter description..."></textarea>
+  </div>
+</div>
+-->
+
+<!-- ────────────────────────────────────────────────────────────
+     TYPE 4: Standard with Front Icon
+     Figma: innerType="Standard with Front Icon"
+     ──────────────────────────────────────────────────────────── -->
+<!--
+<div class="form-row">
+  <label class="form-row__label">Search <span class="form-row__mandatory">*</span></label>
+  <div class="form-row__input">
+    <div class="form-input-icon-wrap form-input-icon-wrap--left">
+      <span class="form-input-icon-wrap__icon"><img src="./assets/icons/icon-search.svg" alt="" /></span>
+      <input class="form-input" type="text" placeholder="Enter a unique name" />
+    </div>
+  </div>
+</div>
+-->
+
+<!-- ────────────────────────────────────────────────────────────
+     TYPE 5: Radio Group (Domain / Workgroup)
+     Figma: idx 4 — detached with 2 radios
+     ──────────────────────────────────────────────────────────── -->
+<!--
+<div class="form-row">
+  <label class="form-row__label">Connection Type <span class="form-row__mandatory">*</span></label>
+  <div class="form-row__input">
+    <div class="form-radio-group">
+      <label class="form-radio">
+        <input class="form-radio__input" type="radio" name="connectionType" value="domain" checked />
+        <img class="form-radio__icon form-radio__icon--checked" src="./assets/icons/icon-radio-checked.svg" alt="" />
+        <img class="form-radio__icon form-radio__icon--unchecked" src="./assets/icons/icon-radio-unchecked.svg" alt="" />
+        <span>Domain</span>
+      </label>
+      <label class="form-radio">
+        <input class="form-radio__input" type="radio" name="connectionType" value="workgroup" />
+        <img class="form-radio__icon form-radio__icon--checked" src="./assets/icons/icon-radio-checked.svg" alt="" />
+        <img class="form-radio__icon form-radio__icon--unchecked" src="./assets/icons/icon-radio-unchecked.svg" alt="" />
+        <span>Workgroup</span>
+      </label>
+      <img class="form-radio__info" src="./assets/icons/icon-info.svg" alt="info" title="Choose connection type" />
+    </div>
+  </div>
+</div>
+-->
+
+<!-- ────────────────────────────────────────────────────────────
+     TYPE 6: Text with Pre-filled Value + Plus Icon (opens another tab)
+     Figma: Text Value visible + "plus" icon at right edge (14×14)
+     ──────────────────────────────────────────────────────────── -->
+<!--
+<div class="form-row">
+  <label class="form-row__label">Device Type <span class="form-row__mandatory">*</span></label>
+  <div class="form-row__input">
+    <div class="form-input-icon-wrap form-input-icon-wrap--right">
+      <input class="form-input form-input--text" type="text" value="Member Server, Workstation" />
+      <span class="form-input-icon-wrap__icon form-input-icon-wrap__plus" title="Add new"><img src="./assets/icons/icon-plus.svg" alt="add" /></span>
+    </div>
+  </div>
+</div>
+-->
+
+<!-- ────────────────────────────────────────────────────────────
+     TYPE 7: Select / Dropdown
+     Figma: placeholder "- Select -"
+     ──────────────────────────────────────────────────────────── -->
+<!--
+<div class="form-row">
+  <label class="form-row__label">Category <span class="form-row__mandatory">*</span></label>
+  <div class="form-row__input">
+    <select class="form-input form-input--select">
+      <option value="" disabled selected>- Select -</option>
+      <option>Option A</option>
+      <option>Option B</option>
+      <option>Option C</option>
+    </select>
+  </div>
+</div>
+-->
+
+<!-- ────────────────────────────────────────────────────────────
+     TYPE 8: Date/Time Range
+     Figma: value "2025-12-01 00:00:00 - 2026-12-01 23:59:59"
+     ──────────────────────────────────────────────────────────── -->
+<!--
+<div class="form-row">
+  <label class="form-row__label">Date Range <span class="form-row__mandatory">*</span></label>
+  <div class="form-row__input">
+    <div class="form-input-calendar">
+      <input class="form-input" type="text" value="2025-12-01 00:00:00 - 2026-12-01 23:59:59" />
+      <img class="form-input-calendar__icon" src="./assets/icons/icon-calendar.svg" alt="" />
+    </div>
+  </div>
+</div>
+-->
+
+<!-- ────────────────────────────────────────────────────────────
+     TYPE 9: File Upload (with Upload button)
+     Figma: placeholder "- Upload -", button "Upload"
+     ──────────────────────────────────────────────────────────── -->
+<!--
+<div class="form-row form-row--half">
+  <label class="form-row__label">SSL Certificate <span class="form-row__mandatory">*</span></label>
+  <div class="form-row__input">
+    <div class="form-input-upload">
+      <input class="form-input" type="text" placeholder="- Upload -" readonly />
+      <button class="form-input-upload__btn" type="button">
+        <img src="./assets/icons/icon-upload.svg" alt="" /> Upload
+      </button>
+    </div>
+  </div>
+</div>
+-->
+
+<!-- ────────────────────────────────────────────────────────────
+     TYPE 10: File Upload (with Browse button)
+     Figma: placeholder "- Upload -", button "Browse"
+     ──────────────────────────────────────────────────────────── -->
+<!--
+<div class="form-row form-row--half">
+  <label class="form-row__label">Import File <span class="form-row__mandatory">*</span></label>
+  <div class="form-row__input">
+    <div class="form-input-upload">
+      <input class="form-input" type="text" placeholder="- Upload -" readonly />
+      <button class="form-input-upload__btn" type="button">Browse</button>
+    </div>
+  </div>
+</div>
+-->
+
+<!-- ────────────────────────────────────────────────────────────
+     TYPE 11: File Upload (with Cc suffix)
+     Figma: placeholder "- Upload -", suffix "Cc"
+     ──────────────────────────────────────────────────────────── -->
+<!--
+<div class="form-row form-row--half">
+  <label class="form-row__label">Email Cc <span class="form-row__mandatory">*</span></label>
+  <div class="form-row__input">
+    <div class="form-input-upload">
+      <input class="form-input" type="text" placeholder="- Upload -" readonly />
+      <button class="form-input-upload__btn" type="button">Cc</button>
+    </div>
+  </div>
+</div>
+-->
+
+<!-- ────────────────────────────────────────────────────────────
+     TYPE 12: Text with Pre-filled Server Name
+     Figma: value "PROD-SVR-01"
+     ──────────────────────────────────────────────────────────── -->
+<!--
+<div class="form-row">
+  <label class="form-row__label">Server Name <span class="form-row__mandatory">*</span></label>
+  <div class="form-row__input">
+    <input class="form-input form-input--text" type="text" value="PROD-SVR-01" />
+  </div>
+</div>
+-->
+
+<!-- ────────────────────────────────────────────────────────────
+     TYPE 13: Password Input
+     Figma: value masked "●●●●●●●●●"
+     ──────────────────────────────────────────────────────────── -->
+<!--
+<div class="form-row">
+  <label class="form-row__label">Password <span class="form-row__mandatory">*</span></label>
+  <div class="form-row__input">
+    <div class="form-input-password">
+      <input class="form-input" type="password" value="mysecretpassword123" />
+      <button class="form-input-password__toggle" type="button">
+        <img src="./assets/icons/icon-eye-show.svg" alt="Show" />
+      </button>
+    </div>
+  </div>
+</div>
+-->
+
+<!-- ────────────────────────────────────────────────────────────
+     TYPE 14: Icon Right (e.g., calendar trigger, search icon right)
+     Figma: innerType="Standard - Icon Right"
+     ──────────────────────────────────────────────────────────── -->
+<!--
+<div class="form-row form-row--half">
+  <label class="form-row__label">Date <span class="form-row__mandatory">*</span></label>
+  <div class="form-row__input">
+    <div class="form-input-icon-wrap form-input-icon-wrap--right">
+      <input class="form-input" type="text" placeholder="Enter Value" />
+      <span class="form-input-icon-wrap__icon"><img src="./assets/icons/icon-calendar.svg" alt="" /></span>
+    </div>
+  </div>
+</div>
+-->
+
+<!-- ────────────────────────────────────────────────────────────
+     TYPE 15: Icon Left
+     Figma: innerType="Standard - Icon Left"
+     ──────────────────────────────────────────────────────────── -->
+<!--
+<div class="form-row form-row--half">
+  <label class="form-row__label">Search <span class="form-row__mandatory">*</span></label>
+  <div class="form-row__input">
+    <div class="form-input-icon-wrap form-input-icon-wrap--left">
+      <span class="form-input-icon-wrap__icon"><img src="./assets/icons/icon-search.svg" alt="" /></span>
+      <input class="form-input" type="text" placeholder="Enter Value" />
+    </div>
+  </div>
+</div>
+-->
+
+<!-- ────────────────────────────────────────────────────────────
+     TYPE 16: Number Input (with up/down arrows)
+     Figma: innerType="Number", value=25
+     ──────────────────────────────────────────────────────────── -->
+<!--
+<div class="form-row form-row--half">
+  <label class="form-row__label">Port Number <span class="form-row__mandatory">*</span></label>
+  <div class="form-row__input">
+    <div class="form-input-number">
+      <input class="form-input" type="number" value="25" min="1" max="65535" />
+      <div class="form-input-number__arrows">
+        <button class="form-input-number__btn form-input-number__btn--up" type="button">
+          <img src="./assets/icons/icon-number-up.svg" alt="up" />
+        </button>
+        <button class="form-input-number__btn form-input-number__btn--down" type="button">
+          <img src="./assets/icons/icon-number-down.svg" alt="down" />
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+-->
+
+<!-- ────────────────────────────────────────────────────────────
+     TYPE 17: Port Input (protocol + host + port)
+     Figma: innerType="Port-1" → "https://" + input + ":443"
+     ──────────────────────────────────────────────────────────── -->
+<!--
+<div class="form-row form-row--half">
+  <label class="form-row__label">Server URL <span class="form-row__mandatory">*</span></label>
+  <div class="form-row__input">
+    <div class="form-input-port">
+      <span class="form-input-port__prefix">https://</span>
+      <input class="form-input" type="text" placeholder="Enter Value" />
+      <span class="form-input-port__suffix">:443</span>
+    </div>
+  </div>
+</div>
+-->
+
+<!-- ────────────────────────────────────────────────────────────
+     TYPE 18: Frequency Input (dropdown + time selectors)
+     Figma: innerType="Frequency"
+     ──────────────────────────────────────────────────────────── -->
+<!--
+<div class="form-row">
+  <label class="form-row__label">Schedule <span class="form-row__mandatory">*</span></label>
+  <div class="form-row__input">
+    <div class="form-input-frequency">
+      <select class="form-input form-input--select">
+        <option>Daily</option>
+        <option>Weekly</option>
+        <option>Monthly</option>
+      </select>
+      <span class="form-input-frequency__sep">at</span>
+      <div class="form-input-number">
+        <input class="form-input" type="number" value="12" min="0" max="23" />
+        <div class="form-input-number__arrows">
+          <button class="form-input-number__btn form-input-number__btn--up" type="button"><img src="./assets/icons/icon-number-up.svg" alt="" /></button>
+          <button class="form-input-number__btn form-input-number__btn--down" type="button"><img src="./assets/icons/icon-number-down.svg" alt="" /></button>
+        </div>
+      </div>
+      <span class="form-input-frequency__sep">hrs</span>
+      <div class="form-input-number">
+        <input class="form-input" type="number" value="00" min="0" max="59" />
+        <div class="form-input-number__arrows">
+          <button class="form-input-number__btn form-input-number__btn--up" type="button"><img src="./assets/icons/icon-number-up.svg" alt="" /></button>
+          <button class="form-input-number__btn form-input-number__btn--down" type="button"><img src="./assets/icons/icon-number-down.svg" alt="" /></button>
+        </div>
+      </div>
+      <span class="form-input-frequency__sep">mins</span>
+    </div>
+  </div>
+</div>
+-->
+
+<!-- ────────────────────────────────────────────────────────────
+     TYPE 19: Dropdown with Icon
+     Figma: innerType="Stand with Icon Dropdown"
+     ──────────────────────────────────────────────────────────── -->
+<!--
+<div class="form-row form-row--half">
+  <label class="form-row__label">Category <span class="form-row__mandatory">*</span></label>
+  <div class="form-row__input">
+    <select class="form-input form-input--select form-input--icon-dropdown">
+      <option value="" disabled selected>Enter Value</option>
+      <option>Category A</option>
+      <option>Category B</option>
+    </select>
+  </div>
+</div>
+-->
+
+<!-- ────────────────────────────────────────────────────────────
+     TYPE 20: Tags Input
+     Figma: innerType="Tags", pre-filled tags
+     ──────────────────────────────────────────────────────────── -->
+<!--
+<div class="form-row form-row--half">
+  <label class="form-row__label">Tags <span class="form-row__mandatory">*</span></label>
+  <div class="form-row__input">
+    <div class="form-input-tags">
+      <span class="form-input-tags__tag">admin <img class="form-input-tags__tag-remove" src="./assets/icons/icon-tag-close.svg" alt="×" /></span>
+      <span class="form-input-tags__tag">security <img class="form-input-tags__tag-remove" src="./assets/icons/icon-tag-close.svg" alt="×" /></span>
+      <input class="form-input-tags__input" type="text" placeholder="Add tag..." />
+    </div>
+  </div>
+</div>
+-->
+
+<!-- ────────────────────────────────────────────────────────────
+     TYPE 21: Text with Description Helper
+     Figma: descVisible=true
+     ──────────────────────────────────────────────────────────── -->
+<!--
+<div class="form-row">
+  <label class="form-row__label">Retention Period <span class="form-row__mandatory">*</span></label>
+  <div class="form-row__input">
+    <input class="form-input form-input--text" type="text" placeholder="Select retention period" />
+    <span class="form-row__desc">Data will be automatically purged after the retention period expires.</span>
+  </div>
+</div>
+-->
+
+<!-- ────────────────────────────────────────────────────────────
+     TYPE 22: Email Input
+     Figma: value "admin@zohocorp.com"
+     ──────────────────────────────────────────────────────────── -->
+<!--
+<div class="form-row">
+  <label class="form-row__label">Email <span class="form-row__mandatory">*</span></label>
+  <div class="form-row__input">
+    <input class="form-input form-input--text" type="email" value="admin@zohocorp.com" />
+  </div>
+</div>
+-->
+
+<!-- ────────────────────────────────────────────────────────────
+     SAVE / CANCEL BAR
+     Figma: "Save and Cancel" component, 24px gap from form group
+     ──────────────────────────────────────────────────────────── -->
+<!--
+<div class="form-actions">
+  <button class="btn-primary" type="button">Save</button>
+  <button class="btn-secondary" type="button">Cancel</button>
+  <a class="form-actions__link" href="#">Reset</a>
+</div>
+-->

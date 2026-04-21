@@ -1,0 +1,135 @@
+<!-- ============================================================
+     FORM DROPDOWN — Predefined HTML Templates
+     Figma "Dropdown" component — 6 types
+     ════════════════════════════════════════════════════════════
+     Container: 280px, bg #FFF, border 1px #DCDCDC, radius 2px
+     Item row: 26px height, padding 6px 12px (basic) / 5px 12px (check/radio)
+     Hover: bg #E9E9E9 | Selected: color #006AFF
+     ============================================================ -->
+
+<!-- ────────────────────────────────────────────────────────────
+     TYPE 1: Basic Dropdown (plain text items)
+     Figma: State=Dropdown, Checkbox=false, Radio=false, Search=false
+     ──────────────────────────────────────────────────────────── -->
+<!--
+<div class="form-dropdown form-dropdown--static">
+  <div class="form-dropdown__list">
+    <div class="form-dropdown__item">Option 1</div>
+    <div class="form-dropdown__item form-dropdown__item--active">Option 2 (hover)</div>
+    <div class="form-dropdown__item">Option 3</div>
+    <div class="form-dropdown__item">Option 4</div>
+    <div class="form-dropdown__item">Option 5</div>
+    <div class="form-dropdown__item">Option 6</div>
+    <div class="form-dropdown__item">Option 7</div>
+  </div>
+</div>
+-->
+
+<!-- ────────────────────────────────────────────────────────────
+     TYPE 2: Checkbox Multi-Select
+     Figma: Checkbox=true
+     ──────────────────────────────────────────────────────────── -->
+<!--
+<div class="form-dropdown form-dropdown--static">
+  <div class="form-dropdown__select-all">
+    <img class="form-dropdown__item-icon" src="./assets/icons/icon-checkbox.svg" data-checked="false" alt="" />
+    <span>Select All</span>
+  </div>
+  <div class="form-dropdown__list">
+    <div class="form-dropdown__item form-dropdown__item--check form-dropdown__item--active">
+      <img class="form-dropdown__item-icon" src="./assets/icons/icon-checkbox-checked.svg" data-checked="true" alt="" />
+      <span>Option 1</span>
+    </div>
+    <div class="form-dropdown__item form-dropdown__item--check">
+      <img class="form-dropdown__item-icon" src="./assets/icons/icon-checkbox.svg" data-checked="false" alt="" />
+      <span>Option 2</span>
+    </div>
+  </div>
+</div>
+-->
+
+<!-- ────────────────────────────────────────────────────────────
+     TYPE 3: Searchable (search bar + scroll)
+     Figma: Search Bar=true, Scroll=true
+     ──────────────────────────────────────────────────────────── -->
+<!--
+<div class="form-dropdown form-dropdown--static">
+  <div class="form-dropdown__search">
+    <div class="form-dropdown__search-inner">
+      <input class="form-dropdown__search-input" type="text" placeholder="Search" />
+      <img class="form-dropdown__search-clear" src="./assets/icons/icon-search-close.svg" alt="clear" />
+    </div>
+  </div>
+  <div class="form-dropdown__list">
+    <div class="form-dropdown__item">Option 1</div>
+    ...items...
+  </div>
+</div>
+-->
+
+<!-- ────────────────────────────────────────────────────────────
+     TYPE 4: Search + Radio (single select with search)
+     Figma: Search Bar=true, Radio Button=true, Scroll=true
+     ──────────────────────────────────────────────────────────── -->
+<!--
+<div class="form-dropdown form-dropdown--static">
+  <div class="form-dropdown__search">
+    <div class="form-dropdown__search-inner">
+      <input class="form-dropdown__search-input" type="text" placeholder="Search" />
+      <img class="form-dropdown__search-clear" src="./assets/icons/icon-search-close.svg" alt="clear" />
+    </div>
+  </div>
+  <div class="form-dropdown__list">
+    <div class="form-dropdown__item form-dropdown__item--radio form-dropdown__item--active">
+      <img class="form-dropdown__item-icon" src="./assets/icons/icon-radio-checked.svg" data-checked="true" alt="" />
+      <span>Option 1</span>
+    </div>
+    <div class="form-dropdown__item form-dropdown__item--radio">
+      <img class="form-dropdown__item-icon" src="./assets/icons/icon-radio-unchecked.svg" data-checked="false" alt="" />
+      <span>Option 2</span>
+    </div>
+  </div>
+</div>
+-->
+
+<!-- ────────────────────────────────────────────────────────────
+     TYPE 5: No Data State (radio + pagination + empty)
+     Figma: Radio Button=true, Pagination=true, No data=Yes
+     ──────────────────────────────────────────────────────────── -->
+<!--
+<div class="form-dropdown form-dropdown--static">
+  <div class="form-dropdown__search">
+    <div class="form-dropdown__search-inner">
+      <input class="form-dropdown__search-input" type="text" placeholder="Search" value="xyz" />
+      <img class="form-dropdown__search-clear form-dropdown__search-clear--visible" src="./assets/icons/icon-search-close.svg" alt="clear" />
+    </div>
+  </div>
+  <div class="form-dropdown__no-data">
+    <span class="form-dropdown__no-data-text">No Data Available</span>
+    <a class="form-dropdown__no-data-link" href="#">Clear Search</a>
+  </div>
+</div>
+-->
+
+<!-- ────────────────────────────────────────────────────────────
+     TYPE 6: Apply / Cancel Footer
+     Figma: Radio Button=true, Pagination=true, Apply Cancel=true
+     ──────────────────────────────────────────────────────────── -->
+<!--
+<div class="form-dropdown form-dropdown--static">
+  <div class="form-dropdown__list">
+    <div class="form-dropdown__item form-dropdown__item--radio form-dropdown__item--active">
+      <img class="form-dropdown__item-icon" src="./assets/icons/icon-radio-checked.svg" data-checked="true" alt="" />
+      <span>Option 1</span>
+    </div>
+    ...items...
+  </div>
+  <div class="form-dropdown__footer">
+    <div class="form-dropdown__footer-line"></div>
+    <div class="form-dropdown__footer-actions">
+      <button class="btn-apply" type="button">Apply</button>
+      <button class="btn-cancel" type="button">Cancel</button>
+    </div>
+  </div>
+</div>
+-->

@@ -1,0 +1,40 @@
+/* ═══ Note Container — Predefined Component ═══
+   Figma source: "Note" (684:81335) — Test Claude file
+   Layout: horizontal flex, 12px padding, 8px gap, 2px radius
+   ═══════════════════════════════════════════════ */
+
+.note-container {
+  display: flex;
+  align-items: flex-start;
+  padding: 12px;
+  gap: 8px;
+  border-radius: 2px;
+  background: var(--main-content-bg, #FFFFFF);
+  border: 1px solid var(--table-border, #DCDCDC);
+  font-family: var(--font-family);
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.note-container__label {
+  font-weight: 600;
+  color: #000000;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.note-container__body {
+  font-weight: 400;
+  color: #000000;
+}
+
+.note-container__body a {
+  color: var(--link-color, #006AFF);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.note-container__body a:hover {
+  text-decoration: underline;
+  color: var(--link-hover, #0055D4);
+}

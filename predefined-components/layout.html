@@ -1,0 +1,107 @@
+<!--
+  ============================================================
+  LAYOUT SHELL — Predefined HTML Skeleton
+  ============================================================
+  Use this as the base template for any new page.
+  Replace {{PAGE_TITLE}}, {{ACTIVE_TAB}}, {{ACTIVE_MENU_ITEM}},
+  and fill in the main-content area.
+
+  FILE NAMING:
+    Converted HTML files go directly in figma-export/ — NO subfolder.
+    Use lowercase + hyphens for the filename.
+    Example: figma-export/settings-applications.html  NOT  figma-export/settings-applications/index.html
+
+  DATA ATTRIBUTES:
+    data-active-tab="TabName"   on <header class="topnavbar">
+    data-active-item="ItemName" on <aside class="sidemenu">
+    JS reads these on load — no manual class editing needed.
+
+  REQUIRED CSS (in this order, with cache-busting ?v=N):
+    tokens.css → layout.css → topnavbar.css → sidemenu.css
+    → header.css → classic-tab.css → table.css → responsive.css
+
+  REQUIRED JS (at bottom of body):
+    topnavbar.js → sidemenu.js → classic-tab.js → table.js
+
+  RESPONSIVE:
+    Desktop > 1024px  — original Figma layout
+    Tablet  768–1024px — sidebar overlay, priority+ tabs, hamburger
+    Mobile  < 768px   — stacked layout, drawer sidebar, compact nav
+
+  DEPLOYMENT:
+    Always bump ?v=N on CSS links when pushing to GitHub Pages
+    to bust browser cache.
+  ============================================================
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{PAGE_TITLE}}</title>
+
+  <!-- Predefined CSS (bump ?v=N after changes for cache busting) -->
+  <link rel="stylesheet" href="./predefined-components/tokens.css?v=4" />
+  <link rel="stylesheet" href="./predefined-components/layout.css?v=4" />
+  <link rel="stylesheet" href="./predefined-components/topnavbar.css?v=4" />
+  <link rel="stylesheet" href="./predefined-components/sidemenu.css?v=4" />
+  <link rel="stylesheet" href="./predefined-components/header.css?v=4" />
+  <link rel="stylesheet" href="./predefined-components/classic-tab.css?v=4" />
+  <link rel="stylesheet" href="./predefined-components/table.css?v=4" />
+  <link rel="stylesheet" href="./predefined-components/responsive.css?v=4" />
+</head>
+<body>
+<!-- Sidebar overlay backdrop (mobile/tablet) -->
+<div class="sidemenu-backdrop"></div>
+
+<div class="app-shell">
+
+  <!-- TOPNAVBAR: paste from topnavbar.html, set data-active-tab -->
+
+  <div class="app-body">
+
+    <!-- SIDEMENU: paste from sidemenu.html, set data-active-item -->
+
+    <!-- Expand button (visible when sidebar collapsed on desktop) -->
+    <button class="sidemenu-expand" id="sidebarExpand" title="Expand sidebar">
+      <img src="./assets/icons/icon-slider-close.svg" alt="" />
+    </button>
+
+    <main class="main-content">
+
+      <!-- HEADER: paste from header.html, set title -->
+
+      <!-- CONTENT: classic-tab, table, form, etc. -->
+
+    </main>
+  </div>
+
+</div>
+
+<!-- Bottom sheet for mobile/tablet tab navigation (OUTSIDE app-shell) -->
+<div class="nav-bottom-sheet" id="navBottomSheet">
+  <div class="nav-bottom-sheet__backdrop"></div>
+  <div class="nav-bottom-sheet__panel">
+    <div class="nav-bottom-sheet__handle"></div>
+    <ul class="nav-bottom-sheet__list">
+      <li><button class="nav-bottom-sheet__item" data-tab="Dashboard">Dashboard</button></li>
+      <li><button class="nav-bottom-sheet__item" data-tab="Reports">Reports</button></li>
+      <li><button class="nav-bottom-sheet__item" data-tab="Compliance">Compliance</button></li>
+      <li><button class="nav-bottom-sheet__item" data-tab="Search">Search</button></li>
+      <li><button class="nav-bottom-sheet__item" data-tab="Correlation">Correlation</button></li>
+      <li><button class="nav-bottom-sheet__item" data-tab="Alert">Alert</button></li>
+      <li><button class="nav-bottom-sheet__item" data-tab="Cloud Protection">Cloud Protection</button></li>
+      <li><button class="nav-bottom-sheet__item" data-tab="Settings">Settings</button></li>
+      <li><button class="nav-bottom-sheet__item" data-tab="Support">Support</button></li>
+    </ul>
+  </div>
+</div>
+
+<!-- Predefined JS -->
+<script src="./predefined-components/topnavbar.js"></script>
+<script src="./predefined-components/sidemenu.js"></script>
+<script src="./predefined-components/classic-tab.js"></script>
+<script src="./predefined-components/table.js"></script>
+</body>
+</html>

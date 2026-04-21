@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alerts Responders — Enhanced Suggestions</title>
+  <link rel="stylesheet" href="./predefined-components/tokens.css" />
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Zoho Puvi', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #F4F5F7;
+      color: #1a1a1a;
+      font-size: 13px;
+      min-height: 100vh;
+      padding: 24px;
+    }
+
+    /* ── Page header ── */
+    .page-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: #888;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    /* ── Widget header row ── */
+    .widget-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+    .widget-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #1a1a1a;
+    }
+    .widget-badge {
+      background: #E8F0FE;
+      color: #1967D2;
+      font-size: 11px;
+      font-weight: 600;
+      border-radius: 10px;
+      padding: 1px 8px;
+    }
+    .widget-actions {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .icon-btn {
+      width: 26px;
+      height: 26px;
+      border-radius: 4px;
+      border: 1px solid #E2E2E2;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: #555;
+      transition: background 0.15s;
+    }
+    .icon-btn:hover { background: #F0F0F0; }
+    .icon-btn svg { width: 13px; height: 13px; }
+
+    /* ── Stat cards row ── */
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .stat-card {
+      background: #fff;
+      border: 1px solid #E5E7EB;
+      border-radius: 8px;
+      padding: 16px 18px 14px;
+      position: relative;
+      overflow: hidden;
+      transition: box-shadow 0.2s;
+    }
+    .stat-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
+
+    /* Left accent border — color coded */
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 4px;
+      border-radius: 8px 0 0 8px;
+    }
+    .stat-card--good::before   { background: #22C55E; }
+    .stat-card--warn::before   { background: #F59E0B; }
+    .stat-card--fast::before   { background: #3B82F6; }
+    .stat-card--rate::before   { background: #10B981; }
+
+    .stat-label {
+      font-size: 11px;
+      color: #6B7280;
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+    .stat-value {
+      font-size: 26px;
+      font-weight: 700;
+      line-height: 1.1;
+      color: #111827;
+    }
+    .stat-value--warn { color: #B45309; }
+    .stat-sub {
+      font-size: 11px;
+      color: #9CA3AF;
+      margin-top: 2px;
+    }
+    .stat-trend {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      font-size: 11px;
+      font-weight: 500;
+      margin-top: 4px;
+    }
+    .stat-trend--up   { color: #16A34A; }
+    .stat-trend--down { color: #DC2626; }
+
+    /* Progress bar under 8/10 */
+    .stat-progress {
+      margin-top: 10px;
+      height: 5px;
+      background: #F3F4F6;
+      border-radius: 99px;
+      overflow: hidden;
+    }
+    .stat-progress__fill {
+      height: 100%;
+      border-radius: 99px;
+      background: linear-gradient(90deg, #22C55E, #86EFAC);
+      transition: width 0.6s ease;
+    }
+    .stat-progress__fill--warn {
+      background: linear-gradient(90deg, #F59E0B, #FCD34D);
+    }
+
+    /* Mini sparkline canvas inside card */
+    .stat-sparkline {
+      position: absolute;
+      bottom: 0; right: 0;
+      width: 80px;
+      height: 44px;
+      opacity: 0.18;
+    }
+
+    /* Rate card circle */
+    .rate-circle {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 6px;
+    }
+    .rate-donut {
+      width: 40px;
+      height: 40px;
+      flex-shrink: 0;
+    }
+
+    /* ── Two-column bottom section ── */
+    .bottom-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    /* ── Panel card ── */
+    .panel-card {
+      background: #fff;
+      border: 1px solid #E5E7EB;
+      border-radius: 8px;
+      padding: 16px 18px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── Alert list ── */
+    .alert-list { display: flex; flex-direction: column; gap: 6px; margin-top: 8px; }
+
+    .alert-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 10px;
+      border-radius: 6px;
+      border: 1px solid transparent;
+      transition: background 0.15s, border-color 0.15s;
+      cursor: pointer;
+    }
+    .alert-row:hover { background: #F9FAFB; border-color: #E5E7EB; }
+
+    /* Severity tint for false positives */
+    .alert-row--fp  { background: #FFF5F5; border-color: #FEE2E2; }
+    .alert-row--btp { background: #FFFBEB; border-color: #FEF3C7; }
+    .alert-row--tp  { background: #F0FDF4; border-color: #DCFCE7; }
+    .alert-row--fp:hover  { background: #FEE2E2; }
+    .alert-row--btp:hover { background: #FEF3C7; }
+    .alert-row--tp:hover  { background: #DCFCE7; }
+
+    .alert-icon { width: 20px; height: 20px; flex-shrink: 0; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+    .alert-icon svg { width: 12px; height: 12px; }
+    .alert-icon--critical { background: #FEE2E2; color: #DC2626; }
+    .alert-icon--warning  { background: #FEF3C7; color: #D97706; }
+    .alert-icon--info     { background: #EFF6FF; color: #2563EB; }
+
+    .alert-name { flex: 1; font-size: 12px; font-weight: 500; color: #111827; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .alert-time { font-size: 11px; color: #9CA3AF; white-space: nowrap; margin-left: auto; padding-right: 8px; }
+
+    .verdict-pill {
+      font-size: 10px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 10px;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 3px;
+    }
+    .verdict-pill svg { width: 9px; height: 9px; }
+    .verdict-pill--tp  { background: #DCFCE7; color: #15803D; }
+    .verdict-pill--fp  { background: #FEE2E2; color: #B91C1C; }
+    .verdict-pill--btp { background: #FEF3C7; color: #92400E; }
+
+    .analyst-avatar {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #6366F1;
+      color: #fff;
+      font-size: 9px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    /* ── Storage table ── */
+    .storage-table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+    .storage-table th {
+      font-size: 11px;
+      font-weight: 600;
+      color: #6B7280;
+      text-align: left;
+      padding: 6px 8px;
+      border-bottom: 1px solid #F3F4F6;
+      cursor: pointer;
+      user-select: none;
+    }
+    .storage-table th:hover { color: #1a1a1a; }
+    .storage-table th .sort-icon { opacity: 0.4; margin-left: 3px; font-size: 10px; }
+    .storage-table td {
+      padding: 7px 8px;
+      font-size: 12px;
+      color: #374151;
+      border-bottom: 1px solid #F9FAFB;
+      vertical-align: middle;
+    }
+    .storage-table tr:last-child td { border-bottom: none; }
+
+    /* Highlighted top row */
+    .storage-table tr.top-row td { background: #EFF6FF; font-weight: 600; color: #1E40AF; }
+    .storage-table tr:hover td { background: #F9FAFB; }
+
+    .bar-cell { width: 120px; }
+    .bar-wrap { height: 6px; background: #F3F4F6; border-radius: 99px; overflow: hidden; }
+    .bar-fill { height: 100%; border-radius: 99px; background: linear-gradient(90deg, #3B82F6, #93C5FD); transition: width 0.5s ease; }
+    .bar-fill--top { background: linear-gradient(90deg, #6366F1, #A5B4FC); }
+
+    .pct-cell { font-size: 11px; color: #9CA3AF; width: 50px; text-align: right; }
+
+    /* Sort arrow active */
+    .sort-active .sort-icon { opacity: 1; color: #3B82F6; }
+
+    /* ── Suggestion labels (callout ribbons) ── */
+    .suggestion-ribbon {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 10px;
+      font-weight: 600;
+      color: #7C3AED;
+      background: #F5F3FF;
+      border: 1px solid #DDD6FE;
+      border-radius: 4px;
+      padding: 2px 7px;
+      margin-bottom: 10px;
+    }
+    .suggestion-ribbon svg { width: 10px; height: 10px; }
+
+    /* ── Divider label ── */
+    .section-divider {
+      font-size: 11px;
+      color: #9CA3AF;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      margin: 18px 0 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .section-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: #E5E7EB;
+    }
+
+    .view-all-link {
+      margin-top: 12px;
+      font-size: 11px;
+      color: #3B82F6;
+      font-weight: 500;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+    }
+    .view-all-link:hover { text-decoration: underline; }
+
+    /* ── Queued badge ── */
+    .queued-badge {
+      display: inline-block;
+      background: #FEF2F2;
+      color: #DC2626;
+      border: 1px solid #FECACA;
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 1px 6px;
+      margin-left: 4px;
+    }
+
+  </style>
+</head>
+<body>
+
+<p class="page-label">✦ Enhanced Widget Suggestions — Visual Preview</p>
+
+<!-- ══════════════════════════════════════════════
+     WIDGET HEADER
+════════════════════════════════════════════════ -->
+<div class="widget-header">
+  <span class="widget-title">Alerts &amp; Responders</span>
+  <span class="widget-badge">Live</span>
+  <div class="widget-actions">
+    <div class="icon-btn" title="Refresh">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 4v6h6"/><path d="M23 20v-6h-6"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4-4.64 4.36A9 9 0 0 1 3.51 15"/></svg>
+    </div>
+    <div class="icon-btn" title="Sort">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+    </div>
+    <div class="icon-btn" title="Search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     SUGGESTION: Color-coded stat cards with
+     progress bar, sparkline, trend indicator
+════════════════════════════════════════════════ -->
+<div class="suggestion-ribbon">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+  Suggestion: Color-coded cards · Progress bar · Sparkline trend · Urgency hint
+</div>
+
+<div class="stat-grid">
+
+  <!-- Card 1: Investigated -->
+  <div class="stat-card stat-card--good">
+    <canvas class="stat-sparkline" id="spark1"></canvas>
+    <div class="stat-label">Investigated This Hour</div>
+    <div class="stat-value">8<span style="font-size:16px;color:#9CA3AF;font-weight:500;">/10</span></div>
+    <div class="stat-sub">Hr Limit</div>
+    <div class="stat-trend stat-trend--up">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="11" height="11"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+      +3 vs last hour
+    </div>
+    <div class="stat-progress" style="margin-top:10px;">
+      <div class="stat-progress__fill" style="width:80%;"></div>
+    </div>
+    <div style="display:flex;justify-content:space-between;margin-top:4px;">
+      <span style="font-size:10px;color:#9CA3AF;">0</span>
+      <span style="font-size:10px;color:#16A34A;font-weight:600;">80% capacity</span>
+      <span style="font-size:10px;color:#9CA3AF;">10</span>
+    </div>
+  </div>
+
+  <!-- Card 2: Queued -->
+  <div class="stat-card stat-card--warn">
+    <canvas class="stat-sparkline" id="spark2"></canvas>
+    <div class="stat-label">Queued <span class="queued-badge">Urgent</span></div>
+    <div class="stat-value stat-value--warn">02</div>
+    <div class="stat-sub">Pending Alerts</div>
+    <div class="stat-trend stat-trend--down">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="11" height="11"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/><polyline points="17 18 23 18 23 12"/></svg>
+      +2 since 15m ago
+    </div>
+    <div class="stat-progress" style="margin-top:10px;">
+      <div class="stat-progress__fill stat-progress__fill--warn" style="width:20%;"></div>
+    </div>
+    <div style="margin-top:4px;font-size:10px;color:#D97706;font-weight:600;">⚠ Exceeds threshold (1)</div>
+  </div>
+
+  <!-- Card 3: Avg Investigation Time -->
+  <div class="stat-card stat-card--fast">
+    <canvas class="stat-sparkline" id="spark3"></canvas>
+    <div class="stat-label">Avg. Investigation Time</div>
+    <div class="stat-value">4m <span style="font-size:18px;">21s</span></div>
+    <div class="stat-trend stat-trend--up" style="margin-top:6px;">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="11" height="11"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+      18% faster than manual
+    </div>
+    <div id="sparkLine3wrap" style="margin-top:8px;height:32px;">
+      <canvas id="sparkLine3" style="width:100%;height:32px;"></canvas>
+    </div>
+  </div>
+
+  <!-- Card 4: True Positive Rate -->
+  <div class="stat-card stat-card--rate">
+    <div class="stat-label">True Positive Rate</div>
+    <div class="rate-circle">
+      <canvas class="rate-donut" id="donutChart"></canvas>
+      <div>
+        <div class="stat-value" style="font-size:28px;color:#15803D;">78%</div>
+        <div class="stat-sub">AI Confidence Score</div>
+        <div class="stat-trend stat-trend--up" style="margin-top:4px;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="11" height="11"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+          +5% vs last week
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════════════════════════
+     BOTTOM TWO-COLUMN SECTION
+════════════════════════════════════════════════ -->
+
+<div class="section-divider">Detailed Panels</div>
+
+<div class="suggestion-ribbon" style="margin-bottom:10px;">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+  Suggestion: Tinted rows · Timestamps · Analyst avatar · Sortable table · Bar chart column · % of Total
+</div>
+
+<div class="bottom-grid">
+
+  <!-- ── Left: Recently Investigated ── -->
+  <div class="panel-card">
+    <div class="widget-header" style="margin-bottom:4px;">
+      <span class="widget-title">Recently Investigated</span>
+      <span class="widget-badge" style="background:#F3F4F6;color:#374151;">24 total</span>
+      <div class="widget-actions">
+        <div class="icon-btn" title="Filter by severity">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+        </div>
+      </div>
+    </div>
+    <div style="font-size:10px;color:#9CA3AF;margin-bottom:8px;">Sorted by: Most Recent</div>
+
+    <div class="alert-list">
+
+      <!-- Row 1: True Positive (critical) -->
+      <div class="alert-row alert-row--tp">
+        <div class="alert-icon alert-icon--critical">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        </div>
+        <div class="alert-name">Malicious URL — santhosh-8457</div>
+        <span class="alert-time">2m ago</span>
+        <div class="analyst-avatar" title="Analyst: SR">SR</div>
+        <span class="verdict-pill verdict-pill--tp">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+          True Positive
+        </span>
+      </div>
+
+      <!-- Row 2: True Positive (warning) -->
+      <div class="alert-row alert-row--tp">
+        <div class="alert-icon alert-icon--warning">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </div>
+        <div class="alert-name">Brute Force — DAE-WIN2019-1</div>
+        <span class="alert-time">8m ago</span>
+        <div class="analyst-avatar" style="background:#059669;" title="Analyst: KP">KP</div>
+        <span class="verdict-pill verdict-pill--tp">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+          True Positive
+        </span>
+      </div>
+
+      <!-- Row 3: False Positive (tinted red) -->
+      <div class="alert-row alert-row--fp">
+        <div class="alert-icon alert-icon--info">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="alert-name">PowerShell exec — admin-7721</div>
+        <span class="alert-time">14m ago</span>
+        <div class="analyst-avatar" style="background:#DC2626;" title="Analyst: AM">AM</div>
+        <span class="verdict-pill verdict-pill--fp">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          False Positive
+        </span>
+      </div>
+
+      <!-- Row 4: Benign True Positive (tinted amber) -->
+      <div class="alert-row alert-row--btp">
+        <div class="alert-icon alert-icon--critical">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        </div>
+        <div class="alert-name">RDP lateral move — 10.18.2.45</div>
+        <span class="alert-time">21m ago</span>
+        <div class="analyst-avatar" style="background:#D97706;" title="Analyst: NJ">NJ</div>
+        <span class="verdict-pill verdict-pill--btp">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Benign True Positive
+        </span>
+      </div>
+
+    </div>
+
+    <span class="view-all-link">
+      View all 24 alerts
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="11" height="11"><polyline points="9 18 15 12 9 6"/></svg>
+    </span>
+  </div>
+
+  <!-- ── Right: Top Storage Consumption ── -->
+  <div class="panel-card">
+    <div class="widget-header" style="margin-bottom:0;">
+      <span class="widget-title">Top Storage Consumption by User</span>
+    </div>
+
+    <table class="storage-table">
+      <thead>
+        <tr>
+          <th>Owner Name <span class="sort-icon">↕</span></th>
+          <th class="sort-active">File Count <span class="sort-icon">↓</span></th>
+          <th>Folder Count <span class="sort-icon">↕</span></th>
+          <th class="bar-cell">Distribution</th>
+          <th class="pct-cell">% Total</th>
+        </tr>
+      </thead>
+      <tbody id="storageBody">
+        <!-- Filled by JS -->
+      </tbody>
+    </table>
+
+    <div style="margin-top:14px;padding-top:12px;border-top:1px solid #F3F4F6;">
+      <div style="font-size:11px;color:#6B7280;margin-bottom:6px;font-weight:500;">File Count Distribution</div>
+      <div id="storageBarChart" style="height:120px;"></div>
+    </div>
+
+    <span class="view-all-link">
+      View all users
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="11" height="11"><polyline points="9 18 15 12 9 6"/></svg>
+    </span>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════════════════════════
+     SCRIPTS
+════════════════════════════════════════════════ -->
+<script>
+/* ── Sparkline helper (vanilla canvas) ── */
+function drawSparkline(canvasId, data, color) {
+  const canvas = document.getElementById(canvasId);
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const W = canvas.offsetWidth || 80;
+  const H = canvas.offsetHeight || 44;
+  canvas.width = W * 2; canvas.height = H * 2;
+  ctx.scale(2, 2);
+  const min = Math.min(...data), max = Math.max(...data);
+  const range = max - min || 1;
+  const pts = data.map((v, i) => ({
+    x: (i / (data.length - 1)) * W,
+    y: H - ((v - min) / range) * (H - 4) - 2
+  }));
+  ctx.beginPath();
+  ctx.moveTo(pts[0].x, pts[0].y);
+  pts.slice(1).forEach(p => ctx.lineTo(p.x, p.y));
+  ctx.strokeStyle = color;
+  ctx.lineWidth = 1.5;
+  ctx.stroke();
+  // fill
+  ctx.lineTo(pts[pts.length-1].x, H);
+  ctx.lineTo(pts[0].x, H);
+  ctx.closePath();
+  const grad = ctx.createLinearGradient(0, 0, 0, H);
+  grad.addColorStop(0, color + '55');
+  grad.addColorStop(1, color + '00');
+  ctx.fillStyle = grad;
+  ctx.fill();
+}
+
+window.addEventListener('load', () => {
+  drawSparkline('spark1', [4,5,6,7,6,7,8,8,7,8], '#22C55E');
+  drawSparkline('spark2', [0,1,0,1,2,1,2,1,2,2], '#F59E0B');
+  drawSparkline('spark3', [7,6,6,5,5,5,4,5,4,4], '#3B82F6');
+
+  /* ── Donut chart (ECharts) ── */
+  const donutEl = document.getElementById('donutChart');
+  if (donutEl && window.echarts) {
+    const donut = echarts.init(donutEl);
+    donut.setOption({
+      animation: true,
+      series: [{
+        type: 'pie',
+        radius: ['68%', '100%'],
+        silent: true,
+        label: { show: false },
+        data: [
+          { value: 78, itemStyle: { color: '#22C55E' } },
+          { value: 22, itemStyle: { color: '#F3F4F6' } }
+        ]
+      }]
+    });
+  }
+
+  /* ── Storage table data ── */
+  const storageData = [
+    { name: 'Administrators', files: 35667, folders: 35667 },
+    { name: 'dsp',            files: 34534, folders: 34534 },
+    { name: 'Trusted Installer', files: 12323, folders: 12323 },
+    { name: 'fap',            files: 3421,  folders: 3421  },
+    { name: 'Local System',   files: 1231,  folders: 1231  },
+  ];
+  const maxFiles = Math.max(...storageData.map(d => d.files));
+  const totalFiles = storageData.reduce((s, d) => s + d.files, 0);
+
+  const tbody = document.getElementById('storageBody');
+  storageData.forEach((row, i) => {
+    const pct = ((row.files / totalFiles) * 100).toFixed(1);
+    const barPct = ((row.files / maxFiles) * 100).toFixed(1);
+    const isTop = i === 0;
+    tbody.innerHTML += `
+      <tr class="${isTop ? 'top-row' : ''}">
+        <td>${row.name}${isTop ? ' 👑' : ''}</td>
+        <td>${row.files.toLocaleString()}</td>
+        <td>${row.folders.toLocaleString()}</td>
+        <td class="bar-cell">
+          <div class="bar-wrap">
+            <div class="bar-fill ${isTop ? 'bar-fill--top' : ''}" style="width:${barPct}%;"></div>
+          </div>
+        </td>
+        <td class="pct-cell">${pct}%</td>
+      </tr>
+    `;
+  });
+
+  /* ── Mini bar chart (ECharts) ── */
+  const barEl = document.getElementById('storageBarChart');
+  if (barEl && window.echarts) {
+    const chart = echarts.init(barEl);
+    chart.setOption({
+      animation: true,
+      grid: { top: 4, bottom: 20, left: 8, right: 8, containLabel: true },
+      xAxis: {
+        type: 'category',
+        data: storageData.map(d => d.name),
+        axisLabel: { fontSize: 10, color: '#9CA3AF', interval: 0, rotate: 15 },
+        axisLine: { show: false }, axisTick: { show: false }
+      },
+      yAxis: {
+        type: 'value',
+        axisLabel: { fontSize: 10, color: '#9CA3AF', formatter: v => (v/1000).toFixed(0)+'k' },
+        splitLine: { lineStyle: { color: '#F3F4F6' } },
+        axisLine: { show: false }, axisTick: { show: false }
+      },
+      series: [{
+        type: 'bar',
+        data: storageData.map((d, i) => ({
+          value: d.files,
+          itemStyle: {
+            color: i === 0
+              ? new echarts.graphic.LinearGradient(0,0,0,1,[{offset:0,color:'#6366F1'},{offset:1,color:'#A5B4FC'}])
+              : new echarts.graphic.LinearGradient(0,0,0,1,[{offset:0,color:'#3B82F6'},{offset:1,color:'#93C5FD'}]),
+            borderRadius: [3,3,0,0]
+          }
+        })),
+        barMaxWidth: 32,
+        label: { show: false }
+      }]
+    });
+  }
+});
+</script>
+
+</body>
+</html>

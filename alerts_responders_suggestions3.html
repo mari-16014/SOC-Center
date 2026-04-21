@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alerts Responders — More Suggestions</title>
+  <link rel="stylesheet" href="./predefined-components/tokens.css" />
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+  <script src="./predefined-components/lib/world-map-register.js"></script>
+  <script src="./predefined-components/lib/world.json" type="application/json" id="worldJson"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg-page:        #F4F5F7;
+      --bg-card:        #FFFFFF;
+      --border:         #E5E7EB;
+      --text-primary:   #111827;
+      --text-secondary: #6B7280;
+      --text-muted:     #9CA3AF;
+      --accent:         #3B82F6;
+      --success:        #22C55E;
+      --warn:           #F59E0B;
+      --danger:         #EF4444;
+      --row-hover:      #F9FAFB;
+      --shadow:         0 2px 12px rgba(0,0,0,0.06);
+    }
+    [data-theme="dark"] {
+      --bg-page:        #0F1117;
+      --bg-card:        #1C1F2B;
+      --border:         #2E3347;
+      --text-primary:   #F1F3F9;
+      --text-secondary: #9AA3B8;
+      --text-muted:     #5A6178;
+      --accent:         #60A5FA;
+      --success:        #4ADE80;
+      --warn:           #FBBF24;
+      --danger:         #F87171;
+      --row-hover:      #252A3B;
+      --shadow:         0 2px 12px rgba(0,0,0,0.3);
+    }
+
+    body {
+      font-family: 'Zoho Puvi', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg-page);
+      color: var(--text-primary);
+      font-size: 13px;
+      min-height: 100vh;
+      padding: 24px;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    /* ── Toolbar ── */
+    .toolbar { display:flex; align-items:center; gap:10px; margin-bottom:20px; }
+    .toolbar-title { font-size:13px; font-weight:700; color:var(--text-secondary); letter-spacing:.06em; text-transform:uppercase; flex:1; }
+    .theme-toggle { display:flex; align-items:center; gap:8px; font-size:11px; color:var(--text-secondary); cursor:pointer; user-select:none; }
+    .toggle-track { width:34px; height:18px; border-radius:99px; background:var(--border); position:relative; transition:background .25s; }
+    .toggle-track.on { background:#6366F1; }
+    .toggle-thumb { width:14px; height:14px; border-radius:50%; background:#fff; position:absolute; top:2px; left:2px; transition:left .25s; box-shadow:0 1px 3px rgba(0,0,0,.2); }
+    .toggle-track.on .toggle-thumb { left:18px; }
+
+    /* ── Ribbon ── */
+    .ribbon { display:inline-flex; align-items:center; gap:5px; font-size:10px; font-weight:600; color:#7C3AED; background:#F5F3FF; border:1px solid #DDD6FE; border-radius:4px; padding:2px 7px; margin-bottom:10px; margin-top:20px; }
+    [data-theme="dark"] .ribbon { background:#2D1F5E; border-color:#4C3D9E; color:#C4B5FD; }
+
+    /* ── Card ── */
+    .card { background:var(--bg-card); border:1px solid var(--border); border-radius:10px; padding:18px 20px; box-shadow:var(--shadow); transition:background .3s, border-color .3s; }
+    .card-title { font-size:13px; font-weight:600; color:var(--text-primary); margin-bottom:14px; display:flex; align-items:center; gap:6px; }
+    .card-title-sub { font-size:11px; font-weight:400; color:var(--text-muted); margin-left:auto; }
+
+    /* ── Grids ── */
+    .grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    .grid-3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; }
+
+    /* ══════════════════════════════════════
+       1. GEO THREAT MAP
+    ══════════════════════════════════════ */
+    #geoMap { width:100%; height:280px; }
+    .geo-legend { display:flex; gap:16px; flex-wrap:wrap; margin-top:10px; }
+    .geo-legend-item { display:flex; align-items:center; gap:6px; font-size:11px; color:var(--text-secondary); }
+    .geo-legend-dot { width:10px; height:10px; border-radius:50%; }
+
+    /* ══════════════════════════════════════
+       2. MTTR TREND
+    ══════════════════════════════════════ */
+    #mttrChart { width:100%; height:200px; }
+    .mttr-kpis { display:flex; gap:0; border-top:1px solid var(--border); margin-top:12px; padding-top:12px; }
+    .mttr-kpi { flex:1; text-align:center; }
+    .mttr-kpi + .mttr-kpi { border-left:1px solid var(--border); }
+    .mttr-kpi__val { font-size:18px; font-weight:700; color:var(--text-primary); }
+    .mttr-kpi__label { font-size:10px; color:var(--text-muted); margin-top:2px; }
+    .chip { display:inline-block; font-size:9px; font-weight:700; padding:1px 6px; border-radius:99px; margin-top:3px; }
+    .chip--green { background:#DCFCE7; color:#15803D; }
+    .chip--red   { background:#FEE2E2; color:#B91C1C; }
+    [data-theme="dark"] .chip--green { background:#052e16; color:#4ADE80; }
+    [data-theme="dark"] .chip--red   { background:#450A0A; color:#FCA5A5; }
+
+    /* ══════════════════════════════════════
+       3. ALERT CORRELATION NETWORK
+    ══════════════════════════════════════ */
+    #networkGraph { width:100%; height:280px; }
+    .network-legend { display:flex; gap:14px; flex-wrap:wrap; margin-top:8px; }
+    .network-legend-item { display:flex; align-items:center; gap:5px; font-size:11px; color:var(--text-secondary); }
+    .network-legend-shape { width:11px; height:11px; border-radius:50%; }
+
+    /* ══════════════════════════════════════
+       4. QUICK TRIAGE PANEL
+    ══════════════════════════════════════ */
+    .triage-list { display:flex; flex-direction:column; gap:8px; }
+    .triage-row {
+      display:flex; align-items:center; gap:10px;
+      padding:10px 12px; border-radius:8px;
+      border:1px solid var(--border);
+      transition:background .15s;
+    }
+    .triage-row:hover { background:var(--row-hover); }
+    .sev-dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
+    .triage-info { flex:1; min-width:0; }
+    .triage-name { font-size:12px; font-weight:600; color:var(--text-primary); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .triage-meta { font-size:10px; color:var(--text-muted); margin-top:1px; }
+    .triage-actions { display:flex; gap:5px; flex-shrink:0; }
+    .triage-btn {
+      height:24px; padding:0 10px; border-radius:5px; border:1px solid var(--border);
+      font-size:11px; font-weight:600; cursor:pointer; background:var(--bg-card);
+      color:var(--text-secondary); transition:all .15s; white-space:nowrap;
+    }
+    .triage-btn:hover { border-color:var(--accent); color:var(--accent); background:var(--accent-soft,#EFF6FF); }
+    .triage-btn--assign:hover  { border-color:#6366F1; color:#6366F1; background:#F5F3FF; }
+    .triage-btn--escalate:hover{ border-color:#EF4444; color:#EF4444; background:#FFF5F5; }
+    .triage-btn--snooze:hover  { border-color:#F59E0B; color:#F59E0B; background:#FFFBEB; }
+    .triage-btn--close:hover   { border-color:#22C55E; color:#22C55E; background:#F0FDF4; }
+    .triage-btn.clicked { opacity:.5; pointer-events:none; }
+
+    /* ══════════════════════════════════════
+       5. NOISE REDUCTION SCORE
+    ══════════════════════════════════════ */
+    #noiseChart { width:100%; height:150px; }
+    .noise-stats { display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin-top:14px; }
+    .noise-stat { text-align:center; padding:10px; background:var(--row-hover); border-radius:8px; }
+    .noise-stat__val { font-size:20px; font-weight:700; }
+    .noise-stat__label { font-size:10px; color:var(--text-muted); margin-top:2px; }
+
+    /* ══════════════════════════════════════
+       6. SHIFT HANDOVER CARD
+    ══════════════════════════════════════ */
+    .shift-header { display:flex; align-items:center; gap:10px; margin-bottom:14px; }
+    .shift-badge { font-size:10px; font-weight:700; padding:3px 9px; border-radius:99px; }
+    .shift-badge--day   { background:#FEF3C7; color:#92400E; }
+    .shift-badge--night { background:#EDE9FE; color:#5B21B6; }
+    [data-theme="dark"] .shift-badge--day   { background:#2D1A00; color:#FCD34D; }
+    [data-theme="dark"] .shift-badge--night { background:#1E1545; color:#C4B5FD; }
+    .shift-analyst-row { display:flex; align-items:center; gap:8px; }
+    .shift-avatar { width:28px; height:28px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:700; color:#fff; flex-shrink:0; }
+    .shift-name { font-size:12px; font-weight:600; color:var(--text-primary); }
+    .shift-role { font-size:10px; color:var(--text-muted); }
+    .shift-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin:14px 0; }
+    .shift-stat { background:var(--row-hover); border-radius:8px; padding:10px; text-align:center; }
+    .shift-stat__val { font-size:18px; font-weight:700; color:var(--text-primary); }
+    .shift-stat__label { font-size:10px; color:var(--text-muted); margin-top:2px; }
+    .shift-notes { font-size:11px; color:var(--text-secondary); line-height:1.6; padding:10px 12px; background:var(--row-hover); border-radius:7px; border-left:3px solid #6366F1; }
+    .shift-handover-btn { margin-top:12px; height:30px; width:100%; border-radius:6px; border:1px solid #6366F1; background:transparent; color:#6366F1; font-size:12px; font-weight:600; cursor:pointer; transition:background .15s; }
+    .shift-handover-btn:hover { background:#F5F3FF; }
+    [data-theme="dark"] .shift-handover-btn { border-color:#818CF8; color:#818CF8; }
+    [data-theme="dark"] .shift-handover-btn:hover { background:#1E1B4B; }
+
+    /* ── Toast notification ── */
+    .toast {
+      position:fixed; bottom:24px; right:24px;
+      background:var(--bg-card); border:1px solid var(--border);
+      border-radius:8px; padding:10px 16px;
+      font-size:12px; font-weight:500; color:var(--text-primary);
+      box-shadow:0 8px 24px rgba(0,0,0,0.12);
+      transform:translateY(80px); opacity:0;
+      transition:transform .3s, opacity .3s;
+      z-index:9999; display:flex; align-items:center; gap:8px;
+    }
+    .toast.show { transform:translateY(0); opacity:1; }
+    .toast-dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
+  </style>
+</head>
+<body>
+
+<!-- Toast -->
+<div class="toast" id="toast">
+  <div class="toast-dot" id="toastDot"></div>
+  <span id="toastMsg"></span>
+</div>
+
+<!-- Toolbar -->
+<div class="toolbar">
+  <span class="toolbar-title">✦ More Widget Suggestions (Set 3)</span>
+  <div class="theme-toggle" id="themeToggle">
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    <div class="toggle-track" id="toggleTrack"><div class="toggle-thumb"></div></div>
+    Dark Mode
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     1. GEO THREAT MAP
+════════════════════════════════════════════════ -->
+<div class="ribbon">★ Suggestion 7 — Geo Threat Origin Map (attack source countries)</div>
+<div class="card" style="margin-bottom:0;">
+  <div class="card-title">
+    🌍 Threat Origin Map
+    <span class="card-title-sub">Last 24 hours · 312 inbound threats</span>
+  </div>
+  <div id="geoMap"></div>
+  <div class="geo-legend">
+    <div class="geo-legend-item"><div class="geo-legend-dot" style="background:#EF4444;"></div> Critical (≥ 50 threats)</div>
+    <div class="geo-legend-item"><div class="geo-legend-dot" style="background:#F59E0B;"></div> High (20–49)</div>
+    <div class="geo-legend-item"><div class="geo-legend-dot" style="background:#3B82F6;"></div> Medium (5–19)</div>
+    <div class="geo-legend-item"><div class="geo-legend-dot" style="background:#D1D5DB;"></div> Low (1–4)</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     2. MTTR TREND + 3. NETWORK GRAPH
+════════════════════════════════════════════════ -->
+<div class="ribbon">★ Suggestion 8 — MTTR Trend (14-day) &amp; Suggestion 9 — Alert Correlation Network</div>
+<div class="grid-2" style="margin-bottom:0;">
+
+  <!-- MTTR -->
+  <div class="card">
+    <div class="card-title">
+      📉 Mean Time to Resolve (MTTR)
+      <span class="card-title-sub">14-day rolling</span>
+    </div>
+    <div id="mttrChart"></div>
+    <div class="mttr-kpis">
+      <div class="mttr-kpi">
+        <div class="mttr-kpi__val" style="color:#22C55E;">4m 21s</div>
+        <div class="mttr-kpi__label">Today</div>
+        <div class="chip chip--green">▼ 18% vs target</div>
+      </div>
+      <div class="mttr-kpi">
+        <div class="mttr-kpi__val">5m 44s</div>
+        <div class="mttr-kpi__label">7-day avg</div>
+        <div class="chip chip--green">On track</div>
+      </div>
+      <div class="mttr-kpi">
+        <div class="mttr-kpi__val" style="color:#EF4444;">8m 12s</div>
+        <div class="mttr-kpi__label">Worst day</div>
+        <div class="chip chip--red">▲ 37% over SLA</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Network Graph -->
+  <div class="card">
+    <div class="card-title">
+      🔗 Alert Correlation Network
+      <span class="card-title-sub">Linked by host · user · IOC</span>
+    </div>
+    <div id="networkGraph"></div>
+    <div class="network-legend">
+      <div class="network-legend-item"><div class="network-legend-shape" style="background:#EF4444;"></div> Critical alert</div>
+      <div class="network-legend-item"><div class="network-legend-shape" style="background:#F59E0B;"></div> Warning alert</div>
+      <div class="network-legend-item"><div class="network-legend-shape" style="background:#3B82F6;"></div> Informational</div>
+      <div class="network-legend-item"><div class="network-legend-shape" style="background:#6366F1; border-radius:2px;"></div> Host/Entity</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     4. QUICK TRIAGE PANEL
+════════════════════════════════════════════════ -->
+<div class="ribbon">★ Suggestion 10 — Quick Triage Action Panel (Assign · Escalate · Snooze · Close)</div>
+<div class="card" style="margin-bottom:0;">
+  <div class="card-title">
+    ⚡ Quick Triage
+    <span class="card-title-sub">Take action without leaving the dashboard</span>
+  </div>
+  <div class="triage-list" id="triageList">
+
+    <div class="triage-row">
+      <div class="sev-dot" style="background:#EF4444;"></div>
+      <div class="triage-info">
+        <div class="triage-name">Ransomware C2 Beacon — WIN-DB-04</div>
+        <div class="triage-meta">Received 4m ago · Unassigned · CRITICAL</div>
+      </div>
+      <div class="triage-actions">
+        <button class="triage-btn triage-btn--assign"   onclick="triageAction(this,'Assigned to you')">👤 Assign</button>
+        <button class="triage-btn triage-btn--escalate" onclick="triageAction(this,'Escalated to L3')">🚨 Escalate</button>
+        <button class="triage-btn triage-btn--snooze"   onclick="triageAction(this,'Snoozed 15m')">⏸ Snooze</button>
+        <button class="triage-btn triage-btn--close"    onclick="triageAction(this,'Closed')">✔ Close</button>
+      </div>
+    </div>
+
+    <div class="triage-row">
+      <div class="sev-dot" style="background:#F59E0B;"></div>
+      <div class="triage-info">
+        <div class="triage-name">Privilege Escalation — svc-acc · LNX-PROD-12</div>
+        <div class="triage-meta">Received 18m ago · Assigned: KP · HIGH</div>
+      </div>
+      <div class="triage-actions">
+        <button class="triage-btn triage-btn--assign"   onclick="triageAction(this,'Re-assigned')">👤 Assign</button>
+        <button class="triage-btn triage-btn--escalate" onclick="triageAction(this,'Escalated to L3')">🚨 Escalate</button>
+        <button class="triage-btn triage-btn--snooze"   onclick="triageAction(this,'Snoozed 15m')">⏸ Snooze</button>
+        <button class="triage-btn triage-btn--close"    onclick="triageAction(this,'Closed')">✔ Close</button>
+      </div>
+    </div>
+
+    <div class="triage-row">
+      <div class="sev-dot" style="background:#3B82F6;"></div>
+      <div class="triage-info">
+        <div class="triage-name">Unusual Login Location — MAC-DEV-08</div>
+        <div class="triage-meta">Received 1h 2m ago · Assigned: AM · MEDIUM</div>
+      </div>
+      <div class="triage-actions">
+        <button class="triage-btn triage-btn--assign"   onclick="triageAction(this,'Assigned to you')">👤 Assign</button>
+        <button class="triage-btn triage-btn--escalate" onclick="triageAction(this,'Escalated to L3')">🚨 Escalate</button>
+        <button class="triage-btn triage-btn--snooze"   onclick="triageAction(this,'Snoozed 15m')">⏸ Snooze</button>
+        <button class="triage-btn triage-btn--close"    onclick="triageAction(this,'Closed')">✔ Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     5. NOISE REDUCTION + 6. SHIFT HANDOVER
+════════════════════════════════════════════════ -->
+<div class="ribbon">★ Suggestion 11 — Noise Reduction Score &amp; Suggestion 12 — Shift Handover Summary</div>
+<div class="grid-2" style="margin-bottom:0;">
+
+  <!-- Noise Reduction -->
+  <div class="card">
+    <div class="card-title">
+      🔇 Alert Noise Reduction
+      <span class="card-title-sub">False positive suppression trend</span>
+    </div>
+    <div id="noiseChart"></div>
+    <div class="noise-stats">
+      <div class="noise-stat">
+        <div class="noise-stat__val" style="color:#22C55E;">1,247</div>
+        <div class="noise-stat__label">Alerts Suppressed</div>
+        <div class="chip chip--green" style="margin-top:4px;">This week</div>
+      </div>
+      <div class="noise-stat">
+        <div class="noise-stat__val" style="color:#3B82F6;">22%</div>
+        <div class="noise-stat__label">False Positive Rate</div>
+        <div class="chip chip--green" style="margin-top:4px;">▼ 6% vs last wk</div>
+      </div>
+      <div class="noise-stat">
+        <div class="noise-stat__val" style="color:#6366F1;">4.2h</div>
+        <div class="noise-stat__label">Analyst Time Saved</div>
+        <div class="chip chip--green" style="margin-top:4px;">Today</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Shift Handover -->
+  <div class="card">
+    <div class="card-title">📋 Shift Handover Summary</div>
+    <div class="shift-header">
+      <span class="shift-badge shift-badge--day">☀ Day Shift · 08:00 – 16:00</span>
+      <span style="font-size:11px;color:var(--text-muted);margin-left:auto;">Ends in 1h 24m</span>
+    </div>
+    <div style="font-size:11px;color:var(--text-muted);margin-bottom:8px;">On duty:</div>
+    <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:14px;">
+      <div class="shift-analyst-row">
+        <div class="shift-avatar" style="background:#6366F1;">SR</div>
+        <div><div class="shift-name">Santhosh R.</div><div class="shift-role">Lead · 14 cases closed</div></div>
+      </div>
+      <div class="shift-analyst-row">
+        <div class="shift-avatar" style="background:#059669;">KP</div>
+        <div><div class="shift-name">Kavitha P.</div><div class="shift-role">Analyst · 11 cases closed</div></div>
+      </div>
+    </div>
+    <div class="shift-grid">
+      <div class="shift-stat">
+        <div class="shift-stat__val" style="color:#22C55E;">32</div>
+        <div class="shift-stat__label">Resolved</div>
+      </div>
+      <div class="shift-stat">
+        <div class="shift-stat__val" style="color:#F59E0B;">2</div>
+        <div class="shift-stat__label">Pending</div>
+      </div>
+      <div class="shift-stat">
+        <div class="shift-stat__val" style="color:#EF4444;">1</div>
+        <div class="shift-stat__label">Escalated</div>
+      </div>
+      <div class="shift-stat">
+        <div class="shift-stat__val" style="color:#6366F1;">78%</div>
+        <div class="shift-stat__label">TP Rate</div>
+      </div>
+    </div>
+    <div class="shift-notes">
+      ⚠ <strong>Handover note:</strong> Ransomware beacon on WIN-DB-04 is unresolved — critical priority. Privilege escalation on LNX-PROD-12 needs L3 review. Storage quota near limit for Administrators account.
+    </div>
+    <button class="shift-handover-btn" onclick="showToast('Handover report sent to Night Shift','#6366F1')">
+      📤 Send Handover to Night Shift
+    </button>
+  </div>
+</div>
+
+<div style="height:30px;"></div>
+
+<!-- ════════════════════════════════════════
+     SCRIPTS
+════════════════════════════════════════ -->
+<script>
+/* ── Dark mode ── */
+const html = document.documentElement;
+const track = document.getElementById('toggleTrack');
+let isDark = false;
+document.getElementById('themeToggle').addEventListener('click', () => {
+  isDark = !isDark;
+  html.setAttribute('data-theme', isDark ? 'dark' : 'light');
+  track.classList.toggle('on', isDark);
+  setTimeout(renderAllCharts, 60);
+});
+
+/* ── Toast helper ── */
+function showToast(msg, color) {
+  const t = document.getElementById('toast');
+  document.getElementById('toastMsg').textContent = msg;
+  document.getElementById('toastDot').style.background = color || '#22C55E';
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+/* ── Triage action ── */
+function triageAction(btn, msg) {
+  btn.classList.add('clicked');
+  btn.textContent = '✔ ' + msg;
+  showToast(msg + ' successfully', '#22C55E');
+}
+
+/* ── Chart instances ── */
+let geoChart, mttrChart, netChart, noiseChart;
+
+function renderAllCharts() {
+  const dark = isDark;
+  const textColor  = dark ? '#9AA3B8' : '#6B7280';
+  const gridColor  = dark ? '#2E3347' : '#F3F4F6';
+  const bg         = dark ? '#1C1F2B' : '#FFFFFF';
+  const mapFill    = dark ? '#2E3347' : '#E5E7EB';
+  const mapBorder  = dark ? '#3D4460' : '#CBD5E1';
+
+  /* ─── 1. GEO MAP ─── */
+  if (!geoChart) geoChart = echarts.init(document.getElementById('geoMap'));
+  const threatData = [
+    { name:'China',         value: 98 },
+    { name:'Russia',        value: 74 },
+    { name:'North Korea',   value: 52 },
+    { name:'Brazil',        value: 24 },
+    { name:'Iran',          value: 31 },
+    { name:'Nigeria',       value: 18 },
+    { name:'Germany',       value: 7  },
+    { name:'India',         value: 8  },
+  ];
+  geoChart.setOption({
+    backgroundColor: 'transparent',
+    tooltip: {
+      trigger: 'item',
+      formatter: p => p.name ? `<b>${p.name}</b><br/>${p.value ?? 0} threats` : '',
+      backgroundColor: bg, borderColor: gridColor,
+      textStyle: { color: textColor, fontSize: 11 }
+    },
+    visualMap: {
+      min: 0, max: 100,
+      show: false,
+      inRange: { color: ['#DBEAFE','#93C5FD','#3B82F6','#1D4ED8','#1E3A8A'] }
+    },
+    series: [{
+      type: 'map',
+      map: 'world',
+      roam: true,
+      emphasis: { itemStyle: { areaColor: '#6366F1' }, label: { show: false } },
+      itemStyle: { areaColor: mapFill, borderColor: mapBorder, borderWidth: 0.5 },
+      label: { show: false },
+      data: threatData
+    }]
+  });
+
+  /* ─── 2. MTTR TREND ─── */
+  if (!mttrChart) mttrChart = echarts.init(document.getElementById('mttrChart'));
+  const days14 = Array.from({length:14},(_,i)=>{const d=new Date(2026,3,8+i);return `${d.getDate()}/${d.getMonth()+1}`;});
+  const mttrVals = [7.2,6.8,8.2,7.1,6.4,5.9,6.1,5.5,5.8,5.2,4.9,5.1,4.6,4.35];
+  mttrChart.setOption({
+    backgroundColor:'transparent',
+    tooltip:{ trigger:'axis', backgroundColor:bg, borderColor:gridColor, textStyle:{color:textColor,fontSize:11},
+      formatter:p=>`${p[0].axisValue}<br/>${p.map(s=>`${s.marker}${s.seriesName}: <b>${s.value}m</b>`).join('<br/>')}` },
+    legend:{ bottom:0, textStyle:{fontSize:10,color:textColor}, icon:'circle', itemWidth:8, itemHeight:8 },
+    grid:{ top:8, bottom:32, left:8, right:8, containLabel:true },
+    xAxis:{ type:'category', data:days14, axisLabel:{fontSize:10,color:textColor,rotate:30}, axisLine:{lineStyle:{color:gridColor}}, axisTick:{show:false} },
+    yAxis:{ type:'value', min:3, max:10, axisLabel:{fontSize:10,color:textColor,formatter:v=>v+'m'}, splitLine:{lineStyle:{color:gridColor}}, axisLine:{show:false}, axisTick:{show:false} },
+    series:[
+      { name:'MTTR', type:'line', smooth:true, data:mttrVals, symbol:'circle', symbolSize:5,
+        lineStyle:{color:'#3B82F6',width:2}, itemStyle:{color:'#3B82F6'},
+        areaStyle:{color:new echarts.graphic.LinearGradient(0,0,0,1,[{offset:0,color:'#3B82F620'},{offset:1,color:'#3B82F600'}])} },
+      { name:'SLA Target (6m)', type:'line', data:Array(14).fill(6), symbol:'none',
+        lineStyle:{color:'#EF4444',width:1.5,type:'dashed'}, itemStyle:{color:'#EF4444'} }
+    ]
+  });
+
+  /* ─── 3. NETWORK GRAPH ─── */
+  if (!netChart) netChart = echarts.init(document.getElementById('networkGraph'));
+  const nodes = [
+    // Hosts (square-ish — larger)
+    { id:'h1', name:'WIN-DB-04',    category:3, symbolSize:28, x:200, y:140, label:{show:true,fontSize:9,color:textColor} },
+    { id:'h2', name:'LNX-PROD-12',  category:3, symbolSize:24, x:320, y:80,  label:{show:true,fontSize:9,color:textColor} },
+    { id:'h3', name:'MAC-DEV-08',   category:3, symbolSize:20, x:420, y:180, label:{show:true,fontSize:9,color:textColor} },
+    // Critical alerts
+    { id:'a1', name:'Ransomware C2',    category:0, symbolSize:20, x:120, y:80  },
+    { id:'a2', name:'Lateral Move',     category:0, symbolSize:16, x:160, y:220 },
+    // Warning alerts
+    { id:'a3', name:'Priv. Escalation', category:1, symbolSize:16, x:300, y:160 },
+    { id:'a4', name:'Brute Force',      category:1, symbolSize:14, x:380, y:60  },
+    // Info
+    { id:'a5', name:'Unusual Login',    category:2, symbolSize:14, x:480, y:120 },
+    { id:'a6', name:'Port Scan',        category:2, symbolSize:12, x:460, y:240 },
+    // Shared IOC
+    { id:'ioc1', name:'IP: 85.23.4.11', category:3, symbolSize:18, x:240, y:280, symbol:'diamond',
+      label:{show:true,fontSize:9,color:'#6366F1',fontWeight:'bold'} },
+  ];
+  const edges = [
+    {source:'a1',target:'h1'},{source:'a2',target:'h1'},{source:'a1',target:'ioc1'},
+    {source:'a3',target:'h2'},{source:'a4',target:'h2'},{source:'a2',target:'ioc1'},
+    {source:'a5',target:'h3'},{source:'a6',target:'h3'},{source:'a4',target:'ioc1'},
+  ];
+  netChart.setOption({
+    backgroundColor:'transparent',
+    tooltip:{ formatter:p=>p.data.name || '', backgroundColor:bg, borderColor:gridColor, textStyle:{color:textColor,fontSize:11} },
+    series:[{
+      type:'graph', layout:'none', roam:true, draggable:true,
+      categories:[
+        { name:'Critical', itemStyle:{color:'#EF4444'} },
+        { name:'Warning',  itemStyle:{color:'#F59E0B'} },
+        { name:'Info',     itemStyle:{color:'#3B82F6'} },
+        { name:'Entity',   itemStyle:{color:'#6366F1'} },
+      ],
+      nodes: nodes.map(n=>({...n, label:{...n.label, color:n.label?.color||textColor}})),
+      edges: edges.map(e=>({...e, lineStyle:{color:gridColor,width:1.5,curveness:0.2}})),
+      edgeSymbol:['none','arrow'], edgeSymbolSize:6,
+      emphasis:{ focus:'adjacency', lineStyle:{width:3} },
+    }]
+  });
+
+  /* ─── 5. NOISE REDUCTION ─── */
+  if (!noiseChart) noiseChart = echarts.init(document.getElementById('noiseChart'));
+  const noiseWeeks = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+  const totalAlerts    = [320,410,380,450,390,210,180];
+  const suppressed     = [120,180,150,200,160, 80, 60];
+  noiseChart.setOption({
+    backgroundColor:'transparent',
+    tooltip:{ trigger:'axis', backgroundColor:bg, borderColor:gridColor, textStyle:{color:textColor,fontSize:11} },
+    legend:{ bottom:0, textStyle:{fontSize:10,color:textColor}, icon:'circle', itemWidth:8, itemHeight:8 },
+    grid:{ top:8, bottom:32, left:8, right:8, containLabel:true },
+    xAxis:{ type:'category', data:noiseWeeks, axisLabel:{fontSize:10,color:textColor}, axisLine:{lineStyle:{color:gridColor}}, axisTick:{show:false} },
+    yAxis:{ type:'value', axisLabel:{fontSize:10,color:textColor}, splitLine:{lineStyle:{color:gridColor}}, axisLine:{show:false}, axisTick:{show:false} },
+    series:[
+      { name:'Total Alerts', type:'bar', data:totalAlerts, barMaxWidth:28,
+        itemStyle:{color:new echarts.graphic.LinearGradient(0,0,0,1,[{offset:0,color:'#93C5FD'},{offset:1,color:'#BFDBFE'}]),borderRadius:[3,3,0,0]} },
+      { name:'Suppressed (FP)', type:'bar', data:suppressed, barMaxWidth:28,
+        itemStyle:{color:new echarts.graphic.LinearGradient(0,0,0,1,[{offset:0,color:'#22C55E'},{offset:1,color:'#86EFAC'}]),borderRadius:[3,3,0,0]} },
+    ]
+  });
+}
+
+window.addEventListener('load', renderAllCharts);
+window.addEventListener('resize', () => {
+  [geoChart, mttrChart, netChart, noiseChart].forEach(c => c && c.resize());
+});
+</script>
+</body>
+</html>

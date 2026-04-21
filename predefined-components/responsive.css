@@ -1,0 +1,435 @@
+/* ============================================================
+   RESPONSIVE — Tablet & Mobile breakpoints
+   ============================================================
+   Desktop:  > 1024px  — original Figma layout (no changes)
+   Tablet:   768–1024px — sidebar overlay, priority+ tabs
+   Mobile:   < 768px   — stacked layout, drawer sidebar
+   ============================================================
+   TAB OVERFLOW: Handled by topnavbar.js (priority+ pattern).
+   JS measures available space, shows as many tabs as fit,
+   always keeps the active tab visible, and pushes the rest
+   into the "..." bottom sheet. CSS just provides the styles.
+   ============================================================ */
+
+/* ── Hamburger toggle (hidden on desktop) ── */
+.topnavbar__hamburger {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+  border-radius: 6px;
+  transition: background 0.15s;
+}
+.topnavbar__hamburger:hover {
+  background: var(--icon-container-hover-bg, #3D4255);
+}
+.topnavbar__hamburger svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* ── "More" three-dot button — hidden by default, shown by JS when tabs overflow ── */
+.topnavbar__more {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+  border-radius: 4px;
+  transition: background 0.15s;
+}
+.topnavbar__more--visible {
+  display: flex;
+}
+.topnavbar__more:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+.topnavbar__more svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* ── Tab hidden by JS overflow (not by CSS media query) ── */
+.topnavbar__tab--overflow {
+  display: none !important;
+}
+
+/* ── Sidebar overlay backdrop ── */
+.sidemenu-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 99;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+.sidemenu-backdrop--visible {
+  display: block;
+  opacity: 1;
+}
+
+/* ── Bottom sheet for tab navigation ── */
+.nav-bottom-sheet {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 200;
+  pointer-events: none;
+}
+.nav-bottom-sheet--open {
+  display: block;
+  pointer-events: auto;
+}
+
+.nav-bottom-sheet__backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 200;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.nav-bottom-sheet--open .nav-bottom-sheet__backdrop {
+  opacity: 1;
+}
+
+.nav-bottom-sheet__panel {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 201;
+  background: #FFFFFF;
+  border-radius: 16px 16px 0 0;
+  box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.15);
+  transform: translateY(100%);
+  transition: transform 0.35s cubic-bezier(0.32, 0.72, 0, 1);
+  max-height: 70vh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.nav-bottom-sheet--open .nav-bottom-sheet__panel {
+  transform: translateY(0);
+}
+
+.nav-bottom-sheet__handle {
+  display: flex;
+  justify-content: center;
+  padding: 12px 0 8px;
+}
+.nav-bottom-sheet__handle::after {
+  content: '';
+  width: 40px;
+  height: 4px;
+  background: #D0D0D0;
+  border-radius: 2px;
+}
+
+.nav-bottom-sheet__list {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 env(safe-area-inset-bottom, 16px);
+}
+
+.nav-bottom-sheet__item {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 52px;
+  padding: 0 24px;
+  border: none;
+  background: transparent;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 400;
+  color: #000000;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.12s;
+  border-bottom: 1px solid #F0F0F0;
+}
+.nav-bottom-sheet__item:last-child {
+  border-bottom: none;
+}
+.nav-bottom-sheet__item:hover {
+  background: #F5F5F5;
+}
+.nav-bottom-sheet__item--active {
+  font-weight: 600;
+  color: #2C66DD;
+  background: #F0F6FF;
+}
+.nav-bottom-sheet__item--active:hover {
+  background: #E5EEFA;
+}
+
+/* ============================================================
+   TABLET — 768px to 1024px
+   ============================================================ */
+@media (max-width: 1024px) {
+
+  /* Show hamburger in Row 1, logo stays left-aligned next to it */
+  .topnavbar__hamburger {
+    display: flex;
+  }
+  .topnavbar__row1-container {
+    justify-content: flex-start;
+    gap: 16px;
+  }
+  .topnavbar__logo {
+    padding-left: 0;
+  }
+  .topnavbar__right {
+    margin-left: auto;
+  }
+
+  /* Tabs: let JS manage overflow, no CSS scroll */
+  .topnavbar__tabs {
+    overflow: hidden;
+    flex: 1;
+    min-width: 0;
+  }
+
+  /* Search box: shrink */
+  .topnavbar__search {
+    width: 140px;
+  }
+
+  /* Sidebar: off-screen overlay mode */
+  .sidemenu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    z-index: 100;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    opacity: 0;
+    width: var(--sidebar-width);
+    box-shadow: none;
+  }
+  .sidemenu.sidemenu--overlay-open {
+    transform: translateX(0);
+    opacity: 1;
+    box-shadow: 4px 0 16px rgba(0, 0, 0, 0.15);
+  }
+
+  .sidemenu.sidemenu--collapsed {
+    width: var(--sidebar-width);
+    border-right: 1px solid var(--sidebar-stroke);
+    pointer-events: auto;
+  }
+
+  .sidemenu__bottom-btn img,
+  .sidemenu__bottom-btn svg {
+    transform: rotate(180deg);
+  }
+
+  .app-body {
+    position: relative;
+  }
+  .main-content {
+    width: 100%;
+  }
+
+  .classic-tab__headers {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .classic-tab__headers::-webkit-scrollbar {
+    display: none;
+  }
+
+  .data-table {
+    min-width: 900px;
+  }
+}
+
+/* ============================================================
+   MOBILE — under 768px
+   ============================================================ */
+@media (max-width: 767px) {
+
+  .topnavbar__hamburger {
+    display: flex;
+  }
+
+  .topnavbar__tabs {
+    overflow: hidden;
+    flex: 1;
+    min-width: 0;
+  }
+
+  /* ── Row 1: compact ── */
+  .topnavbar__row1 {
+    padding: 3px 8px;
+  }
+  .topnavbar__subscription {
+    display: none;
+  }
+  .topnavbar__divider {
+    display: none;
+  }
+  .topnavbar__right {
+    gap: 8px;
+  }
+  .topnavbar__icons {
+    gap: 8px;
+  }
+
+  /* ── Row 2: hide search ── */
+  .topnavbar__segment {
+    display: none;
+  }
+  .topnavbar__row2 {
+    padding: 0 4px;
+  }
+
+  /* ── Sidebar: full-height overlay drawer ── */
+  .sidemenu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 280px;
+    z-index: 100;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    opacity: 0;
+    box-shadow: none;
+  }
+  .sidemenu.sidemenu--overlay-open {
+    transform: translateX(0);
+    opacity: 1;
+    box-shadow: 4px 0 20px rgba(0, 0, 0, 0.2);
+  }
+  .sidemenu.sidemenu--collapsed {
+    width: 280px;
+    border-right: 1px solid var(--sidebar-stroke);
+    pointer-events: auto;
+  }
+
+  .sidemenu__bottom-btn img,
+  .sidemenu__bottom-btn svg {
+    transform: rotate(180deg);
+  }
+
+  /* ── Main content: full width, reduced padding ── */
+  .main-content {
+    padding: 0 8px;
+  }
+
+  .page-header__title {
+    font-size: 14px;
+  }
+
+  .classic-tab__headers {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    flex-wrap: nowrap;
+  }
+  .classic-tab__headers::-webkit-scrollbar {
+    display: none;
+  }
+  .classic-tab__header {
+    flex-shrink: 0;
+  }
+  .classic-tab__filler {
+    flex-shrink: 0;
+    min-width: 20px;
+  }
+  .classic-tab__content {
+    padding: 12px 8px;
+  }
+
+  .button-row {
+    justify-content: stretch;
+  }
+  .btn-primary {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .actionbar {
+    flex-wrap: wrap;
+    height: auto;
+    padding: 6px 4px;
+    gap: 4px;
+  }
+  .actionbar__left,
+  .actionbar__right {
+    gap: 4px;
+  }
+  .actionbar__pagination {
+    font-size: 11px;
+  }
+  .actionbar__icon-btn--view img {
+    width: 32px;
+  }
+
+  .data-table {
+    min-width: 800px;
+  }
+  .data-table-wrap {
+    -webkit-overflow-scrolling: touch;
+  }
+
+  body {
+    overflow: auto;
+  }
+  .app-shell {
+    height: auto;
+    min-height: 100vh;
+  }
+
+  .nav-bottom-sheet__panel {
+    max-height: 80vh;
+  }
+  .nav-bottom-sheet__item {
+    height: 48px;
+    font-size: 14px;
+    padding: 0 20px;
+  }
+}
+
+/* ============================================================
+   SMALL MOBILE — under 480px
+   ============================================================ */
+@media (max-width: 480px) {
+
+  .topnavbar__icons .topnavbar__icon-btn:nth-child(3) {
+    display: none;
+  }
+
+  .sidemenu.sidemenu--overlay-open {
+    width: 100vw;
+  }
+  .sidemenu.sidemenu--collapsed {
+    width: 100vw;
+  }
+
+  .classic-tab__header {
+    padding: 8px 10px;
+    font-size: 11px;
+  }
+
+  .nav-bottom-sheet__panel {
+    border-radius: 12px 12px 0 0;
+  }
+}

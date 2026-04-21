@@ -1,0 +1,26 @@
+/* ============================================================
+   LAYOUT — Page shell structure from Figma MCP
+   Full viewport: TopNavBar (78px) + Body (sidebar + main)
+   ============================================================ */
+
+.app-shell {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #FFFFFF;
+}
+
+.app-body {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  background: var(--main-content-bg);
+  padding: var(--main-content-padding);
+}

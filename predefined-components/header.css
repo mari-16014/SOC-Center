@@ -1,0 +1,67 @@
+/* ============================================================
+   HEADER — Captured from Figma MCP
+   Height: 40px | Layout: VERTICAL, inner HORIZONTAL
+   Title: 16px Zoho Puvi Semibold (→ Inter 600), black
+   Help icon: 14x14, #626262 stroke, gap 8px from title
+   Bottom stroke: 1px solid #E9E9E9
+   ============================================================ */
+
+.page-header {
+  display: flex;
+  align-items: center;
+  gap: var(--header-gap);                    /* 8px */
+  height: var(--header-height);              /* 40px */
+  flex-shrink: 0;
+  border-bottom: 1px solid var(--header-border-bottom); /* #E9E9E9 */
+}
+
+.page-header__title {
+  font-size: var(--header-title-font-size);  /* 16px */
+  font-weight: var(--header-title-font-weight); /* 600 Semibold */
+  color: var(--header-title-color);          /* #000000 */
+  line-height: 1.2;
+}
+
+.page-header__help {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  padding: 0;
+}
+.page-header__help:hover {
+  opacity: 0.7;
+}
+.page-header__help img,
+.page-header__help svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* --- Back Button (Variant: Header with Back) --- */
+.page-header__back {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  cursor: pointer;
+  border: 1px solid var(--table-border);        /* #DCDCDC */
+  border-radius: 2px;
+  background: transparent;
+  padding: 0;
+}
+.page-header__back:hover {
+  background: var(--table-hover-bg);            /* #F0F6FF */
+  border-color: var(--btn-primary-bg);          /* #2C66DD */
+}
+.page-header__back img,
+.page-header__back svg {
+  width: 14px;
+  height: 14px;
+}

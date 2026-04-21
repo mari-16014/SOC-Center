@@ -1,0 +1,474 @@
+/* ============================================================
+   FORM INPUT — Predefined Component
+   Extracted from Figma "Textbox with Label" & "Form Creation"
+   Specs: height 26px per row, 16px gap between rows, 24px gap
+   between form group and save/cancel bar
+   ──────────────────────────────────────────────────────────────
+   STRICT RULE: Form inputs have 3 FIXED widths from Figma.
+   They NEVER stretch to fill the container.
+     Default = 280px  (Figma innerType "Standard")
+     Medium  = 160px  (Figma innerType "Medium")
+     Small   = 100px  (Figma innerType "Small")
+   ============================================================ */
+
+/* ── Form Container ── */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ── Save / Cancel Bar ── */
+.form-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 16px 16px 0;
+  border-top: 1px solid #E9E9E9;
+  margin-top: 24px;
+}
+.form-actions .btn-primary {
+  font-family: var(--font-family);
+  font-size: 12px; font-weight: 400;
+  height: 28px; padding: 0 16px;
+  background: #2C66DD; color: #fff;
+  border: none; border-radius: 2px;
+  cursor: pointer; white-space: nowrap;
+}
+.form-actions .btn-primary:hover { background: #2458C4; }
+.form-actions .btn-secondary {
+  font-family: var(--font-family);
+  font-size: 12px; font-weight: 400;
+  height: 28px; padding: 0 16px;
+  background: #fff; color: #000;
+  border: 1px solid #ABABAB; border-radius: 2px;
+  cursor: pointer; white-space: nowrap;
+}
+.form-actions .btn-secondary:hover { background: #F5F5F5; }
+.form-actions .form-actions__link {
+  font-family: var(--font-family);
+  font-size: 12px; color: #006AFF;
+  text-decoration: none; cursor: pointer;
+  margin-left: 4px;
+}
+.form-actions .form-actions__link:hover { color: #0055D4; text-decoration: underline; }
+
+/* ── Single Form Row (label + input) ── */
+.form-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  min-height: 26px;
+}
+.form-row--inline {
+  display: inline-flex;
+  width: auto;
+}
+
+/* ── Label Area ── */
+.form-row__label {
+  flex: 0 0 200px;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  height: 26px;
+  font-family: var(--font-family);
+  font-size: 12px;
+  font-weight: 400;
+  color: #000;
+  white-space: nowrap;
+}
+.form-row__mandatory {
+  color: #DD1616;
+  font-size: 12px;
+  margin-left: 2px;
+}
+
+/* ── Input Area (right side) — NEVER flex:1 / fill container ── */
+.form-row__input {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 280px;
+}
+
+/* ── Fixed Input Widths (from Figma) ── */
+.form-row__input--default { width: 280px; }  /* Figma innerType "Standard"  */
+.form-row__input--medium  { width: 160px; }  /* Figma innerType "Medium"    */
+.form-row__input--small   { width: 100px; }  /* Figma innerType "Small"     */
+
+/* ── Shared Input Base ── */
+.form-input {
+  font-family: var(--font-family);
+  font-size: 12px;
+  color: #000;
+  height: 26px;
+  padding: 0 8px;
+  border: 1px solid #DCDCDC;
+  border-radius: 2px;
+  background: #fff;
+  outline: none;
+  box-sizing: border-box;
+  width: 100%;
+  transition: border-color 0.15s;
+}
+.form-input::placeholder {
+  color: #939393;
+  font-size: 12px;
+}
+.form-input:hover { border-color: #ABABAB; }
+.form-input:focus { border-color: #2C66DD; }
+.form-input:disabled,
+.form-input[readonly] {
+  background: #F5F5F5;
+  color: #939393;
+  cursor: not-allowed;
+}
+.form-input--error { border-color: #DD1616 !important; }
+
+/* ── Type: Standard Text ── */
+.form-input--text { /* inherits base */ }
+
+/* ── Type: Description / Textarea ── */
+.form-input--textarea {
+  height: 68px;
+  padding: 6px 8px;
+  resize: vertical;
+  line-height: 1.5;
+}
+
+/* ── Type: Select / Dropdown ── */
+.form-input--select {
+  appearance: none;
+  -webkit-appearance: none;
+  padding-right: 28px;
+  background-image: url('../assets/icons/icon-chevron-down.svg');
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  background-size: 12px;
+  cursor: pointer;
+}
+
+/* ── Type: Standard with Front Icon ── */
+.form-input-icon-wrap {
+  display: flex;
+  align-items: center;
+  height: 26px;
+  border: 1px solid #DCDCDC;
+  border-radius: 2px;
+  background: #fff;
+  overflow: hidden;
+  transition: border-color 0.15s;
+}
+.form-input-icon-wrap:hover { border-color: #ABABAB; }
+.form-input-icon-wrap:focus-within { border-color: #2C66DD; }
+.form-input-icon-wrap__icon {
+  flex: 0 0 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 26px;
+}
+.form-input-icon-wrap__icon img { width: 14px; height: 14px; }
+.form-input-icon-wrap .form-input {
+  border: none;
+  height: 24px;
+  flex: 1;
+}
+.form-input-icon-wrap .form-input:focus { box-shadow: none; }
+
+/* Icon on right side */
+.form-input-icon-wrap--right { flex-direction: row; }
+.form-input-icon-wrap--right .form-input-icon-wrap__icon { order: 2; }
+.form-input-icon-wrap--right .form-input { order: 1; }
+
+/* Plus icon (clickable — opens tab) */
+.form-input-icon-wrap__plus { cursor: pointer; }
+.form-input-icon-wrap__plus:hover { background: #F5F5F5; border-radius: 2px; }
+
+/* Icon on left side */
+.form-input-icon-wrap--left .form-input-icon-wrap__icon { order: 1; }
+.form-input-icon-wrap--left .form-input { order: 2; }
+
+/* ── Type: Radio Group ── */
+.form-radio-group {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  height: 26px;
+}
+.form-radio {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-family: var(--font-family);
+  font-size: 12px;
+  color: #000;
+}
+.form-radio__input { display: none; }
+.form-radio__icon {
+  width: 16px; height: 16px;
+  flex: 0 0 16px;
+}
+.form-radio__icon--checked { display: none; }
+.form-radio__icon--unchecked { display: block; }
+.form-radio__input:checked ~ .form-radio__icon--checked { display: block; }
+.form-radio__input:checked ~ .form-radio__icon--unchecked { display: none; }
+.form-radio__info {
+  width: 14px; height: 14px;
+  margin-left: 4px;
+  cursor: help;
+}
+
+/* ── Type: Password ── */
+.form-input-password {
+  display: flex;
+  align-items: center;
+  height: 26px;
+  border: 1px solid #DCDCDC;
+  border-radius: 2px;
+  background: #fff;
+  overflow: hidden;
+  transition: border-color 0.15s;
+}
+.form-input-password:hover { border-color: #ABABAB; }
+.form-input-password:focus-within { border-color: #2C66DD; }
+.form-input-password .form-input {
+  border: none; height: 24px; flex: 1;
+}
+.form-input-password__toggle {
+  flex: 0 0 26px;
+  display: flex; align-items: center; justify-content: center;
+  height: 26px; cursor: pointer; background: none; border: none; padding: 0;
+}
+.form-input-password__toggle img { width: 14px; height: 14px; }
+
+/* ── Type: Number (with up/down arrows) ── */
+.form-input-number {
+  display: flex;
+  align-items: center;
+  height: 26px;
+  border: 1px solid #DCDCDC;
+  border-radius: 2px;
+  background: #fff;
+  overflow: hidden;
+  transition: border-color 0.15s;
+}
+.form-input-number:hover { border-color: #ABABAB; }
+.form-input-number:focus-within { border-color: #2C66DD; }
+.form-input-number .form-input {
+  border: none; height: 24px; flex: 1;
+  text-align: center; -moz-appearance: textfield;
+}
+.form-input-number .form-input::-webkit-inner-spin-button,
+.form-input-number .form-input::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+.form-input-number__arrows {
+  display: flex; flex-direction: column;
+  flex: 0 0 20px; height: 26px;
+  border-left: 1px solid #DCDCDC;
+}
+.form-input-number__btn {
+  flex: 1; display: flex; align-items: center; justify-content: center;
+  cursor: pointer; background: none; border: none; padding: 0;
+}
+.form-input-number__btn:hover { background: #F5F5F5; }
+.form-input-number__btn img { width: 8px; height: 5px; }
+.form-input-number__arrows .form-input-number__btn + .form-input-number__btn {
+  border-top: 1px solid #DCDCDC;
+}
+
+/* ── Type: Port (protocol + host + port) ── */
+.form-input-port {
+  display: flex;
+  align-items: center;
+  height: 26px;
+  gap: 0;
+}
+.form-input-port__prefix {
+  flex: 0 0 auto;
+  height: 26px; padding: 0 8px;
+  display: flex; align-items: center;
+  font-family: var(--font-family); font-size: 12px; color: #626262;
+  background: #F5F5F5;
+  border: 1px solid #DCDCDC;
+  border-right: none; border-radius: 2px 0 0 2px;
+  white-space: nowrap;
+}
+.form-input-port .form-input {
+  border-radius: 0; flex: 1 1 0; min-width: 0;
+}
+.form-input-port__suffix {
+  flex: 0 0 auto;
+  height: 26px; padding: 0 8px;
+  display: flex; align-items: center;
+  font-family: var(--font-family); font-size: 12px; color: #626262;
+  background: #F5F5F5;
+  border: 1px solid #DCDCDC;
+  border-left: none; border-radius: 0 2px 2px 0;
+  white-space: nowrap;
+}
+
+/* ── Type: Frequency ── */
+.form-input-frequency {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 26px;
+  flex-wrap: nowrap;
+}
+.form-input-frequency .form-input--select {
+  width: auto; min-width: 80px; flex: 0 0 auto;
+}
+.form-input-frequency__sep {
+  font-family: var(--font-family);
+  font-size: 12px; color: #626262;
+  white-space: nowrap;
+}
+/* ── Type: Dropdown with icon ── */
+.form-input--icon-dropdown {
+  padding-left: 28px;
+  background-image: url('../assets/icons/icon-chevron-down.svg');
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  background-size: 12px;
+}
+
+/* ── Type: Tags ── */
+.form-input-tags {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px;
+  min-height: 26px;
+  padding: 3px 8px;
+  border: 1px solid #DCDCDC;
+  border-radius: 2px;
+  background: #fff;
+  cursor: text;
+  transition: border-color 0.15s;
+}
+.form-input-tags:hover { border-color: #ABABAB; }
+.form-input-tags:focus-within { border-color: #2C66DD; }
+.form-input-tags__tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 18px;
+  padding: 0 6px;
+  background: #E8F0FE;
+  border-radius: 2px;
+  font-family: var(--font-family);
+  font-size: 11px; color: #2C66DD;
+  white-space: nowrap;
+}
+.form-input-tags__tag-remove {
+  width: 10px; height: 10px;
+  cursor: pointer; opacity: 0.7;
+}
+.form-input-tags__tag-remove:hover { opacity: 1; }
+.form-input-tags__input {
+  flex: 1; min-width: 60px;
+  border: none; outline: none;
+  font-family: var(--font-family);
+  font-size: 12px; color: #000;
+  background: transparent;
+  height: 20px;
+}
+.form-input-tags__input::placeholder { color: #939393; }
+
+/* ── Type: File Upload ── */
+.form-input-upload {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  height: 26px;
+}
+.form-input-upload .form-input {
+  border-radius: 2px 0 0 2px;
+  flex: 1 1 0;
+  min-width: 0;
+  color: #939393;
+}
+.form-input-upload__btn {
+  flex: 0 0 auto;
+  height: 26px; padding: 0 12px;
+  display: flex; align-items: center; gap: 4px;
+  font-family: var(--font-family);
+  font-size: 12px; color: #000;
+  background: #F5F5F5;
+  border: 1px solid #DCDCDC;
+  border-left: none; border-radius: 0 2px 2px 0;
+  cursor: pointer; white-space: nowrap;
+}
+.form-input-upload__btn:hover { background: #EDEDED; }
+.form-input-upload__btn img { width: 14px; height: 14px; }
+
+/* ── Type: Date/Time (Calendar) ── */
+.form-input-calendar {
+  position: relative;
+}
+.form-input-calendar .form-input {
+  padding-right: 28px;
+}
+.form-input-calendar__icon {
+  position: absolute;
+  right: 8px; top: 50%;
+  transform: translateY(-50%);
+  width: 14px; height: 14px;
+  pointer-events: none;
+}
+
+/* ── Type: Checkbox (with label) ── */
+.form-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 26px;
+  cursor: pointer;
+  font-family: var(--font-family);
+  font-size: 12px; color: #000;
+}
+.form-checkbox__input { display: none; }
+.form-checkbox__icon { width: 16px; height: 16px; flex: 0 0 16px; }
+.form-checkbox__icon--checked { display: none; }
+.form-checkbox__icon--unchecked { display: block; }
+.form-checkbox__input:checked ~ .form-checkbox__icon--checked { display: block; }
+.form-checkbox__input:checked ~ .form-checkbox__icon--unchecked { display: none; }
+
+/* ── Description Helper ── */
+.form-row__desc {
+  font-family: var(--font-family);
+  font-size: 11px;
+  color: #939393;
+  line-height: 1.4;
+  margin-top: 2px;
+}
+
+/* ── Composite wrappers inherit parent width ── */
+.form-input-icon-wrap,
+.form-input-password,
+.form-input-number,
+.form-input-port,
+.form-input-upload,
+.form-input-calendar,
+.form-input-tags {
+  width: 100%;
+}
+
+/* Override number spinner to its natural compact width */
+.form-input-number { max-width: 100px; width: auto; }
+.form-input-frequency .form-input-number { max-width: 70px; }
+
+/* ── Input States ── */
+.form-input--hover { border-color: #ABABAB; }
+.form-input--focus { border-color: #2C66DD; }
+.form-input--disabled { background: #F5F5F5; color: #939393; cursor: not-allowed; }
+.form-input--readonly { background: #F5F5F5; color: #626262; }
+.form-input--error { border-color: #DD1616; }
+.form-error-text {
+  font-family: var(--font-family);
+  font-size: 11px; color: #DD1616;
+  margin-top: 2px;
+}

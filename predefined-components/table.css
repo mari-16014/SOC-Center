@@ -1,0 +1,352 @@
+/* ============================================================
+   TABLE + ACTIONBAR — Captured from Figma MCP
+   ActionBar: h=36, padding 6px 4px, bg=white, stroke #E9E9E9
+   Table: header h=32, row h=40, col gap via padding
+   Actions icons: 24x24 each, gap 8px
+   Agent/Status: 14x14 icon + text, gap 8px
+   Checkbox col: 48px
+   ============================================================ */
+
+/* ── Button Row (above ActionBar) ── */
+.button-row {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-top: var(--button-row-padding-top);
+  padding-bottom: var(--button-row-padding-bottom);
+}
+
+.btn-primary {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: var(--btn-primary-height);
+  padding: var(--btn-primary-padding);
+  background: var(--btn-primary-bg);
+  color: var(--btn-primary-text);
+  font-size: var(--btn-primary-font-size);
+  font-family: inherit;
+  font-weight: 400;
+  border: none;
+  border-radius: var(--btn-primary-radius);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s;
+  line-height: 1;
+}
+.btn-primary:hover {
+  background: #2458C4;
+}
+.btn-primary img,
+.btn-primary svg {
+  width: 10px;
+  height: 10px;
+  flex-shrink: 0;
+}
+
+/* ── ActionBar ── */
+.actionbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--actionbar-height);               /* 36px */
+  border-top: 1px solid #E9E9E9;                 /* Figma: strokeTop only */
+  background: var(--actionbar-bg);
+  padding: 6px 4px;                              /* Figma: padding 6 4 6 4 */
+}
+
+.actionbar__left,
+.actionbar__right {
+  display: flex;
+  align-items: center;
+  gap: 8px;                                       /* Figma: itemSpacing 8 */
+}
+
+.actionbar__icon-btn {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 3px;
+  padding: 0;
+  transition: background 0.12s;
+}
+.actionbar__icon-btn:hover {
+  background: var(--table-header-bg);
+}
+.actionbar__icon-btn img,
+.actionbar__icon-btn svg {
+  width: 24px;
+  height: 24px;
+}
+
+/* View-type combined icon (grid + dropdown arrow) */
+.actionbar__icon-btn--view img {
+  width: 42px;
+  height: 24px;
+}
+.actionbar__icon-btn--view {
+  width: auto;
+}
+
+.actionbar__separator {
+  width: 1px;
+  height: 16px;
+  background: var(--actionbar-border);
+  flex-shrink: 0;
+}
+
+.actionbar__pagination {
+  font-size: var(--actionbar-pagination-font-size);
+  color: var(--sidebar-text-secondary);
+  white-space: nowrap;
+}
+.actionbar__pagination b {
+  color: var(--table-text-primary);
+  font-weight: 600;
+}
+.actionbar__pagination i {
+  font-style: italic;
+}
+
+/* Pagination prev/next arrows (24x24) */
+.actionbar__nav-btn {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+}
+.actionbar__nav-btn img {
+  width: 14px;
+  height: 14px;
+}
+
+/* ── ActionBar Bulk Actions (Type 2) ── */
+.actionbar__actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.actionbar__action {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 8px;
+  border: none;
+  background: #fff;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 12px;
+  color: #000;
+  border-radius: 2px;
+  white-space: nowrap;
+  transition: background 0.12s;
+}
+.actionbar__action:hover {
+  background: #E9E9E9;
+}
+.actionbar__action.actionbar__action--active {
+  background: #EAF0FC;
+}
+.actionbar__action img {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+.actionbar__action--more {
+  padding: 5px 6px;
+}
+.actionbar__action--more img {
+  width: 14px;
+  height: 14px;
+}
+
+/* ── ActionBar Selected Count (Type 7) ── */
+.actionbar__selected-count {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: #000;
+  white-space: nowrap;
+}
+.actionbar__selected-count b {
+  font-weight: 600;
+}
+.actionbar__clear-all {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 12px;
+  color: var(--link-color);
+  padding: 0;
+}
+.actionbar__clear-all:hover {
+  text-decoration: underline;
+}
+
+/* ── ActionBar Filter Dropdown (Type 5) ── */
+.actionbar__filter-dropdown {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #000;
+  white-space: nowrap;
+}
+.actionbar__filter-dropdown select {
+  border: 1px solid #DCDCDC;
+  border-radius: 3px;
+  font-family: inherit;
+  font-size: 12px;
+  padding: 2px 20px 2px 6px;
+  height: 24px;
+  background: #fff;
+  cursor: pointer;
+  appearance: auto;
+}
+
+/* ── ActionBar Toggle View (Type 6) ── */
+.actionbar__icon-btn--toggle {
+  width: auto;
+}
+.actionbar__icon-btn--toggle img {
+  width: 50px;
+  height: 20px;
+}
+
+/* ── ActionBar Table View Type (Type 4) ── */
+.actionbar__icon-btn--table-view {
+  width: auto;
+}
+.actionbar__icon-btn--table-view img {
+  width: 42px;
+  height: 24px;
+}
+
+/* ── Data Table ── */
+.data-table-wrap {
+  overflow-x: auto;
+  /* Figma: NO left/right border on table — only horizontal row lines */
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--table-font-size);
+  line-height: 1.5;
+}
+
+.data-table thead tr {
+  background: var(--table-header-bg);
+}
+
+.data-table th {
+  height: var(--table-header-height);             /* 32px */
+  padding: 0 8px;
+  border-top: 1px solid #E9E9E9;                 /* Figma: strokeTop only */
+  border-bottom: none;
+  text-align: left;
+  vertical-align: middle;
+  font-weight: var(--table-header-font-weight);   /* 500 Medium */
+  color: var(--table-header-color);               /* BLACK */
+  font-size: var(--table-header-font-size);
+  white-space: nowrap;
+}
+
+.data-table td {
+  height: var(--table-row-height);                /* 40px */
+  padding: 0 8px;
+  vertical-align: middle;
+  color: var(--table-text-primary);
+}
+
+.data-table tbody tr {
+  border-top: 1px solid #E9E9E9;                 /* Figma: strokeTop=1 */
+  border-bottom: 1px solid #E9E9E9;              /* Figma: strokeBottom=1 */
+  /* NO left/right borders — Figma: strokeLeft=0, strokeRight=0 */
+  transition: background 0.1s;
+}
+.data-table tbody tr:hover {
+  background: var(--table-hover-bg);
+}
+.data-table tbody tr.data-table__row--selected {
+  background: var(--table-selected-bg, #F9FBFF);
+}
+.data-table tbody tr.data-table__row--selected:hover {
+  background: var(--table-selected-hover-bg, #F0F5FF);
+}
+.data-table tbody tr.data-table__row--focused {
+  background: var(--table-hover-bg, #FAFAFA);
+}
+
+/* ── Cell: Actions (24x24 icons, gap 8px) ── */
+.cell-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;                                       /* Figma: itemSpacing 8 */
+}
+.cell-actions img {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
+
+/* ── Cell: Icon + Text (Agent column, 14x14 icon + text) ── */
+.cell-icon-text {
+  display: flex;
+  align-items: center;
+  gap: 8px;                                       /* Figma: Slot 4 itemSpacing 8 */
+}
+.cell-icon-text img {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+/* ── Cell: Status (14x14 icon + text) ── */
+.cell-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.cell-status img {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+/* ── Cell: Link ── */
+.cell-link {
+  color: var(--link-color);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.cell-link:hover {
+  text-decoration: underline;
+  color: var(--link-hover);
+}
+
+/* ── Cell: Checkbox (16x16 checkbox, padding-left 8px) ── */
+.cell-checkbox {
+  width: 48px;
+  padding-left: 8px !important;
+  text-align: left;
+}
+.cell-checkbox img,
+.cell-checkbox svg {
+  width: 16px;
+  height: 16px;
+  vertical-align: middle;
+  display: block;
+}

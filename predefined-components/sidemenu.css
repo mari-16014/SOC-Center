@@ -1,0 +1,362 @@
+/* ============================================================
+   SIDEMENU — Captured from Figma MCP
+   Width: 240px | bg: #E9E9E9 | Items: h=32 each
+   L1 headers: chevron(14x14) + section-icon(14x14) + text(13px Medium)
+   L2 sub-header: padding-left 32px, 12px Regular, #626262
+   L2 items: padding-left 54px, 12px Regular, black
+   Active: bg #DCDCDC, border-left 3px solid #2C66DD
+   Bottom bar: bg #DCDCDC, h=32, icon right-aligned
+   ============================================================ */
+
+.sidemenu {
+  width: var(--sidebar-width);
+  flex-shrink: 0;
+  background: var(--sidebar-bg);
+  border-right: 1px solid var(--sidebar-stroke);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  transition: width 0.25s ease, opacity 0.2s ease;
+  overflow: hidden;
+}
+
+/* Collapsed state */
+.sidemenu--collapsed {
+  width: 0;
+  border-right: none;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Expand toggle — visible only when sidebar is collapsed (desktop) */
+.sidemenu-expand {
+  position: fixed;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 24px;
+  height: 40px;
+  background: var(--sidebar-active-bg, #DCDCDC);
+  border: 1px solid var(--sidebar-stroke, #E9E9E9);
+  border-left: none;
+  border-radius: 0 4px 4px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 50;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease 0.15s;
+  padding: 0;
+}
+.sidemenu-expand img {
+  width: 14px;
+  height: 14px;
+  transform: rotate(180deg);
+}
+.sidemenu-expand--visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+.sidemenu-expand:hover {
+  background: #D0D0D0;
+}
+
+.sidemenu__scroll {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Search box */
+.sidemenu__search-wrap {
+  padding: 8px 8px 0 8px;
+}
+.sidemenu__search {
+  display: flex;
+  align-items: center;
+  height: 26px;
+  background: #FFFFFF;
+  border: 1px solid var(--sidebar-stroke);
+  border-radius: 3px;
+  padding: 0 8px;
+  gap: 6px;
+}
+.sidemenu__search img,
+.sidemenu__search svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+.sidemenu__search input {
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: var(--sidebar-item-font-size);
+  font-family: inherit;
+  color: var(--sidebar-text-primary);
+  width: 100%;
+}
+.sidemenu__search input::placeholder {
+  color: var(--sidebar-search-placeholder);
+}
+
+/* Item section container */
+.sidemenu__section {
+  display: flex;
+  flex-direction: column;
+}
+
+/* L1 header (e.g. "Log Source Configuration", "Admin Settings") */
+.sidemenu__l1 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: var(--sidebar-item-height);
+  padding: 0 var(--sidebar-l1-padding-left);
+  font-size: var(--sidebar-l1-font-size);
+  font-weight: var(--sidebar-l1-font-weight);
+  color: var(--sidebar-text-primary);
+  cursor: pointer;
+  background: var(--sidebar-bg);
+  border: none;
+  width: 100%;
+  text-align: left;
+  font-family: inherit;
+  transition: background 0.12s;
+}
+.sidemenu__l1:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+/* Chevron icon (14x14 from Figma) */
+.sidemenu__chevron {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+/* Section icon next to L1 text (troubleshoot, admin, system) */
+.sidemenu__l1-icon {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+/* L2 sub-header (e.g. "Add and Manage") */
+.sidemenu__l2-subheader {
+  display: flex;
+  align-items: center;
+  height: var(--sidebar-item-height);
+  padding: 0 8px 0 var(--sidebar-l2-subheader-padding-left);
+  font-size: var(--sidebar-item-font-size);
+  color: var(--sidebar-text-secondary);
+}
+
+/* L2 item (e.g. "Devices", "Applications") */
+.sidemenu__item {
+  display: flex;
+  align-items: center;
+  height: var(--sidebar-item-height);
+  padding: 0 8px 0 var(--sidebar-l2-item-padding-left);
+  font-size: var(--sidebar-item-font-size);
+  font-weight: 400;
+  color: var(--sidebar-text-primary);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.12s;
+}
+.sidemenu__item:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+/* Active item */
+.sidemenu__item--active {
+  background: var(--sidebar-active-bg);
+  border-left: 3px solid var(--sidebar-active-border);
+  padding-left: 51px; /* 54 - 3px border */
+}
+.sidemenu__item--active:hover {
+  background: var(--sidebar-active-bg);
+}
+
+/* Bottom bar (slider close icon, right-aligned) */
+.sidemenu__bottom {
+  flex-shrink: 0;
+  border-top: 1px solid var(--sidebar-stroke);
+  height: 32px;
+  background: var(--sidebar-active-bg);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 16px;
+}
+.sidemenu__bottom-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+}
+.sidemenu__bottom-btn img,
+.sidemenu__bottom-btn svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* ============================================================
+   SIDEMENU TYPE 2 — Reports variant
+   Flat accordion (no section icons), OS dropdown header,
+   bottom links + "Need New Reports?" with bulb icon
+   ============================================================ */
+
+/* OS dropdown */
+.sidemenu__os-dropdown-wrap {
+  padding: 8px 8px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidemenu__os-dropdown {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 26px;
+  background: #FFFFFF;
+  border: 1px solid var(--sidebar-stroke);
+  border-radius: 3px;
+  padding: 0 0 0 8px;
+  cursor: pointer;
+  user-select: none;
+}
+.sidemenu__os-dropdown:hover {
+  border-color: #ABABAB;
+}
+
+.sidemenu__os-icon {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+.sidemenu__os-label {
+  flex: 1;
+  font-size: 12px;
+  font-family: inherit;
+  color: var(--sidebar-text-primary);
+  padding: 0 4px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sidemenu__os-arrow {
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border-left: 1px solid var(--sidebar-stroke);
+}
+.sidemenu__os-arrow img {
+  width: 14px;
+  height: 14px;
+}
+
+/* Dropdown options panel */
+.sidemenu__os-options {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: #FFFFFF;
+  border: 1px solid var(--sidebar-stroke);
+  border-top: none;
+  border-radius: 0 0 3px 3px;
+  z-index: 60;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+.sidemenu__os-options--open {
+  display: block;
+}
+.sidemenu__os-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 28px;
+  padding: 0 8px;
+  font-size: 12px;
+  font-family: inherit;
+  color: var(--sidebar-text-primary);
+  cursor: pointer;
+  transition: background 0.1s;
+}
+.sidemenu__os-option:hover {
+  background: var(--table-hover-bg, #F0F6FF);
+}
+.sidemenu__os-option img {
+  width: 14px;
+  height: 14px;
+}
+
+/* Divider line between dropdown and search / sections */
+.sidemenu__divider {
+  height: 1px;
+  background: #DCDCDC;
+  margin: 0 8px;
+  flex-shrink: 0;
+}
+
+/* Type 2 L1 item (flat accordion — no section icon, just chevron + text) */
+.sidemenu__l1--flat {
+  gap: 6px;
+  padding: 0 8px 0 12px;
+}
+
+/* Type 2 active L1 (highlighted, blue left border) */
+.sidemenu__l1--active {
+  background: var(--sidebar-active-bg);
+  border-left: 3px solid var(--sidebar-active-border);
+  padding-left: 9px;
+  font-weight: 500;
+}
+.sidemenu__l1--active:hover {
+  background: var(--sidebar-active-bg);
+}
+
+/* Type 2 bottom links */
+.sidemenu__bottom-links {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid #DCDCDC;
+  padding: 0;
+}
+.sidemenu__bottom-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 32px;
+  padding: 0 12px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--sidebar-text-primary);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.12s;
+}
+.sidemenu__bottom-link:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+.sidemenu__bottom-link img {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}

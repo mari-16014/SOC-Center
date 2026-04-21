@@ -1,0 +1,241 @@
+<!-- ============================================================
+     LINE TAB — Predefined HTML Template
+     Captured from Figma Elegant Components 1.0 via MCP
+     Component Set: Line Tab (529:18726)
+
+     VARIANTS (set via class modifier on .line-tab):
+       Default        → .line-tab                     (plain text tabs, h=40)
+       Icon variant   → .line-tab.line-tab--with-icon (icon + text, h=40)
+       QuickLink      → .line-tab.line-tab--quicklink (pill tabs, h=32)
+
+     BOOLEANS (show/hide via presence of elements):
+       Checkbox       → Add .line-tab__checkbox inside each .line-tab__header
+       Settings Icon  → Add .line-tab__settings inside each .line-tab__header
+       Pagination     → Add .line-tab__pagination after .line-tab__headers
+       Dashboard Settings → Add .line-tab__dashboard-settings after headers
+       Right Actions  → Add .line-tab__actions (Variant 4 dashboard)
+
+     TAB SWITCHING:
+       line-tab.js reads data-tab on each header and shows matching
+       .line-tab__content[data-tab-content] in .line-tab__body
+
+     USAGE:
+       1. Copy the variant you need below
+       2. Set tab labels (text inside .line-tab__header)
+       3. Set data-tab="tabname" on each header
+       4. Set data-tab-content="tabname" on each body panel
+       5. Add --selected to the default active tab header
+       6. Add --active to the default visible body panel
+     ============================================================ -->
+
+<!-- ═══════════════════════════════════════════════════════════
+     VARIANT 1: Line Tab (plain text, h=40)
+     Figma: State=Line Tab
+     ═══════════════════════════════════════════════════════════ -->
+<div class="line-tab">
+  <div class="line-tab__headers">
+    <button class="line-tab__header line-tab__header--selected" data-tab="tab1">Tab Label 1</button>
+    <button class="line-tab__header line-tab__header--unselected" data-tab="tab2">Tab Label 2</button>
+    <button class="line-tab__header line-tab__header--unselected" data-tab="tab3">Tab Label 3</button>
+  </div>
+  <!-- Optional: Pagination (boolean Pagination#8642:0 = true) -->
+  <!--
+  <div class="line-tab__pagination">
+    <button class="line-tab__pagination-btn" aria-label="Previous page">
+      <img src="../assets/icons/icon-chevron-left.svg" alt="" />
+    </button>
+    <button class="line-tab__pagination-btn" aria-label="Next page">
+      <img src="../assets/icons/icon-chevron-right.svg" alt="" />
+    </button>
+    <div class="line-tab__pagination-separator"></div>
+    <button class="line-tab__pagination-refresh" aria-label="Refresh">
+      <img src="../assets/icons/icon-actionbar-refresh.svg" alt="" />
+    </button>
+  </div>
+  -->
+  <!-- Optional: Dashboard Settings (boolean Dashboard Settings#23773:0 = true) -->
+  <!--
+  <div class="line-tab__dashboard-settings">
+    <div class="line-tab__dashboard-settings-separator"></div>
+    <button class="line-tab__dashboard-settings-btn" aria-label="Filter">
+      <img src="../assets/icons/icon-actionbar-filter.svg" alt="" />
+    </button>
+  </div>
+  -->
+</div>
+<div class="line-tab__body">
+  <div class="line-tab__content line-tab__content--active" data-tab-content="tab1">
+    <!-- Tab 1 content here -->
+  </div>
+  <div class="line-tab__content" data-tab-content="tab2">
+    <!-- Tab 2 content here -->
+  </div>
+  <div class="line-tab__content" data-tab-content="tab3">
+    <!-- Tab 3 content here -->
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     VARIANT 2: Icon with Line Tab (icon + text, h=40)
+     Figma: State=Icon with Line Tab
+     Each tab has a 14x14 icon before the text label
+     ═══════════════════════════════════════════════════════════ -->
+<!--
+<div class="line-tab line-tab--with-icon">
+  <div class="line-tab__headers">
+    <button class="line-tab__header line-tab__header--selected" data-tab="tab1">
+      <img class="line-tab__icon" src="../assets/icons/icon-linetab-settings.svg" alt="" />
+      Tab Label 1
+    </button>
+    <button class="line-tab__header line-tab__header--unselected" data-tab="tab2">
+      <img class="line-tab__icon" src="../assets/icons/icon-linetab-settings.svg" alt="" />
+      Tab Label 2
+    </button>
+  </div>
+</div>
+<div class="line-tab__body">
+  <div class="line-tab__content line-tab__content--active" data-tab-content="tab1">
+  </div>
+  <div class="line-tab__content" data-tab-content="tab2">
+  </div>
+</div>
+-->
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     VARIANT 3: QuickLink (pill tabs, h=32)
+     Figma: State=QuickLink
+     Compact tabs with background fills instead of bottom border
+     ═══════════════════════════════════════════════════════════ -->
+<!--
+<div class="line-tab line-tab--quicklink">
+  <div class="line-tab__headers">
+    <button class="line-tab__header line-tab__header--selected" data-tab="ql1">
+      QuickLink 1
+      <img class="line-tab__arrow" src="../assets/icons/icon-chevron-down.svg" alt="" />
+    </button>
+    <button class="line-tab__header line-tab__header--unselected" data-tab="ql2">
+      QuickLink 2
+      <img class="line-tab__arrow" src="../assets/icons/icon-chevron-down.svg" alt="" />
+    </button>
+  </div>
+</div>
+<div class="line-tab__body">
+  <div class="line-tab__content line-tab__content--active" data-tab-content="ql1">
+  </div>
+  <div class="line-tab__content" data-tab-content="ql2">
+  </div>
+</div>
+-->
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     VARIANT 1 + CHECKBOX BOOLEAN (Checkbox#20845:0 = true)
+     Shows a 16x16 checkbox before each tab label
+     ═══════════════════════════════════════════════════════════ -->
+<!--
+<div class="line-tab">
+  <div class="line-tab__headers">
+    <button class="line-tab__header line-tab__header--selected" data-tab="tab1">
+      <img class="line-tab__checkbox" src="../assets/icons/icon-checkbox.svg" alt="" />
+      Tab Label 1
+    </button>
+    <button class="line-tab__header line-tab__header--unselected" data-tab="tab2">
+      <img class="line-tab__checkbox" src="../assets/icons/icon-checkbox.svg" alt="" />
+      Tab Label 2
+    </button>
+  </div>
+</div>
+-->
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     VARIANT 1 + SETTINGS BOOLEAN (back Icon#18595:0 = true)
+     Shows a 14x14 settings gear icon after the tab label
+     ═══════════════════════════════════════════════════════════ -->
+<!--
+<div class="line-tab">
+  <div class="line-tab__headers">
+    <button class="line-tab__header line-tab__header--selected" data-tab="tab1">
+      Tab Label 1
+      <button class="line-tab__settings" aria-label="Settings">
+        <img src="../assets/icons/icon-linetab-settings.svg" alt="" />
+      </button>
+    </button>
+    <button class="line-tab__header line-tab__header--unselected" data-tab="tab2">
+      Tab Label 2
+      <button class="line-tab__settings" aria-label="Settings">
+        <img src="../assets/icons/icon-linetab-settings.svg" alt="" />
+      </button>
+    </button>
+  </div>
+</div>
+-->
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     VARIANT 4: Dashboard Line Tab with Right Actions (h=40)
+     MANDATORY for all dashboard tab conversions — no compromise.
+
+     Tabs left-aligned, right side has DYNAMIC action items:
+       ▸ Calendar input (.cal-input) — 280×26, date range picker
+       ▸ Icon buttons (.line-tab__action-icon-btn) — 24×24, Lucide CDN
+       ▸ Separator (.line-tab__action-separator) — 1px #E9E9E9
+       ▸ Settings gear (.line-tab__action-settings) — 40×40 (rightmost)
+
+     RIGHT-ACTIONS are DYNAMIC — adapt to user's HTML input:
+       • If user HTML has date range / calendar → use .cal-input
+       • If user HTML has expand / fullscreen → add maximize-2 icon btn
+       • If user HTML has refresh → add refresh-cw icon btn
+       • If user HTML has export / download → add download icon btn
+       • If user HTML has filter → add filter icon btn
+       • If user HTML has settings / gear → keep .line-tab__action-settings
+       • Icons: ALWAYS use Lucide CDN <i data-lucide="name"> (14×14)
+       • Separator goes before the settings gear
+
+     gap: 8px between all items in .line-tab__actions
+     ═══════════════════════════════════════════════════════════ -->
+<!--
+<div class="line-tab" style="padding-left:16px;">
+  <div class="line-tab__headers">
+    <button class="line-tab__header line-tab__header--selected" data-tab="tab1">Dashboard Tab 1</button>
+    <button class="line-tab__header line-tab__header--unselected" data-tab="tab2">Dashboard Tab 2</button>
+    <button class="line-tab__header line-tab__header--unselected" data-tab="tab3">Dashboard Tab 3</button>
+  </div>
+  <div class="line-tab__actions">
+
+    <!-- Calendar / Date Range (optional — include if user HTML has date range) -->
+    <div class="cal-input" title="Date Range">
+      <span class="cal-input__text">2025-12-01 – 2026-12-01</span>
+      <span class="cal-input__icon">
+        <img src="../assets/icons/icon-calendar-input.svg" alt="" />
+      </span>
+    </div>
+
+    <!-- Icon buttons — add/remove based on user's HTML input actions -->
+    <button class="line-tab__action-icon-btn" title="Expand">
+      <i data-lucide="maximize-2" style="width:14px;height:14px;"></i>
+    </button>
+    <button class="line-tab__action-icon-btn" title="Refresh">
+      <i data-lucide="refresh-cw" style="width:14px;height:14px;"></i>
+    </button>
+
+    <!-- Separator — always placed before settings gear -->
+    <div class="line-tab__action-separator"></div>
+
+    <!-- Settings gear (rightmost) with dropdown -->
+    <div class="gear-wrapper" style="position:relative;">
+      <button class="line-tab__action-settings" title="Settings">
+        <i data-lucide="settings" style="width:14px;height:14px;"></i>
+      </button>
+    </div>
+
+  </div>
+</div>
+<div class="line-tab__body">
+  <div class="line-tab__content line-tab__content--active" data-tab-content="tab1">
+    Dashboard content here
+  </div>
+</div>
+-->

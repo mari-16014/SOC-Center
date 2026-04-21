@@ -1,0 +1,161 @@
+<!--
+  ============================================================
+  SIDEMENU — Predefined HTML Component (Settings pages)
+  ============================================================
+
+  CONFIGURATION (data- attribute):
+  ─────────────────────────────────
+  Set data-active-item="ItemName" on the <aside> element.
+  The JS (sidemenu.js) reads this attribute on page load and:
+    1. Finds the matching menu item by its text content
+    2. Adds sidemenu__item--active class to it
+    3. Auto-expands the parent L1 section (chevron down, children visible)
+
+  NO manual class editing needed — all items start as plain links.
+
+  AVAILABLE ITEM NAMES (case-sensitive, must match text exactly):
+
+  ┌─ Log Source Configuration
+  │   ├─ "Devices"
+  │   ├─ "Applications"
+  │   ├─ "Import Logs"
+  │   ├─ "Manage Cloud Sources"
+  │   ├─ "File Integrity Monitoring"
+  │   └─ "Log Forwarding"
+  ├─ Admin Settings
+  │   ├─ "Manage Agents"
+  │   ├─ "Manage Log Source Groups"
+  │   ├─ "User Management"
+  │   ├─ "Technician Audit"
+  │   ├─ "Threat Management"
+  │   ├─ "Account Settings"
+  │   ├─ "Listener Ports"
+  │   ├─ "Auto Device Configration"
+  │   ├─ "All Extensions"
+  │   ├─ "Installed Extensions"
+  │   ├─ "Extension Profiles"
+  │   ├─ "Product Settings"
+  │   ├─ "Privacy Settings"
+  │   ├─ "Working Hour Settings"
+  │   ├─ "Custom Log Format"
+  │   ├─ "Storage Tiers"
+  │   ├─ "Log Collection Filters"
+  │   ├─ "Reload Archive Logs"
+  │   ├─ "Log Forwarding"
+  │   ├─ "My Account"
+  │   ├─ "Tags"
+  │   ├─ "License"
+  │   ├─ "Custom Widgets"
+  │   └─ "Insights"
+  └─ System Settings
+      ├─ "Server CA Management"
+      └─ "Certificate Trust Store"
+
+  EXAMPLES:
+    <aside class="sidemenu" data-active-item="Applications">
+    <aside class="sidemenu" data-active-item="Manage Agents">
+    <aside class="sidemenu" data-active-item="Storage Tiers">
+
+  CSS:  tokens.css + sidemenu.css
+  JS:   sidemenu.js  (reads data-active-item + collapse/expand/search)
+  ============================================================
+-->
+
+<!-- ═══════ SIDEMENU (w=240) ═══════ -->
+<aside class="sidemenu" data-active-item="Applications">
+  <div class="sidemenu__scroll scrollbar-thin">
+
+    <!-- Search -->
+    <div class="sidemenu__search-wrap">
+      <div class="sidemenu__search">
+        <img src="../assets/icons/icon-search-settings.svg" alt="" />
+        <input type="text" placeholder="Search Settings" />
+      </div>
+    </div>
+
+    <!-- ── Log Source Configuration ── -->
+    <div class="sidemenu__section" data-section="log-source">
+      <button class="sidemenu__l1">
+        <img src="../assets/icons/icon-sm-chevron-right.svg" alt="" class="sidemenu__chevron" />
+        <img src="../assets/icons/icon-troubleshoot.svg" alt="" class="sidemenu__l1-icon" />
+        <span>Log Source Configuration</span>
+      </button>
+      <a href="#" class="sidemenu__item" style="display:none">Devices</a>
+      <a href="#" class="sidemenu__item" style="display:none">Applications</a>
+      <a href="#" class="sidemenu__item" style="display:none">Import Logs</a>
+      <a href="#" class="sidemenu__item" style="display:none">Manage Cloud Sources</a>
+      <a href="#" class="sidemenu__item" style="display:none">File Integrity Monitoring</a>
+      <a href="#" class="sidemenu__item" style="display:none">Log Forwarding</a>
+    </div>
+
+    <!-- ── Admin Settings ── -->
+    <div class="sidemenu__section" data-section="admin">
+      <button class="sidemenu__l1">
+        <img src="../assets/icons/icon-sm-chevron-right.svg" alt="" class="sidemenu__chevron" />
+        <img src="../assets/icons/icon-admin-settings.svg" alt="" class="sidemenu__l1-icon" />
+        <span>Admin Settings</span>
+      </button>
+      <!-- Management -->
+      <div class="sidemenu__l2-subheader" style="display:none">Management</div>
+      <a href="#" class="sidemenu__item" style="display:none">Manage Agents</a>
+      <a href="#" class="sidemenu__item" style="display:none">Manage Log Source Groups</a>
+      <a href="#" class="sidemenu__item" style="display:none">User Management</a>
+      <a href="#" class="sidemenu__item" style="display:none">Technician Audit</a>
+      <a href="#" class="sidemenu__item" style="display:none">Threat Management</a>
+      <a href="#" class="sidemenu__item" style="display:none">Account Settings</a>
+      <a href="#" class="sidemenu__item" style="display:none">Listener Ports</a>
+      <a href="#" class="sidemenu__item" style="display:none">Auto Device Configration</a>
+      <!-- MarketPlace -->
+      <div class="sidemenu__l2-subheader" style="display:none">MarketPlace</div>
+      <a href="#" class="sidemenu__item" style="display:none">All Extensions</a>
+      <a href="#" class="sidemenu__item" style="display:none">Installed Extensions</a>
+      <a href="#" class="sidemenu__item" style="display:none">Extension Profiles</a>
+      <!-- Product Customization -->
+      <div class="sidemenu__l2-subheader" style="display:none">Product Customization</div>
+      <a href="#" class="sidemenu__item" style="display:none">Product Settings</a>
+      <a href="#" class="sidemenu__item" style="display:none">Privacy Settings</a>
+      <a href="#" class="sidemenu__item" style="display:none">Working Hour Settings</a>
+      <a href="#" class="sidemenu__item" style="display:none">Custom Log Format</a>
+      <!-- Data Storage -->
+      <div class="sidemenu__l2-subheader" style="display:none">Data Storage</div>
+      <a href="#" class="sidemenu__item" style="display:none">Storage Tiers</a>
+      <a href="#" class="sidemenu__item" style="display:none">Log Collection Filters</a>
+      <a href="#" class="sidemenu__item" style="display:none">Reload Archive Logs</a>
+      <a href="#" class="sidemenu__item" style="display:none">Log Forwarding</a>
+      <!-- General -->
+      <div class="sidemenu__l2-subheader" style="display:none">General</div>
+      <a href="#" class="sidemenu__item" style="display:none">My Account</a>
+      <a href="#" class="sidemenu__item" style="display:none">Tags</a>
+      <a href="#" class="sidemenu__item" style="display:none">License</a>
+      <!-- Developer Space -->
+      <div class="sidemenu__l2-subheader" style="display:none">Developer Space</div>
+      <a href="#" class="sidemenu__item" style="display:none">Custom Widgets</a>
+      <!-- Zia -->
+      <div class="sidemenu__l2-subheader" style="display:none">Zia</div>
+      <a href="#" class="sidemenu__item" style="display:none">Insights</a>
+    </div>
+
+    <!-- ── System Settings ── -->
+    <div class="sidemenu__section" data-section="system">
+      <button class="sidemenu__l1">
+        <img src="../assets/icons/icon-sm-chevron-right.svg" alt="" class="sidemenu__chevron" />
+        <img src="../assets/icons/icon-system-settings.svg" alt="" class="sidemenu__l1-icon" />
+        <span>System Settings</span>
+      </button>
+      <a href="#" class="sidemenu__item" style="display:none">Server CA Management</a>
+      <a href="#" class="sidemenu__item" style="display:none">Certificate Trust Store</a>
+    </div>
+  </div>
+
+  <!-- Bottom bar -->
+  <div class="sidemenu__bottom">
+    <button class="sidemenu__bottom-btn" title="Collapse sidebar">
+      <img src="../assets/icons/icon-slider-close.svg" alt="" />
+    </button>
+  </div>
+</aside>
+
+<!-- Expand button (visible when sidebar collapsed) -->
+<button class="sidemenu-expand" id="sidebarExpand" title="Expand sidebar">
+  <img src="../assets/icons/icon-slider-close.svg" alt="" />
+</button>

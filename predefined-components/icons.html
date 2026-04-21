@@ -1,0 +1,104 @@
+<!--
+  ============================================================
+  ICON SYSTEM — Dual-Folder Architecture
+  ============================================================
+
+  TWO icon folders serve different purposes:
+
+  ┌─────────────────────────────────────────────────────────┐
+  │  assets/icons/          (Elegant Library — DO NOT TOUCH) │
+  │  Quality-checked exports from Figma Elegant library.    │
+  │  Used ONLY by predefined components (TopNavBar,         │
+  │  SideMenu, Header, Table, ActionBar, etc.)              │
+  │  NEVER add to, modify, or delete from this folder.      │
+  └─────────────────────────────────────────────────────────┘
+
+  ┌─────────────────────────────────────────────────────────┐
+  │  assets/lucide-icons/   (On-Demand Lucide Icons)        │
+  │  Open-source Lucide icons fetched during conversion.    │
+  │  Used for ALL custom/converted content.                 │
+  │  Icons accumulate — reuse existing, fetch only new.     │
+  │  Naming: {lucide-name}-{size}.svg                       │
+  │  Example: search-14.svg, bell-24.svg, trash-2-14.svg    │
+  └─────────────────────────────────────────────────────────┘
+
+  ENGINE FILE: ../predefined-components/icon-engine.js
+  CDN SOURCE:  https://cdn.jsdelivr.net/npm/lucide-static@1.7.0/icons/
+
+  ============================================================
+  STROKE WEIGHT RULES (consistent per size, no exceptions)
+  ============================================================
+    ≤14px  → stroke-width: 1
+     16px  → stroke-width: 1.25
+    ≥24px  → stroke-width: 1.5
+
+  ============================================================
+  SIZE GRID (8-point aligned)
+  ============================================================
+    10px — plus inside compact Add button
+    12px — date pickers, mini chevrons
+    14px — DEFAULT (buttons, dropdowns, tables, sidebar, tiles)
+    16px — tile headers, stat cards, checkboxes, topnav
+    24px — navigation, toolbar, action-bar, table row actions
+    32px — hero sections, empty states
+
+  ============================================================
+  PREDEFINED COMPONENT ICONS (assets/icons/ — do not replace)
+  ============================================================
+
+  BRAND
+    logo-log360.svg
+
+  TOPNAVBAR
+    icon-notification.svg, icon-question.svg,
+    icon-user-avatar.svg, icon-apps-grid.svg,
+    icon-search.svg, icon-plus.svg
+
+  SIDEMENU
+    icon-search-settings.svg, icon-troubleshoot.svg,
+    icon-admin-settings.svg, icon-system-settings.svg,
+    icon-sidemenu-settings.svg, icon-slider-close.svg,
+    icon-sm-chevron-right.svg, icon-sm-chevron-down.svg
+
+  HEADER
+    icon-help.svg
+
+  TABLE — ACTION BAR
+    icon-actionbar-search.svg, icon-actionbar-filter.svg,
+    icon-actionbar-refresh.svg, icon-view-type.svg,
+    icon-chevron-left.svg, icon-chevron-right.svg,
+    icon-chevron-down.svg
+
+  TABLE — ROW ACTIONS
+    icon-action-approve.svg, icon-action-edit.svg,
+    icon-action-delete.svg, icon-action-more.svg,
+    icon-checkbox.svg, icon-checkbox-checked.svg,
+    icon-checkbox-indeterminate.svg
+
+  TABLE — CELL ICONS
+    icon-agent.svg, icon-status-enabled.svg,
+    icon-status-disabled.svg
+
+  WIDGET TOOLBAR
+    icon-widget-maximize.svg, icon-widget-schedule.svg,
+    icon-widget-sort.svg, icon-widget-notification.svg,
+    icon-refresh.svg, icon-more.svg
+
+  LINE TAB
+    icon-linetab-settings.svg
+
+  ============================================================
+  LUCIDE ICON USAGE (assets/lucide-icons/ — on-demand)
+  ============================================================
+
+  HTML Usage:
+    <img src="./assets/lucide-icons/search-14.svg" alt="Search" width="14" height="14" />
+    <img src="./assets/lucide-icons/bell-24.svg" alt="Notifications" width="24" height="24" />
+    <img src="./assets/lucide-icons/shield-check-14.svg" alt="Secure" width="14" height="14" />
+
+  Runtime Placeholder (optional):
+    <i data-icon="search" data-icon-context="default"></i>
+    <script>ElegantIcons.init();</script>
+
+  ============================================================
+-->

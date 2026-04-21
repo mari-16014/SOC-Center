@@ -1,0 +1,153 @@
+<!--
+  ============================================================
+  TABLE TYPE 2 — Card-Row Alert Table (Predefined HTML Component)
+  ============================================================
+  A rich, card-style row table for alert/incident management.
+  Each row is a multi-line card with severity, priority, description,
+  assignee, status, and remediation columns.
+
+  STRUCTURE:
+    1. View Selector Toolbar (top) — Select view dropdown + filter + date range
+    2. ActionBar (Type 7 style) — Bulk actions + selected count + pagination
+    3. Column Headers — Details (sortable) | Time Generated | Assignee | Status | Remediation
+    4. Card Rows — Each row contains:
+       - Left: Checkbox + divider + ThumbsUp icon + count badge
+       - Details: Severity icon + Title + Priority badge + Zia/ATA icons + Description text
+       - Time Generated: Date string
+       - Assignee: Avatar + Name + Dropdown
+       - Status: Colored dot + Status text + Dropdown
+       - Remediation: "Run Playbook" button OR Status text (Success/Failed/Executing)
+
+  PRIORITY LEVELS & COLORS (fully rounded pill, border-radius: 1000px):
+    Critical — bg: #EFDFDD, border: #95291D, label: black, score: #95291D
+    High     — bg: #FCE8E8, border: #DD1616, label: black, score: #DD1616
+    Medium   — bg: #FFDECC, border: #FF5900, label: black, score: #FF5900
+    Low      — bg: #F7F0E6, border: #AC6602, label: black, score: #AC6602
+    Very Low — bg: #E8F2E8, border: #198019, label: black, score: #198019
+
+  STATUS TYPES & COLORS (rounded pill, border-radius: 32px, 10% opacity fill + 1px border):
+    Open               — fill: rgba(44,102,221,0.1), border: #2C66DD, text: #2C66DD
+    Acknowledge        — fill: rgba(172,102,2,0.1), border: #AC6602, text: #AC6602
+    Assigned           — fill: rgba(172,102,2,0.1), border: #AC6602, text: #AC6602
+    Under Investigation — fill: rgba(172,102,2,0.1), border: #AC6602, text: #AC6602
+    Under Remediation  — fill: rgba(172,102,2,0.1), border: #AC6602, text: #AC6602
+    Remediated         — fill: rgba(25,128,25,0.1), border: #198019, text: #198019
+    False Positive     — fill: rgba(25,128,25,0.1), border: #198019, text: #198019
+    Benign Positive    — fill: rgba(25,128,25,0.1), border: #198019, text: #198019
+
+  ASSIGNEE AVATARS:
+    Named assignee  — icon-t2-avatar.svg (realistic person with suit/tie, #D5E0F8 gradient bg)
+    Unassigned      — icon-t2-avatar-unassigned.svg (gray circle + person silhouette, #E9E9E9 bg)
+
+  REMEDIATION TYPES:
+    Run Playbook       — Blue outlined button with playbook icon
+    Success            — Green checkmark circle icon + "Success." + "View Details" link
+    Failed             — Red X circle icon + "Failed." + "View Details" link
+    Executing Playbook — Spinning blue gradient loader icon + "Executing Playbook..."
+
+  ICON ASSETS:
+    icon-t2-severity-critical.svg — Red hexagon X
+    icon-t2-severity-medium.svg   — Orange diamond !
+    icon-t2-thumbsup.svg          — Green thumbs up
+    icon-t2-zia.svg               — Zia AI sparkle icon
+    icon-t2-ata.svg               — ATA document search icon
+    icon-t2-avatar.svg            — Named user avatar (realistic person with suit)
+    icon-t2-avatar-unassigned.svg — Unassigned avatar (gray circle + person silhouette)
+    icon-t2-playbook.svg          — Lightning bolt playbook icon
+    icon-t2-rem-success.svg       — Green circle + checkmark (remediation success)
+    icon-t2-rem-failed.svg        — Red circle + X (remediation failed)
+    icon-t2-rem-executing.svg     — Blue gradient spinner (remediation executing)
+    icon-t2-calendar.svg          — Calendar icon
+    icon-checkbox.svg             — Unchecked checkbox
+    icon-checkbox-checked.svg     — Checked checkbox
+    icon-checkbox-indeterminate.svg — Indeterminate checkbox
+    icon-chevron-down.svg         — Dropdown chevron
+
+  CSS:  tokens.css + table-type2.css
+  JS:   table.js (checkbox 3-state logic applies)
+  ============================================================
+-->
+
+<!-- ── VIEW SELECTOR TOOLBAR ── -->
+<div class="t2-toolbar">
+  <div class="t2-toolbar__left">
+    <span class="t2-toolbar__label">Select view</span>
+    <button class="t2-toolbar__select">
+      Active Alerts
+      <img src="./assets/icons/icon-chevron-down.svg" alt="" />
+    </button>
+    <div class="t2-toolbar__divider"></div>
+    <button class="t2-toolbar__filter" title="Filter">
+      <img src="./assets/icons/icon-actionbar-filter.svg" alt="" />
+    </button>
+  </div>
+  <div class="t2-toolbar__right">
+    <img src="./assets/icons/icon-t2-calendar.svg" alt="" />
+    <span>Last 7 Days</span>
+  </div>
+</div>
+
+<!-- ── ACTION BAR (Type 7 — Bulk Actions + Selected Count + Pagination) ── -->
+<div class="actionbar">
+  <div class="actionbar__left">
+    <button class="actionbar__icon-btn" title="Search">
+      <img src="./assets/icons/icon-actionbar-search.svg" alt="" />
+    </button>
+    <div class="actionbar__actions">
+      <button class="actionbar__action" data-ab-action="incident">
+        <span>+ Add to Incident</span>
+      </button>
+      <button class="actionbar__action" data-ab-action="assignee">
+        <img src="./assets/icons/icon-t2-avatar.svg" alt="" style="width:14px;height:14px;" />
+        <span>Assignee</span>
+      </button>
+      <button class="actionbar__action" data-ab-action="delete">
+        <img src="./assets/icons/icon-ab-delete.svg" alt="" />
+        <span>Delete</span>
+      </button>
+      <button class="actionbar__action actionbar__action--more" data-ab-action="more">
+        <img src="./assets/icons/icon-ab-more.svg" alt="" />
+      </button>
+    </div>
+    <div class="actionbar__selected-count">
+      <b>Selected Count: 06</b>
+      <a href="#" class="actionbar__clear-all">Clear All</a>
+    </div>
+  </div>
+  <div class="actionbar__right">
+    <span class="actionbar__pagination">1-25 <i>of</i> <b>100</b></span>
+    <button class="actionbar__nav-btn" title="Previous">
+      <img src="./assets/icons/icon-chevron-left.svg" alt="" />
+    </button>
+    <button class="actionbar__nav-btn" title="Next">
+      <img src="./assets/icons/icon-chevron-right.svg" alt="" />
+    </button>
+  </div>
+</div>
+
+<!-- ── CARD-ROW TABLE ── -->
+<div class="data-table-wrap">
+  <table class="t2-table" id="t2-demo-table">
+    <colgroup>
+      <col style="width:80px;min-width:80px;" />
+      <col />
+      <col style="width:150px;min-width:140px;" />
+      <col style="width:165px;min-width:150px;" />
+      <col style="width:180px;min-width:165px;" />
+      <col style="width:175px;min-width:155px;" />
+    </colgroup>
+    <thead>
+      <tr>
+        <th class="t2-th-check"></th>
+        <th class="t2-th-details"><span class="t2-sort">Details</span></th>
+        <th>Time Generated</th>
+        <th>Assignee</th>
+        <th>Status</th>
+        <th>Remediation</th>
+      </tr>
+    </thead>
+    <tbody id="t2-table-body">
+      <!-- Rows populated via JS -->
+    </tbody>
+  </table>
+</div>

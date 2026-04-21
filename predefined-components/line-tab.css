@@ -1,0 +1,457 @@
+/* ============================================================
+   LINE TAB — Captured from Figma Elegant Components 1.0 via MCP
+   Component Set ID: 529:18726 | Tab Item ID: 529:18070
+
+   3 outer variants:
+     State=Line Tab        → plain text tabs, h=40
+     State=Icon with Line Tab → icon + text tabs, h=40
+     State=QuickLink       → compact pill tabs, h=32
+
+   9 inner tab-item states:
+     LineTab  / Selected   → text #2C66DD, stroke-bottom 2px #2C66DD
+     LineTab  / Hover      → text #000, bg #E9E9E9
+     LineTab  / Unselected → text #000, no bg
+     Icon     / Selected   → icon + text #2C66DD, stroke-bottom 2px
+     Icon     / Hover      → icon + text #000, bg #E9E9E9
+     Icon     / Unselected → icon + text #000
+     Quicklink/ Selected   → text #000, bg #FFF
+     Quicklink/ Active     → text #000, bg #EAF0FC
+     Quicklink/ Hover      → text #000, bg #E9E9E9
+
+   Booleans: Checkbox, back Icon (Settings gear), Pagination, Dashboard Settings
+   ============================================================ */
+
+:root {
+  /* ── Line Tab tokens ── */
+  --line-tab-height: 40px;
+  --line-tab-font-size: 12px;
+  --line-tab-font-weight: 400;
+  --line-tab-gap: 12px;
+  --line-tab-item-padding: 12px 8px;
+  --line-tab-item-gap: 8px;
+  --line-tab-border-bottom: #E9E9E9;
+  --line-tab-selected-color: #2C66DD;
+  --line-tab-selected-stroke: 2px;
+  --line-tab-unselected-color: #000000;
+  --line-tab-hover-bg: #E9E9E9;
+  --line-tab-icon-size: 14px;
+  --line-tab-icon-gap: 6px;
+
+  /* ── QuickLink variant tokens ── */
+  --quicklink-height: 32px;
+  --quicklink-gap: 4px;
+  --quicklink-item-padding: 9px 8px;
+  --quicklink-selected-bg: #FFFFFF;
+  --quicklink-active-bg: #EAF0FC;
+  --quicklink-hover-bg: #E9E9E9;
+
+  /* ── Pagination tokens ── */
+  --line-tab-pagination-height: 24px;
+  --line-tab-pagination-icon-size: 24px;
+  --line-tab-pagination-icon-bg: #E9E9E9;
+}
+
+/* ── Line Tab container ── */
+.line-tab {
+  display: flex;
+  align-items: center;
+  height: var(--line-tab-height);
+  border-bottom: 1px solid var(--line-tab-border-bottom);
+  flex-shrink: 0;
+  position: relative;
+}
+
+/* ── Tab headers wrapper ── */
+.line-tab__headers {
+  display: flex;
+  align-items: center;
+  gap: var(--line-tab-gap);
+  height: 100%;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+}
+
+/* ── Individual tab item ── */
+.line-tab__header {
+  display: flex;
+  align-items: center;
+  gap: var(--line-tab-item-gap);
+  height: var(--line-tab-height);
+  padding: var(--line-tab-item-padding);
+  font-size: var(--line-tab-font-size);
+  font-weight: var(--line-tab-font-weight);
+  font-family: inherit;
+  color: var(--line-tab-unselected-color);
+  cursor: pointer;
+  white-space: nowrap;
+  border: none;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+  transition: background 0.12s, color 0.12s, border-color 0.12s;
+  line-height: 1;
+  margin-bottom: -1px;
+  box-sizing: border-box;
+}
+
+/* Selected state */
+.line-tab__header--selected {
+  color: var(--line-tab-selected-color);
+  border-bottom-color: var(--line-tab-selected-color);
+}
+
+/* Unselected state */
+.line-tab__header--unselected {
+  color: var(--line-tab-unselected-color);
+  border-bottom-color: transparent;
+}
+
+/* Hover state */
+.line-tab__header--unselected:hover {
+  background: var(--line-tab-hover-bg);
+}
+
+/* ── Icon inside tab (14x14) ── */
+.line-tab__icon {
+  width: var(--line-tab-icon-size);
+  height: var(--line-tab-icon-size);
+  flex-shrink: 0;
+}
+
+/* Icon with Line Tab variant uses smaller gap */
+.line-tab--with-icon .line-tab__header {
+  gap: var(--line-tab-icon-gap);
+}
+
+/* ── Settings gear icon (right side, optional boolean) ── */
+.line-tab__settings {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--line-tab-icon-size);
+  height: var(--line-tab-icon-size);
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  padding: 0;
+  flex-shrink: 0;
+}
+.line-tab__settings img {
+  width: var(--line-tab-icon-size);
+  height: var(--line-tab-icon-size);
+}
+
+/* ── Checkbox (optional boolean, 16x16) ── */
+.line-tab__checkbox {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+.line-tab__checkbox img {
+  width: 16px;
+  height: 16px;
+}
+
+/* ── Pagination (optional boolean, right-aligned) ── */
+.line-tab__pagination {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  margin-left: auto;
+  height: var(--line-tab-pagination-height);
+}
+
+.line-tab__pagination-btn {
+  width: var(--line-tab-pagination-icon-size);
+  height: var(--line-tab-pagination-icon-size);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: var(--line-tab-pagination-icon-bg);
+  cursor: pointer;
+  padding: 0;
+  border-radius: 2px;
+  transition: background 0.12s;
+}
+.line-tab__pagination-btn:hover {
+  background: #DCDCDC;
+}
+.line-tab__pagination-btn img {
+  width: 14px;
+  height: 14px;
+}
+
+.line-tab__pagination-separator {
+  width: 1px;
+  height: 16px;
+  background: #DCDCDC;
+  flex-shrink: 0;
+}
+
+.line-tab__pagination-refresh {
+  width: var(--line-tab-pagination-icon-size);
+  height: var(--line-tab-pagination-icon-size);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: var(--line-tab-pagination-icon-bg);
+  cursor: pointer;
+  padding: 0;
+  border-radius: 2px;
+  transition: background 0.12s;
+}
+.line-tab__pagination-refresh:hover {
+  background: #DCDCDC;
+}
+.line-tab__pagination-refresh img {
+  width: 14px;
+  height: 14px;
+}
+
+/* ── Dashboard Settings (optional boolean, right-aligned) ── */
+.line-tab__dashboard-settings {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  flex-shrink: 0;
+  margin-left: auto;
+  height: var(--line-tab-height);
+}
+
+.line-tab__dashboard-settings-separator {
+  width: 1px;
+  height: 100%;
+  background: var(--line-tab-border-bottom);
+  flex-shrink: 0;
+}
+
+.line-tab__dashboard-settings-btn {
+  width: 40px;
+  height: var(--line-tab-height);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: #FFFFFF;
+  cursor: pointer;
+  padding: 0;
+  border-bottom: 1px solid var(--line-tab-border-bottom);
+  transition: background 0.12s;
+}
+.line-tab__dashboard-settings-btn:hover {
+  background: #F5F5F5;
+}
+.line-tab__dashboard-settings-btn img {
+  width: 14px;
+  height: 14px;
+}
+
+/* ============================================================
+   VARIANT 4: Dashboard Line Tab with Right Actions (h=40)
+   Tabs left-aligned, right side has dynamic action items:
+     Calendar input (280×26, Figma "Textbox without Label" Calendar:Daily)
+     + icon buttons (24×24, Lucide CDN icons)
+     + separator (1px #E9E9E9 full height)
+     + settings gear (40×40)
+   Gap: 8px between all action items for breathing space.
+   MANDATORY for all dashboard pages — no compromise.
+   ============================================================ */
+.line-tab__actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  margin-left: auto;
+  height: var(--line-tab-height);
+}
+
+/* ── Calendar / Date Range Input (from Figma Textbox w/o Label, Calendar:Daily) ── */
+.cal-input {
+  display: flex;
+  align-items: center;
+  width: 280px;
+  height: 26px;
+  border: 1px solid #C4C4C4;
+  border-radius: 2px;
+  background: #fff;
+  cursor: pointer;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.cal-input:hover { border-color: #ABABAB; }
+.cal-input__text {
+  flex: 1;
+  padding: 3px 0 3px 12px;
+  font-size: 12px;
+  color: #000;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-family: inherit;
+  line-height: 1;
+}
+.cal-input__icon {
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #F5F5F5;
+  border-left: 1px solid #C4C4C4;
+  flex-shrink: 0;
+  border-radius: 0 2px 2px 0;
+}
+.cal-input__icon img { width: 14px; height: 14px; }
+
+/* ── Icon buttons (24×24, for Lucide icons or SVG assets) ── */
+.line-tab__action-icon-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  border-radius: 2px;
+  color: #626262;
+}
+.line-tab__action-icon-btn:hover { background: #F5F5F5; color: #000; }
+.line-tab__action-icon-btn img { width: 14px; height: 14px; }
+
+/* ── Vertical separator ── */
+.line-tab__action-separator {
+  width: 1px;
+  height: 100%;
+  background: #E9E9E9;
+  flex-shrink: 0;
+}
+
+/* ── Settings gear button (rightmost, 40×40) ── */
+.line-tab__action-settings {
+  width: 40px;
+  height: var(--line-tab-height);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  border-bottom: 1px solid #E9E9E9;
+  color: #626262;
+}
+.line-tab__action-settings:hover { background: #F5F5F5; color: #000; }
+.line-tab__action-settings img { width: 14px; height: 14px; }
+
+/* ── Legacy support: action-btn (dropdown-style button) ── */
+.line-tab__action-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 24px;
+  padding: 5px 8px;
+  font-family: inherit;
+  font-size: 12px;
+  color: #000;
+  background: #fff;
+  border: 1px solid #DCDCDC;
+  border-radius: 2px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.line-tab__action-btn:hover { background: #F5F5F5; }
+.line-tab__action-btn img { width: 12px; height: 12px; }
+.line-tab__action-btn .line-tab__action-chevron { width: 8px; height: 8px; }
+
+/* ── Line Tab body (content panels below tabs) ── */
+.line-tab__body {
+  display: flex;
+  flex-direction: column;
+}
+
+.line-tab__content {
+  display: none;
+}
+
+.line-tab__content--active {
+  display: block;
+}
+
+/* ============================================================
+   QUICKLINK VARIANT
+   h=32, gap=4, pill-style tabs with bg fills
+   ============================================================ */
+.line-tab--quicklink {
+  height: var(--quicklink-height);
+}
+
+.line-tab--quicklink .line-tab__headers {
+  gap: var(--quicklink-gap);
+}
+
+.line-tab--quicklink .line-tab__header {
+  height: var(--quicklink-height);
+  padding: var(--quicklink-item-padding);
+  border-bottom: none;
+  margin-bottom: 0;
+  border-radius: 0;
+  gap: 4px;
+}
+
+.line-tab--quicklink .line-tab__header--selected {
+  background: var(--quicklink-selected-bg);
+  color: var(--line-tab-unselected-color);
+}
+
+.line-tab--quicklink .line-tab__header--active {
+  background: var(--quicklink-active-bg);
+  color: var(--line-tab-unselected-color);
+}
+
+.line-tab--quicklink .line-tab__header--unselected {
+  background: transparent;
+}
+
+.line-tab--quicklink .line-tab__header--unselected:hover {
+  background: var(--quicklink-hover-bg);
+}
+
+/* Arrow icon in quicklink tabs */
+.line-tab__arrow {
+  width: 10px;
+  height: 10px;
+  flex-shrink: 0;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 1024px) {
+  .line-tab__headers {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .line-tab__headers::-webkit-scrollbar {
+    display: none;
+  }
+  .line-tab__header {
+    flex-shrink: 0;
+  }
+}
+
+@media (max-width: 767px) {
+  .line-tab__header {
+    padding: 10px 6px;
+    font-size: 11px;
+  }
+  .line-tab__pagination {
+    gap: 4px;
+  }
+}

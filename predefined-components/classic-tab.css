@@ -1,0 +1,72 @@
+/* ============================================================
+   CLASSIC TAB — Captured from Figma MCP
+   Header tabs: h=32, spacing=-1px
+   Selected: white bg | Unselected: #E9E9E9
+   Stroke: #DCDCDC | Tab padding: 9px 16px
+   Body: white bg, border except top, strokeTop=0
+   ============================================================ */
+
+.classic-tab {
+  display: flex;
+  flex-direction: column;
+  padding-top: var(--classic-tab-padding-top);
+}
+
+/* Tab headers row */
+.classic-tab__headers {
+  display: flex;
+  align-items: flex-end;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.classic-tab__header {
+  display: flex;
+  align-items: center;
+  height: var(--classic-tab-header-height);
+  padding: var(--classic-tab-padding);
+  font-size: var(--classic-tab-font-size);
+  font-family: inherit;
+  font-weight: 400;
+  border: 1px solid var(--classic-tab-stroke);
+  cursor: pointer;
+  white-space: nowrap;
+  margin-right: var(--classic-tab-header-spacing);
+  border-radius: 0;
+  line-height: 1;
+}
+
+.classic-tab__header--selected {
+  background: var(--classic-tab-selected-bg);
+  color: var(--header-title-color);
+  border-bottom-color: var(--classic-tab-selected-bg);
+}
+
+.classic-tab__header--unselected {
+  background: var(--classic-tab-unselected-bg);
+  color: var(--header-title-color);
+}
+.classic-tab__header--unselected:hover {
+  background: #e0e0e0;
+}
+
+/* Filler (fills remaining space in header row) */
+.classic-tab__filler {
+  flex: 1;
+  height: var(--classic-tab-header-height);
+  background: var(--classic-tab-unselected-bg);
+  border: 1px solid var(--classic-tab-stroke);
+}
+
+/* Tab body — hugs content (matches Figma primaryAxisSizingMode: AUTO) */
+.classic-tab__body {
+  background: var(--classic-tab-body-bg);
+  border: 1px solid var(--classic-tab-stroke);
+  border-top: none;
+}
+
+/* Inner content — matches Figma "Classic Tab table outer frame" padding: 16 all sides */
+.classic-tab__content {
+  padding: var(--classic-tab-body-padding);
+}

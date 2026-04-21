@@ -1,0 +1,443 @@
+/* ============================================================
+   DRAWER — Predefined CSS Component
+   Captured from Figma Elegant Components 1.0 via MCP
+   Frame: Drawer (650:42237)
+
+   STRUCTURE:
+     Backdrop (rgba(52,63,79,0.4)) + Panel (slides from right)
+     Panel = MainContent + RHS Menu (optional 30px icon strip)
+     MainContent = TopBar (40px) + Body (scrollable) + Footer (60px)
+
+   WIDTH MODES (set via .drawer--{size} modifier on .drawer):
+     .drawer--sm     →  480px  (forms, simple dialogs)
+     .drawer--md     →  600px  (medium content)
+     .drawer--lg     →  800px  (large content, tables)
+     .drawer--xl     →  1000px (extra-large)
+     .drawer--auto   →  fit-content (dynamic, max 90vw)
+     .drawer--grid6  →  948px  (fixed, 6-col card grid + 24px body padding)
+     .drawer--grid5  →  796px  (fixed, 5-col card grid + 24px body padding)
+     .drawer--grid4  →  644px  (fixed, 4-col card grid + 24px body padding)
+     (default)       →  480px
+
+   FIGMA SPEC:
+     TopBar:   h=40, pad 16px LR / 11px TB, gap 16, white bg, 1px bottom border #E9E9E9
+     Body:     flex:1, pad 16px all, scrollable, white bg
+     Footer:   h=60, pad 0 16 16 16, gap 16, top divider 1px #E9E9E9
+     Buttons:  Save (h=28 #2C66DD r=2) / Cancel (h=28 #FFF border #DCDCDC r=2)
+     RHS Menu: w=30, white bg, icon buttons 24x24 with 14x14 icons
+     Backdrop: rgba(52,63,79,0.4)
+     Shadow:   -10px 0 10px rgba(0,0,0,0.16)
+   ============================================================ */
+
+.drawer-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(52, 63, 79, 0.4);
+  z-index: 900;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
+}
+.drawer-backdrop--active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+  z-index: 910;
+  transform: translateX(100%);
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.drawer--open {
+  transform: translateX(0);
+}
+
+.drawer__main {
+  width: 480px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: #FFFFFF;
+  box-shadow: -10px 0 10px rgba(0, 0, 0, 0.16);
+}
+.drawer--sm .drawer__main  { width: 480px; }
+.drawer--md .drawer__main  { width: 600px; }
+.drawer--lg .drawer__main  { width: 800px; }
+.drawer--xl .drawer__main  { width: 1000px; }
+.drawer--auto .drawer__main { width: fit-content; min-width: 360px; max-width: 90vw; }
+.drawer--grid6 .drawer__main { width: 948px; }
+.drawer--grid5 .drawer__main { width: 796px; }
+.drawer--grid4 .drawer__main { width: 644px; }
+
+/* ── Top bar (h=40) ── */
+.drawer__top {
+  height: 40px;
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  background: #FFFFFF;
+  border-bottom: 1px solid #E9E9E9;
+  gap: 16px;
+}
+.drawer__title-area {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+}
+.drawer__title {
+  font-family: var(--font-family, 'Zoho Puvi', sans-serif);
+  font-size: 16px;
+  font-weight: 600;
+  color: #000000;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.drawer__subtitle {
+  font-family: var(--font-family, 'Zoho Puvi', sans-serif);
+  font-size: 16px;
+  font-weight: 400;
+  color: #626262;
+  white-space: nowrap;
+}
+.drawer__title-sep {
+  font-size: 16px;
+  color: #6A6B6C;
+}
+.drawer__top-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+.drawer__top-link {
+  font-family: var(--font-family, 'Zoho Puvi', sans-serif);
+  font-size: 12px;
+  color: #006AFF;
+  text-decoration: none;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+}
+.drawer__top-link:hover { text-decoration: underline; }
+.drawer__close {
+  width: 14px;
+  height: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  color: #626262;
+  flex-shrink: 0;
+}
+.drawer__close:hover { color: #000000; }
+.drawer__close svg { width: 14px; height: 14px; }
+
+/* ── Body (scrollable) ── */
+.drawer__body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  background: #FFFFFF;
+}
+
+/* ── Footer (h=60) ── */
+.drawer__footer {
+  min-height: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 16px 16px 16px;
+  background: #FFFFFF;
+  gap: 16px;
+}
+.drawer__footer-line {
+  width: 100%;
+  height: 1px;
+  background: #E9E9E9;
+  flex-shrink: 0;
+}
+.drawer__footer-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.drawer__footer-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.drawer__footer-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.drawer__btn-save {
+  height: 28px;
+  padding: 0 16px;
+  font-family: var(--font-family, 'Zoho Puvi', sans-serif);
+  font-size: 12px;
+  font-weight: 500;
+  color: #FFFFFF;
+  background: #2C66DD;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+}
+.drawer__btn-save:hover { background: #1A56CC; }
+.drawer__btn-cancel {
+  height: 28px;
+  padding: 0 16px;
+  font-family: var(--font-family, 'Zoho Puvi', sans-serif);
+  font-size: 12px;
+  font-weight: 500;
+  color: #000000;
+  background: #FFFFFF;
+  border: 1px solid #DCDCDC;
+  border-radius: 2px;
+  cursor: pointer;
+}
+.drawer__btn-cancel:hover { background: #F5F5F5; }
+.drawer__footer-link {
+  font-family: var(--font-family, 'Zoho Puvi', sans-serif);
+  font-size: 12px;
+  color: #006AFF;
+  text-decoration: none;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+}
+.drawer__footer-link:hover { text-decoration: underline; }
+
+/* ── RHS Menu (optional 30px icon strip) ── */
+.drawer__rhs {
+  width: 30px;
+  height: 100%;
+  background: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  flex-shrink: 0;
+}
+.drawer__rhs-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+.drawer__rhs-btn {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: none;
+  cursor: pointer;
+  border-radius: 2px;
+  color: #626262;
+}
+.drawer__rhs-btn:hover { background: #F5F5F5; color: #000000; }
+.drawer__rhs-btn img { width: 14px; height: 14px; }
+.drawer__rhs-avatar {
+  width: 30px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #313642;
+}
+.drawer__rhs-avatar img { width: 20px; height: 20px; }
+
+/* ── Card Grid (reusable tile picker inside drawer body) ── */
+.drawer-grid {
+  display: grid;
+  gap: 12px;
+  justify-content: start;
+}
+.drawer-grid--6col { grid-template-columns: repeat(6, 140px); }
+.drawer-grid--5col { grid-template-columns: repeat(5, 140px); }
+.drawer-grid--4col { grid-template-columns: repeat(4, 140px); }
+
+.drawer-card {
+  width: 140px;
+  height: 140px;
+  background: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+  position: relative;
+  border: 1px solid #E9E9E9;
+  border-radius: 4px;
+}
+.drawer-card:hover { background: #EAF0FC; border-color: #DCDCDC; }
+.drawer-card.selected { background: #EAF0FC; border-color: #2C66DD; border-width: 2px; }
+.drawer-card--muted {
+  background: #F5F5F5;
+  border-color: #E9E9E9;
+}
+.drawer-card--muted:hover { background: #EBEBEB; }
+.drawer-card__icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.drawer-card__icon img { width: 48px; height: 48px; object-fit: contain; }
+.drawer-card__label {
+  font-family: var(--font-family, 'Zoho Puvi', sans-serif);
+  font-size: 12px;
+  font-weight: 600;
+  color: #000;
+  text-align: center;
+  line-height: 1.3;
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.drawer-card__badge {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  background: #198019;
+  color: #fff;
+  font-family: var(--font-family, 'Zoho Puvi', sans-serif);
+  font-size: 9px;
+  font-weight: 700;
+  padding: 1px 5px;
+  border-radius: 2px;
+  letter-spacing: 0.3px;
+}
+
+/* ── Card Detail Panel (expandable info below grid) ── */
+.drawer-detail {
+  background: #fff;
+  border: 1px solid #E9E9E9;
+  border-radius: 4px;
+  padding: 24px;
+  margin-top: 16px;
+  display: none;
+  width: 100%;
+  box-sizing: border-box;
+}
+.drawer-detail.visible { display: flex; gap: 24px; }
+.drawer-detail__info {
+  flex: 1;
+  min-width: 0;
+  overflow-y: auto;
+  max-height: 260px;
+}
+.drawer-detail__title {
+  font-family: var(--font-family, 'Zoho Puvi', sans-serif);
+  font-size: 14px;
+  font-weight: 600;
+  color: #000;
+  margin-bottom: 16px;
+}
+.drawer-detail__field {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.drawer-detail__field label {
+  font-family: var(--font-family, 'Zoho Puvi', sans-serif);
+  font-size: 12px;
+  font-weight: 500;
+  color: #000;
+  white-space: nowrap;
+  min-width: 70px;
+}
+.drawer-detail__field span {
+  font-family: var(--font-family, 'Zoho Puvi', sans-serif);
+  font-size: 12px;
+  color: #000;
+  padding: 4px 8px;
+  border: 1px solid #E9E9E9;
+  border-radius: 2px;
+  background: #F9F9F9;
+  flex: 1;
+  min-width: 0;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+}
+.drawer-detail__desc {
+  font-family: var(--font-family, 'Zoho Puvi', sans-serif);
+  font-size: 12px;
+  color: #626262;
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+.drawer-detail__charts {
+  list-style: disc;
+  padding-left: 20px;
+  margin: 0;
+}
+.drawer-detail__charts li {
+  font-family: var(--font-family, 'Zoho Puvi', sans-serif);
+  font-size: 12px;
+  color: #000;
+  line-height: 1.8;
+}
+.drawer-detail__preview {
+  width: 300px;
+  height: 180px;
+  flex-shrink: 0;
+  background: #F5F5F5;
+  border: 1px solid #E9E9E9;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.drawer-detail__preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.drawer-detail__no-preview {
+  font-family: var(--font-family, 'Zoho Puvi', sans-serif);
+  font-size: 11px;
+  color: #939393;
+}
+
+@media (max-width: 1024px) {
+  .drawer-grid--6col { grid-template-columns: repeat(3, 140px); }
+  .drawer-grid--5col { grid-template-columns: repeat(3, 140px); }
+  .drawer-detail.visible { flex-direction: column; }
+  .drawer-detail__preview { width: 100%; height: 140px; }
+}
+@media (max-width: 768px) {
+  .drawer__main { width: 100vw !important; }
+  .drawer__rhs  { display: none; }
+  .drawer-grid--6col,
+  .drawer-grid--5col,
+  .drawer-grid--4col { grid-template-columns: repeat(2, 140px); }
+}
