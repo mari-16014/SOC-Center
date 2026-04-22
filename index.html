@@ -2187,176 +2187,118 @@
               <div class="card" style="padding:0;overflow:hidden;">
 
                 <!-- Header -->
-                <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 20px;border-bottom:1px solid #F0F0F0;">
-                  <div style="display:flex;align-items:center;gap:8px;">
-                    <img src="./assets/icons/icon-tile-zia.svg" alt="" style="width:18px;height:18px;" />
-                    <span style="font-size:13px;font-weight:600;color:#1a1a1a;">Autonomous Investigation</span>
-                    <span style="font-size:11px;background:#EAF2FF;color:#1565C0;padding:2px 8px;border-radius:20px;font-weight:500;">Active</span>
-                  </div>
-                  <div style="display:flex;align-items:center;gap:8px;">
-                    <span style="font-size:11px;color:#888;">This hour's capacity</span>
-                    <div style="width:120px;height:6px;background:#EBEBEB;border-radius:4px;overflow:hidden;">
-                      <div style="width:80%;height:100%;background:linear-gradient(90deg,#1565C0,#42A5F5);border-radius:4px;"></div>
-                    </div>
-                    <span style="font-size:11px;font-weight:600;color:#1565C0;">8 / 10</span>
-                  </div>
+                <div style="display:flex;align-items:center;gap:10px;padding:14px 20px;border-bottom:1px solid #F0F0F0;">
+                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="1" y="1" width="6" height="6" rx="1" fill="#2C66DD"/><rect x="11" y="1" width="6" height="6" rx="1" fill="#2C66DD"/><rect x="1" y="11" width="6" height="6" rx="1" fill="#2C66DD"/><rect x="11" y="11" width="6" height="6" rx="1" fill="#2C66DD"/></svg>
+                  <span style="font-size:13px;font-weight:700;color:#1a1a1a;">Autonomous Investigation</span>
+                  <span style="display:inline-flex;align-items:center;gap:4px;font-size:11px;background:#EAF2FF;color:#1565C0;padding:2px 10px;border-radius:20px;font-weight:600;">
+                    <svg width="10" height="10" viewBox="0 0 12 12" fill="#1565C0"><polygon points="6,0 7.5,4.5 12,4.5 8.5,7.5 10,12 6,9 2,12 3.5,7.5 0,4.5 4.5,4.5"/></svg>
+                    AI Investigated
+                  </span>
                 </div>
 
                 <!-- Stats Row -->
-                <div style="display:grid;grid-template-columns:repeat(5,1fr);border-bottom:1px solid #F0F0F0;">
-                  <div style="padding:14px 18px;border-right:1px solid #F0F0F0;">
-                    <div style="font-size:11px;color:#888;margin-bottom:4px;">Investigated This Hour</div>
-                    <div style="font-size:22px;font-weight:700;color:#1a1a1a;line-height:1;">8</div>
-                    <div style="font-size:11px;color:#888;margin-top:2px;">of 10 / hr limit</div>
+                <div style="display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid #F0F0F0;">
+                  <!-- Investigated This Hour -->
+                  <div style="padding:16px 20px;border-right:1px solid #F0F0F0;">
+                    <div style="font-size:11px;color:#888;margin-bottom:6px;">Investigated This Hour</div>
+                    <div style="font-size:26px;font-weight:700;color:#1a1a1a;line-height:1;">8/10</div>
+                    <div style="margin-top:8px;height:5px;background:#E8EEF8;border-radius:4px;overflow:hidden;">
+                      <div style="width:80%;height:100%;background:linear-gradient(90deg,#1565C0,#42A5F5);border-radius:4px;"></div>
+                    </div>
                   </div>
-                  <div style="padding:14px 18px;border-right:1px solid #F0F0F0;">
-                    <div style="font-size:11px;color:#888;margin-bottom:4px;">Queued</div>
-                    <div style="font-size:22px;font-weight:700;color:#D97706;line-height:1;">2</div>
-                    <div style="font-size:11px;color:#888;margin-top:2px;">pending alerts</div>
+                  <!-- Queued -->
+                  <div style="padding:16px 20px;border-right:1px solid #F0F0F0;">
+                    <div style="font-size:11px;color:#888;margin-bottom:6px;">Queued</div>
+                    <div style="font-size:26px;font-weight:700;color:#1a1a1a;line-height:1;">02 <span style="font-size:13px;font-weight:500;color:#888;">Pending Alerts</span></div>
+                    <div style="margin-top:8px;height:5px;background:#FEF3CD;border-radius:4px;overflow:hidden;">
+                      <div style="width:20%;height:100%;background:#D97706;border-radius:4px;"></div>
+                    </div>
                   </div>
-                  <div style="padding:14px 18px;border-right:1px solid #F0F0F0;">
-                    <div style="font-size:11px;color:#888;margin-bottom:4px;">Avg. Investigation Time</div>
-                    <div style="font-size:22px;font-weight:700;color:#1a1a1a;line-height:1;">4m <span style="font-size:14px;">32s</span></div>
-                    <div style="font-size:11px;color:#198019;margin-top:2px;">↓ 18% faster than manual</div>
+                  <!-- Avg. Investigation Time -->
+                  <div style="padding:16px 20px;border-right:1px solid #F0F0F0;">
+                    <div style="font-size:11px;color:#888;margin-bottom:6px;">Avg. Investigation Time</div>
+                    <div style="font-size:26px;font-weight:700;color:#1a1a1a;line-height:1;">4m <span style="font-size:16px;font-weight:700;">21s</span></div>
+                    <div style="font-size:11px;color:#198019;margin-top:8px;">↑ 18% faster than manual</div>
                   </div>
-                  <div style="padding:14px 18px;border-right:1px solid #F0F0F0;">
-                    <div style="font-size:11px;color:#888;margin-bottom:4px;">True Positive Rate</div>
-                    <div style="font-size:22px;font-weight:700;color:#198019;line-height:1;">78%</div>
-                    <div style="font-size:11px;color:#888;margin-top:2px;">AI confidence: High</div>
-                  </div>
-                  <div style="padding:14px 18px;">
-                    <div style="font-size:11px;color:#888;margin-bottom:4px;">Alerts Saved</div>
-                    <div style="font-size:22px;font-weight:700;color:#1565C0;line-height:1;">~3h</div>
-                    <div style="font-size:11px;color:#888;margin-top:2px;">analyst time today</div>
+                  <!-- True Positive Rate -->
+                  <div style="padding:16px 20px;">
+                    <div style="font-size:11px;color:#888;margin-bottom:6px;">True Positive Rate</div>
+                    <div style="display:flex;align-items:center;gap:6px;">
+                      <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#198019" stroke-width="1.5"/><polyline points="6,10 9,13 14,7" stroke="#198019" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                      <span style="font-size:26px;font-weight:700;color:#1a1a1a;line-height:1;">78%</span>
+                    </div>
+                    <div style="font-size:11px;color:#888;margin-top:8px;">AI Confidence Score</div>
                   </div>
                 </div>
 
-                <!-- Body: 3-column layout -->
-                <div style="display:grid;grid-template-columns:1.2fr 1fr 1fr;border-bottom:1px solid #F0F0F0;">
+                <!-- Body: 2-column layout -->
+                <div style="display:grid;grid-template-columns:1fr 1fr;">
 
                   <!-- Recently Investigated -->
-                  <div style="padding:14px 18px;border-right:1px solid #F0F0F0;">
-                    <div style="font-size:11px;font-weight:600;color:#888;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px;">Recently Investigated</div>
-                    <div style="display:flex;flex-direction:column;gap:9px;">
-                      <div style="display:flex;align-items:center;gap:8px;">
-                        <div style="width:6px;height:6px;border-radius:50%;background:#E42527;flex-shrink:0;"></div>
-                        <span style="font-size:12px;color:#1a1a1a;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Malicious URL — santhosh-8457</span>
-                        <span style="font-size:11px;background:#FEECEC;color:#CC1515;padding:2px 7px;border-radius:4px;font-weight:500;flex-shrink:0;">TP</span>
+                  <div style="padding:18px 20px;border-right:1px solid #F0F0F0;">
+                    <div style="font-size:12px;font-weight:600;color:#1a1a1a;margin-bottom:14px;">Recently Investigated</div>
+                    <div style="display:flex;flex-direction:column;gap:0;">
+                      <!-- Row 1 -->
+                      <div style="display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid #F5F5F5;">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7.5" fill="#FEECEC" stroke="#E42527" stroke-width="0.5"/><line x1="5" y1="5" x2="11" y2="11" stroke="#E42527" stroke-width="1.8" stroke-linecap="round"/><line x1="11" y1="5" x2="5" y2="11" stroke="#E42527" stroke-width="1.8" stroke-linecap="round"/></svg>
+                        <span style="font-size:12px;color:#1a1a1a;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">Malicious URL — santhosh-8457</span>
+                        <span style="font-size:11px;background:#E6F4EA;color:#1A8C43;padding:2px 9px;border-radius:4px;font-weight:500;flex-shrink:0;">True Positive</span>
                       </div>
-                      <div style="display:flex;align-items:center;gap:8px;">
-                        <div style="width:6px;height:6px;border-radius:50%;background:#FF8E36;flex-shrink:0;"></div>
-                        <span style="font-size:12px;color:#1a1a1a;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Brute Force — DAE-WIN2019-1</span>
-                        <span style="font-size:11px;background:#FEECEC;color:#CC1515;padding:2px 7px;border-radius:4px;font-weight:500;flex-shrink:0;">TP</span>
+                      <!-- Row 2 -->
+                      <div style="display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid #F5F5F5;">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7.5" fill="#FFF3E8" stroke="#FF8E36" stroke-width="0.5"/><line x1="8" y1="4.5" x2="8" y2="9" stroke="#FF8E36" stroke-width="1.8" stroke-linecap="round"/><circle cx="8" cy="11" r="0.9" fill="#FF8E36"/></svg>
+                        <span style="font-size:12px;color:#1a1a1a;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">Brute Force — DAE-WIN2019-1</span>
+                        <span style="font-size:11px;background:#E6F4EA;color:#1A8C43;padding:2px 9px;border-radius:4px;font-weight:500;flex-shrink:0;">True Positive</span>
                       </div>
-                      <div style="display:flex;align-items:center;gap:8px;">
-                        <div style="width:6px;height:6px;border-radius:50%;background:#FFC600;flex-shrink:0;"></div>
-                        <span style="font-size:12px;color:#1a1a1a;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">PowerShell exec — admin-7721</span>
-                        <span style="font-size:11px;background:#F0FFF4;color:#198019;padding:2px 7px;border-radius:4px;font-weight:500;flex-shrink:0;">FP</span>
+                      <!-- Row 3 -->
+                      <div style="display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid #F5F5F5;">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1.5L15 14H1Z" fill="#FFF8E0" stroke="#DFA500" stroke-width="0.5" stroke-linejoin="round"/><line x1="8" y1="6.5" x2="8" y2="10" stroke="#DFA500" stroke-width="1.8" stroke-linecap="round"/><circle cx="8" cy="12" r="0.8" fill="#DFA500"/></svg>
+                        <span style="font-size:12px;color:#1a1a1a;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">PowerShell exec — admin-7721</span>
+                        <span style="font-size:11px;background:#FEECEC;color:#CC1515;padding:2px 9px;border-radius:4px;font-weight:500;flex-shrink:0;">False Positive</span>
                       </div>
-                      <div style="display:flex;align-items:center;gap:8px;">
-                        <div style="width:6px;height:6px;border-radius:50%;background:#E42527;flex-shrink:0;"></div>
-                        <span style="font-size:12px;color:#1a1a1a;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">RDP lateral move — 10.18.2.45</span>
-                        <span style="font-size:11px;background:#FFF8E6;color:#D97706;padding:2px 7px;border-radius:4px;font-weight:500;flex-shrink:0;">INC</span>
-                      </div>
-                      <div style="display:flex;align-items:center;gap:8px;">
-                        <div style="width:6px;height:6px;border-radius:50%;background:#9B4D6A;flex-shrink:0;"></div>
-                        <span style="font-size:12px;color:#1a1a1a;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Account lockout — zohocorp\john</span>
-                        <span style="font-size:11px;background:#F5EDFF;color:#7B2FA8;padding:2px 7px;border-radius:4px;font-weight:500;flex-shrink:0;">BTP</span>
+                      <!-- Row 4 -->
+                      <div style="display:flex;align-items:center;gap:10px;padding:9px 0;">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7.5" fill="#FEECEC" stroke="#E42527" stroke-width="0.5"/><line x1="5" y1="5" x2="11" y2="11" stroke="#E42527" stroke-width="1.8" stroke-linecap="round"/><line x1="11" y1="5" x2="5" y2="11" stroke="#E42527" stroke-width="1.8" stroke-linecap="round"/></svg>
+                        <span style="font-size:12px;color:#1a1a1a;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">RDP lateral move — 10.18.2.45</span>
+                        <span style="font-size:11px;background:#FFF5E0;color:#B45C00;padding:2px 9px;border-radius:4px;font-weight:500;flex-shrink:0;">Benign True Positive</span>
                       </div>
                     </div>
                   </div>
 
-                  <!-- Verdict Distribution -->
-                  <div style="padding:14px 18px;border-right:1px solid #F0F0F0;">
-                    <div style="font-size:11px;font-weight:600;color:#888;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:12px;">Verdict Distribution</div>
-                    <div style="display:flex;flex-direction:column;gap:9px;">
-                      <div>
-                        <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
-                          <span style="font-size:12px;color:#1a1a1a;">True Positive</span>
-                          <span style="font-size:12px;font-weight:600;color:#E42527;">5 &nbsp;<span style="color:#888;font-weight:400;">62%</span></span>
-                        </div>
-                        <div style="height:5px;background:#F0F0F0;border-radius:3px;overflow:hidden;"><div style="width:62%;height:100%;background:#E42527;border-radius:3px;"></div></div>
-                      </div>
-                      <div>
-                        <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
-                          <span style="font-size:12px;color:#1a1a1a;">False Positive</span>
-                          <span style="font-size:12px;font-weight:600;color:#198019;">1 &nbsp;<span style="color:#888;font-weight:400;">12%</span></span>
-                        </div>
-                        <div style="height:5px;background:#F0F0F0;border-radius:3px;overflow:hidden;"><div style="width:12%;height:100%;background:#198019;border-radius:3px;"></div></div>
-                      </div>
-                      <div>
-                        <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
-                          <span style="font-size:12px;color:#1a1a1a;">Benign True Positive</span>
-                          <span style="font-size:12px;font-weight:600;color:#7B2FA8;">1 &nbsp;<span style="color:#888;font-weight:400;">13%</span></span>
-                        </div>
-                        <div style="height:5px;background:#F0F0F0;border-radius:3px;overflow:hidden;"><div style="width:13%;height:100%;background:#7B2FA8;border-radius:3px;"></div></div>
-                      </div>
-                      <div>
-                        <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
-                          <span style="font-size:12px;color:#1a1a1a;">Inconclusive</span>
-                          <span style="font-size:12px;font-weight:600;color:#D97706;">1 &nbsp;<span style="color:#888;font-weight:400;">13%</span></span>
-                        </div>
-                        <div style="height:5px;background:#F0F0F0;border-radius:3px;overflow:hidden;"><div style="width:13%;height:100%;background:#D97706;border-radius:3px;"></div></div>
-                      </div>
-                    </div>
-                    <div style="margin-top:12px;padding-top:10px;border-top:1px solid #F5F5F5;display:flex;gap:6px;align-items:center;">
-                      <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" fill="#EAF2FF"/><path d="M8 5v4m0 2h.01" stroke="#1565C0" stroke-width="1.5" stroke-linecap="round"/></svg>
-                      <span style="font-size:11px;color:#888;">Based on 8 investigations this hour</span>
+                  <!-- Verdict Distribution (Donut chart) -->
+                  <div style="padding:18px 20px;display:flex;flex-direction:column;">
+                    <div style="font-size:12px;font-weight:600;color:#1a1a1a;margin-bottom:10px;">Verdict Distribution</div>
+                    <div style="display:flex;align-items:center;justify-content:center;flex:1;gap:18px;">
+                      <!-- SVG Donut -->
+                      <svg viewBox="0 0 160 160" width="150" height="150" style="flex-shrink:0;">
+                        <!-- True Positive (green) ~40%: -90° → 54° -->
+                        <path d="M80 22 A58 58 0 0 1 128.9 108.5 L104.8 95.1 A30 30 0 0 0 80 50 Z" fill="#27AE60"/>
+                        <!-- False Positive (red) ~27%: 54° → 151.2° -->
+                        <path d="M128.9 108.5 A58 58 0 0 1 30.0 110.8 L54.0 97.4 A30 30 0 0 0 104.8 95.1 Z" fill="#E42527"/>
+                        <!-- Benign True Positive (brown) ~22%: 151.2° → 230.4° -->
+                        <path d="M30.0 110.8 A58 58 0 0 1 43.1 31.2 L61.9 48.1 A30 30 0 0 0 54.0 97.4 Z" fill="#8B6914"/>
+                        <!-- Inconclusive (light gray) ~11%: 230.4° → 270° -->
+                        <path d="M43.1 31.2 A58 58 0 0 1 80 22 L80 50 A30 30 0 0 0 61.9 48.1 Z" fill="#BDBDBD"/>
+                        <!-- Center hole white -->
+                        <circle cx="80" cy="80" r="28" fill="#fff"/>
+                        <!-- Labels with lines -->
+                        <!-- False Positive label (top right) -->
+                        <line x1="118" y1="52" x2="134" y2="38" stroke="#BDBDBD" stroke-width="1"/>
+                        <text x="136" y="36" font-size="9" fill="#555" font-family="sans-serif">False Positive</text>
+                        <!-- True Positive label (right) -->
+                        <line x1="136" y1="88" x2="148" y2="88" stroke="#BDBDBD" stroke-width="1"/>
+                        <text x="150" y="91" font-size="9" fill="#555" font-family="sans-serif">True Positive</text>
+                        <!-- Benign TP label (bottom left) -->
+                        <line x1="38" y1="108" x2="8" y2="120" stroke="#BDBDBD" stroke-width="1"/>
+                        <text x="2" y="134" font-size="9" fill="#555" font-family="sans-serif">Benign True</text>
+                        <text x="4" y="144" font-size="9" fill="#555" font-family="sans-serif">Positive</text>
+                        <!-- Inconclusive label (bottom) -->
+                        <line x1="62" y1="36" x2="52" y2="18" stroke="#BDBDBD" stroke-width="1"/>
+                        <text x="10" y="16" font-size="9" fill="#555" font-family="sans-serif">Inconclusive</text>
+                      </svg>
                     </div>
                   </div>
 
-                  <!-- Triage Queue + Severity Breakdown -->
-                  <div style="padding:14px 18px;">
-                    <div style="font-size:11px;font-weight:600;color:#888;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:12px;">Triage Queue</div>
-                    <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:14px;">
-                      <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 10px;background:#FFF8F8;border:1px solid #FDDCDC;border-radius:6px;">
-                        <div>
-                          <div style="font-size:11px;font-weight:600;color:#CC1515;">Critical · Score 94</div>
-                          <div style="font-size:11px;color:#888;margin-top:1px;">SSH Brute Force — 192.168.4.12</div>
-                        </div>
-                        <span style="font-size:10px;background:#FEECEC;color:#CC1515;padding:2px 6px;border-radius:4px;font-weight:600;">#1</span>
-                      </div>
-                      <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 10px;background:#FFFCF0;border:1px solid #FDEEA0;border-radius:6px;">
-                        <div>
-                          <div style="font-size:11px;font-weight:600;color:#D97706;">High · Score 81</div>
-                          <div style="font-size:11px;color:#888;margin-top:1px;">Privilege escalation — admin-9032</div>
-                        </div>
-                        <span style="font-size:10px;background:#FFF8E6;color:#D97706;padding:2px 6px;border-radius:4px;font-weight:600;">#2</span>
-                      </div>
-                    </div>
-                    <div style="font-size:11px;font-weight:600;color:#888;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px;">Investigated by Severity</div>
-                    <div style="display:flex;gap:6px;align-items:flex-end;height:40px;">
-                      <div style="display:flex;flex-direction:column;align-items:center;gap:3px;flex:1;">
-                        <div style="width:100%;background:#E42527;border-radius:3px 3px 0 0;height:34px;"></div>
-                        <span style="font-size:10px;color:#888;">Crit</span>
-                      </div>
-                      <div style="display:flex;flex-direction:column;align-items:center;gap:3px;flex:1;">
-                        <div style="width:100%;background:#FF8E36;border-radius:3px 3px 0 0;height:22px;"></div>
-                        <span style="font-size:10px;color:#888;">High</span>
-                      </div>
-                      <div style="display:flex;flex-direction:column;align-items:center;gap:3px;flex:1;">
-                        <div style="width:100%;background:#FFC600;border-radius:3px 3px 0 0;height:12px;"></div>
-                        <span style="font-size:10px;color:#888;">Med</span>
-                      </div>
-                      <div style="display:flex;flex-direction:column;align-items:center;gap:3px;flex:1;">
-                        <div style="width:100%;background:#78C87A;border-radius:3px 3px 0 0;height:6px;"></div>
-                        <span style="font-size:10px;color:#888;">Low</span>
-                      </div>
-                    </div>
-                    <div style="display:flex;gap:6px;margin-top:4px;">
-                      <span style="font-size:10px;color:#888;flex:1;text-align:center;">4</span>
-                      <span style="font-size:10px;color:#888;flex:1;text-align:center;">2</span>
-                      <span style="font-size:10px;color:#888;flex:1;text-align:center;">1</span>
-                      <span style="font-size:10px;color:#888;flex:1;text-align:center;">1</span>
-                    </div>
-                  </div>
-
-                </div>
-
-                <!-- Footer -->
-                <div style="padding:10px 20px;display:flex;align-items:center;justify-content:space-between;background:#FAFAFA;">
-                  <span style="font-size:11px;color:#888;">Hourly limit resets at the <strong style="color:#1a1a1a;">top of each hour</strong></span>
-                  <a href="#" style="font-size:12px;color:#1565C0;text-decoration:none;font-weight:500;">View All Investigations →</a>
                 </div>
 
               </div>
