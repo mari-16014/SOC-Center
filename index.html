@@ -2152,6 +2152,7 @@
                   <div class="ov-dd-item" data-view="incident-ov">Incident Overview</div>
                   <div class="ov-dd-item" data-view="ciso-ov">CISO</div>
                   <div class="ov-dd-item" data-view="my-alert-ov">My Alert Overview</div>
+                  <div class="ov-dd-item" data-view="autoinv-ov">Autonomous Investigation</div>
                 </div>
               </div>
 
@@ -2380,6 +2381,181 @@
           </div>
 
           <!-- MY ALERT OVERVIEW -->
+          <!-- ═══ AUTONOMOUS INVESTIGATION DASHBOARD ═══ -->
+          <div class="view-panel" id="th-panel-autoinv-ov">
+            <div class="dash">
+
+              <!-- Row 1: 4 stat tiles -->
+              <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:var(--dash-gap);">
+
+                <!-- Total Alert Count -->
+                <div class="card" style="padding:16px 20px;">
+                  <div style="font-size:11px;color:#888;font-weight:500;margin-bottom:8px;">Total Alert Count</div>
+                  <div style="display:flex;align-items:flex-end;justify-content:space-between;">
+                    <div>
+                      <div style="display:flex;align-items:center;gap:8px;">
+                        <span style="font-size:26px;font-weight:700;color:#1a1a1a;">18,452</span>
+                        <span style="font-size:11px;color:#E53E3E;background:#FFF5F5;padding:2px 6px;border-radius:3px;font-weight:600;">▲ 30%</span>
+                      </div>
+                      <div style="margin-top:8px;height:40px;" id="ai-sparkline-total"></div>
+                    </div>
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+                  </div>
+                </div>
+
+                <!-- Investigations Running -->
+                <div class="card" style="padding:16px 20px;">
+                  <div style="font-size:11px;color:#888;font-weight:500;margin-bottom:8px;">Investigations Running</div>
+                  <div style="display:flex;align-items:flex-start;justify-content:space-between;">
+                    <div style="flex:1;">
+                      <div style="display:flex;align-items:center;gap:8px;">
+                        <span style="font-size:26px;font-weight:700;color:#1a1a1a;">247</span>
+                        <span style="font-size:11px;color:#38A169;background:#F0FFF4;padding:2px 6px;border-radius:3px;font-weight:600;">▲ 10%</span>
+                      </div>
+                      <div style="font-size:11px;color:#888;margin-top:4px;">Queue utilisation</div>
+                      <div style="margin-top:5px;height:6px;background:#EAEAEA;border-radius:3px;overflow:hidden;max-width:140px;"><div style="height:100%;width:81.7%;background:linear-gradient(90deg,#7B3FE4,#4F8EF7);border-radius:3px;"></div></div>
+                      <div style="font-size:11px;color:#555;margin-top:3px;">81.7%</div>
+                      <div style="display:flex;align-items:center;gap:10px;margin-top:8px;font-size:11px;">
+                        <span style="display:flex;align-items:center;gap:3px;"><span style="width:8px;height:8px;border-radius:50%;background:#E53E3E;display:inline-block;"></span><b>560</b> Alert Severity</span>
+                        <span style="display:flex;align-items:center;gap:3px;"><span style="width:8px;height:8px;border-radius:50%;background:#DD6B20;display:inline-block;"></span><b>220</b></span>
+                        <span style="display:flex;align-items:center;gap:3px;"><span style="width:8px;height:8px;border-radius:50%;background:#ECC94B;display:inline-block;"></span><b>59</b></span>
+                      </div>
+                    </div>
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+                  </div>
+                </div>
+
+                <!-- Created Incidents -->
+                <div class="card" style="padding:16px 20px;">
+                  <div style="font-size:11px;color:#888;font-weight:500;margin-bottom:8px;">Created Incidents</div>
+                  <div style="display:flex;align-items:flex-start;justify-content:space-between;">
+                    <div style="flex:1;">
+                      <div style="display:flex;align-items:center;gap:8px;">
+                        <span style="font-size:26px;font-weight:700;color:#1a1a1a;">247</span>
+                        <span style="font-size:11px;color:#38A169;background:#F0FFF4;padding:2px 6px;border-radius:3px;font-weight:600;">▲ 10%</span>
+                        <span style="font-size:11px;background:#EEF3FF;color:#4F8EF7;padding:2px 6px;border-radius:3px;">13%</span>
+                      </div>
+                      <div style="font-size:11px;color:#888;margin-top:3px;">From 2,891 completed investigations</div>
+                      <div style="display:flex;align-items:center;gap:14px;margin-top:8px;font-size:11px;">
+                        <span style="display:flex;align-items:center;gap:4px;color:#4F8EF7;"><span style="width:8px;height:8px;border-radius:50%;background:#4F8EF7;display:inline-block;"></span>Open <b>218</b></span>
+                        <span style="display:flex;align-items:center;gap:4px;color:#38A169;"><span style="width:8px;height:8px;border-radius:50%;background:#38A169;display:inline-block;"></span>Resolved <b>168</b></span>
+                        <span style="display:flex;align-items:center;gap:4px;color:#ECC94B;"><span style="width:8px;height:8px;border-radius:50%;background:#ECC94B;display:inline-block;"></span>Escalated <b>41</b></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Investigation MTTI -->
+                <div class="card" style="padding:16px 20px;">
+                  <div style="font-size:11px;color:#888;font-weight:500;margin-bottom:8px;">Investigation MTTI</div>
+                  <div style="display:flex;align-items:flex-start;justify-content:space-between;">
+                    <div style="flex:1;">
+                      <div style="display:flex;align-items:center;gap:8px;">
+                        <span style="font-size:22px;font-weight:700;color:#1a1a1a;">4 mins 22s</span>
+                        <span style="font-size:11px;color:#38A169;background:#F0FFF4;padding:2px 6px;border-radius:3px;font-weight:600;">▲ 10%</span>
+                      </div>
+                      <div style="font-size:11px;color:#888;margin-top:3px;">From 247 completed investigations</div>
+                      <div style="margin-top:10px;height:38px;" id="ai-sparkline-mtti"></div>
+                    </div>
+                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Row 2: AI Confidence Level + Investigation Pipeline -->
+              <div style="display:grid;grid-template-columns:1fr 2fr;gap:var(--dash-gap);">
+                <div class="card card--scroll">
+                  <div class="card__header"><span class="card__title">AI Confidence Level</span></div>
+                  <div class="card__body"><div class="card__chart" id="ai-chart-confidence" style="min-height:220px;"></div></div>
+                </div>
+                <div class="card" style="padding:20px 24px;">
+                  <div style="font-size:13px;font-weight:600;color:#1a1a1a;margin-bottom:4px;">Investigation Pipeline <span style="font-size:11px;font-weight:400;color:#888;">(Last 7 Days)</span></div>
+                  <div style="display:flex;align-items:center;justify-content:center;gap:0;margin-top:24px;flex-wrap:wrap;">
+                    <!-- Step 1 -->
+                    <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+                      <div style="width:72px;height:72px;border-radius:50%;border:3px solid #E53E3E;display:flex;align-items:center;justify-content:center;background:#fff;">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#E53E3E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                      </div>
+                      <span style="font-size:10px;background:#E53E3E;color:#fff;padding:2px 10px;border-radius:3px;white-space:nowrap;">Alerts Received</span>
+                      <span style="font-size:15px;font-weight:700;color:#1a1a1a;">2.5M</span>
+                    </div>
+                    <!-- Arrow + % -->
+                    <div style="display:flex;flex-direction:column;align-items:center;padding:0 10px;margin-bottom:36px;">
+                      <span style="font-size:11px;color:#555;margin-bottom:3px;">7.3%</span>
+                      <div style="width:60px;height:2px;background:#DCDCDC;position:relative;"><div style="position:absolute;right:-5px;top:-4px;border-left:8px solid #DCDCDC;border-top:5px solid transparent;border-bottom:5px solid transparent;"></div></div>
+                    </div>
+                    <!-- Step 2 -->
+                    <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+                      <div style="width:72px;height:72px;border-radius:50%;border:3px solid #7B3FE4;display:flex;align-items:center;justify-content:center;background:#fff;">
+                        <img src="./assets/icons/icon-tile-zia.svg" alt="" style="width:30px;height:30px;" />
+                      </div>
+                      <span style="font-size:10px;background:#7B3FE4;color:#fff;padding:2px 10px;border-radius:3px;white-space:nowrap;">Auto Investigated</span>
+                      <span style="font-size:15px;font-weight:700;color:#1a1a1a;">2.5L</span>
+                    </div>
+                    <!-- Arrow -->
+                    <div style="display:flex;flex-direction:column;align-items:center;padding:0 10px;margin-bottom:36px;">
+                      <span style="font-size:11px;color:#555;margin-bottom:3px;">7.3%</span>
+                      <div style="width:60px;height:2px;background:#DCDCDC;position:relative;"><div style="position:absolute;right:-5px;top:-4px;border-left:8px solid #DCDCDC;border-top:5px solid transparent;border-bottom:5px solid transparent;"></div></div>
+                    </div>
+                    <!-- Step 3 -->
+                    <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+                      <div style="width:72px;height:72px;border-radius:50%;border:3px solid #DD6B20;display:flex;align-items:center;justify-content:center;background:#fff;">
+                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#DD6B20" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                      </div>
+                      <span style="font-size:10px;background:#DD6B20;color:#fff;padding:2px 10px;border-radius:3px;white-space:nowrap;">Incidents Created</span>
+                      <span style="font-size:15px;font-weight:700;color:#1a1a1a;">5.3K</span>
+                    </div>
+                    <!-- Arrow -->
+                    <div style="display:flex;flex-direction:column;align-items:center;padding:0 10px;margin-bottom:36px;">
+                      <span style="font-size:11px;color:#555;margin-bottom:3px;">95.2%</span>
+                      <div style="width:60px;height:2px;background:#DCDCDC;position:relative;"><div style="position:absolute;right:-5px;top:-4px;border-left:8px solid #DCDCDC;border-top:5px solid transparent;border-bottom:5px solid transparent;"></div></div>
+                    </div>
+                    <!-- Step 4 -->
+                    <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+                      <div style="width:72px;height:72px;border-radius:50%;border:3px solid #B7791F;display:flex;align-items:center;justify-content:center;background:#fff;">
+                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#B7791F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                      </div>
+                      <span style="font-size:10px;background:#B7791F;color:#fff;padding:2px 10px;border-radius:3px;white-space:nowrap;">Ticket Created</span>
+                      <span style="font-size:15px;font-weight:700;color:#1a1a1a;">250</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Row 3: Top 5 Attack Types + Zia-Created Incidents status + Investigation Verdict -->
+              <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:var(--dash-gap);">
+                <div class="card card--scroll">
+                  <div class="card__header"><span class="card__title">Top 5 Attack Types</span></div>
+                  <div class="card__body"><div class="card__chart" id="ai-chart-attack-types" style="min-height:220px;"></div></div>
+                </div>
+                <div class="card card--scroll">
+                  <div class="card__header"><span class="card__title">Zia-Created Incidents status</span></div>
+                  <div class="card__body"><div class="card__chart" id="ai-chart-incidents-status" style="min-height:220px;"></div></div>
+                </div>
+                <div class="card card--scroll">
+                  <div class="card__header"><span class="card__title">Investigation Verdict</span></div>
+                  <div class="card__body"><div class="card__chart" id="ai-chart-verdict" style="min-height:220px;"></div></div>
+                </div>
+              </div>
+
+              <!-- Row 4: Top Investigated Usernames + SLA Violated & Escalated Trend -->
+              <div style="display:grid;grid-template-columns:1fr 2fr;gap:var(--dash-gap);">
+                <div class="card">
+                  <div class="card__header"><span class="card__title">Top Investigated Usernames</span></div>
+                  <div class="card__body" style="padding:12px 16px;">
+                    <!-- username rows -->
+                    <div id="ai-usernames-list"></div>
+                  </div>
+                </div>
+                <div class="card card--scroll">
+                  <div class="card__header"><span class="card__title">Auto Investigated SLA Violated &amp; Escalated Alerts Trend</span></div>
+                  <div class="card__body"><div class="card__chart" id="ai-chart-sla-trend" style="min-height:220px;"></div></div>
+                </div>
+              </div>
+
+            </div>
+          </div><!-- /th-panel-autoinv-ov -->
+
           <div class="view-panel" id="th-panel-my-alert-ov">
             <div class="dash">
               <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--dash-gap);">
@@ -7625,6 +7801,156 @@ function initThreatHub() {
       ]
     });
   }
+
+  /* ═══ AUTONOMOUS INVESTIGATION DASHBOARD CHARTS ═══ */
+  (function() {
+    /* -- Sparkline: Total Alert Count -- */
+    (function(){
+      var dom = document.getElementById('ai-sparkline-total');
+      if (!dom) return;
+      var ex = echarts.getInstanceByDom(dom); if (ex) ex.dispose();
+      var c = echarts.init(dom, 'elegant');
+      c.setOption({ grid:{top:0,bottom:0,left:0,right:0}, xAxis:{show:false,type:'category',data:['a','b','c','d','e','f','g','h']}, yAxis:{show:false,type:'value'}, series:[{type:'line',smooth:true,data:[120,180,140,200,160,220,190,240],symbol:'none',lineStyle:{color:'#E53E3E',width:1.5},areaStyle:{color:'rgba(229,62,62,0.10)'}}] });
+    })();
+    /* -- Sparkline: MTTI -- */
+    (function(){
+      var dom = document.getElementById('ai-sparkline-mtti');
+      if (!dom) return;
+      var ex = echarts.getInstanceByDom(dom); if (ex) ex.dispose();
+      var c = echarts.init(dom, 'elegant');
+      c.setOption({ grid:{top:0,bottom:0,left:0,right:0}, xAxis:{show:false,type:'category',data:['a','b','c','d','e','f','g','h']}, yAxis:{show:false,type:'value'}, series:[{type:'line',smooth:true,data:[5,4.5,6,4,5.5,4,3.5,4.2],symbol:'none',lineStyle:{color:'#38A169',width:1.5},areaStyle:{color:'rgba(56,161,105,0.10)'}}] });
+    })();
+    /* -- AI Confidence Level (grouped bar) -- */
+    (function(){
+      var dom = document.getElementById('ai-chart-confidence');
+      if (!dom) return;
+      var ex = echarts.getInstanceByDom(dom); if (ex) ex.dispose();
+      var c = echarts.init(dom, 'elegant');
+      c.setOption({
+        tooltip:{trigger:'axis',backgroundColor:'#fff',borderColor:'#DCDCDC',borderWidth:1,textStyle:{fontSize:11,color:'#333'}},
+        legend:{bottom:0,left:'center',icon:'circle',itemWidth:8,itemHeight:8,textStyle:{fontSize:11,color:'#626262'}},
+        grid:{top:20,bottom:40,left:50,right:10},
+        xAxis:{type:'category',data:['8-12','8-12','8-12','8-12'],axisLabel:{fontSize:10,color:'#888'}},
+        yAxis:{type:'value',name:'Count',nameTextStyle:{fontSize:10,color:'#888'},axisLabel:{fontSize:10,color:'#888'},splitLine:{lineStyle:{color:'#F0F0F0'}}},
+        series:[
+          {name:'False Positive',type:'bar',stack:'s',data:[400,600,1000,900],itemStyle:{color:'#B7791F'},barMaxWidth:24},
+          {name:'True Positive',type:'bar',stack:'s',data:[500,900,1200,1100],itemStyle:{color:'#DD6B20'},barMaxWidth:24}
+        ]
+      });
+    })();
+    /* -- Top 5 Attack Types (radar) -- */
+    (function(){
+      var dom = document.getElementById('ai-chart-attack-types');
+      if (!dom) return;
+      var ex = echarts.getInstanceByDom(dom); if (ex) ex.dispose();
+      var c = echarts.init(dom, 'elegant');
+      c.setOption({
+        tooltip:{trigger:'item',backgroundColor:'#fff',borderColor:'#DCDCDC',borderWidth:1,textStyle:{fontSize:11}},
+        legend:{bottom:0,left:'center',icon:'circle',itemWidth:8,itemHeight:8,textStyle:{fontSize:10,color:'#626262'},data:['True Positive','False Positive']},
+        radar:{center:['50%','48%'],radius:'62%',indicator:[
+          {name:'Brute Force\n802 alerts',max:900},
+          {name:'Ransomware\n654 alerts',max:900},
+          {name:'C2 Beacon\n501 alerts',max:900},
+          {name:'Lateral Mvmt\n389 alerts',max:900},
+          {name:'Data Exfil\n802 alerts',max:900}
+        ],axisName:{fontSize:9,color:'#555'},splitLine:{lineStyle:{color:'#E9E9E9'}},splitArea:{show:false}},
+        series:[
+          {type:'radar',name:'True Positive',data:[{value:[700,500,400,300,600],name:'True Positive'}],lineStyle:{color:'#DD6B20',width:1.5},itemStyle:{color:'#DD6B20'},areaStyle:{color:'rgba(221,107,32,0.25)'}},
+          {type:'radar',name:'False Positive',data:[{value:[400,300,250,200,350],name:'False Positive'}],lineStyle:{color:'#B7791F',width:1.5},itemStyle:{color:'#B7791F'},areaStyle:{color:'rgba(183,121,31,0.15)'}}
+        ]
+      });
+    })();
+    /* -- Zia-Created Incidents Status (nightingale rose) -- */
+    (function(){
+      var dom = document.getElementById('ai-chart-incidents-status');
+      if (!dom) return;
+      var ex = echarts.getInstanceByDom(dom); if (ex) ex.dispose();
+      var c = echarts.init(dom, 'elegant');
+      var months = ['10Sep','15Sep','20Sep','25Sep','30Sep','35Sep','40Sep','45Sep','50Sep','55Sep','1Oct','5Oct'];
+      var openColors = months.map(function(_,i){ return i%3===0?'#E53E3E':i%3===1?'#DD6B20':'#ECC94B'; });
+      c.setOption({
+        tooltip:{trigger:'item',backgroundColor:'#fff',borderColor:'#DCDCDC',borderWidth:1,textStyle:{fontSize:11}},
+        legend:{bottom:0,left:'center',icon:'circle',itemWidth:8,itemHeight:8,textStyle:{fontSize:10},data:[{name:'Open',icon:'circle'},{name:'Inprogress',icon:'circle'},{name:'Closed',icon:'circle'}]},
+        polar:{radius:['25%','75%']},
+        angleAxis:{type:'category',data:months.concat(months).concat(months),axisLabel:{fontSize:8,color:'#888'},startAngle:90},
+        radiusAxis:{type:'value',axisLabel:{show:false},axisLine:{show:false},splitLine:{show:false}},
+        series:[
+          {type:'bar',name:'Open',coordinateSystem:'polar',data:[120,100,140,110,130,90,120,100,80,70,110,90],itemStyle:{color:'#E53E3E'},barMaxWidth:12},
+          {type:'bar',name:'Inprogress',coordinateSystem:'polar',data:[80,90,70,100,60,80,90,70,60,80,70,60],itemStyle:{color:'#DD6B20'},barMaxWidth:12},
+          {type:'bar',name:'Closed',coordinateSystem:'polar',data:[60,70,50,80,70,60,50,80,70,60,50,70],itemStyle:{color:'#ECC94B'},barMaxWidth:12}
+        ]
+      });
+    })();
+    /* -- Investigation Verdict (concentric donut) -- */
+    (function(){
+      var dom = document.getElementById('ai-chart-verdict');
+      if (!dom) return;
+      var ex = echarts.getInstanceByDom(dom); if (ex) ex.dispose();
+      var c = echarts.init(dom, 'elegant');
+      c.setOption({
+        tooltip:{trigger:'item',backgroundColor:'#fff',borderColor:'#DCDCDC',borderWidth:1,textStyle:{fontSize:11}},
+        legend:{orient:'vertical',right:10,top:'center',icon:'circle',itemWidth:8,itemHeight:8,textStyle:{fontSize:11,color:'#626262'},formatter:function(n){return n==='True Positive'?'250  True Positive':'50  False Positive';}},
+        series:[
+          {name:'Outer',type:'pie',radius:['55%','75%'],center:['40%','52%'],label:{show:false},data:[
+            {value:250,name:'True Positive',itemStyle:{color:'#DD6B20'}},
+            {value:50,name:'False Positive',itemStyle:{color:'#E53E3E'}}
+          ]},
+          {name:'Inner',type:'pie',radius:['30%','50%'],center:['40%','52%'],label:{show:false},data:[
+            {value:200,name:'True Positive',itemStyle:{color:'#ECC94B'}},
+            {value:100,name:'False Positive',itemStyle:{color:'#C05621'}}
+          ]}
+        ]
+      });
+    })();
+    /* -- Top Investigated Usernames -- */
+    (function(){
+      var el = document.getElementById('ai-usernames-list');
+      if (!el) return;
+      var users = [
+        {name:'Syed-5336',count:500,fp:81},
+        {name:'Syed-5336',count:500,fp:53},
+        {name:'Syed-5336',count:300,fp:95},
+        {name:'Syed-5336',count:125,fp:20},
+        {name:'Syed-5336',count:95,fp:40}
+      ];
+      var maxCount = 500;
+      el.innerHTML = users.map(function(u){
+        var pct = Math.round(u.count/maxCount*100);
+        return '<div style="margin-bottom:14px;">' +
+          '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;">' +
+            '<span style="font-size:12px;color:#333;">' + u.name + '</span>' +
+            '<span style="display:flex;align-items:center;gap:6px;font-size:12px;font-weight:700;color:#1a1a1a;">' + u.count +
+              '<span style="font-size:11px;color:#E53E3E;background:#FFF5F5;padding:1px 6px;border-radius:3px;font-weight:600;">' + u.fp + '</span>' +
+            '</span>' +
+          '</div>' +
+          '<div style="height:6px;background:#EAEAEA;border-radius:3px;overflow:hidden;">' +
+            '<div style="height:100%;width:' + pct + '%;background:linear-gradient(90deg,#DD6B20,#E53E3E);border-radius:3px;"></div>' +
+          '</div>' +
+        '</div>';
+      }).join('');
+    })();
+    /* -- SLA Violated & Escalated Trend (area) -- */
+    (function(){
+      var dom = document.getElementById('ai-chart-sla-trend');
+      if (!dom) return;
+      var ex = echarts.getInstanceByDom(dom); if (ex) ex.dispose();
+      var c = echarts.init(dom, 'elegant');
+      var labels = [];
+      for(var d=1;d<=24;d++) labels.push('Nov '+d);
+      function rnd(base,variance){ return labels.map(function(){return Math.round(base + (Math.random()-0.5)*variance*2);}); }
+      c.setOption({
+        tooltip:{trigger:'axis',backgroundColor:'#fff',borderColor:'#DCDCDC',borderWidth:1,textStyle:{fontSize:11}},
+        legend:{bottom:0,left:'center',icon:'circle',itemWidth:8,itemHeight:8,textStyle:{fontSize:11,color:'#626262'}},
+        grid:{top:20,bottom:50,left:40,right:20},
+        xAxis:{type:'category',data:labels,axisLabel:{fontSize:9,color:'#888',interval:2},axisLine:{lineStyle:{color:'#E9E9E9'}}},
+        yAxis:{type:'value',name:'Incident Count',nameTextStyle:{fontSize:10,color:'#888'},min:0,max:1300,axisLabel:{fontSize:10,color:'#888'},splitLine:{lineStyle:{color:'#F0F0F0'}}},
+        series:[
+          {name:'SLA Violated Alerts',type:'line',smooth:true,data:rnd(400,200),symbol:'none',lineStyle:{color:'#E53E3E',width:1.5},areaStyle:{color:'rgba(229,62,62,0.25)'}},
+          {name:'Escalated Alerts',type:'line',smooth:true,data:rnd(200,100),symbol:'none',lineStyle:{color:'#ECC94B',width:1.5},areaStyle:{color:'rgba(236,201,75,0.25)'}}
+        ]
+      });
+    })();
+  })();
 
   /* ═══ EXPLORER — Sidebar Widgets + Thread Table ═══ */
   var thThreadInit = false;
