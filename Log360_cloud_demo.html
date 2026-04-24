@@ -2154,6 +2154,7 @@
                   <div class="ov-dd-item" data-view="my-alert-ov">My Alert Overview</div>
                   <div class="ov-dd-item" data-view="autoinv-ov">Autonomous Investigation</div>
                   <div class="ov-dd-item" data-view="command-center">Command Center</div>
+                  <div class="ov-dd-item" data-view="command-center1">Command Center 1</div>
                 </div>
               </div>
 
@@ -2778,6 +2779,222 @@
             </div>
 
           </div><!-- /th-panel-command-center -->
+
+          <!-- ═══ COMMAND CENTER 1 — White Theme ═══ -->
+          <div class="view-panel" id="th-panel-command-center1" style="background:#F5F7FA;min-height:100%;">
+            <style>
+              #th-panel-command-center1 { color:#1A2332; }
+              .cc1-header { display:flex;align-items:center;justify-content:space-between;padding:14px 24px;border-bottom:1px solid rgba(0,0,0,0.08);background:#fff; }
+              .cc1-title { font-size:15px;font-weight:700;color:#1A2332;display:flex;align-items:center;gap:8px; }
+              .cc1-badge { font-size:10px;background:rgba(0,102,204,0.1);color:#0066CC;border:1px solid rgba(0,102,204,0.3);padding:2px 10px;border-radius:20px;font-weight:600; }
+              .cc1-time-pill { display:flex;align-items:center;gap:6px;font-size:12px;color:#0066CC;border:1px solid rgba(0,102,204,0.3);border-radius:20px;padding:4px 14px;cursor:pointer;background:#fff; }
+              .cc1-flow-section { display:flex;align-items:stretch;min-height:400px;border-bottom:1px solid rgba(0,0,0,0.07);background:#fff; }
+              .cc1-sources { width:230px;flex-shrink:0;padding:24px 0 24px 24px;display:flex;flex-direction:column;justify-content:center;gap:10px;border-right:1px solid rgba(0,0,0,0.07); }
+              .cc1-source-row { display:flex;align-items:center;gap:10px;font-size:11px;color:#6B7A8D; }
+              .cc1-source-dot { width:10px;height:10px;border-radius:50%;flex-shrink:0; }
+              .cc1-source-name { flex:1; }
+              .cc1-source-count { color:#1A2332;font-weight:700;font-size:12px; }
+              .cc1-center { flex:1;display:flex;align-items:center;justify-content:center;position:relative;background:#fff; }
+              .cc1-right { width:320px;flex-shrink:0;display:flex;flex-direction:column;justify-content:center;padding:24px;gap:20px;border-left:1px solid rgba(0,0,0,0.07);background:#fff; }
+              .cc1-flow-circle { border-radius:50%;background:rgba(0,102,204,0.1);border:2px solid #0066CC;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,102,204,0.15); }
+              .cc1-flow-circle--amber { background:rgba(217,119,6,0.08);border-color:#D97706;box-shadow:0 2px 8px rgba(217,119,6,0.1); }
+              .cc1-bottom-strip { display:flex;align-items:stretch;border-top:1px solid rgba(0,0,0,0.07);background:#fff; }
+              .cc1-strip-cell { flex:1;padding:14px 22px;border-right:1px solid rgba(0,0,0,0.07);display:flex;flex-direction:column;gap:4px; }
+              .cc1-strip-cell:last-child { border-right:none; }
+              .cc1-strip-label { font-size:11px;color:#6B7A8D;font-weight:500; }
+              .cc1-strip-val { font-size:20px;font-weight:800;color:#1A2332;display:flex;align-items:center;gap:8px; }
+              .cc1-strip-spark { flex:1;height:28px;min-width:80px; }
+              .cc1-metrics-section { display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:0;border-top:1px solid rgba(0,0,0,0.07);min-height:260px;background:#fff; }
+              .cc1-metric-cell { padding:22px;border-right:1px solid rgba(0,0,0,0.07);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px; }
+              .cc1-metric-cell:last-child { border-right:none; }
+              .cc1-metric-label { font-size:11px;color:#6B7A8D;font-weight:500;text-align:center;line-height:1.4; }
+              .cc1-gauge-wrap { width:180px;height:110px; }
+            </style>
+
+            <!-- Header -->
+            <div class="cc1-header">
+              <div class="cc1-title">
+                <img src="./assets/icons/icon-tile-zia.svg" alt="" style="width:20px;height:20px;filter:hue-rotate(200deg) saturate(1.2);" />
+                Log360 AI &mdash; Autonomous SOC Command Center
+                <span class="cc1-badge">LAST 7 DAYS</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:10px;">
+                <span style="font-size:11px;color:#6B7A8D;">Data is up to date</span>
+                <div class="cc1-time-pill">
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#0066CC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  Last 7 Days
+                </div>
+              </div>
+            </div>
+
+            <!-- Flow section -->
+            <div class="cc1-flow-section">
+              <!-- Data Sources -->
+              <div class="cc1-sources">
+                <div style="font-size:10px;color:#6B7A8D;font-weight:600;margin-bottom:6px;letter-spacing:0.5px;">LOG SOURCES CONNECTED</div>
+                <div class="cc1-source-row"><div class="cc1-source-dot" style="background:#0066CC;"></div><span class="cc1-source-name">Windows / AD Logs</span><span class="cc1-source-count">21</span></div>
+                <div class="cc1-source-row"><div class="cc1-source-dot" style="background:#3B82F6;"></div><span class="cc1-source-name">Network Devices</span><span class="cc1-source-count">18</span></div>
+                <div class="cc1-source-row"><div class="cc1-source-dot" style="background:#DC2626;"></div><span class="cc1-source-name">Cloud (AWS / Azure)</span><span class="cc1-source-count">15</span></div>
+                <div class="cc1-source-row"><div class="cc1-source-dot" style="background:#7C3AED;"></div><span class="cc1-source-name">Identity &amp; IAM</span><span class="cc1-source-count">12</span></div>
+                <div class="cc1-source-row"><div class="cc1-source-dot" style="background:#059669;"></div><span class="cc1-source-name">Web / Proxy</span><span class="cc1-source-count">9</span></div>
+                <div class="cc1-source-row"><div class="cc1-source-dot" style="background:#D97706;"></div><span class="cc1-source-name">Email Gateway</span><span class="cc1-source-count">7</span></div>
+                <div class="cc1-source-row"><div class="cc1-source-dot" style="background:#DB2777;"></div><span class="cc1-source-name">UEBA / DLP</span><span class="cc1-source-count">5</span></div>
+                <div style="margin-top:10px;height:1px;background:rgba(0,0,0,0.07);"></div>
+                <div style="font-size:10px;color:#6B7A8D;margin-top:8px;">Total Alert Count</div>
+                <div style="font-size:22px;font-weight:800;color:#1A2332;">18,452 <span style="font-size:12px;color:#DC2626;font-weight:600;">&#9650; 30%</span></div>
+                <div style="display:flex;gap:12px;margin-top:4px;font-size:10px;">
+                  <span style="color:#DC2626;">&#9679; 560 Crit</span>
+                  <span style="color:#EA580C;">&#9679; 220 High</span>
+                  <span style="color:#CA8A04;">&#9679; 59 Med</span>
+                </div>
+              </div>
+
+              <!-- Center: Sankey + donut -->
+              <div class="cc1-center">
+                <svg style="position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none;" preserveAspectRatio="none" viewBox="0 0 400 420">
+                  <defs>
+                    <linearGradient id="cc1-grad1" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#0066CC" stop-opacity="0.35"/><stop offset="100%" stop-color="#0066CC" stop-opacity="0.03"/></linearGradient>
+                    <linearGradient id="cc1-grad2" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#3B82F6" stop-opacity="0.35"/><stop offset="100%" stop-color="#3B82F6" stop-opacity="0.03"/></linearGradient>
+                    <linearGradient id="cc1-grad3" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#DC2626" stop-opacity="0.3"/><stop offset="100%" stop-color="#DC2626" stop-opacity="0.03"/></linearGradient>
+                    <linearGradient id="cc1-grad4" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#7C3AED" stop-opacity="0.3"/><stop offset="100%" stop-color="#7C3AED" stop-opacity="0.03"/></linearGradient>
+                    <linearGradient id="cc1-grad5" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#059669" stop-opacity="0.28"/><stop offset="100%" stop-color="#059669" stop-opacity="0.03"/></linearGradient>
+                    <linearGradient id="cc1-grad6" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#D97706" stop-opacity="0.28"/><stop offset="100%" stop-color="#D97706" stop-opacity="0.03"/></linearGradient>
+                    <linearGradient id="cc1-grad7" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#DB2777" stop-opacity="0.25"/><stop offset="100%" stop-color="#DB2777" stop-opacity="0.03"/></linearGradient>
+                  </defs>
+                  <path d="M0,70 C120,70 160,210 200,210" stroke="url(#cc1-grad1)" stroke-width="13" fill="none" opacity="0.9"/>
+                  <path d="M0,120 C120,120 160,210 200,210" stroke="url(#cc1-grad2)" stroke-width="11" fill="none" opacity="0.9"/>
+                  <path d="M0,168 C110,168 155,210 200,210" stroke="url(#cc1-grad3)" stroke-width="9" fill="none" opacity="0.9"/>
+                  <path d="M0,215 C100,215 150,210 200,210" stroke="url(#cc1-grad4)" stroke-width="8" fill="none" opacity="0.9"/>
+                  <path d="M0,262 C100,262 150,210 200,210" stroke="url(#cc1-grad5)" stroke-width="7" fill="none" opacity="0.8"/>
+                  <path d="M0,308 C110,308 155,210 200,210" stroke="url(#cc1-grad6)" stroke-width="6" fill="none" opacity="0.8"/>
+                  <path d="M0,354 C120,354 160,210 200,210" stroke="url(#cc1-grad7)" stroke-width="5" fill="none" opacity="0.7"/>
+                  <path d="M200,210 C250,210 310,145 400,130" stroke="rgba(0,102,204,0.25)" stroke-width="16" fill="none"/>
+                  <path d="M200,210 C250,210 310,280 400,295" stroke="rgba(217,119,6,0.2)" stroke-width="10" fill="none"/>
+                </svg>
+                <div style="position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;">
+                  <div id="cc1-donut-issues" style="width:220px;height:220px;"></div>
+                  <div style="display:flex;gap:28px;margin-top:-4px;">
+                    <div style="text-align:center;">
+                      <div style="font-size:20px;font-weight:800;color:#1A2332;">18,452</div>
+                      <div style="font-size:10px;color:#6B7A8D;">Total Alerts</div>
+                    </div>
+                    <div style="width:1px;background:rgba(0,0,0,0.1);"></div>
+                    <div style="text-align:center;">
+                      <div style="font-size:20px;font-weight:800;color:#0066CC;">2,891</div>
+                      <div style="font-size:10px;color:#6B7A8D;">Auto-Investigated</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Right outcomes -->
+              <div class="cc1-right">
+                <div style="display:flex;align-items:flex-start;gap:14px;">
+                  <div style="display:flex;flex-direction:column;align-items:center;padding-top:4px;">
+                    <div class="cc1-flow-circle" style="width:44px;height:44px;">
+                      <img src="./assets/icons/icon-tile-zia.svg" alt="" style="width:22px;height:22px;filter:hue-rotate(200deg) saturate(1.2);" />
+                    </div>
+                    <div style="width:2px;height:24px;background:linear-gradient(to bottom,rgba(0,102,204,0.4),rgba(0,102,204,0.03));"></div>
+                  </div>
+                  <div style="flex:1;">
+                    <div style="font-size:11px;color:#0066CC;font-weight:600;margin-bottom:2px;">ZIA AUTO-INVESTIGATED</div>
+                    <div style="font-size:28px;font-weight:800;color:#1A2332;line-height:1;">2,891</div>
+                    <div style="font-size:10px;color:#6B7A8D;margin-top:2px;">of 2,891 completed (81.7% queue)</div>
+                    <div style="display:flex;gap:14px;margin-top:8px;font-size:11px;">
+                      <span style="color:#059669;">&#10003; 250 True Positive</span>
+                      <span style="color:#DC2626;">&#10007; 50 False Positive</span>
+                    </div>
+                  </div>
+                </div>
+                <div style="height:1px;background:rgba(0,0,0,0.07);"></div>
+                <div style="display:flex;align-items:flex-start;gap:14px;">
+                  <div style="display:flex;flex-direction:column;align-items:center;padding-top:4px;">
+                    <div class="cc1-flow-circle cc1-flow-circle--amber" style="width:44px;height:44px;">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#D97706" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                    </div>
+                    <div style="width:2px;height:24px;background:linear-gradient(to bottom,rgba(217,119,6,0.4),rgba(217,119,6,0.03));"></div>
+                  </div>
+                  <div style="flex:1;">
+                    <div style="font-size:11px;color:#D97706;font-weight:600;margin-bottom:2px;">INCIDENTS CREATED</div>
+                    <div style="font-size:28px;font-weight:800;color:#1A2332;line-height:1;">247</div>
+                    <div style="font-size:10px;color:#6B7A8D;margin-top:2px;">from 2,891 completed investigations (13%)</div>
+                    <div style="display:flex;gap:14px;margin-top:8px;font-size:11px;">
+                      <span style="color:#2563EB;">&#9679; Open 218</span>
+                      <span style="color:#059669;">&#9679; Resolved 168</span>
+                      <span style="color:#CA8A04;">&#9679; Escalated 41</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div><!-- /cc1-flow-section -->
+
+            <!-- Bottom strip -->
+            <div class="cc1-bottom-strip">
+              <div class="cc1-strip-cell">
+                <div class="cc1-strip-label">Total Alerts (7 Days)</div>
+                <div class="cc1-strip-val">18,452<div class="cc1-strip-spark" id="cc1-spark-events"></div></div>
+                <div style="font-size:10px;color:#DC2626;">&#9650; 30% vs prior period</div>
+              </div>
+              <div class="cc1-strip-cell">
+                <div class="cc1-strip-label">Auto-Investigated by ZIA</div>
+                <div class="cc1-strip-val">2,891<div class="cc1-strip-spark" id="cc1-spark-data"></div></div>
+                <div style="font-size:10px;color:#059669;">15.7% of total alerts triaged</div>
+              </div>
+              <div class="cc1-strip-cell">
+                <div class="cc1-strip-label">Open Incidents</div>
+                <div class="cc1-strip-val">218</div>
+                <div style="display:flex;gap:8px;font-size:10px;margin-top:2px;">
+                  <span style="color:#DC2626;">&#9679; Critical 560</span>
+                  <span style="color:#EA580C;">&#9679; High 220</span>
+                  <span style="color:#CA8A04;">&#9679; Med 59</span>
+                </div>
+              </div>
+              <div class="cc1-strip-cell">
+                <div class="cc1-strip-label">Escalated Incidents</div>
+                <div class="cc1-strip-val" style="color:#D97706;">41</div>
+                <div style="font-size:10px;color:#6B7A8D;">of 247 created incidents</div>
+              </div>
+            </div>
+
+            <!-- SOC Efficiency Metrics -->
+            <div style="padding:16px 24px 6px;border-top:1px solid rgba(0,0,0,0.07);background:#fff;">
+              <div style="font-size:12px;font-weight:700;color:#1A2332;display:flex;align-items:center;gap:8px;">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#0066CC" stroke-width="2"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
+                SOC Efficiency Metrics
+              </div>
+            </div>
+            <div class="cc1-metrics-section">
+              <div class="cc1-metric-cell">
+                <div class="cc1-metric-label">Analyst Hours Saved by ZIA<br/><span style="font-size:10px;color:rgba(107,122,141,0.8);">(2,891 investigations &times; 4m 22s avg)</span></div>
+                <div style="display:flex;align-items:flex-end;gap:6px;margin-top:6px;">
+                  <div style="font-size:42px;font-weight:900;color:#1A2332;line-height:1;">210</div>
+                  <div style="font-size:18px;font-weight:700;color:#6B7A8D;margin-bottom:6px;">Hrs</div>
+                </div>
+                <div style="height:60px;width:100%;" id="cc1-bar-soc-hours"></div>
+              </div>
+              <div class="cc1-metric-cell">
+                <div class="cc1-metric-label">True Positive Rate<br/><span style="font-size:10px;color:rgba(107,122,141,0.8);">(250 TP of 300 verdicts)</span></div>
+                <div style="font-size:52px;font-weight:900;color:#059669;line-height:1;margin-top:6px;">83%</div>
+                <div style="font-size:11px;color:#6B7A8D;margin-top:4px;">50 False Positives filtered</div>
+              </div>
+              <div class="cc1-metric-cell">
+                <div class="cc1-metric-label">Mean Time to Investigate (MTTI)<br/><span style="font-size:10px;color:rgba(107,122,141,0.8);">per completed investigation</span></div>
+                <div class="cc1-gauge-wrap" id="cc1-gauge-mttd"></div>
+                <div style="font-size:14px;font-weight:700;color:#1A2332;">4m 22s <span style="font-size:11px;font-weight:400;color:#059669;">&#9650; 10%</span></div>
+              </div>
+              <div class="cc1-metric-cell">
+                <div class="cc1-metric-label">Investigations Running<br/><span style="font-size:10px;color:rgba(107,122,141,0.8);">Queue utilisation</span></div>
+                <div style="font-size:42px;font-weight:900;color:#1A2332;line-height:1;margin-top:6px;">247</div>
+                <div style="width:100%;max-width:160px;margin-top:8px;">
+                  <div style="height:8px;background:rgba(0,0,0,0.07);border-radius:4px;overflow:hidden;">
+                    <div style="height:100%;width:81.7%;background:linear-gradient(90deg,#6D28D9,#0066CC);border-radius:4px;"></div>
+                  </div>
+                  <div style="font-size:11px;color:#0066CC;margin-top:4px;text-align:center;">81.7% queue used</div>
+                </div>
+              </div>
+            </div>
+
+          </div><!-- /th-panel-command-center1 -->
 
           <div class="view-panel" id="th-panel-my-alert-ov">
             <div class="dash">
@@ -7858,6 +8075,7 @@ function initThreatHub() {
     if (v === 'my-alert-ov') initMyAlertOverview();
     if (v === 'autoinv-ov') initAutoInvOverview();
     if (v === 'command-center') initCommandCenter();
+    if (v === 'command-center1') initCommandCenter1();
     setTimeout(function () { ElegantEChart.resize(); }, 150);
   }
 
@@ -8304,6 +8522,128 @@ function initThreatHub() {
       });
     })();
   }  /* end initCommandCenter */
+
+  function initCommandCenter1() {
+    /* -- Donut: alert severity breakdown (white theme) -- */
+    (function(){
+      var dom = document.getElementById('cc1-donut-issues');
+      if (!dom) return;
+      var ex = echarts.getInstanceByDom(dom); if (ex) ex.dispose();
+      var c = echarts.init(dom, null, {renderer:'canvas'});
+      c.setOption({
+        backgroundColor:'transparent',
+        tooltip:{show:false},
+        series:[{
+          type:'pie',
+          radius:['50%','75%'],
+          center:['50%','50%'],
+          silent:true,
+          label:{show:false},
+          data:[
+            {value:560,itemStyle:{color:'#DC2626',opacity:0.85}},
+            {value:220,itemStyle:{color:'#EA580C',opacity:0.8}},
+            {value:59,itemStyle:{color:'#CA8A04',opacity:0.8}},
+            {value:17613,itemStyle:{color:'rgba(0,102,204,0.12)'}}
+          ]
+        },{
+          type:'pie',
+          radius:['32%','48%'],
+          center:['50%','50%'],
+          silent:true,
+          label:{show:false},
+          data:[
+            {value:2891,itemStyle:{color:'rgba(0,102,204,0.25)'}},
+            {value:15561,itemStyle:{color:'rgba(0,0,0,0.04)'}}
+          ]
+        }],
+        graphic:[{
+          type:'group',left:'center',top:'34%',
+          children:[{
+            type:'text',
+            style:{text:'ZIA',fill:'#0066CC',fontSize:20,fontWeight:'bold',textAlign:'center'}
+          },{
+            type:'text',top:24,
+            style:{text:'AI Engine',fill:'rgba(107,122,141,0.9)',fontSize:9,textAlign:'center'}
+          }]
+        }]
+      });
+    })();
+    /* -- Sparkline: Total Alerts trend -- */
+    (function(){
+      var dom = document.getElementById('cc1-spark-events');
+      if (!dom) return;
+      var ex = echarts.getInstanceByDom(dom); if (ex) ex.dispose();
+      var c = echarts.init(dom, null, {renderer:'canvas'});
+      c.setOption({
+        backgroundColor:'transparent',
+        grid:{top:0,bottom:0,left:0,right:0},
+        xAxis:{show:false,type:'category',data:['Mon','Tue','Wed','Thu','Fri','Sat','Sun']},
+        yAxis:{show:false},
+        series:[{type:'line',smooth:true,symbol:'none',
+          data:[2100,2450,2800,2600,3000,2750,3200],
+          lineStyle:{color:'#0066CC',width:1.5},areaStyle:{color:'rgba(0,102,204,0.1)'}}]
+      });
+    })();
+    /* -- Sparkline: Investigations trend -- */
+    (function(){
+      var dom = document.getElementById('cc1-spark-data');
+      if (!dom) return;
+      var ex = echarts.getInstanceByDom(dom); if (ex) ex.dispose();
+      var c = echarts.init(dom, null, {renderer:'canvas'});
+      c.setOption({
+        backgroundColor:'transparent',
+        grid:{top:0,bottom:0,left:0,right:0},
+        xAxis:{show:false,type:'category',data:['Mon','Tue','Wed','Thu','Fri','Sat','Sun']},
+        yAxis:{show:false},
+        series:[{type:'line',smooth:true,symbol:'none',
+          data:[350,420,480,390,520,440,480],
+          lineStyle:{color:'#059669',width:1.5},areaStyle:{color:'rgba(5,150,105,0.1)'}}]
+      });
+    })();
+    /* -- Analyst hours saved bar (210 hrs / 7 days) -- */
+    (function(){
+      var dom = document.getElementById('cc1-bar-soc-hours');
+      if (!dom) return;
+      var ex = echarts.getInstanceByDom(dom); if (ex) ex.dispose();
+      var c = echarts.init(dom, null, {renderer:'canvas'});
+      c.setOption({
+        backgroundColor:'transparent',
+        grid:{top:2,bottom:16,left:8,right:8},
+        xAxis:{type:'category',data:['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
+          axisLabel:{fontSize:8,color:'rgba(107,122,141,0.8)'},axisLine:{show:false},axisTick:{show:false}},
+        yAxis:{show:false},
+        series:[{type:'bar',data:[28,32,30,35,26,30,29],barWidth:'55%',
+          itemStyle:{color:new echarts.graphic.LinearGradient(0,0,0,1,
+            [{offset:0,color:'#0066CC'},{offset:1,color:'rgba(0,102,204,0.15)'}]),borderRadius:[2,2,0,0]}}]
+      });
+    })();
+    /* -- MTTI Gauge: 4m 22s, scale 0-10 mins, light theme -- */
+    (function(){
+      var dom = document.getElementById('cc1-gauge-mttd');
+      if (!dom) return;
+      var ex = echarts.getInstanceByDom(dom); if (ex) ex.dispose();
+      var c = echarts.init(dom, null, {renderer:'canvas'});
+      c.setOption({
+        backgroundColor:'transparent',
+        series:[{
+          type:'gauge',
+          startAngle:200,endAngle:-20,
+          min:0,max:10,
+          radius:'88%',center:['50%','60%'],
+          pointer:{length:'55%',width:3,itemStyle:{color:'#1A2332'}},
+          progress:{show:true,width:7,
+            itemStyle:{color:new echarts.graphic.LinearGradient(0,0,1,0,
+              [{offset:0,color:'#059669'},{offset:0.5,color:'#D97706'},{offset:1,color:'#DC2626'}])}},
+          axisLine:{lineStyle:{width:7,color:[[1,'rgba(0,0,0,0.08)']]}},
+          axisTick:{show:false},splitLine:{show:false},
+          axisLabel:{distance:-18,fontSize:8,color:'rgba(107,122,141,0.8)',
+            formatter:function(v){return v===0?'0m':v===5?'5m':v===10?'10m':'';}},
+          detail:{show:false},
+          data:[{value:4.4}]
+        }]
+      });
+    })();
+  }  /* end initCommandCenter1 */
 
   /* ═══ EXPLORER — Sidebar Widgets + Thread Table ═══ */
   var thThreadInit = false;
