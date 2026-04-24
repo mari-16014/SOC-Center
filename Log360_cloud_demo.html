@@ -2159,6 +2159,7 @@
                   <div class="ov-dd-item" data-view="command-center3">Command Center 3</div>
                   <div class="ov-dd-item" data-view="command-center4">Command Center 4</div>
                   <div class="ov-dd-item" data-view="command-center5">Command Center 5</div>
+                  <div class="ov-dd-item" data-view="command-center6">Command Center 6</div>
                 </div>
               </div>
 
@@ -3789,6 +3790,117 @@
               </div>
             </div>
           </div><!-- /th-panel-command-center5 -->
+
+          <!-- ═══ COMMAND CENTER 6 — Glassmorphism ═══ -->
+          <div class="view-panel" id="th-panel-command-center6" style="background:linear-gradient(135deg,#0f2027 0%,#1e3a5f 50%,#0f2c4a 100%);min-height:100%;color:#fff;">
+            <style>
+              .cc6-glass{background:rgba(255,255,255,0.06);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.12);border-radius:12px;}
+              .cc6-header{display:flex;align-items:center;justify-content:space-between;padding:14px 24px;background:rgba(255,255,255,0.04);border-bottom:1px solid rgba(255,255,255,0.08);}
+              .cc6-kpi-row{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;padding:14px 16px;}
+              .cc6-kpi{padding:12px 14px;}
+              .cc6-kpi-l{font-size:10px;color:rgba(255,255,255,0.5);margin-bottom:3px;}
+              .cc6-kpi-v{font-size:18px;font-weight:800;color:#fff;}
+              .cc6-kpi-s{font-size:10px;color:rgba(255,255,255,0.4);margin-top:2px;}
+              .cc6-body{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;padding:0 16px 14px;}
+              .cc6-card{padding:16px;display:flex;flex-direction:column;gap:10px;}
+              .cc6-card-h{font-size:11px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:rgba(255,255,255,0.7);display:flex;align-items:center;gap:6px;}
+              .cc6-row{display:flex;justify-content:space-between;align-items:center;font-size:11px;padding:5px 0;border-bottom:1px solid rgba(255,255,255,0.05);}
+              .cc6-row:last-child{border:none;}
+              .cc6-track{height:3px;background:rgba(255,255,255,0.06);border-radius:2px;margin-top:3px;overflow:hidden;}
+              .cc6-fill{height:100%;border-radius:2px;}
+              .cc6-bottom{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:0 16px 16px;}
+              .cc6-bc{padding:12px 14px;}
+            </style>
+
+            <!-- Header -->
+            <div class="cc6-header">
+              <div style="display:flex;align-items:center;gap:10px;">
+                <div style="width:34px;height:34px;background:rgba(56,189,248,0.15);border:1px solid rgba(56,189,248,0.3);border-radius:10px;display:flex;align-items:center;justify-content:center;">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                </div>
+                <div>
+                  <div style="font-size:14px;font-weight:800;color:#fff;">Log360 AI — Command Center</div>
+                  <div style="font-size:10px;color:rgba(255,255,255,0.4);">Glass UI &bull; SOC Dashboard &bull; Apr 24 2026</div>
+                </div>
+                <div style="background:rgba(56,189,248,0.1);border:1px solid rgba(56,189,248,0.25);color:#38BDF8;font-size:10px;padding:3px 12px;border-radius:20px;">&#9679; LIVE</div>
+              </div>
+              <div style="display:flex;gap:10px;">
+                <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);padding:4px 14px;border-radius:20px;font-size:10px;color:rgba(255,255,255,0.6);">Last 7 Days</div>
+              </div>
+            </div>
+
+            <!-- KPI row -->
+            <div class="cc6-kpi-row">
+              <div class="cc6-kpi cc6-glass"><div class="cc6-kpi-l">Events Processed</div><div class="cc6-kpi-v" style="color:#38BDF8;">128.4M</div><div class="cc6-kpi-s">&#9650; 12%</div></div>
+              <div class="cc6-kpi cc6-glass"><div class="cc6-kpi-l">Total Alerts</div><div class="cc6-kpi-v" style="color:#FB923C;">18,452</div><div class="cc6-kpi-s">&#9650; 30%</div></div>
+              <div class="cc6-kpi cc6-glass"><div class="cc6-kpi-l">AI Investigated</div><div class="cc6-kpi-v" style="color:#34D399;">2,891</div><div class="cc6-kpi-s">15.7% triage</div></div>
+              <div class="cc6-kpi cc6-glass"><div class="cc6-kpi-l">Incidents</div><div class="cc6-kpi-v" style="color:#A78BFA;">247</div><div class="cc6-kpi-s">218 open</div></div>
+              <div class="cc6-kpi cc6-glass"><div class="cc6-kpi-l">TP Rate</div><div class="cc6-kpi-v" style="color:#34D399;">83%</div><div class="cc6-kpi-s">50 FP blocked</div></div>
+              <div class="cc6-kpi cc6-glass"><div class="cc6-kpi-l">MTTI / SLA</div><div class="cc6-kpi-v">4m 22s</div><div class="cc6-kpi-s">SLA 94.2%</div></div>
+            </div>
+
+            <!-- Body -->
+            <div class="cc6-body">
+              <div class="cc6-card cc6-glass">
+                <div class="cc6-card-h" style="color:#38BDF8;">Alert Distribution</div>
+                <div id="cc6-pie" style="width:100%;height:160px;"></div>
+                <div class="cc6-row"><span style="color:rgba(255,255,255,0.5);">Critical</span><span style="font-weight:700;color:#EF4444;">560</span></div>
+                <div class="cc6-row"><span style="color:rgba(255,255,255,0.5);">High</span><span style="font-weight:700;color:#FB923C;">220</span></div>
+                <div class="cc6-row"><span style="color:rgba(255,255,255,0.5);">Medium</span><span style="font-weight:700;color:#FBBF24;">59</span></div>
+                <div class="cc6-row"><span style="color:rgba(255,255,255,0.5);">Low / Info</span><span style="font-weight:700;color:rgba(255,255,255,0.6);">17,613</span></div>
+              </div>
+
+              <div class="cc6-card cc6-glass">
+                <div class="cc6-card-h" style="color:#34D399;">ZIA Automation Engine</div>
+                <div id="cc6-gauge" style="width:100%;height:160px;"></div>
+                <div class="cc6-row"><span style="color:rgba(255,255,255,0.5);">True Positives</span><span style="font-weight:700;color:#34D399;">250 (83%)</span></div>
+                <div class="cc6-row"><span style="color:rgba(255,255,255,0.5);">False Positives</span><span style="font-weight:700;color:#FBBF24;">50</span></div>
+                <div class="cc6-row"><span style="color:rgba(255,255,255,0.5);">Hours Saved</span><span style="font-weight:700;color:#38BDF8;">210 hrs</span></div>
+              </div>
+
+              <div class="cc6-card cc6-glass">
+                <div class="cc6-card-h" style="color:#A78BFA;">Incident Pipeline</div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px;">
+                  <div style="background:rgba(59,130,246,0.12);border:1px solid rgba(59,130,246,0.2);border-radius:8px;padding:10px;text-align:center;"><div style="font-size:24px;font-weight:800;color:#60A5FA;">218</div><div style="font-size:9px;color:rgba(255,255,255,0.4);">Open</div></div>
+                  <div style="background:rgba(52,211,153,0.1);border:1px solid rgba(52,211,153,0.2);border-radius:8px;padding:10px;text-align:center;"><div style="font-size:24px;font-weight:800;color:#34D399;">168</div><div style="font-size:9px;color:rgba(255,255,255,0.4);">Resolved</div></div>
+                  <div style="background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.2);border-radius:8px;padding:10px;text-align:center;"><div style="font-size:24px;font-weight:800;color:#F87171;">41</div><div style="font-size:9px;color:rgba(255,255,255,0.4);">Escalated</div></div>
+                  <div style="background:rgba(167,139,250,0.1);border:1px solid rgba(167,139,250,0.2);border-radius:8px;padding:10px;text-align:center;"><div style="font-size:24px;font-weight:800;color:#A78BFA;">247</div><div style="font-size:9px;color:rgba(255,255,255,0.4);">Total</div></div>
+                </div>
+                <div class="cc6-card-h" style="color:#FB923C;">Affected Assets</div>
+                <div class="cc6-row"><span style="color:rgba(255,255,255,0.5);">Total Assets</span><span style="font-weight:700;color:#fff;">1,836</span></div>
+                <div class="cc6-row"><span style="color:rgba(255,255,255,0.5);">High-Risk</span><span style="font-weight:700;color:#EF4444;">312</span></div>
+                <div class="cc6-row"><span style="color:rgba(255,255,255,0.5);">Threat Intel Hits</span><span style="font-weight:700;color:#FB923C;">1,247</span></div>
+              </div>
+            </div>
+
+            <!-- Bottom -->
+            <div class="cc6-bottom">
+              <div class="cc6-bc cc6-glass" style="border-radius:10px;">
+                <div style="font-size:10px;color:rgba(255,255,255,0.4);margin-bottom:3px;">Alert Trend</div>
+                <div style="font-size:20px;font-weight:800;color:#FB923C;">18,452</div>
+                <div id="cc6-sp1" style="height:26px;width:100%;margin:3px 0;"></div>
+                <div style="font-size:10px;color:rgba(255,255,255,0.3);">&#9650; 30% this week</div>
+              </div>
+              <div class="cc6-bc cc6-glass" style="border-radius:10px;">
+                <div style="font-size:10px;color:rgba(255,255,255,0.4);margin-bottom:3px;">ZIA Daily</div>
+                <div style="font-size:20px;font-weight:800;color:#34D399;">413/day</div>
+                <div id="cc6-sp2" style="height:26px;width:100%;margin:3px 0;"></div>
+                <div style="font-size:10px;color:rgba(255,255,255,0.3);">2,891 total investigated</div>
+              </div>
+              <div class="cc6-bc cc6-glass" style="border-radius:10px;">
+                <div style="font-size:10px;color:rgba(255,255,255,0.4);margin-bottom:3px;">SOC Efficiency</div>
+                <div style="font-size:20px;font-weight:800;color:#38BDF8;">210 hrs</div>
+                <div style="font-size:12px;color:#34D399;font-weight:600;">$31,500 ROI</div>
+                <div style="font-size:10px;color:rgba(255,255,255,0.3);">83% TP &bull; 50 FP</div>
+              </div>
+              <div class="cc6-bc cc6-glass" style="border-radius:10px;">
+                <div style="font-size:10px;color:rgba(255,255,255,0.4);margin-bottom:3px;">Response Time</div>
+                <div style="font-size:20px;font-weight:800;color:#A78BFA;">4m 22s</div>
+                <div style="font-size:12px;color:rgba(255,255,255,0.5);">MTTD: 2m 08s</div>
+                <div style="font-size:10px;color:rgba(255,255,255,0.3);">SLA 94.2% compliance</div>
+              </div>
+            </div>
+          </div><!-- /th-panel-command-center6 -->
 
           <div class="view-panel" id="th-panel-my-alert-ov">
             <div class="dash">
@@ -8874,6 +8986,7 @@ function initThreatHub() {
     if (v === 'command-center3') initCommandCenter3();
     if (v === 'command-center4') initCommandCenter4();
     if (v === 'command-center5') initCommandCenter5();
+    if (v === 'command-center6') initCommandCenter6();
     setTimeout(function () { ElegantEChart.resize(); }, 150);
   }
 
@@ -9657,6 +9770,59 @@ function initThreatHub() {
           lineStyle:{color:cfg[2],width:1.5},areaStyle:{color:cfg[3]}}]});
     });
   }  /* end initCommandCenter5 */
+
+  function initCommandCenter6() {
+    /* Severity pie */
+    (function(){
+      var dom=document.getElementById('cc6-pie'); if(!dom) return;
+      var ex=echarts.getInstanceByDom(dom); if(ex) ex.dispose();
+      var c=echarts.init(dom,null,{renderer:'canvas'});
+      c.setOption({
+        backgroundColor:'transparent',
+        legend:{show:false},
+        series:[{
+          type:'pie',radius:['38%','65%'],center:['50%','50%'],silent:true,
+          label:{show:true,fontSize:9,color:'rgba(255,255,255,0.7)',formatter:'{b}\n{d}%'},
+          data:[
+            {value:560,name:'Critical',itemStyle:{color:'#EF4444'}},
+            {value:220,name:'High',itemStyle:{color:'#FB923C'}},
+            {value:59,name:'Medium',itemStyle:{color:'#FBBF24'}},
+            {value:17613,name:'Low+Info',itemStyle:{color:'rgba(255,255,255,0.08)'}}
+          ]
+        }]
+      });
+    })();
+    /* Gauge chart for ZIA */
+    (function(){
+      var dom=document.getElementById('cc6-gauge'); if(!dom) return;
+      var ex=echarts.getInstanceByDom(dom); if(ex) ex.dispose();
+      var c=echarts.init(dom,null,{renderer:'canvas'});
+      c.setOption({
+        backgroundColor:'transparent',
+        series:[{
+          type:'gauge',startAngle:200,endAngle:-20,min:0,max:100,
+          progress:{show:true,width:8,itemStyle:{color:new echarts.graphic.LinearGradient(0,0,1,0,[{offset:0,color:'#34D399'},{offset:1,color:'#38BDF8'}])}},
+          axisLine:{lineStyle:{width:8,color:[[1,'rgba(255,255,255,0.06)']]}},
+          axisTick:{show:false},splitLine:{show:false},axisLabel:{show:false},
+          pointer:{show:false},
+          detail:{valueAnimation:true,fontSize:28,fontWeight:800,color:'#34D399',offsetCenter:[0,'15%'],formatter:'{value}%'},
+          title:{color:'rgba(255,255,255,0.4)',fontSize:10,offsetCenter:[0,'42%']},
+          data:[{value:15.7,name:'Triage Rate'}]
+        }]
+      });
+    })();
+    [['cc6-sp1',[2100,2450,2800,2600,3000,2750,3200],'#FB923C','rgba(251,146,60,0.15)'],
+     ['cc6-sp2',[350,420,480,390,520,440,480],'#34D399','rgba(52,211,153,0.15)']
+    ].forEach(function(cfg){
+      var dom=document.getElementById(cfg[0]); if(!dom) return;
+      var ex=echarts.getInstanceByDom(dom); if(ex) ex.dispose();
+      var c=echarts.init(dom,null,{renderer:'canvas'});
+      c.setOption({backgroundColor:'transparent',grid:{top:0,bottom:0,left:0,right:0},
+        xAxis:{show:false,type:'category'},yAxis:{show:false},
+        series:[{type:'line',smooth:true,symbol:'none',data:cfg[1],
+          lineStyle:{color:cfg[2],width:1.5},areaStyle:{color:cfg[3]}}]});
+    });
+  }  /* end initCommandCenter6 */
 
   /* ═══ EXPLORER — Sidebar Widgets + Thread Table ═══ */
   var thThreadInit = false;
