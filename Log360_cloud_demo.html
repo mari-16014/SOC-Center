@@ -2161,6 +2161,7 @@
                   <div class="ov-dd-item" data-view="command-center5">Command Center 5</div>
                   <div class="ov-dd-item" data-view="command-center6">Command Center 6</div>
                   <div class="ov-dd-item" data-view="command-center7">Command Center 7</div>
+                  <div class="ov-dd-item" data-view="command-center8">Command Center 8</div>
                 </div>
               </div>
 
@@ -4029,6 +4030,131 @@
               </div>
             </div>
           </div><!-- /th-panel-command-center7 -->
+
+          <!-- ═══ COMMAND CENTER 8 — Corporate Blue ═══ -->
+          <div class="view-panel" id="th-panel-command-center8" style="background:#EEF2F7;min-height:100%;">
+            <style>
+              .cc8-header{display:flex;align-items:center;justify-content:space-between;padding:0 24px;height:52px;background:#1E3A5F;color:#fff;}
+              .cc8-title{font-size:14px;font-weight:800;display:flex;align-items:center;gap:10px;}
+              .cc8-title-badge{font-size:10px;background:rgba(255,255,255,0.15);padding:2px 10px;border-radius:20px;font-weight:500;}
+              .cc8-sub-header{display:flex;align-items:center;justify-content:space-between;padding:8px 24px;background:#F0F4FA;border-bottom:1px solid #D8E2EF;}
+              .cc8-breadcrumb{font-size:11px;color:#64748B;display:flex;align-items:center;gap:6px;}
+              .cc8-kpi-row{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;padding:14px 16px;}
+              .cc8-kpi{background:#fff;border-radius:8px;padding:12px 14px;border-top:3px solid #3B82F6;box-shadow:0 1px 3px rgba(0,0,0,0.06);}
+              .cc8-kpi-l{font-size:10px;color:#94A3B8;font-weight:500;margin-bottom:3px;}
+              .cc8-kpi-v{font-size:19px;font-weight:800;color:#1E293B;}
+              .cc8-kpi-s{font-size:10px;margin-top:2px;}
+              .cc8-body{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;padding:0 16px 14px;}
+              .cc8-card{background:#fff;border-radius:8px;border:1px solid #E2E8F0;padding:16px;box-shadow:0 1px 3px rgba(0,0,0,0.05);}
+              .cc8-card-h{font-size:11px;font-weight:700;color:#374151;border-bottom:1px solid #F1F5F9;padding-bottom:8px;margin-bottom:8px;display:flex;align-items:center;gap:6px;}
+              .cc8-row{display:flex;justify-content:space-between;align-items:center;font-size:11px;padding:5px 0;border-bottom:1px solid #F8FAFC;}
+              .cc8-row:last-child{border:none;}
+              .cc8-track{height:4px;background:#F1F5F9;border-radius:2px;margin-top:2px;overflow:hidden;}
+              .cc8-fill{height:100%;border-radius:2px;background:#3B82F6;}
+              .cc8-bottom{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;padding:0 16px 16px;}
+              .cc8-stat{background:#1E3A5F;color:#fff;border-radius:8px;padding:14px 16px;}
+              .cc8-stat-l{font-size:10px;color:rgba(255,255,255,0.5);margin-bottom:3px;}
+              .cc8-stat-v{font-size:20px;font-weight:800;}
+              .cc8-stat-s{font-size:10px;color:rgba(255,255,255,0.4);margin-top:3px;}
+            </style>
+
+            <!-- Header -->
+            <div class="cc8-header">
+              <div class="cc8-title">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" fill="rgba(255,255,255,0.15)" stroke="#fff" stroke-width="1.5"/></svg>
+                Log360 AI &ndash; Enterprise SOC Dashboard
+                <span class="cc8-title-badge">COMMAND CENTER</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:14px;">
+                <span style="font-size:11px;color:rgba(255,255,255,0.6);">&#9679; Live Monitoring</span>
+                <span style="font-size:11px;color:rgba(255,255,255,0.5);">Apr 24, 2026</span>
+                <span style="font-size:11px;background:rgba(255,255,255,0.12);padding:3px 12px;border-radius:20px;">Last 7 Days</span>
+              </div>
+            </div>
+
+            <!-- Sub-header -->
+            <div class="cc8-sub-header">
+              <div class="cc8-breadcrumb">
+                <span>SOC Operations</span><span style="color:#CBD5E1;">/</span><span style="color:#3B82F6;font-weight:600;">AI Command Center</span>
+              </div>
+              <div style="font-size:11px;color:#64748B;">18,452 active alerts &nbsp;&bull;&nbsp; 247 incidents &nbsp;&bull;&nbsp; 2,891 AI-investigated &nbsp;&bull;&nbsp; 94.2% SLA</div>
+            </div>
+
+            <!-- KPI row -->
+            <div class="cc8-kpi-row">
+              <div class="cc8-kpi" style="border-top-color:#6366F1;"><div class="cc8-kpi-l">Events Processed</div><div class="cc8-kpi-v">128.4M</div><div class="cc8-kpi-s" style="color:#059669;">&#9650; 12%</div></div>
+              <div class="cc8-kpi" style="border-top-color:#EF4444;"><div class="cc8-kpi-l">Total Alerts</div><div class="cc8-kpi-v" style="color:#EF4444;">18,452</div><div class="cc8-kpi-s" style="color:#EF4444;">&#9650; 30% surge</div></div>
+              <div class="cc8-kpi" style="border-top-color:#059669;"><div class="cc8-kpi-l">AI Investigated</div><div class="cc8-kpi-v" style="color:#059669;">2,891</div><div class="cc8-kpi-s" style="color:#059669;">15.7% triage</div></div>
+              <div class="cc8-kpi" style="border-top-color:#F59E0B;"><div class="cc8-kpi-l">Incidents</div><div class="cc8-kpi-v" style="color:#F59E0B;">247</div><div class="cc8-kpi-s" style="color:#94A3B8;">218 open &bull; 41 escalated</div></div>
+              <div class="cc8-kpi" style="border-top-color:#059669;"><div class="cc8-kpi-l">True Positive Rate</div><div class="cc8-kpi-v">83%</div><div class="cc8-kpi-s" style="color:#94A3B8;">50 FP contained</div></div>
+              <div class="cc8-kpi"><div class="cc8-kpi-l">MTTI / SLA</div><div class="cc8-kpi-v">4m 22s</div><div class="cc8-kpi-s" style="color:#059669;">SLA 94.2% met</div></div>
+            </div>
+
+            <!-- Body -->
+            <div class="cc8-body">
+              <!-- Severity + rules -->
+              <div class="cc8-card">
+                <div class="cc8-card-h" style="color:#1E3A5F;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/></svg>Alert Severity &amp; Rules</div>
+                <div id="cc8-bar" style="width:100%;height:130px;"></div>
+                <div class="cc8-row"><span style="color:#64748B;">Critical Alerts</span><span style="font-weight:700;color:#EF4444;">560</span></div>
+                <div class="cc8-row"><span style="color:#64748B;">High Alerts</span><span style="font-weight:700;color:#F59E0B;">220</span></div>
+                <div class="cc8-row"><span style="color:#64748B;">Correlation Rules Fired</span><span style="font-weight:700;color:#3B82F6;">342/528</span></div>
+                <div class="cc8-row"><span style="color:#64748B;">Threat Intel Matches</span><span style="font-weight:700;color:#8B5CF6;">1,247</span></div>
+              </div>
+
+              <!-- ZIA -->
+              <div class="cc8-card">
+                <div class="cc8-card-h" style="color:#1E3A5F;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>ZIA Investigation Summary</div>
+                <div id="cc8-donut" style="width:100%;height:160px;"></div>
+                <div class="cc8-row"><span style="color:#64748B;">Avg Daily Investigations</span><span style="font-weight:700;">413/day</span></div>
+                <div class="cc8-row"><span style="color:#64748B;">Running Investigations</span><span style="font-weight:700;color:#3B82F6;">247 (81.7%)</span></div>
+                <div class="cc8-row"><span style="color:#64748B;">Analyst Hours Saved</span><span style="font-weight:700;color:#059669;">210 hrs</span></div>
+              </div>
+
+              <!-- Incidents + assets -->
+              <div class="cc8-card">
+                <div class="cc8-card-h" style="color:#1E3A5F;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/></svg>Incidents &amp; Asset Risk</div>
+                <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:10px;">
+                  <div style="background:#EFF6FF;border-radius:6px;padding:10px;text-align:center;border:1px solid #BFDBFE;"><div style="font-size:22px;font-weight:800;color:#2563EB;">218</div><div style="font-size:9px;color:#94A3B8;">Open</div></div>
+                  <div style="background:#F0FDF4;border-radius:6px;padding:10px;text-align:center;border:1px solid #BBF7D0;"><div style="font-size:22px;font-weight:800;color:#16A34A;">168</div><div style="font-size:9px;color:#94A3B8;">Resolved</div></div>
+                  <div style="background:#FFF7ED;border-radius:6px;padding:10px;text-align:center;border:1px solid #FED7AA;"><div style="font-size:22px;font-weight:800;color:#EA580C;">41</div><div style="font-size:9px;color:#94A3B8;">Escalated</div></div>
+                </div>
+                <div class="cc8-card-h" style="color:#1E3A5F;">Asset Exposure</div>
+                <div class="cc8-row"><span style="color:#64748B;">Total Affected Assets</span><span style="font-weight:700;">1,836</span></div>
+                <div class="cc8-row"><span style="color:#64748B;">High-Risk Assets</span><span style="font-weight:700;color:#EF4444;">312</span></div>
+                <div class="cc8-row"><span style="color:#64748B;">Log Sources Active</span><span style="font-weight:700;color:#3B82F6;">87</span></div>
+                <div class="cc8-row"><span style="color:#64748B;">SLA Compliance</span><span style="font-weight:700;color:#059669;">94.2%</span></div>
+              </div>
+            </div>
+
+            <!-- Bottom dark stat cards -->
+            <div class="cc8-bottom">
+              <div class="cc8-stat">
+                <div class="cc8-stat-l">Alert Volume</div>
+                <div class="cc8-stat-v" style="color:#FB923C;">18,452</div>
+                <div id="cc8-sp1" style="height:24px;margin:4px 0;"></div>
+                <div class="cc8-stat-s">&#9650; 30% WoW &nbsp;&bull;&nbsp; 2,636/day</div>
+              </div>
+              <div class="cc8-stat">
+                <div class="cc8-stat-l">AI Investigations</div>
+                <div class="cc8-stat-v" style="color:#34D399;">2,891</div>
+                <div id="cc8-sp2" style="height:24px;margin:4px 0;"></div>
+                <div class="cc8-stat-s">413/day average &nbsp;&bull;&nbsp; 15.7%</div>
+              </div>
+              <div class="cc8-stat">
+                <div class="cc8-stat-l">SOC Efficiency</div>
+                <div class="cc8-stat-v" style="color:#38BDF8;">83% TP</div>
+                <div style="font-size:14px;font-weight:700;color:#34D399;margin-top:2px;">$31,500 ROI</div>
+                <div class="cc8-stat-s">210 analyst hrs saved</div>
+              </div>
+              <div class="cc8-stat">
+                <div class="cc8-stat-l">Mean Time to Investigate</div>
+                <div class="cc8-stat-v" style="color:#FBBF24;">4m 22s</div>
+                <div style="font-size:11px;color:rgba(255,255,255,0.4);margin-top:2px;">MTTD 2m 08s</div>
+                <div class="cc8-stat-s">SLA 94.2% compliance</div>
+              </div>
+            </div>
+          </div><!-- /th-panel-command-center8 -->
 
           <div class="view-panel" id="th-panel-my-alert-ov">
             <div class="dash">
@@ -9116,6 +9242,7 @@ function initThreatHub() {
     if (v === 'command-center5') initCommandCenter5();
     if (v === 'command-center6') initCommandCenter6();
     if (v === 'command-center7') initCommandCenter7();
+    if (v === 'command-center8') initCommandCenter8();
     setTimeout(function () { ElegantEChart.resize(); }, 150);
   }
 
@@ -10003,6 +10130,57 @@ function initThreatHub() {
           lineStyle:{color:cfg[2],width:1.5}}]});
     });
   }  /* end initCommandCenter7 */
+
+  function initCommandCenter8() {
+    /* Severity stacked bar */
+    (function(){
+      var dom=document.getElementById('cc8-bar'); if(!dom) return;
+      var ex=echarts.getInstanceByDom(dom); if(ex) ex.dispose();
+      var c=echarts.init(dom,null,{renderer:'canvas'});
+      c.setOption({
+        backgroundColor:'transparent',
+        grid:{top:8,bottom:24,left:35,right:8},
+        xAxis:{type:'category',data:['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
+          axisLabel:{fontSize:9,color:'#94A3B8'},axisLine:{lineStyle:{color:'#E2E8F0'}}},
+        yAxis:{show:false},
+        series:[
+          {type:'bar',stack:'a',barWidth:'55%',data:[70,80,95,60,110,80,65],itemStyle:{color:'#EF4444'}},
+          {type:'bar',stack:'a',data:[30,35,40,25,45,35,30],itemStyle:{color:'#F59E0B'}},
+          {type:'bar',stack:'a',data:[300,350,400,300,450,350,310],itemStyle:{color:'#3B82F6'}}
+        ]
+      });
+    })();
+    /* Donut */
+    (function(){
+      var dom=document.getElementById('cc8-donut'); if(!dom) return;
+      var ex=echarts.getInstanceByDom(dom); if(ex) ex.dispose();
+      var c=echarts.init(dom,null,{renderer:'canvas'});
+      c.setOption({
+        backgroundColor:'transparent',
+        legend:{show:false},
+        series:[{
+          type:'pie',radius:['40%','65%'],center:['50%','50%'],silent:true,
+          label:{show:true,fontSize:9,color:'#374151',formatter:'{b}\n{d}%'},
+          data:[
+            {value:250,name:'True Pos',itemStyle:{color:'#059669'}},
+            {value:50,name:'False Pos',itemStyle:{color:'#F59E0B'}},
+            {value:2591,name:'Pending',itemStyle:{color:'#E2E8F0'}}
+          ]
+        }]
+      });
+    })();
+    [['cc8-sp1',[2100,2450,2800,2600,3000,2750,3200],'#FB923C','rgba(251,146,60,0.2)'],
+     ['cc8-sp2',[350,420,480,390,520,440,480],'#34D399','rgba(52,211,153,0.2)']
+    ].forEach(function(cfg){
+      var dom=document.getElementById(cfg[0]); if(!dom) return;
+      var ex=echarts.getInstanceByDom(dom); if(ex) ex.dispose();
+      var c=echarts.init(dom,null,{renderer:'canvas'});
+      c.setOption({backgroundColor:'transparent',grid:{top:0,bottom:0,left:0,right:0},
+        xAxis:{show:false,type:'category'},yAxis:{show:false},
+        series:[{type:'line',smooth:true,symbol:'none',data:cfg[1],
+          lineStyle:{color:cfg[2],width:1.5},areaStyle:{color:cfg[3]}}]});
+    });
+  }  /* end initCommandCenter8 */
 
   /* ═══ EXPLORER — Sidebar Widgets + Thread Table ═══ */
   var thThreadInit = false;
