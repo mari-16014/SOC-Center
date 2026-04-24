@@ -3610,15 +3610,63 @@
                   <input type="text" placeholder="Enter a Unique name" style="width:220px;height:32px;border:1px solid #C4C4C4;border-radius:2px;padding:0 10px;font-size:12px;outline:none;" />
                 </td>
               </tr>
-              <!-- Criteria -->
+              <!-- Rule -->
               <tr style="vertical-align:top;">
-                <td style="padding:10px 0;font-size:13px;color:#000;">Alert Rule <span style="color:#D00;">*</span></td>
+                <td style="padding:10px 0;font-size:13px;color:#000;">Rule <span style="color:#D00;">*</span></td>
                 <td style="padding:10px 0;">
                   <div style="display:flex;align-items:center;gap:0;">
-                    <div style="display:flex;align-items:center;width:220px;height:32px;border:1px solid #C4C4C4;border-radius:2px 0 0 2px;background:#fff;padding:0 8px;font-size:12px;color:#888;cursor:pointer;">
-                      <span>Select a rule</span>
+                    <div style="display:flex;align-items:center;width:220px;height:32px;border:1px solid #C4C4C4;border-radius:2px 0 0 2px;background:#fff;padding:0 8px;font-size:12px;color:#333;cursor:pointer;">
+                      <span style="flex:1;">Save rule from search</span>
                     </div>
                     <button onclick="thOpenCriteriaBuilder()" style="width:32px;height:32px;border:1px solid #C4C4C4;border-left:none;border-radius:0 2px 2px 0;background:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;color:#555;line-height:1;">+</button>
+                  </div>
+                </td>
+              </tr>
+              <!-- Log Source -->
+              <tr style="vertical-align:top;">
+                <td style="padding:10px 0;font-size:13px;color:#000;">Log Source <span style="color:#D00;">*</span></td>
+                <td style="padding:10px 0;">
+                  <div style="display:flex;align-items:center;gap:0;">
+                    <div style="display:flex;align-items:center;width:220px;height:32px;border:1px solid #C4C4C4;border-radius:2px 0 0 2px;background:#fff;padding:0 8px;font-size:12px;color:#333;cursor:pointer;">
+                      <span style="flex:1;">WindowsGroup</span>
+                    </div>
+                    <button style="width:32px;height:32px;border:1px solid #C4C4C4;border-left:none;border-radius:0 2px 2px 0;background:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;color:#555;line-height:1;">+</button>
+                  </div>
+                </td>
+              </tr>
+              <!-- Filter -->
+              <tr style="vertical-align:top;">
+                <td style="padding:4px 0;"></td>
+                <td style="padding:4px 0;">
+                  <label style="display:flex;align-items:center;gap:8px;font-size:13px;color:#333;cursor:pointer;">
+                    <input type="checkbox" style="width:14px;height:14px;cursor:pointer;" /> Filter
+                  </label>
+                </td>
+              </tr>
+              <!-- Grouping -->
+              <tr style="vertical-align:top;">
+                <td style="padding:6px 0;"></td>
+                <td style="padding:6px 0;">
+                  <label style="display:flex;align-items:center;gap:8px;font-size:13px;color:#333;cursor:pointer;">
+                    <input type="checkbox" checked id="aapGroupingCheck" onchange="document.getElementById('aapGroupingBody').style.display=this.checked?'block':'none';" style="width:14px;height:14px;accent-color:#2C66DD;cursor:pointer;" /> Grouping
+                  </label>
+                  <div id="aapGroupingBody" style="border:1px solid #E0E0E0;border-radius:3px;padding:14px 16px;margin-top:8px;max-width:520px;background:#FAFAFA;">
+                    <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;font-size:12px;color:#333;flex-wrap:wrap;">
+                      <span>Group Alerts with the same</span>
+                      <div style="display:flex;align-items:center;height:28px;border:1px solid #C4C4C4;border-radius:2px;background:#fff;padding:0 8px;font-size:12px;gap:6px;cursor:pointer;min-width:160px;">
+                        <span style="flex:1;">Application Name</span>
+                        <img src="./assets/icons/icon-chevron-down.svg" alt="" style="width:10px;height:10px;" />
+                      </div>
+                      <button style="width:28px;height:28px;border:1px solid #C4C4C4;border-radius:2px;background:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+                      </button>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:12px;font-size:12px;color:#333;flex-wrap:wrap;">
+                      <span>Create a new group if the existing group is:</span>
+                      <label style="display:flex;align-items:center;gap:5px;cursor:pointer;"><input type="radio" name="aapGroupStatus" checked style="accent-color:#2C66DD;cursor:pointer;"/> Closed</label>
+                      <label style="display:flex;align-items:center;gap:5px;cursor:pointer;"><input type="radio" name="aapGroupStatus" style="cursor:pointer;"/> Assigned</label>
+                      <label style="display:flex;align-items:center;gap:5px;cursor:pointer;"><input type="radio" name="aapGroupStatus" style="cursor:pointer;"/> Acknowledged</label>
+                    </div>
                   </div>
                 </td>
               </tr>
@@ -3655,6 +3703,46 @@
                 <td style="padding:4px 0;"></td>
                 <td style="padding:4px 0;">
                   <button style="display:flex;align-items:center;gap:4px;color:#2C66DD;font-size:12px;border:none;background:none;cursor:pointer;padding:0;">Advanced Configuration <img src="./assets/icons/icon-chevron-down.svg" alt="" style="width:10px;height:10px;" /></button>
+                </td>
+              </tr>
+              <!-- Threshold -->
+              <tr style="vertical-align:top;">
+                <td style="padding:6px 0;"></td>
+                <td style="padding:6px 0;">
+                  <label style="display:flex;align-items:center;gap:8px;font-size:13px;color:#333;cursor:pointer;">
+                    <input type="checkbox" checked id="aapThresholdCheck" onchange="document.getElementById('aapThresholdBody').style.display=this.checked?'flex':'none';" style="width:14px;height:14px;accent-color:#2C66DD;cursor:pointer;" /> Threshold
+                  </label>
+                  <div id="aapThresholdBody" style="display:flex;align-items:center;gap:8px;margin-top:10px;flex-wrap:wrap;font-size:12px;color:#333;">
+                    <span>Aggregate events based on</span>
+                    <div style="display:flex;align-items:center;height:28px;border:1px solid #C4C4C4;border-radius:2px;background:#fff;padding:0 8px;font-size:12px;gap:6px;cursor:pointer;min-width:150px;">
+                      <span style="flex:1;">Manual Threshold</span>
+                      <img src="./assets/icons/icon-chevron-down.svg" alt="" style="width:10px;height:10px;" />
+                    </div>
+                    <span>when</span>
+                    <input type="text" placeholder="No of events" style="width:92px;height:28px;border:1px solid #C4C4C4;border-radius:2px;padding:0 8px;font-size:12px;outline:none;color:#888;" />
+                    <span>occurs within</span>
+                    <input type="text" placeholder="Interval" style="width:72px;height:28px;border:1px solid #C4C4C4;border-radius:2px;padding:0 8px;font-size:12px;outline:none;color:#888;" />
+                    <span>Minute(s)</span>
+                  </div>
+                </td>
+              </tr>
+              <!-- Time Range -->
+              <tr style="vertical-align:top;">
+                <td style="padding:6px 0;"></td>
+                <td style="padding:6px 0;">
+                  <label style="display:flex;align-items:center;gap:8px;font-size:13px;color:#333;cursor:pointer;">
+                    <input type="checkbox" id="aapTimeRangeCheck" onchange="document.getElementById('aapTimeRangeBody').style.display=this.checked?'flex':'none';" style="width:14px;height:14px;cursor:pointer;" /> Time Range
+                  </label>
+                  <div id="aapTimeRangeBody" style="display:flex;align-items:center;gap:8px;margin-top:10px;font-size:12px;color:#333;">
+                    <div style="display:flex;align-items:center;height:28px;border:1px solid #C4C4C4;border-radius:2px;background:#fff;padding:0 8px;font-size:12px;gap:6px;cursor:pointer;min-width:140px;">
+                      <span style="flex:1;">Working Hours</span>
+                      <img src="./assets/icons/icon-chevron-down.svg" alt="" style="width:10px;height:10px;" />
+                    </div>
+                    <span style="color:#626262;">(10 - 20 Hrs)</span>
+                    <button style="border:none;background:none;cursor:pointer;padding:2px;display:flex;align-items:center;">
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                    </button>
+                  </div>
                 </td>
               </tr>
               <!-- Alert Notification -->
