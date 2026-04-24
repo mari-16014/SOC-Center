@@ -2915,47 +2915,7 @@
                 </div>
               </div>
 
-              <!-- Center: Sankey + donut -->
-              <div class="cc1-center">
-                <!-- Left Sankey: thin elegant lines from sources to donut -->
-                <svg style="position:absolute;left:0;top:0;width:50%;height:100%;pointer-events:none;" preserveAspectRatio="none" viewBox="0 0 200 380">
-                  <defs>
-                    <linearGradient id="cc1-g1" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#0066CC" stop-opacity="0.5"/><stop offset="100%" stop-color="#0066CC" stop-opacity="0.08"/></linearGradient>
-                    <linearGradient id="cc1-g2" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#3B82F6" stop-opacity="0.45"/><stop offset="100%" stop-color="#3B82F6" stop-opacity="0.08"/></linearGradient>
-                    <linearGradient id="cc1-g3" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#DC2626" stop-opacity="0.4"/><stop offset="100%" stop-color="#DC2626" stop-opacity="0.08"/></linearGradient>
-                    <linearGradient id="cc1-g4" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#7C3AED" stop-opacity="0.4"/><stop offset="100%" stop-color="#7C3AED" stop-opacity="0.08"/></linearGradient>
-                    <linearGradient id="cc1-g5" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#059669" stop-opacity="0.35"/><stop offset="100%" stop-color="#059669" stop-opacity="0.08"/></linearGradient>
-                    <linearGradient id="cc1-g6" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#D97706" stop-opacity="0.35"/><stop offset="100%" stop-color="#D97706" stop-opacity="0.08"/></linearGradient>
-                    <linearGradient id="cc1-g7" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#DB2777" stop-opacity="0.3"/><stop offset="100%" stop-color="#DB2777" stop-opacity="0.08"/></linearGradient>
-                  </defs>
-                  <path d="M0,44 C100,44 150,190 200,190" stroke="url(#cc1-g1)" stroke-width="3.5" fill="none"/>
-                  <path d="M0,87 C100,87 150,190 200,190" stroke="url(#cc1-g2)" stroke-width="3" fill="none"/>
-                  <path d="M0,130 C95,130 148,190 200,190" stroke="url(#cc1-g3)" stroke-width="2.5" fill="none"/>
-                  <path d="M0,173 C90,173 145,190 200,190" stroke="url(#cc1-g4)" stroke-width="2.5" fill="none"/>
-                  <path d="M0,216 C90,216 145,190 200,190" stroke="url(#cc1-g5)" stroke-width="2" fill="none"/>
-                  <path d="M0,259 C95,259 148,190 200,190" stroke="url(#cc1-g6)" stroke-width="2" fill="none"/>
-                  <path d="M0,302 C100,302 150,190 200,190" stroke="url(#cc1-g7)" stroke-width="1.5" fill="none"/>
-                </svg>
-                <!-- Right connectors: donut to outcomes -->
-                <svg style="position:absolute;right:0;top:0;width:50%;height:100%;pointer-events:none;" preserveAspectRatio="none" viewBox="0 0 200 380">
-                  <path d="M0,190 C60,190 120,100 200,90" stroke="rgba(0,102,204,0.2)" stroke-width="3" fill="none" stroke-dasharray="5,3"/>
-                  <path d="M0,190 C60,190 120,280 200,295" stroke="rgba(217,119,6,0.15)" stroke-width="2" fill="none" stroke-dasharray="5,3"/>
-                </svg>
-                <div style="position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;">
-                  <div id="cc1-donut-issues" style="width:190px;height:190px;"></div>
-                  <div style="display:flex;gap:16px;margin-top:6px;padding:7px 12px;background:#fff;border-radius:8px;border:1px solid rgba(0,0,0,0.08);box-shadow:0 1px 4px rgba(0,0,0,0.05);">
-                    <div style="text-align:center;">
-                      <div style="font-size:16px;font-weight:800;color:#1A2332;">18,452</div>
-                      <div style="font-size:9px;color:#6B7A8D;margin-top:1px;">Total Alerts</div>
-                    </div>
-                    <div style="width:1px;background:rgba(0,0,0,0.08);"></div>
-                    <div style="text-align:center;">
-                      <div style="font-size:16px;font-weight:800;color:#0066CC;">2,891</div>
-                      <div style="font-size:9px;color:#6B7A8D;margin-top:1px;">Auto-Investigated</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <!-- Center: Sankey + donut -->\n              <div class="cc1-center">\n                <!-- Left Sankey: thin elegant lines from sources to donut -->\n                <svg style="position:absolute;left:0;top:0;width:50%;height:100%;pointer-events:none;" preserveAspectRatio="none" viewBox="0 0 200 380">\n                  <defs>\n                    <linearGradient id="cc1-g1" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#0066CC" stop-opacity="0.5"/><stop offset="100%" stop-color="#0066CC" stop-opacity="0.08"/></linearGradient>\n                    <linearGradient id="cc1-g2" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#3B82F6" stop-opacity="0.45"/><stop offset="100%" stop-color="#3B82F6" stop-opacity="0.08"/></linearGradient>\n                    <linearGradient id="cc1-g3" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#DC2626" stop-opacity="0.4"/><stop offset="100%" stop-color="#DC2626" stop-opacity="0.08"/></linearGradient>\n                    <linearGradient id="cc1-g4" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#7C3AED" stop-opacity="0.4"/><stop offset="100%" stop-color="#7C3AED" stop-opacity="0.08"/></linearGradient>\n                    <linearGradient id="cc1-g5" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#059669" stop-opacity="0.35"/><stop offset="100%" stop-color="#059669" stop-opacity="0.08"/></linearGradient>\n                    <linearGradient id="cc1-g6" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#D97706" stop-opacity="0.35"/><stop offset="100%" stop-color="#D97706" stop-opacity="0.08"/></linearGradient>\n                    <linearGradient id="cc1-g7" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#DB2777" stop-opacity="0.3"/><stop offset="100%" stop-color="#DB2777" stop-opacity="0.08"/></linearGradient>\n                  </defs>\n                  <path d="M0,44 C100,44 150,190 200,190" stroke="url(#cc1-g1)" stroke-width="3.5" fill="none"/>\n                  <path d="M0,87 C100,87 150,190 200,190" stroke="url(#cc1-g2)" stroke-width="3" fill="none"/>\n                  <path d="M0,130 C95,130 148,190 200,190" stroke="url(#cc1-g3)" stroke-width="2.5" fill="none"/>\n                  <path d="M0,173 C90,173 145,190 200,190" stroke="url(#cc1-g4)" stroke-width="2.5" fill="none"/>\n                  <path d="M0,216 C90,216 145,190 200,190" stroke="url(#cc1-g5)" stroke-width="2" fill="none"/>\n                  <path d="M0,259 C95,259 148,190 200,190" stroke="url(#cc1-g6)" stroke-width="2" fill="none"/>\n                  <path d="M0,302 C100,302 150,190 200,190" stroke="url(#cc1-g7)" stroke-width="1.5" fill="none"/>\n                </svg>\n                <div style="position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;">\n                  <div id="cc1-donut-issues" style="width:190px;height:190px;"></div>\n                  <div style="display:flex;gap:16px;margin-top:6px;padding:7px 12px;background:#fff;border-radius:8px;border:1px solid rgba(0,0,0,0.08);box-shadow:0 1px 4px rgba(0,0,0,0.05);">\n                    <div style="text-align:center;">\n                      <div style="font-size:16px;font-weight:800;color:#1A2332;">18,452</div>\n                      <div style="font-size:9px;color:#6B7A8D;margin-top:1px;">Total Alerts</div>\n                    </div>\n                    <div style="width:1px;background:rgba(0,0,0,0.08);"></div>\n                    <div style="text-align:center;">\n                      <div style="font-size:16px;font-weight:800;color:#0066CC;">2,891</div>\n                      <div style="font-size:9px;color:#6B7A8D;margin-top:1px;">Auto-Investigated</div>\n                    </div>\n                  </div>\n                </div>\n              </div>
 
               <!-- Right outcomes -->
               <div class="cc1-right">
