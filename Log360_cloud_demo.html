@@ -2163,6 +2163,7 @@
                   <div class="ov-dd-item" data-view="command-center7">Command Center 7</div>
                   <div class="ov-dd-item" data-view="command-center8">Command Center 8</div>
                   <div class="ov-dd-item" data-view="command-center9">Command Center 9</div>
+                  <div class="ov-dd-item" data-view="command-center10">Command Center 10</div>
                 </div>
               </div>
 
@@ -4273,6 +4274,137 @@
               </div>
             </div>
           </div><!-- /th-panel-command-center9 -->
+
+          <!-- ═══ COMMAND CENTER 10 — Midnight Gold ═══ -->
+          <div class="view-panel" id="th-panel-command-center10" style="background:#070B14;min-height:100%;color:#fff;">
+            <style>
+              .cc10-header{display:flex;align-items:center;justify-content:space-between;padding:14px 24px;background:linear-gradient(90deg,#0D1629,#111827);border-bottom:1px solid rgba(245,158,11,0.2);}
+              .cc10-kpi-bar{display:grid;grid-template-columns:repeat(6,1fr);background:linear-gradient(180deg,rgba(245,158,11,0.03),transparent);border-bottom:1px solid rgba(245,158,11,0.1);}
+              .cc10-kpi{padding:14px 16px;border-right:1px solid rgba(245,158,11,0.08);}
+              .cc10-kpi:last-child{border-right:none;}
+              .cc10-kpi-l{font-size:9px;color:rgba(245,158,11,0.5);font-weight:600;letter-spacing:0.5px;text-transform:uppercase;margin-bottom:4px;}
+              .cc10-kpi-v{font-size:20px;font-weight:800;color:#fff;}
+              .cc10-kpi-s{font-size:10px;color:rgba(245,158,11,0.4);margin-top:2px;}
+              .cc10-body{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;padding:14px 16px;}
+              .cc10-card{background:linear-gradient(145deg,rgba(255,255,255,0.04),rgba(255,255,255,0.01));border:1px solid rgba(245,158,11,0.12);border-radius:12px;padding:18px;display:flex;flex-direction:column;gap:10px;}
+              .cc10-card-h{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:rgba(245,158,11,0.8);display:flex;align-items:center;gap:8px;padding-bottom:8px;border-bottom:1px solid rgba(245,158,11,0.1);}
+              .cc10-gold{color:#F59E0B;text-shadow:0 0 10px rgba(245,158,11,0.3);}
+              .cc10-row{display:flex;justify-content:space-between;align-items:center;font-size:11px;padding:5px 0;border-bottom:1px solid rgba(245,158,11,0.05);}
+              .cc10-row:last-child{border:none;}
+              .cc10-track{height:3px;background:rgba(245,158,11,0.08);border-radius:2px;margin-top:3px;overflow:hidden;}
+              .cc10-fill{height:100%;border-radius:2px;}
+              .cc10-badge{display:inline-block;font-size:9px;font-weight:700;padding:1px 8px;border-radius:20px;border:1px solid rgba(245,158,11,0.4);color:rgba(245,158,11,0.9);background:rgba(245,158,11,0.08);}
+              .cc10-bottom{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;padding:0 16px 16px;}
+              .cc10-bc{background:linear-gradient(145deg,rgba(245,158,11,0.07),rgba(245,158,11,0.02));border:1px solid rgba(245,158,11,0.15);border-radius:10px;padding:14px 16px;}
+              .cc10-bc-l{font-size:9px;color:rgba(245,158,11,0.5);letter-spacing:0.5px;text-transform:uppercase;margin-bottom:4px;}
+              .cc10-bc-v{font-size:22px;font-weight:800;}
+              .cc10-divider{height:1px;background:linear-gradient(90deg,transparent,rgba(245,158,11,0.3),transparent);margin:0;}
+            </style>
+
+            <!-- Header -->
+            <div class="cc10-header">
+              <div style="display:flex;align-items:center;gap:14px;">
+                <div style="width:38px;height:38px;background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.3);border-radius:10px;display:flex;align-items:center;justify-content:center;">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" fill="#F59E0B" opacity="0.9"/></svg>
+                </div>
+                <div>
+                  <div style="font-size:15px;font-weight:800;color:#fff;letter-spacing:0.3px;">Log360 AI — Executive Intelligence</div>
+                  <div style="font-size:10px;color:rgba(245,158,11,0.5);margin-top:1px;">Premium SOC Dashboard &bull; Apr 24, 2026 &bull; Midnight Edition</div>
+                </div>
+                <div class="cc10-badge">ENTERPRISE PREMIUM</div>
+              </div>
+              <div style="display:flex;align-items:center;gap:12px;">
+                <div style="display:flex;align-items:center;gap:5px;font-size:11px;color:rgba(245,158,11,0.7);">
+                  <span style="width:6px;height:6px;background:#F59E0B;border-radius:50%;display:inline-block;"></span>LIVE
+                </div>
+                <div style="font-size:10px;color:rgba(255,255,255,0.3);border:1px solid rgba(245,158,11,0.2);padding:3px 12px;border-radius:20px;">Last 7 Days</div>
+              </div>
+            </div>
+            <div class="cc10-divider"></div>
+
+            <!-- KPI -->
+            <div class="cc10-kpi-bar">
+              <div class="cc10-kpi"><div class="cc10-kpi-l">Events Processed</div><div class="cc10-kpi-v">128.4<span style="font-size:12px;color:rgba(245,158,11,0.5);">M</span></div><div class="cc10-kpi-s">&#9650; 12% &bull; 7 days</div></div>
+              <div class="cc10-kpi"><div class="cc10-kpi-l">Total Alerts</div><div class="cc10-kpi-v" style="color:#FB923C;">18,452</div><div class="cc10-kpi-s">&#9650; 30% surge</div></div>
+              <div class="cc10-kpi"><div class="cc10-kpi-l">AI Investigated</div><div class="cc10-kpi-v" style="color:#34D399;">2,891</div><div class="cc10-kpi-s">15.7% triage rate</div></div>
+              <div class="cc10-kpi"><div class="cc10-kpi-l">Incidents Active</div><div class="cc10-kpi-v" class="cc10-gold">247</div><div class="cc10-kpi-s">218 open &bull; 41 escalated</div></div>
+              <div class="cc10-kpi"><div class="cc10-kpi-l">True Positive Rate</div><div class="cc10-kpi-v" style="color:#34D399;">83%</div><div class="cc10-kpi-s">50 FP suppressed</div></div>
+              <div class="cc10-kpi"><div class="cc10-kpi-l">MTTI &bull; SLA</div><div class="cc10-kpi-v" style="color:#F59E0B;">4m 22s</div><div class="cc10-kpi-s">SLA 94.2%</div></div>
+            </div>
+
+            <!-- Body -->
+            <div class="cc10-body">
+              <!-- Threat landscape -->
+              <div class="cc10-card">
+                <div class="cc10-card-h"><svg width="12" height="12" viewBox="0 0 24 24" fill="#F59E0B"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>Threat Landscape</div>
+                <div id="cc10-radar" style="width:100%;height:160px;"></div>
+                <div style="display:flex;flex-direction:column;gap:4px;">
+                  <div class="cc10-row"><span style="color:rgba(255,255,255,0.5);">Brute Force</span><span class="cc10-gold">1,247</span></div>
+                  <div class="cc10-track"><div class="cc10-fill" style="width:88%;background:linear-gradient(90deg,#F59E0B,#FB923C);"></div></div>
+                  <div class="cc10-row"><span style="color:rgba(255,255,255,0.5);">Priv. Escalation</span><span style="color:#FB923C;">884</span></div>
+                  <div class="cc10-track"><div class="cc10-fill" style="width:63%;background:#FB923C;"></div></div>
+                  <div class="cc10-row"><span style="color:rgba(255,255,255,0.5);">Lateral Movement</span><span style="color:rgba(255,255,255,0.7);">682</span></div>
+                  <div class="cc10-track"><div class="cc10-fill" style="width:49%;background:rgba(245,158,11,0.4);"></div></div>
+                </div>
+              </div>
+
+              <!-- ZIA + TP/FP -->
+              <div class="cc10-card">
+                <div class="cc10-card-h"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/></svg>ZIA Intelligence Engine</div>
+                <div id="cc10-donut" style="width:100%;height:150px;"></div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+                  <div style="background:rgba(52,211,153,0.07);border:1px solid rgba(52,211,153,0.15);border-radius:8px;padding:10px;text-align:center;"><div style="font-size:20px;font-weight:800;color:#34D399;">250</div><div style="font-size:9px;color:rgba(255,255,255,0.3);">True Positives</div></div>
+                  <div style="background:rgba(245,158,11,0.07);border:1px solid rgba(245,158,11,0.15);border-radius:8px;padding:10px;text-align:center;"><div style="font-size:20px;font-weight:800;color:#F59E0B;">50</div><div style="font-size:9px;color:rgba(255,255,255,0.3);">False Positives</div></div>
+                  <div style="background:rgba(251,146,60,0.07);border:1px solid rgba(251,146,60,0.1);border-radius:8px;padding:10px;text-align:center;"><div style="font-size:20px;font-weight:800;color:#FB923C;">247</div><div style="font-size:9px;color:rgba(255,255,255,0.3);">Incidents</div></div>
+                  <div style="background:rgba(245,158,11,0.07);border:1px solid rgba(245,158,11,0.15);border-radius:8px;padding:10px;text-align:center;"><div style="font-size:20px;font-weight:800;color:#F59E0B;">210h</div><div style="font-size:9px;color:rgba(255,255,255,0.3);">Hrs Saved</div></div>
+                </div>
+              </div>
+
+              <!-- Executive summary -->
+              <div class="cc10-card">
+                <div class="cc10-card-h"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>Executive Summary</div>
+                <div style="text-align:center;padding:10px 0;">
+                  <div style="font-size:11px;color:rgba(245,158,11,0.6);margin-bottom:6px;">ANALYST HOURS SAVED</div>
+                  <div style="font-size:56px;font-weight:900;color:#F59E0B;line-height:1;text-shadow:0 0 30px rgba(245,158,11,0.3);">210</div>
+                  <div style="font-size:12px;color:rgba(255,255,255,0.4);margin-top:2px;">hours this week</div>
+                  <div style="font-size:16px;font-weight:700;color:#34D399;margin-top:6px;">$31,500 ROI</div>
+                </div>
+                <div class="cc10-row"><span style="color:rgba(255,255,255,0.4);">Incidents Open</span><span style="color:#60A5FA;font-weight:700;">218</span></div>
+                <div class="cc10-row"><span style="color:rgba(255,255,255,0.4);">Resolved</span><span style="color:#34D399;font-weight:700;">168</span></div>
+                <div class="cc10-row"><span style="color:rgba(255,255,255,0.4);">Escalated (P1)</span><span style="color:#FB923C;font-weight:700;">41</span></div>
+                <div class="cc10-row"><span style="color:rgba(255,255,255,0.4);">SLA Compliance</span><span style="color:#F59E0B;font-weight:700;">94.2%</span></div>
+                <div class="cc10-row"><span style="color:rgba(255,255,255,0.4);">High-Risk Assets</span><span style="color:#FB923C;font-weight:700;">312 / 1,836</span></div>
+              </div>
+            </div>
+
+            <!-- Bottom -->
+            <div class="cc10-bottom">
+              <div class="cc10-bc">
+                <div class="cc10-bc-l">Alert Volume</div>
+                <div class="cc10-bc-v" style="color:#FB923C;">18,452</div>
+                <div id="cc10-sp1" style="height:26px;margin:4px 0;"></div>
+                <div style="font-size:10px;color:rgba(245,158,11,0.4);">&#9650; 30% &bull; 2,636/day</div>
+              </div>
+              <div class="cc10-bc">
+                <div class="cc10-bc-l">AI Triage</div>
+                <div class="cc10-bc-v" style="color:#34D399;">2,891</div>
+                <div id="cc10-sp2" style="height:26px;margin:4px 0;"></div>
+                <div style="font-size:10px;color:rgba(245,158,11,0.4);">15.7% &bull; 413/day</div>
+              </div>
+              <div class="cc10-bc">
+                <div class="cc10-bc-l">Detection Speed</div>
+                <div class="cc10-bc-v" style="color:#F59E0B;">4m 22s</div>
+                <div style="font-size:11px;color:rgba(255,255,255,0.3);margin-top:2px;">MTTD 2m 08s</div>
+                <div style="font-size:10px;color:rgba(245,158,11,0.4);">94.2% SLA met</div>
+              </div>
+              <div class="cc10-bc">
+                <div class="cc10-bc-l">Intelligence</div>
+                <div class="cc10-bc-v" style="color:#F59E0B;">1,247</div>
+                <div style="font-size:11px;color:rgba(255,255,255,0.3);">Threat Intel Matches</div>
+                <div style="font-size:10px;color:rgba(245,158,11,0.4);">&#9650; 22% &bull; 87 sources</div>
+              </div>
+            </div>
+          </div><!-- /th-panel-command-center10 -->
 
           <div class="view-panel" id="th-panel-my-alert-ov">
             <div class="dash">
@@ -9362,6 +9494,7 @@ function initThreatHub() {
     if (v === 'command-center7') initCommandCenter7();
     if (v === 'command-center8') initCommandCenter8();
     if (v === 'command-center9') initCommandCenter9();
+    if (v === 'command-center10') initCommandCenter10();
     setTimeout(function () { ElegantEChart.resize(); }, 150);
   }
 
@@ -10332,6 +10465,69 @@ function initThreatHub() {
           lineStyle:{color:cfg[2],width:2},areaStyle:{color:cfg[3]}}]});
     });
   }  /* end initCommandCenter9 */
+
+  function initCommandCenter10() {
+    /* Radar chart */
+    (function(){
+      var dom=document.getElementById('cc10-radar'); if(!dom) return;
+      var ex=echarts.getInstanceByDom(dom); if(ex) ex.dispose();
+      var c=echarts.init(dom,null,{renderer:'canvas'});
+      c.setOption({
+        backgroundColor:'transparent',
+        radar:{
+          radius:'65%',center:['50%','50%'],
+          indicator:[
+            {name:'Brute Force',max:1500},
+            {name:'Lateral',max:1500},
+            {name:'Exfil',max:1500},
+            {name:'Phishing',max:1500},
+            {name:'PrivEsc',max:1500}
+          ],
+          axisName:{color:'rgba(245,158,11,0.6)',fontSize:9},
+          splitLine:{lineStyle:{color:'rgba(245,158,11,0.08)'}},
+          axisLine:{lineStyle:{color:'rgba(245,158,11,0.1)'}},
+          splitArea:{show:false}
+        },
+        series:[{
+          type:'radar',data:[{value:[1247,682,483,312,884]}],
+          symbol:'none',
+          lineStyle:{color:'#F59E0B',width:1.5},
+          areaStyle:{color:'rgba(245,158,11,0.12)'}
+        }]
+      });
+    })();
+    /* Donut */
+    (function(){
+      var dom=document.getElementById('cc10-donut'); if(!dom) return;
+      var ex=echarts.getInstanceByDom(dom); if(ex) ex.dispose();
+      var c=echarts.init(dom,null,{renderer:'canvas'});
+      c.setOption({
+        backgroundColor:'transparent',
+        series:[{
+          type:'pie',radius:['46%','72%'],center:['50%','50%'],silent:true,label:{show:false},
+          data:[
+            {value:2891,itemStyle:{color:new echarts.graphic.LinearGradient(1,0,0,1,[{offset:0,color:'#F59E0B'},{offset:1,color:'#FBBF24'}])}},
+            {value:15561,itemStyle:{color:'rgba(255,255,255,0.03)'}}
+          ]
+        }],
+        graphic:[{type:'group',left:'center',top:'middle',children:[
+          {type:'text',x:0,y:-12,style:{text:'ZIA',fill:'#F59E0B',fontSize:16,fontWeight:'bold',textAlign:'center'}},
+          {type:'text',x:0,y:8,style:{text:'15.7%',fill:'rgba(245,158,11,0.5)',fontSize:10,textAlign:'center'}}
+        ]}]
+      });
+    })();
+    [['cc10-sp1',[2100,2450,2800,2600,3000,2750,3200],'#FB923C','rgba(251,146,60,0.15)'],
+     ['cc10-sp2',[350,420,480,390,520,440,480],'#34D399','rgba(52,211,153,0.1)']
+    ].forEach(function(cfg){
+      var dom=document.getElementById(cfg[0]); if(!dom) return;
+      var ex=echarts.getInstanceByDom(dom); if(ex) ex.dispose();
+      var c=echarts.init(dom,null,{renderer:'canvas'});
+      c.setOption({backgroundColor:'transparent',grid:{top:0,bottom:0,left:0,right:0},
+        xAxis:{show:false,type:'category'},yAxis:{show:false},
+        series:[{type:'line',smooth:true,symbol:'none',data:cfg[1],
+          lineStyle:{color:cfg[2],width:1.5},areaStyle:{color:cfg[3]}}]});
+    });
+  }  /* end initCommandCenter10 */
 
   /* ═══ EXPLORER — Sidebar Widgets + Thread Table ═══ */
   var thThreadInit = false;
