@@ -2155,6 +2155,7 @@
                   <div class="ov-dd-item" data-view="autoinv-ov">Autonomous Investigation</div>
                   <div class="ov-dd-item" data-view="command-center">Command Center</div>
                   <div class="ov-dd-item" data-view="command-center1">Command Center 1</div>
+                  <div class="ov-dd-item" data-view="command-center2">Command Center 2</div>
                 </div>
               </div>
 
@@ -3215,6 +3216,170 @@
             </div>
 
           </div><!-- /th-panel-command-center1 -->
+
+          <!-- ═══ COMMAND CENTER 2 — Cyberpunk Neon ═══ -->
+          <div class="view-panel" id="th-panel-command-center2" style="background:#0A0014;min-height:100%;color:#fff;">
+            <style>
+              .cc2-header{display:flex;align-items:center;justify-content:space-between;padding:14px 24px;border-bottom:1px solid rgba(168,85,247,0.2);background:rgba(0,0,0,0.4);}
+              .cc2-title{font-size:15px;font-weight:700;color:#fff;display:flex;align-items:center;gap:8px;letter-spacing:0.5px;}
+              .cc2-badge{font-size:10px;background:rgba(168,85,247,0.2);color:#C084FC;border:1px solid rgba(168,85,247,0.5);padding:2px 10px;border-radius:20px;font-weight:600;}
+              .cc2-kpi-bar{display:grid;grid-template-columns:repeat(6,1fr);background:rgba(255,255,255,0.02);border-bottom:1px solid rgba(168,85,247,0.15);}
+              .cc2-kpi-cell{padding:12px 16px;border-right:1px solid rgba(168,85,247,0.1);}
+              .cc2-kpi-cell:last-child{border-right:none;}
+              .cc2-kpi-label{font-size:10px;color:#9B7EC8;font-weight:500;margin-bottom:3px;}
+              .cc2-kpi-val{font-size:17px;font-weight:800;color:#fff;line-height:1.2;text-shadow:0 0 12px rgba(168,85,247,0.6);}
+              .cc2-kpi-sub{font-size:10px;color:#6B5080;margin-top:2px;}
+              .cc2-body{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:rgba(168,85,247,0.08);}
+              .cc2-card{background:#0A0014;padding:20px;display:flex;flex-direction:column;gap:10px;}
+              .cc2-card-title{font-size:11px;font-weight:700;letter-spacing:0.8px;display:flex;align-items:center;gap:6px;}
+              .cc2-big-num{font-size:48px;font-weight:900;line-height:1;}
+              .cc2-row{display:flex;justify-content:space-between;align-items:center;font-size:11px;padding:5px 0;border-bottom:1px solid rgba(168,85,247,0.08);}
+              .cc2-row:last-child{border-bottom:none;}
+              .cc2-bar-track{height:4px;background:rgba(255,255,255,0.06);border-radius:2px;margin-top:4px;overflow:hidden;}
+              .cc2-bar-fill{height:100%;border-radius:2px;}
+              .cc2-bottom{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(168,85,247,0.08);border-top:1px solid rgba(168,85,247,0.1);}
+              .cc2-bottom-cell{background:#0A0014;padding:14px 18px;display:flex;flex-direction:column;gap:4px;}
+              .cc2-bottom-label{font-size:10px;color:#9B7EC8;}
+              .cc2-bottom-val{font-size:20px;font-weight:800;color:#fff;display:flex;align-items:center;gap:8px;}
+              .cc2-spark{flex:1;height:26px;}
+            </style>
+
+            <!-- Header -->
+            <div class="cc2-header">
+              <div class="cc2-title">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#A855F7" stroke-width="1.5"/><path d="M12 6v6l4 2" stroke="#A855F7" stroke-width="1.5" stroke-linecap="round"/></svg>
+                Log360 AI &mdash; SOC Command Center
+                <span class="cc2-badge">CYBER OPS</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:14px;">
+                <span style="font-size:11px;color:#A855F7;font-weight:600;animation:none;">&#9679; LIVE</span>
+                <span style="font-size:11px;color:#6B5080;">Apr 24, 2026 &nbsp;09:41 AM</span>
+                <span style="font-size:11px;color:#C084FC;border:1px solid rgba(168,85,247,0.4);padding:3px 12px;border-radius:20px;">Last 7 Days</span>
+              </div>
+            </div>
+
+            <!-- KPI Bar -->
+            <div class="cc2-kpi-bar">
+              <div class="cc2-kpi-cell"><div class="cc2-kpi-label">Events Processed</div><div class="cc2-kpi-val">128.4<span style="font-size:12px;color:#9B7EC8;">M</span></div><div class="cc2-kpi-sub"><span style="color:#A855F7;">&#9650; 12%</span> 18.3M/day</div></div>
+              <div class="cc2-kpi-cell"><div class="cc2-kpi-label">Threat Intel Matches</div><div class="cc2-kpi-val" style="color:#F472B6;text-shadow:0 0 12px rgba(244,114,182,0.6);">1,247</div><div class="cc2-kpi-sub"><span style="color:#F472B6;">&#9650; 22%</span> 5 feeds</div></div>
+              <div class="cc2-kpi-cell"><div class="cc2-kpi-label">Total Alerts</div><div class="cc2-kpi-val" style="color:#FB923C;text-shadow:0 0 12px rgba(251,146,60,0.5);">18,452</div><div class="cc2-kpi-sub"><span style="color:#FB923C;">&#9650; 30%</span> 2,636/day</div></div>
+              <div class="cc2-kpi-cell"><div class="cc2-kpi-label">AI Investigated</div><div class="cc2-kpi-val" style="color:#34D399;text-shadow:0 0 12px rgba(52,211,153,0.5);">2,891</div><div class="cc2-kpi-sub"><span style="color:#34D399;">15.7%</span> triage rate</div></div>
+              <div class="cc2-kpi-cell"><div class="cc2-kpi-label">Incidents Created</div><div class="cc2-kpi-val" style="color:#FBBF24;text-shadow:0 0 12px rgba(251,191,36,0.5);">247</div><div class="cc2-kpi-sub">218 open &nbsp;41 escalated</div></div>
+              <div class="cc2-kpi-cell"><div class="cc2-kpi-label">TP Rate / MTTI</div><div class="cc2-kpi-val" style="color:#C084FC;">83%</div><div class="cc2-kpi-sub">MTTI <span style="color:#C084FC;">4m 22s</span></div></div>
+            </div>
+
+            <!-- 3-column body -->
+            <div class="cc2-body">
+              <!-- Col 1: Attack surface -->
+              <div class="cc2-card">
+                <div class="cc2-card-title" style="color:#F472B6;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#F472B6" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>TOP ATTACK VECTORS</div>
+                <div>
+                  <div class="cc2-row"><span style="color:#aaa;">Brute Force Login</span><span style="color:#F472B6;font-weight:700;">1,247</span></div>
+                  <div class="cc2-bar-track"><div class="cc2-bar-fill" style="width:88%;background:linear-gradient(90deg,#F472B6,#A855F7);"></div></div>
+                  <div class="cc2-row" style="margin-top:6px;"><span style="color:#aaa;">Privilege Escalation</span><span style="color:#FB923C;font-weight:700;">884</span></div>
+                  <div class="cc2-bar-track"><div class="cc2-bar-fill" style="width:63%;background:linear-gradient(90deg,#FB923C,#FBBF24);"></div></div>
+                  <div class="cc2-row" style="margin-top:6px;"><span style="color:#aaa;">Lateral Movement</span><span style="color:#FBBF24;font-weight:700;">682</span></div>
+                  <div class="cc2-bar-track"><div class="cc2-bar-fill" style="width:49%;background:linear-gradient(90deg,#FBBF24,#34D399);"></div></div>
+                  <div class="cc2-row" style="margin-top:6px;"><span style="color:#aaa;">Data Exfiltration</span><span style="color:#A855F7;font-weight:700;">483</span></div>
+                  <div class="cc2-bar-track"><div class="cc2-bar-fill" style="width:35%;background:linear-gradient(90deg,#A855F7,#C084FC);"></div></div>
+                  <div class="cc2-row" style="margin-top:6px;"><span style="color:#aaa;">Phishing / Email</span><span style="color:#34D399;font-weight:700;">312</span></div>
+                  <div class="cc2-bar-track"><div class="cc2-bar-fill" style="width:22%;background:linear-gradient(90deg,#34D399,#06B6D4);"></div></div>
+                </div>
+                <div style="margin-top:8px;padding:10px;background:rgba(168,85,247,0.06);border:1px solid rgba(168,85,247,0.15);border-radius:6px;">
+                  <div style="font-size:10px;color:#9B7EC8;margin-bottom:4px;">MITRE ATT&amp;CK</div>
+                  <div style="display:flex;gap:8px;">
+                    <div style="text-align:center;"><div style="font-size:18px;font-weight:800;color:#F472B6;">14</div><div style="font-size:9px;color:#6B5080;">Tactics</div></div>
+                    <div style="text-align:center;"><div style="font-size:18px;font-weight:800;color:#A855F7;">68</div><div style="font-size:9px;color:#6B5080;">Techniques</div></div>
+                    <div style="text-align:center;"><div style="font-size:18px;font-weight:800;color:#34D399;">89%</div><div style="font-size:9px;color:#6B5080;">Coverage</div></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Col 2: ZIA Investigation -->
+              <div class="cc2-card">
+                <div class="cc2-card-title" style="color:#34D399;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#34D399" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>ZIA AI ENGINE</div>
+                <div style="text-align:center;padding:10px 0;">
+                  <div id="cc2-donut" style="width:180px;height:180px;margin:0 auto;"></div>
+                  <div style="display:flex;justify-content:center;gap:20px;margin-top:8px;font-size:11px;">
+                    <span style="color:#34D399;">&#9679; 2,891 Investigated</span>
+                    <span style="color:#6B5080;">&#9679; 15,561 Pending</span>
+                  </div>
+                </div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+                  <div style="background:rgba(52,211,153,0.08);border:1px solid rgba(52,211,153,0.2);border-radius:6px;padding:8px 10px;">
+                    <div style="font-size:20px;font-weight:800;color:#34D399;">250</div>
+                    <div style="font-size:9px;color:#6B5080;">True Positives</div>
+                  </div>
+                  <div style="background:rgba(244,114,182,0.08);border:1px solid rgba(244,114,182,0.15);border-radius:6px;padding:8px 10px;">
+                    <div style="font-size:20px;font-weight:800;color:#F472B6;">50</div>
+                    <div style="font-size:9px;color:#6B5080;">False Positives</div>
+                  </div>
+                  <div style="background:rgba(251,191,36,0.08);border:1px solid rgba(251,191,36,0.15);border-radius:6px;padding:8px 10px;">
+                    <div style="font-size:20px;font-weight:800;color:#FBBF24;">247</div>
+                    <div style="font-size:9px;color:#6B5080;">Incidents Created</div>
+                  </div>
+                  <div style="background:rgba(168,85,247,0.08);border:1px solid rgba(168,85,247,0.15);border-radius:6px;padding:8px 10px;">
+                    <div style="font-size:20px;font-weight:800;color:#C084FC;">210h</div>
+                    <div style="font-size:9px;color:#6B5080;">Analyst Hrs Saved</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Col 3: Incident status + assets -->
+              <div class="cc2-card">
+                <div class="cc2-card-title" style="color:#FBBF24;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#FBBF24" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>INCIDENT STATUS</div>
+                <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:8px;">
+                  <div style="border:1px solid rgba(59,130,246,0.3);border-radius:6px;padding:10px;text-align:center;background:rgba(59,130,246,0.06);">
+                    <div style="font-size:26px;font-weight:900;color:#60A5FA;">218</div>
+                    <div style="font-size:9px;color:#6B5080;">Open</div>
+                  </div>
+                  <div style="border:1px solid rgba(52,211,153,0.3);border-radius:6px;padding:10px;text-align:center;background:rgba(52,211,153,0.06);">
+                    <div style="font-size:26px;font-weight:900;color:#34D399;">168</div>
+                    <div style="font-size:9px;color:#6B5080;">Resolved</div>
+                  </div>
+                  <div style="border:1px solid rgba(251,191,36,0.3);border-radius:6px;padding:10px;text-align:center;background:rgba(251,191,36,0.06);">
+                    <div style="font-size:26px;font-weight:900;color:#FBBF24;">41</div>
+                    <div style="font-size:9px;color:#6B5080;">Escalated</div>
+                  </div>
+                </div>
+                <div class="cc2-card-title" style="color:#FB923C;margin-top:6px;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#FB923C" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>AFFECTED ASSETS</div>
+                <div style="display:flex;flex-direction:column;gap:5px;">
+                  <div><div style="display:flex;justify-content:space-between;font-size:10px;margin-bottom:2px;"><span style="color:#aaa;">Workstations</span><span style="color:#fff;font-weight:700;">892 <span style="color:#F472B6;">312 critical</span></span></div><div class="cc2-bar-track"><div class="cc2-bar-fill" style="width:74%;background:linear-gradient(90deg,#3B82F6,#A855F7);"></div></div></div>
+                  <div><div style="display:flex;justify-content:space-between;font-size:10px;margin-bottom:2px;"><span style="color:#aaa;">Servers</span><span style="color:#fff;font-weight:700;">541</span></div><div class="cc2-bar-track"><div class="cc2-bar-fill" style="width:55%;background:linear-gradient(90deg,#A855F7,#F472B6);"></div></div></div>
+                  <div><div style="display:flex;justify-content:space-between;font-size:10px;margin-bottom:2px;"><span style="color:#aaa;">Cloud Instances</span><span style="color:#fff;font-weight:700;">287</span></div><div class="cc2-bar-track"><div class="cc2-bar-fill" style="width:34%;background:linear-gradient(90deg,#34D399,#06B6D4);"></div></div></div>
+                  <div><div style="display:flex;justify-content:space-between;font-size:10px;margin-bottom:2px;"><span style="color:#aaa;">Network Devices</span><span style="color:#fff;font-weight:700;">116</span></div><div class="cc2-bar-track"><div class="cc2-bar-fill" style="width:17%;background:linear-gradient(90deg,#FBBF24,#FB923C);"></div></div></div>
+                </div>
+                <div style="margin-top:8px;padding:8px 10px;background:rgba(244,114,182,0.07);border:1px solid rgba(244,114,182,0.15);border-radius:6px;display:flex;justify-content:space-between;align-items:center;">
+                  <span style="font-size:10px;color:#F472B6;">&#9888; High-risk assets</span>
+                  <span style="font-size:16px;font-weight:800;color:#F472B6;">312</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Bottom strip -->
+            <div class="cc2-bottom">
+              <div class="cc2-bottom-cell">
+                <div class="cc2-bottom-label">Total Alerts (7 Days)</div>
+                <div class="cc2-bottom-val" style="color:#FB923C;">18,452<div class="cc2-spark" id="cc2-spark1"></div></div>
+                <div style="font-size:10px;color:#F472B6;">&#9650; 30% &nbsp;|&nbsp; peak 3,200/day</div>
+              </div>
+              <div class="cc2-bottom-cell">
+                <div class="cc2-bottom-label">Auto-Investigated by ZIA</div>
+                <div class="cc2-bottom-val" style="color:#34D399;">2,891<div class="cc2-spark" id="cc2-spark2"></div></div>
+                <div style="font-size:10px;color:#34D399;">15.7% triage &nbsp;|&nbsp; 413/day avg</div>
+              </div>
+              <div class="cc2-bottom-cell">
+                <div class="cc2-bottom-label">SOC Efficiency</div>
+                <div class="cc2-bottom-val" style="color:#C084FC;">83%<span style="font-size:12px;font-weight:400;color:#6B5080;"> TP rate</span></div>
+                <div style="font-size:10px;color:#9B7EC8;">210 hrs saved &nbsp;|&nbsp; $31,500 ROI</div>
+              </div>
+              <div class="cc2-bottom-cell">
+                <div class="cc2-bottom-label">Mean Time to Investigate</div>
+                <div class="cc2-bottom-val" style="color:#FBBF24;">4m 22s<div id="cc2-spark3" style="flex:1;height:26px;"></div></div>
+                <div style="font-size:10px;color:#9B7EC8;">MTTD 2m 08s &nbsp;|&nbsp; SLA 94.2%</div>
+              </div>
+            </div>
+          </div><!-- /th-panel-command-center2 -->
 
           <div class="view-panel" id="th-panel-my-alert-ov">
             <div class="dash">
@@ -8296,6 +8461,7 @@ function initThreatHub() {
     if (v === 'autoinv-ov') initAutoInvOverview();
     if (v === 'command-center') initCommandCenter();
     if (v === 'command-center1') initCommandCenter1();
+    if (v === 'command-center2') initCommandCenter2();
     setTimeout(function () { ElegantEChart.resize(); }, 150);
   }
 
@@ -8868,6 +9034,54 @@ function initThreatHub() {
       });
     })();
   }  /* end initCommandCenter1 */
+
+  function initCommandCenter2() {
+    /* Donut: investigated vs pending */
+    (function(){
+      var dom = document.getElementById('cc2-donut'); if(!dom) return;
+      var ex = echarts.getInstanceByDom(dom); if(ex) ex.dispose();
+      var c = echarts.init(dom,null,{renderer:'canvas'});
+      c.setOption({
+        backgroundColor:'transparent',
+        series:[{
+          type:'pie',radius:['50%','78%'],center:['50%','50%'],silent:true,label:{show:false},
+          data:[
+            {value:2891,itemStyle:{color:new echarts.graphic.LinearGradient(0,0,1,0,[{offset:0,color:'#34D399'},{offset:1,color:'#06B6D4'}])}},
+            {value:15561,itemStyle:{color:'rgba(255,255,255,0.04)'}}
+          ]
+        }],
+        graphic:[{
+          type:'group',left:'center',top:'middle',
+          children:[
+            {type:'text',x:0,y:-14,style:{text:'ZIA',fill:'#34D399',fontSize:18,fontWeight:'bold',textAlign:'center'}},
+            {type:'text',x:0,y:8,style:{text:'15.7%',fill:'rgba(155,126,200,0.9)',fontSize:10,textAlign:'center'}}
+          ]
+        }]
+      });
+    })();
+    /* Sparklines */
+    ['cc2-spark1','cc2-spark2'].forEach(function(id,i){
+      var dom=document.getElementById(id); if(!dom) return;
+      var ex=echarts.getInstanceByDom(dom); if(ex) ex.dispose();
+      var c=echarts.init(dom,null,{renderer:'canvas'});
+      var colors=[['#FB923C','rgba(251,146,60,0.15)'],['#34D399','rgba(52,211,153,0.15)']];
+      var data=[[2100,2450,2800,2600,3000,2750,3200],[350,420,480,390,520,440,480]];
+      c.setOption({backgroundColor:'transparent',grid:{top:0,bottom:0,left:0,right:0},
+        xAxis:{show:false,type:'category'},yAxis:{show:false},
+        series:[{type:'line',smooth:true,symbol:'none',data:data[i],
+          lineStyle:{color:colors[i][0],width:1.5},areaStyle:{color:colors[i][1]}}]});
+    })();
+    /* MTTI sparkline */
+    (function(){
+      var dom=document.getElementById('cc2-spark3'); if(!dom) return;
+      var ex=echarts.getInstanceByDom(dom); if(ex) ex.dispose();
+      var c=echarts.init(dom,null,{renderer:'canvas'});
+      c.setOption({backgroundColor:'transparent',grid:{top:0,bottom:0,left:0,right:0},
+        xAxis:{show:false,type:'category'},yAxis:{show:false},
+        series:[{type:'line',smooth:true,symbol:'none',data:[5.1,4.8,4.9,4.5,4.4,4.6,4.4],
+          lineStyle:{color:'#FBBF24',width:1.5},areaStyle:{color:'rgba(251,191,36,0.12)'}}]});
+    })();
+  }  /* end initCommandCenter2 */
 
   /* ═══ EXPLORER — Sidebar Widgets + Thread Table ═══ */
   var thThreadInit = false;
