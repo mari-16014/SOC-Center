@@ -2158,6 +2158,7 @@
                   <div class="ov-dd-item" data-view="command-center2">Command Center 2</div>
                   <div class="ov-dd-item" data-view="command-center3">Command Center 3</div>
                   <div class="ov-dd-item" data-view="command-center4">Command Center 4</div>
+                  <div class="ov-dd-item" data-view="command-center5">Command Center 5</div>
                 </div>
               </div>
 
@@ -3649,6 +3650,145 @@
               </div>
             </div>
           </div><!-- /th-panel-command-center4 -->
+
+          <!-- ═══ COMMAND CENTER 5 — Threat Red (Dark) ═══ -->
+          <div class="view-panel" id="th-panel-command-center5" style="background:#0D0505;min-height:100%;color:#fff;">
+            <style>
+              .cc5-header{display:flex;align-items:center;justify-content:space-between;padding:13px 24px;background:rgba(0,0,0,0.5);border-bottom:1px solid rgba(239,68,68,0.2);}
+              .cc5-kpi-bar{display:grid;grid-template-columns:repeat(6,1fr);background:rgba(255,255,255,0.02);border-bottom:1px solid rgba(239,68,68,0.1);}
+              .cc5-kpi-cell{padding:12px 16px;border-right:1px solid rgba(239,68,68,0.08);}
+              .cc5-kpi-cell:last-child{border-right:none;}
+              .cc5-kpi-l{font-size:10px;color:#9B6B6B;font-weight:500;margin-bottom:3px;}
+              .cc5-kpi-v{font-size:18px;font-weight:800;color:#fff;}
+              .cc5-kpi-s{font-size:10px;margin-top:2px;}
+              .cc5-body{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:rgba(239,68,68,0.07);}
+              .cc5-card{background:#0D0505;padding:18px;display:flex;flex-direction:column;gap:10px;}
+              .cc5-card-h{font-size:10px;font-weight:700;letter-spacing:0.8px;text-transform:uppercase;display:flex;align-items:center;gap:6px;}
+              .cc5-row{display:flex;justify-content:space-between;align-items:center;font-size:11px;padding:5px 0;border-bottom:1px solid rgba(239,68,68,0.06);}
+              .cc5-row:last-child{border:none;}
+              .cc5-track{height:3px;background:rgba(255,255,255,0.05);border-radius:2px;margin-top:3px;overflow:hidden;}
+              .cc5-fill{height:100%;border-radius:2px;}
+              .cc5-bottom{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(239,68,68,0.08);border-top:1px solid rgba(239,68,68,0.12);}
+              .cc5-bc{background:#0D0505;padding:14px 18px;}
+              .cc5-bc-l{font-size:10px;color:#9B6B6B;margin-bottom:3px;}
+              .cc5-bc-v{font-size:20px;font-weight:800;}
+              .cc5-bc-s{font-size:10px;color:#6B4040;margin-top:2px;}
+            </style>
+
+            <!-- Header -->
+            <div class="cc5-header">
+              <div style="display:flex;align-items:center;gap:10px;">
+                <div style="width:32px;height:32px;background:rgba(239,68,68,0.15);border:1px solid rgba(239,68,68,0.4);border-radius:8px;display:flex;align-items:center;justify-content:center;">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" fill="#EF4444"/></svg>
+                </div>
+                <div>
+                  <div style="font-size:14px;font-weight:800;color:#fff;">Log360 AI &mdash; Threat Operations</div>
+                  <div style="font-size:10px;color:#9B6B6B;">Critical Threat Monitoring &bull; Apr 24, 2026</div>
+                </div>
+                <span style="font-size:10px;background:rgba(239,68,68,0.15);color:#EF4444;border:1px solid rgba(239,68,68,0.3);padding:2px 10px;border-radius:20px;font-weight:600;">THREAT ACTIVE</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:12px;">
+                <span style="font-size:11px;color:#EF4444;">&#9679; 18,452 Alerts Active</span>
+                <span style="font-size:10px;color:#9B6B6B;border:1px solid rgba(239,68,68,0.2);padding:2px 10px;border-radius:20px;">Last 7 Days</span>
+              </div>
+            </div>
+
+            <!-- KPI -->
+            <div class="cc5-kpi-bar">
+              <div class="cc5-kpi-cell"><div class="cc5-kpi-l">Events Analyzed</div><div class="cc5-kpi-v">128.4<span style="font-size:12px;color:#9B6B6B;">M</span></div><div class="cc5-kpi-s" style="color:#EF4444;">&#9650; 12%</div></div>
+              <div class="cc5-kpi-cell"><div class="cc5-kpi-l">Active Threats</div><div class="cc5-kpi-v" style="color:#EF4444;text-shadow:0 0 10px rgba(239,68,68,0.5);">18,452</div><div class="cc5-kpi-s" style="color:#EF4444;">&#9650; 30% critical surge</div></div>
+              <div class="cc5-kpi-cell"><div class="cc5-kpi-l">Critical + High</div><div class="cc5-kpi-v" style="color:#FB923C;text-shadow:0 0 10px rgba(251,146,60,0.4);">780</div><div class="cc5-kpi-s" style="color:#FB923C;">560 crit &nbsp;220 high</div></div>
+              <div class="cc5-kpi-cell"><div class="cc5-kpi-l">AI Investigated</div><div class="cc5-kpi-v" style="color:#FCD34D;">2,891</div><div class="cc5-kpi-s" style="color:#FCD34D;">247 running</div></div>
+              <div class="cc5-kpi-cell"><div class="cc5-kpi-l">Escalated Incidents</div><div class="cc5-kpi-v" style="color:#EF4444;">41</div><div class="cc5-kpi-s" style="color:#9B6B6B;">218 open &nbsp;168 resolved</div></div>
+              <div class="cc5-kpi-cell"><div class="cc5-kpi-l">MTTI &nbsp;/ SLA</div><div class="cc5-kpi-v" style="color:#FCD34D;">4m 22s</div><div class="cc5-kpi-s" style="color:#9B6B6B;">SLA 94.2%</div></div>
+            </div>
+
+            <!-- Body -->
+            <div class="cc5-body">
+              <!-- Threat feed -->
+              <div class="cc5-card">
+                <div class="cc5-card-h" style="color:#EF4444;"><svg width="11" height="11" viewBox="0 0 24 24" fill="#EF4444"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>LIVE THREAT FEED</div>
+                <div id="cc5-heatmap" style="width:100%;height:110px;"></div>
+                <div style="display:flex;flex-direction:column;gap:5px;">
+                  <div class="cc5-row"><span style="color:#9B6B6B;">Brute Force Login</span><span style="color:#EF4444;font-weight:700;">1,247</span></div>
+                  <div class="cc5-track"><div class="cc5-fill" style="width:88%;background:linear-gradient(90deg,#EF4444,#FB923C);"></div></div>
+                  <div class="cc5-row"><span style="color:#9B6B6B;">Privilege Escalation</span><span style="color:#FB923C;font-weight:700;">884</span></div>
+                  <div class="cc5-track"><div class="cc5-fill" style="width:63%;background:linear-gradient(90deg,#FB923C,#FCD34D);"></div></div>
+                  <div class="cc5-row"><span style="color:#9B6B6B;">Lateral Movement</span><span style="color:#FCD34D;font-weight:700;">682</span></div>
+                  <div class="cc5-track"><div class="cc5-fill" style="width:49%;background:linear-gradient(90deg,#FCD34D,#F59E0B);"></div></div>
+                  <div class="cc5-row"><span style="color:#9B6B6B;">Data Exfiltration</span><span style="color:#F59E0B;font-weight:700;">483</span></div>
+                  <div class="cc5-track"><div class="cc5-fill" style="width:35%;background:#F59E0B;"></div></div>
+                </div>
+              </div>
+
+              <!-- ZIA + TP/FP -->
+              <div class="cc5-card">
+                <div class="cc5-card-h" style="color:#FCD34D;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#FCD34D" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>ZIA THREAT TRIAGE</div>
+                <div id="cc5-donut" style="width:100%;height:150px;"></div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+                  <div style="border:1px solid rgba(239,68,68,0.2);border-radius:6px;padding:8px;background:rgba(239,68,68,0.05);">
+                    <div style="font-size:18px;font-weight:800;color:#EF4444;">250</div>
+                    <div style="font-size:9px;color:#9B6B6B;">True Positives (83%)</div>
+                  </div>
+                  <div style="border:1px solid rgba(252,211,77,0.2);border-radius:6px;padding:8px;background:rgba(252,211,77,0.05);">
+                    <div style="font-size:18px;font-weight:800;color:#FCD34D;">50</div>
+                    <div style="font-size:9px;color:#9B6B6B;">False Positives</div>
+                  </div>
+                  <div style="border:1px solid rgba(251,146,60,0.2);border-radius:6px;padding:8px;background:rgba(251,146,60,0.05);">
+                    <div style="font-size:18px;font-weight:800;color:#FB923C;">247</div>
+                    <div style="font-size:9px;color:#9B6B6B;">Incidents Created</div>
+                  </div>
+                  <div style="border:1px solid rgba(239,68,68,0.15);border-radius:6px;padding:8px;background:rgba(239,68,68,0.04);">
+                    <div style="font-size:18px;font-weight:800;color:#EF4444;">41</div>
+                    <div style="font-size:9px;color:#9B6B6B;">Escalated (P1)</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Asset risk -->
+              <div class="cc5-card">
+                <div class="cc5-card-h" style="color:#FB923C;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#FB923C" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/></svg>AT-RISK ASSETS</div>
+                <div style="text-align:center;padding:10px 0;">
+                  <div style="font-size:52px;font-weight:900;color:#EF4444;line-height:1;text-shadow:0 0 20px rgba(239,68,68,0.4);">1,836</div>
+                  <div style="font-size:11px;color:#9B6B6B;margin-top:4px;">Affected Assets</div>
+                  <div style="display:inline-block;margin-top:6px;background:rgba(239,68,68,0.12);border:1px solid rgba(239,68,68,0.25);color:#EF4444;font-size:11px;font-weight:600;padding:4px 14px;border-radius:20px;">&#9888; 312 Critical Risk</div>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:5px;">
+                  <div class="cc5-row"><span style="color:#9B6B6B;">Workstations</span><span style="color:#EF4444;font-weight:700;">892</span></div>
+                  <div class="cc5-row"><span style="color:#9B6B6B;">Servers</span><span style="color:#FB923C;font-weight:700;">541</span></div>
+                  <div class="cc5-row"><span style="color:#9B6B6B;">Cloud Instances</span><span style="color:#FCD34D;font-weight:700;">287</span></div>
+                  <div class="cc5-row"><span style="color:#9B6B6B;">Network Devices</span><span style="color:#9B6B6B;font-weight:700;">116</span></div>
+                  <div class="cc5-row"><span style="color:#9B6B6B;">Threat Intel Matches</span><span style="color:#EF4444;font-weight:700;">1,247 <span style="font-weight:400;font-size:10px;">&#9650;22%</span></span></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Bottom -->
+            <div class="cc5-bottom">
+              <div class="cc5-bc">
+                <div class="cc5-bc-l">Alert Surge</div>
+                <div class="cc5-bc-v" style="color:#EF4444;">18,452</div>
+                <div id="cc5-sp1" style="height:28px;width:100%;margin:3px 0;"></div>
+                <div class="cc5-bc-s">&#9650; 30% this week</div>
+              </div>
+              <div class="cc5-bc">
+                <div class="cc5-bc-l">AI Triage Rate</div>
+                <div class="cc5-bc-v" style="color:#FCD34D;">15.7%</div>
+                <div id="cc5-sp2" style="height:28px;width:100%;margin:3px 0;"></div>
+                <div class="cc5-bc-s">2,891 / 18,452 total</div>
+              </div>
+              <div class="cc5-bc">
+                <div class="cc5-bc-l">SOC Efficiency</div>
+                <div class="cc5-bc-v" style="color:#FB923C;">83% <span style="font-size:13px;font-weight:400;color:#6B4040;">TP</span></div>
+                <div class="cc5-bc-s">210 hrs saved &nbsp;&bull;&nbsp; $31.5K ROI</div>
+              </div>
+              <div class="cc5-bc">
+                <div class="cc5-bc-l">MTTI / SLA</div>
+                <div class="cc5-bc-v" style="color:#FCD34D;">4m 22s</div>
+                <div class="cc5-bc-s">MTTD 2m 08s &nbsp;&bull;&nbsp; 94.2% SLA</div>
+              </div>
+            </div>
+          </div><!-- /th-panel-command-center5 -->
 
           <div class="view-panel" id="th-panel-my-alert-ov">
             <div class="dash">
@@ -8733,6 +8873,7 @@ function initThreatHub() {
     if (v === 'command-center2') initCommandCenter2();
     if (v === 'command-center3') initCommandCenter3();
     if (v === 'command-center4') initCommandCenter4();
+    if (v === 'command-center5') initCommandCenter5();
     setTimeout(function () { ElegantEChart.resize(); }, 150);
   }
 
@@ -9465,6 +9606,57 @@ function initThreatHub() {
           lineStyle:{color:cfg[2],width:1.5},areaStyle:{color:cfg[3]}}]});
     });
   }  /* end initCommandCenter4 */
+
+  function initCommandCenter5() {
+    /* Heatmap-style 7-day alert bar */
+    (function(){
+      var dom=document.getElementById('cc5-heatmap'); if(!dom) return;
+      var ex=echarts.getInstanceByDom(dom); if(ex) ex.dispose();
+      var c=echarts.init(dom,null,{renderer:'canvas'});
+      c.setOption({
+        backgroundColor:'transparent',
+        grid:{top:8,bottom:24,left:30,right:8},
+        xAxis:{type:'category',data:['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
+          axisLabel:{fontSize:9,color:'#9B6B6B'},axisLine:{lineStyle:{color:'rgba(239,68,68,0.15)'}}},
+        yAxis:{show:false},
+        series:[{type:'bar',barWidth:'60%',
+          data:[2100,2450,2800,2600,3000,2750,3200],
+          itemStyle:{color:new echarts.graphic.LinearGradient(0,0,0,1,[{offset:0,color:'#EF4444'},{offset:1,color:'rgba(239,68,68,0.2)'}])}
+        }]
+      });
+    })();
+    /* Donut */
+    (function(){
+      var dom=document.getElementById('cc5-donut'); if(!dom) return;
+      var ex=echarts.getInstanceByDom(dom); if(ex) ex.dispose();
+      var c=echarts.init(dom,null,{renderer:'canvas'});
+      c.setOption({
+        backgroundColor:'transparent',
+        series:[{
+          type:'pie',radius:['48%','76%'],center:['50%','50%'],silent:true,label:{show:false},
+          data:[
+            {value:2891,itemStyle:{color:new echarts.graphic.LinearGradient(0,0,1,0,[{offset:0,color:'#EF4444'},{offset:1,color:'#FB923C'}])}},
+            {value:15561,itemStyle:{color:'rgba(255,255,255,0.03)'}}
+          ]
+        }],
+        graphic:[{type:'group',left:'center',top:'middle',children:[
+          {type:'text',x:0,y:-12,style:{text:'ZIA',fill:'#EF4444',fontSize:16,fontWeight:'bold',textAlign:'center'}},
+          {type:'text',x:0,y:6,style:{text:'15.7%',fill:'#9B6B6B',fontSize:10,textAlign:'center'}}
+        ]}]
+      });
+    })();
+    [['cc5-sp1',[2100,2450,2800,2600,3000,2750,3200],'#EF4444','rgba(239,68,68,0.1)'],
+     ['cc5-sp2',[15,14,16,14,16,15,16],'#FCD34D','rgba(252,211,77,0.1)']
+    ].forEach(function(cfg){
+      var dom=document.getElementById(cfg[0]); if(!dom) return;
+      var ex=echarts.getInstanceByDom(dom); if(ex) ex.dispose();
+      var c=echarts.init(dom,null,{renderer:'canvas'});
+      c.setOption({backgroundColor:'transparent',grid:{top:0,bottom:0,left:0,right:0},
+        xAxis:{show:false,type:'category'},yAxis:{show:false},
+        series:[{type:'line',smooth:true,symbol:'none',data:cfg[1],
+          lineStyle:{color:cfg[2],width:1.5},areaStyle:{color:cfg[3]}}]});
+    });
+  }  /* end initCommandCenter5 */
 
   /* ═══ EXPLORER — Sidebar Widgets + Thread Table ═══ */
   var thThreadInit = false;
