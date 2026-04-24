@@ -7283,7 +7283,10 @@ function initThreatHub() {
         var view = item.getAttribute('data-view');
         document.querySelectorAll('#threatHubPage .view-panel').forEach(function(p) { p.classList.remove('active'); });
         var panel = document.getElementById('th-panel-' + view);
-        if (panel) panel.classList.add('active');
+        if (panel) { panel.classList.add('active'); }
+        /* scroll the tab body back to top */
+        var tabBody = document.querySelector('#threatHubPage .line-tab__body');
+        if (tabBody) tabBody.scrollTop = 0;
         lazyInitView(view);
       });
     });
@@ -7630,6 +7633,7 @@ function initThreatHub() {
     if (v === 'incident-ov') initIncidentOverview();
     if (v === 'ciso-ov') initCisoOverview();
     if (v === 'my-alert-ov') initMyAlertOverview();
+    if (v === 'autoinv-ov') initAutoInvOverview();
     setTimeout(function () { ElegantEChart.resize(); }, 150);
   }
 
@@ -7803,7 +7807,7 @@ function initThreatHub() {
   }
 
   /* ═══ AUTONOMOUS INVESTIGATION DASHBOARD CHARTS ═══ */
-  (function() {
+  function initAutoInvOverview() {
     /* -- Sparkline: Total Alert Count -- */
     (function(){
       var dom = document.getElementById('ai-sparkline-total');
@@ -7950,7 +7954,7 @@ function initThreatHub() {
         ]
       });
     })();
-  })();
+  }  /* end initAutoInvOverview */
 
   /* ═══ EXPLORER — Sidebar Widgets + Thread Table ═══ */
   var thThreadInit = false;
