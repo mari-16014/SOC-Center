@@ -2160,6 +2160,7 @@
                   <div class="ov-dd-item" data-view="command-center4">Command Center 4</div>
                   <div class="ov-dd-item" data-view="command-center5">Command Center 5</div>
                   <div class="ov-dd-item" data-view="command-center6">Command Center 6</div>
+                  <div class="ov-dd-item" data-view="command-center7">Command Center 7</div>
                 </div>
               </div>
 
@@ -3901,6 +3902,133 @@
               </div>
             </div>
           </div><!-- /th-panel-command-center6 -->
+
+          <!-- ═══ COMMAND CENTER 7 — Terminal / Matrix ═══ -->
+          <div class="view-panel" id="th-panel-command-center7" style="background:#000;min-height:100%;color:#00FF41;font-family:'Courier New',Courier,monospace;">
+            <style>
+              .cc7-header{display:flex;align-items:center;justify-content:space-between;padding:10px 20px;border-bottom:1px solid #00FF41;opacity:0.95;}
+              .cc7-kpi{display:grid;grid-template-columns:repeat(6,1fr);border-bottom:1px solid rgba(0,255,65,0.2);}
+              .cc7-kpi-cell{padding:10px 14px;border-right:1px solid rgba(0,255,65,0.1);}
+              .cc7-kpi-cell:last-child{border-right:none;}
+              .cc7-kpi-l{font-size:9px;color:rgba(0,255,65,0.5);margin-bottom:2px;}
+              .cc7-kpi-v{font-size:16px;font-weight:700;color:#00FF41;}
+              .cc7-kpi-s{font-size:9px;color:rgba(0,255,65,0.4);margin-top:1px;}
+              .cc7-body{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;border-collapse:collapse;}
+              .cc7-panel{border:1px solid rgba(0,255,65,0.15);padding:14px;display:flex;flex-direction:column;gap:8px;}
+              .cc7-panel-h{font-size:10px;font-weight:700;color:#00FF41;border-bottom:1px solid rgba(0,255,65,0.2);padding-bottom:6px;}
+              .cc7-row{display:flex;justify-content:space-between;font-size:11px;padding:4px 0;}
+              .cc7-track{height:2px;background:rgba(0,255,65,0.08);margin-top:2px;}
+              .cc7-fill{height:100%;background:#00FF41;}
+              .cc7-bottom{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid rgba(0,255,65,0.2);}
+              .cc7-bc{padding:10px 14px;border-right:1px solid rgba(0,255,65,0.1);}
+              .cc7-bc:last-child{border-right:none;}
+              .cc7-log{font-size:9px;color:rgba(0,255,65,0.5);margin-top:2px;line-height:1.6;}
+              @keyframes cc7blink{0%,100%{opacity:1}50%{opacity:0}}
+              .cc7-blink{animation:cc7blink 1s step-end infinite;}
+            </style>
+
+            <!-- Header -->
+            <div class="cc7-header">
+              <div>
+                <span style="font-size:13px;font-weight:700;color:#00FF41;">LOG360:AI ~ SOC_COMMAND_CENTER</span><span class="cc7-blink" style="color:#00FF41;margin-left:2px;">_</span>
+              </div>
+              <div style="font-size:10px;color:rgba(0,255,65,0.5);">SYS DATE: 2026-04-24 09:41:00 UTC &nbsp;|&nbsp; UPTIME: 99.97% &nbsp;|&nbsp; 7D WINDOW &nbsp;|&nbsp; <span style="color:#00FF41;">&#9679; MONITORING</span></div>
+            </div>
+
+            <!-- KPI bar -->
+            <div class="cc7-kpi">
+              <div class="cc7-kpi-cell"><div class="cc7-kpi-l">&gt; EVENTS_PROCESSED</div><div class="cc7-kpi-v">128.4M</div><div class="cc7-kpi-s">[+12%] 18.3M/day</div></div>
+              <div class="cc7-kpi-cell"><div class="cc7-kpi-l">&gt; TOTAL_ALERTS</div><div class="cc7-kpi-v" style="color:#FF5555;">18,452</div><div class="cc7-kpi-s" style="color:rgba(255,85,85,0.6);">[SURGE +30%]</div></div>
+              <div class="cc7-kpi-cell"><div class="cc7-kpi-l">&gt; AI_INVESTIGATED</div><div class="cc7-kpi-v">2,891</div><div class="cc7-kpi-s">[15.7%]</div></div>
+              <div class="cc7-kpi-cell"><div class="cc7-kpi-l">&gt; INCIDENTS_OPEN</div><div class="cc7-kpi-v" style="color:#FFFF55;">218</div><div class="cc7-kpi-s" style="color:rgba(255,255,85,0.6);">41 escalated</div></div>
+              <div class="cc7-kpi-cell"><div class="cc7-kpi-l">&gt; TRUE_POSITIVE_RATE</div><div class="cc7-kpi-v">83%</div><div class="cc7-kpi-s">[50 FP]</div></div>
+              <div class="cc7-kpi-cell"><div class="cc7-kpi-l">&gt; MTTI</div><div class="cc7-kpi-v">4m22s</div><div class="cc7-kpi-s">SLA:94.2%</div></div>
+            </div>
+
+            <!-- Body -->
+            <div class="cc7-body">
+              <!-- threats -->
+              <div class="cc7-panel">
+                <div class="cc7-panel-h">&gt;&gt; THREAT_VECTORS [READ]</div>
+                <div class="cc7-row"><span style="color:rgba(0,255,65,0.6);">BRUTE_FORCE_LOGIN</span><span style="color:#FF5555;">1247</span></div>
+                <div class="cc7-track"><div class="cc7-fill" style="width:88%;background:#FF5555;"></div></div>
+                <div class="cc7-row"><span style="color:rgba(0,255,65,0.6);">PRIV_ESCALATION</span><span style="color:#FFAA00;">884</span></div>
+                <div class="cc7-track"><div class="cc7-fill" style="width:63%;background:#FFAA00;"></div></div>
+                <div class="cc7-row"><span style="color:rgba(0,255,65,0.6);">LATERAL_MOVE</span><span style="color:#FFFF55;">682</span></div>
+                <div class="cc7-track"><div class="cc7-fill" style="width:49%;background:#FFFF55;"></div></div>
+                <div class="cc7-row"><span style="color:rgba(0,255,65,0.6);">DATA_EXFILTRATION</span><span style="color:#00FF41;">483</span></div>
+                <div class="cc7-track"><div class="cc7-fill" style="width:35%;"></div></div>
+                <div class="cc7-row"><span style="color:rgba(0,255,65,0.6);">PHISHING</span><span style="color:#00FF41;">312</span></div>
+                <div class="cc7-track"><div class="cc7-fill" style="width:22%;"></div></div>
+                <div style="margin-top:8px;font-size:9px;color:rgba(0,255,65,0.4);">&gt; MITRE_TACTICS: 14 / TECHNIQUES: 68 / COV: 89%</div>
+                <div id="cc7-bar" style="width:100%;height:90px;margin-top:4px;"></div>
+              </div>
+
+              <!-- ZIA terminal -->
+              <div class="cc7-panel">
+                <div class="cc7-panel-h">&gt;&gt; ZIA_ENGINE [STATUS:RUNNING]</div>
+                <div id="cc7-donut" style="width:100%;height:150px;"></div>
+                <div class="cc7-row"><span style="color:rgba(0,255,65,0.6);">INVESTIGATED</span><span style="color:#00FF41;">2891 (15.7%)</span></div>
+                <div class="cc7-row"><span style="color:rgba(0,255,65,0.6);">TRUE_POS</span><span style="color:#00FF41;">250 [83%]</span></div>
+                <div class="cc7-row"><span style="color:rgba(0,255,65,0.6);">FALSE_POS</span><span style="color:#FFFF55;">50</span></div>
+                <div class="cc7-row"><span style="color:rgba(0,255,65,0.6);">INCIDENTS</span><span style="color:#FFAA00;">247</span></div>
+                <div class="cc7-row"><span style="color:rgba(0,255,65,0.6);">HRS_SAVED</span><span style="color:#00FF41;">210</span></div>
+                <div class="cc7-log">&gt; QUEUE: 15,561 pending | RATE: 413/day<br>&gt; CONFIDENCE: 97.2% | MODEL: ZIA-v4.1</div>
+              </div>
+
+              <!-- incidents + assets -->
+              <div class="cc7-panel">
+                <div class="cc7-panel-h">&gt;&gt; INCIDENT_DB [ACTIVE]</div>
+                <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:8px;">
+                  <div style="border:1px solid rgba(0,85,255,0.4);padding:8px;text-align:center;">
+                    <div style="font-size:22px;font-weight:700;color:#5599FF;">218</div>
+                    <div style="font-size:8px;color:rgba(0,255,65,0.4);">OPEN</div>
+                  </div>
+                  <div style="border:1px solid rgba(0,255,65,0.3);padding:8px;text-align:center;">
+                    <div style="font-size:22px;font-weight:700;color:#00FF41;">168</div>
+                    <div style="font-size:8px;color:rgba(0,255,65,0.4);">RESOLVED</div>
+                  </div>
+                  <div style="border:1px solid rgba(255,85,85,0.4);padding:8px;text-align:center;">
+                    <div style="font-size:22px;font-weight:700;color:#FF5555;">41</div>
+                    <div style="font-size:8px;color:rgba(0,255,65,0.4);">ESCALATED</div>
+                  </div>
+                </div>
+                <div class="cc7-panel-h">&gt;&gt; ASSET_RISK_MAP</div>
+                <div class="cc7-row"><span style="color:rgba(0,255,65,0.6);">WORKSTATIONS</span><span style="color:#FFAA00;">892</span></div>
+                <div class="cc7-row"><span style="color:rgba(0,255,65,0.6);">SERVERS</span><span style="color:#FFAA00;">541</span></div>
+                <div class="cc7-row"><span style="color:rgba(0,255,65,0.6);">CLOUD_INSTANCES</span><span style="color:#00FF41;">287</span></div>
+                <div class="cc7-row"><span style="color:rgba(0,255,65,0.6);">NETWORK_DEV</span><span style="color:#00FF41;">116</span></div>
+                <div class="cc7-row"><span style="color:rgba(0,255,65,0.6);">CRITICAL_RISK</span><span style="color:#FF5555;">312</span></div>
+                <div class="cc7-log">&gt; INTEL_MATCHES: 1247 [+22%] | SRC: 87<br>&gt; CORRELATION: 342/528 rules fired</div>
+              </div>
+            </div>
+
+            <!-- Bottom -->
+            <div class="cc7-bottom">
+              <div class="cc7-bc">
+                <div style="font-size:9px;color:rgba(0,255,65,0.5);">ALERTS_7D</div>
+                <div style="font-size:18px;color:#FF5555;font-weight:700;">18,452</div>
+                <div id="cc7-sp1" style="height:24px;margin:3px 0;"></div>
+                <div class="cc7-log">+30% SURGE DETECTED</div>
+              </div>
+              <div class="cc7-bc">
+                <div style="font-size:9px;color:rgba(0,255,65,0.5);">AI_TRIAGE</div>
+                <div style="font-size:18px;color:#00FF41;font-weight:700;">2,891</div>
+                <div id="cc7-sp2" style="height:24px;margin:3px 0;"></div>
+                <div class="cc7-log">15.7% AUTO-RESOLVED</div>
+              </div>
+              <div class="cc7-bc">
+                <div style="font-size:9px;color:rgba(0,255,65,0.5);">SOC_ROI</div>
+                <div style="font-size:18px;color:#00FF41;font-weight:700;">210h &nbsp;$31.5K</div>
+                <div class="cc7-log">83% TP | 50 FP SUPPRESSED<br>MTTI: 4m22s | SLA: 94.2%</div>
+              </div>
+              <div class="cc7-bc">
+                <div style="font-size:9px;color:rgba(0,255,65,0.5);">SYSTEM_STATUS</div>
+                <div style="font-size:18px;color:#00FF41;font-weight:700;">NOMINAL</div>
+                <div class="cc7-log">87 LOG_SOURCES CONNECTED<br>128.4M EVENTS PROCESSED</div>
+              </div>
+            </div>
+          </div><!-- /th-panel-command-center7 -->
 
           <div class="view-panel" id="th-panel-my-alert-ov">
             <div class="dash">
@@ -8987,6 +9115,7 @@ function initThreatHub() {
     if (v === 'command-center4') initCommandCenter4();
     if (v === 'command-center5') initCommandCenter5();
     if (v === 'command-center6') initCommandCenter6();
+    if (v === 'command-center7') initCommandCenter7();
     setTimeout(function () { ElegantEChart.resize(); }, 150);
   }
 
@@ -9823,6 +9952,57 @@ function initThreatHub() {
           lineStyle:{color:cfg[2],width:1.5},areaStyle:{color:cfg[3]}}]});
     });
   }  /* end initCommandCenter6 */
+
+  function initCommandCenter7() {
+    /* Attack vector bar */
+    (function(){
+      var dom=document.getElementById('cc7-bar'); if(!dom) return;
+      var ex=echarts.getInstanceByDom(dom); if(ex) ex.dispose();
+      var c=echarts.init(dom,null,{renderer:'canvas'});
+      c.setOption({
+        backgroundColor:'transparent',
+        grid:{top:4,bottom:20,left:50,right:4},
+        xAxis:{type:'value',show:false},
+        yAxis:{type:'category',data:['Phishing','Exfil','Lateral','PrivEsc','BruteForce'],
+          axisLabel:{fontSize:8,color:'rgba(0,255,65,0.5)'},axisLine:{lineStyle:{color:'rgba(0,255,65,0.1)'}}},
+        series:[{type:'bar',barWidth:'60%',
+          data:[312,483,682,884,1247],
+          itemStyle:{color:function(p){var cs=['#00FF41','#00FF41','#FFFF55','#FFAA00','#FF5555'];return cs[p.dataIndex];}}
+        }]
+      });
+    })();
+    /* ZIA donut */
+    (function(){
+      var dom=document.getElementById('cc7-donut'); if(!dom) return;
+      var ex=echarts.getInstanceByDom(dom); if(ex) ex.dispose();
+      var c=echarts.init(dom,null,{renderer:'canvas'});
+      c.setOption({
+        backgroundColor:'transparent',
+        series:[{
+          type:'pie',radius:['45%','70%'],center:['50%','50%'],silent:true,label:{show:false},
+          data:[
+            {value:2891,itemStyle:{color:'#00FF41'}},
+            {value:15561,itemStyle:{color:'rgba(0,255,65,0.05)'}}
+          ]
+        }],
+        graphic:[{type:'group',left:'center',top:'middle',children:[
+          {type:'text',x:0,y:-12,style:{text:'ZIA',fill:'#00FF41',fontSize:16,fontWeight:'bold',textAlign:'center',fontFamily:'Courier New'}},
+          {type:'text',x:0,y:8,style:{text:'15.7%',fill:'rgba(0,255,65,0.5)',fontSize:10,textAlign:'center',fontFamily:'Courier New'}}
+        ]}]
+      });
+    })();
+    [['cc7-sp1',[2100,2450,2800,2600,3000,2750,3200],'#FF5555'],
+     ['cc7-sp2',[350,420,480,390,520,440,480],'#00FF41']
+    ].forEach(function(cfg){
+      var dom=document.getElementById(cfg[0]); if(!dom) return;
+      var ex=echarts.getInstanceByDom(dom); if(ex) ex.dispose();
+      var c=echarts.init(dom,null,{renderer:'canvas'});
+      c.setOption({backgroundColor:'transparent',grid:{top:0,bottom:0,left:0,right:0},
+        xAxis:{show:false,type:'category'},yAxis:{show:false},
+        series:[{type:'line',smooth:false,symbol:'none',data:cfg[1],
+          lineStyle:{color:cfg[2],width:1.5}}]});
+    });
+  }  /* end initCommandCenter7 */
 
   /* ═══ EXPLORER — Sidebar Widgets + Thread Table ═══ */
   var thThreadInit = false;
