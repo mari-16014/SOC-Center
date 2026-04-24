@@ -2795,14 +2795,14 @@
               .cc1-kpi-val { font-size:18px;font-weight:800;color:#1A2332;line-height:1.2; }
               .cc1-kpi-sub { font-size:10px;color:#6B7A8D; }
               .cc1-flow-section { display:flex;align-items:stretch;min-height:380px;border-bottom:1px solid rgba(0,0,0,0.07);background:#fff; }
-              .cc1-sources { width:250px;flex-shrink:0;padding:18px 0 18px 20px;display:flex;flex-direction:column;justify-content:flex-start;gap:7px;border-right:1px solid rgba(0,0,0,0.07); }
+              .cc1-sources { width:240px;flex-shrink:0;padding:16px 0 16px 18px;display:flex;flex-direction:column;justify-content:flex-start;gap:6px;border-right:1px solid rgba(0,0,0,0.07); }
               .cc1-source-row { display:flex;align-items:center;gap:8px;font-size:11px;color:#6B7A8D; }
               .cc1-source-dot { width:9px;height:9px;border-radius:50%;flex-shrink:0; }
               .cc1-source-name { flex:1; }
               .cc1-source-count { color:#1A2332;font-weight:700;font-size:11px; }
               .cc1-source-events { font-size:10px;color:#6B7A8D;min-width:52px;text-align:right; }
-              .cc1-center { flex:1;display:flex;align-items:center;justify-content:center;position:relative;background:#fff; }
-              .cc1-right { width:330px;flex-shrink:0;display:flex;flex-direction:column;justify-content:flex-start;padding:18px 20px;gap:0;border-left:1px solid rgba(0,0,0,0.07);background:#fff; }
+              .cc1-center { flex:1;display:flex;align-items:center;justify-content:center;position:relative;background:#fff;overflow:hidden; }
+              .cc1-right { width:340px;flex-shrink:0;display:flex;flex-direction:column;justify-content:flex-start;padding:16px 18px;gap:0;border-left:1px solid rgba(0,0,0,0.07);background:#fff; }
               .cc1-flow-circle { border-radius:50%;background:rgba(0,102,204,0.1);border:2px solid #0066CC;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,102,204,0.1); }
               .cc1-flow-circle--amber { background:rgba(217,119,6,0.08);border-color:#D97706;box-shadow:0 2px 8px rgba(217,119,6,0.08); }
               .cc1-flow-circle--green { background:rgba(5,150,105,0.08);border-color:#059669;box-shadow:0 2px 8px rgba(5,150,105,0.08); }
@@ -2917,36 +2917,36 @@
 
               <!-- Center: Sankey + donut -->
               <div class="cc1-center">
-                <svg style="position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none;" preserveAspectRatio="none" viewBox="0 0 400 420">
+                <!-- SVG only covers left half so lines don't bleed into right panel -->
+                <svg style="position:absolute;left:0;top:0;width:50%;height:100%;pointer-events:none;" preserveAspectRatio="none" viewBox="0 0 200 420">
                   <defs>
-                    <linearGradient id="cc1-grad1" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#0066CC" stop-opacity="0.35"/><stop offset="100%" stop-color="#0066CC" stop-opacity="0.03"/></linearGradient>
-                    <linearGradient id="cc1-grad2" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#3B82F6" stop-opacity="0.35"/><stop offset="100%" stop-color="#3B82F6" stop-opacity="0.03"/></linearGradient>
-                    <linearGradient id="cc1-grad3" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#DC2626" stop-opacity="0.3"/><stop offset="100%" stop-color="#DC2626" stop-opacity="0.03"/></linearGradient>
-                    <linearGradient id="cc1-grad4" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#7C3AED" stop-opacity="0.3"/><stop offset="100%" stop-color="#7C3AED" stop-opacity="0.03"/></linearGradient>
-                    <linearGradient id="cc1-grad5" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#059669" stop-opacity="0.28"/><stop offset="100%" stop-color="#059669" stop-opacity="0.03"/></linearGradient>
-                    <linearGradient id="cc1-grad6" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#D97706" stop-opacity="0.28"/><stop offset="100%" stop-color="#D97706" stop-opacity="0.03"/></linearGradient>
-                    <linearGradient id="cc1-grad7" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#DB2777" stop-opacity="0.25"/><stop offset="100%" stop-color="#DB2777" stop-opacity="0.03"/></linearGradient>
+                    <linearGradient id="cc1-grad1" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#0066CC" stop-opacity="0.4"/><stop offset="100%" stop-color="#0066CC" stop-opacity="0.05"/></linearGradient>
+                    <linearGradient id="cc1-grad2" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#3B82F6" stop-opacity="0.4"/><stop offset="100%" stop-color="#3B82F6" stop-opacity="0.05"/></linearGradient>
+                    <linearGradient id="cc1-grad3" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#DC2626" stop-opacity="0.35"/><stop offset="100%" stop-color="#DC2626" stop-opacity="0.05"/></linearGradient>
+                    <linearGradient id="cc1-grad4" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#7C3AED" stop-opacity="0.35"/><stop offset="100%" stop-color="#7C3AED" stop-opacity="0.05"/></linearGradient>
+                    <linearGradient id="cc1-grad5" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#059669" stop-opacity="0.3"/><stop offset="100%" stop-color="#059669" stop-opacity="0.05"/></linearGradient>
+                    <linearGradient id="cc1-grad6" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#D97706" stop-opacity="0.3"/><stop offset="100%" stop-color="#D97706" stop-opacity="0.05"/></linearGradient>
+                    <linearGradient id="cc1-grad7" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#DB2777" stop-opacity="0.28"/><stop offset="100%" stop-color="#DB2777" stop-opacity="0.05"/></linearGradient>
                   </defs>
-                  <path d="M0,70 C120,70 160,210 200,210" stroke="url(#cc1-grad1)" stroke-width="13" fill="none" opacity="0.9"/>
-                  <path d="M0,120 C120,120 160,210 200,210" stroke="url(#cc1-grad2)" stroke-width="11" fill="none" opacity="0.9"/>
-                  <path d="M0,168 C110,168 155,210 200,210" stroke="url(#cc1-grad3)" stroke-width="9" fill="none" opacity="0.9"/>
-                  <path d="M0,215 C100,215 150,210 200,210" stroke="url(#cc1-grad4)" stroke-width="8" fill="none" opacity="0.9"/>
-                  <path d="M0,262 C100,262 150,210 200,210" stroke="url(#cc1-grad5)" stroke-width="7" fill="none" opacity="0.8"/>
-                  <path d="M0,308 C110,308 155,210 200,210" stroke="url(#cc1-grad6)" stroke-width="6" fill="none" opacity="0.8"/>
-                  <path d="M0,354 C120,354 160,210 200,210" stroke="url(#cc1-grad7)" stroke-width="5" fill="none" opacity="0.7"/>
-                  <path d="M200,210 C250,210 310,145 400,130" stroke="rgba(0,102,204,0.25)" stroke-width="16" fill="none"/>
-                  <path d="M200,210 C250,210 310,280 400,295" stroke="rgba(217,119,6,0.2)" stroke-width="10" fill="none"/>
+                  <!-- All paths end at x=200 (right edge of this SVG = center of cc1-center) -->
+                  <path d="M0,55 C90,55 140,210 200,210" stroke="url(#cc1-grad1)" stroke-width="12" fill="none"/>
+                  <path d="M0,105 C90,105 140,210 200,210" stroke="url(#cc1-grad2)" stroke-width="10" fill="none"/>
+                  <path d="M0,155 C85,155 138,210 200,210" stroke="url(#cc1-grad3)" stroke-width="8" fill="none"/>
+                  <path d="M0,205 C80,205 138,210 200,210" stroke="url(#cc1-grad4)" stroke-width="7" fill="none"/>
+                  <path d="M0,255 C80,255 138,210 200,210" stroke="url(#cc1-grad5)" stroke-width="6" fill="none"/>
+                  <path d="M0,305 C85,305 140,210 200,210" stroke="url(#cc1-grad6)" stroke-width="5" fill="none"/>
+                  <path d="M0,355 C90,355 145,210 200,210" stroke="url(#cc1-grad7)" stroke-width="4" fill="none"/>
                 </svg>
                 <div style="position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;">
-                  <div id="cc1-donut-issues" style="width:210px;height:210px;"></div>
-                  <div style="display:flex;gap:22px;margin-top:-4px;">
+                  <div id="cc1-donut-issues" style="width:200px;height:200px;"></div>
+                  <div style="display:flex;gap:20px;margin-top:4px;padding:8px 14px;background:rgba(0,0,0,0.02);border-radius:8px;border:1px solid rgba(0,0,0,0.06);">
                     <div style="text-align:center;">
-                      <div style="font-size:19px;font-weight:800;color:#1A2332;">18,452</div>
+                      <div style="font-size:17px;font-weight:800;color:#1A2332;">18,452</div>
                       <div style="font-size:10px;color:#6B7A8D;">Total Alerts</div>
                     </div>
                     <div style="width:1px;background:rgba(0,0,0,0.1);"></div>
                     <div style="text-align:center;">
-                      <div style="font-size:19px;font-weight:800;color:#0066CC;">2,891</div>
+                      <div style="font-size:17px;font-weight:800;color:#0066CC;">2,891</div>
                       <div style="font-size:10px;color:#6B7A8D;">Auto-Investigated</div>
                     </div>
                   </div>
@@ -8763,13 +8763,17 @@ function initThreatHub() {
           ]
         }],
         graphic:[{
-          type:'group',left:'center',top:'34%',
+          type:'group',
+          left:'center',
+          top:'middle',
           children:[{
             type:'text',
-            style:{text:'ZIA',fill:'#0066CC',fontSize:20,fontWeight:'bold',textAlign:'center'}
+            x:0, y:-14,
+            style:{text:'ZIA',fill:'#0066CC',fontSize:18,fontWeight:'bold',textAlign:'center'}
           },{
-            type:'text',top:24,
-            style:{text:'AI Engine',fill:'rgba(107,122,141,0.9)',fontSize:9,textAlign:'center'}
+            type:'text',
+            x:0, y:8,
+            style:{text:'AI Engine',fill:'rgba(107,122,141,0.85)',fontSize:9,textAlign:'center'}
           }]
         }]
       });
