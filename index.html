@@ -2794,8 +2794,8 @@
               .cc1-kpi-label { font-size:10px;color:#6B7A8D;font-weight:500;white-space:nowrap; }
               .cc1-kpi-val { font-size:18px;font-weight:800;color:#1A2332;line-height:1.2; }
               .cc1-kpi-sub { font-size:10px;color:#6B7A8D; }
-              .cc1-flow-section { display:flex;align-items:stretch;min-height:380px;border-bottom:1px solid rgba(0,0,0,0.07);background:#fff; }
-              .cc1-sources { width:240px;flex-shrink:0;padding:16px 0 16px 18px;display:flex;flex-direction:column;justify-content:flex-start;gap:6px;border-right:1px solid rgba(0,0,0,0.07); }
+              .cc1-flow-section { display:flex;align-items:stretch;border-bottom:1px solid rgba(0,0,0,0.07);background:#fff; }
+              .cc1-sources { width:220px;flex-shrink:0;padding:14px 0 14px 16px;display:flex;flex-direction:column;justify-content:flex-start;gap:5px;border-right:1px solid rgba(0,0,0,0.07); }
               .cc1-source-row { display:flex;align-items:center;gap:8px;font-size:11px;color:#6B7A8D; }
               .cc1-source-dot { width:9px;height:9px;border-radius:50%;flex-shrink:0; }
               .cc1-source-name { flex:1; }
@@ -2886,8 +2886,8 @@
               <!-- Data Sources -->
               <div class="cc1-sources">
                 <div style="font-size:10px;color:#6B7A8D;font-weight:600;margin-bottom:4px;letter-spacing:0.5px;">LOG SOURCES &nbsp;<span style="font-weight:400;color:#0066CC;">87 connected</span></div>
-                <div style="display:grid;grid-template-columns:1fr auto auto;font-size:9px;color:#9AABBA;padding:0 0 4px 18px;border-bottom:1px solid rgba(0,0,0,0.05);gap:8px;">
-                  <span>Source</span><span>Dev.</span><span style="min-width:52px;text-align:right;">Events/7d</span>
+                <div style="display:grid;grid-template-columns:1fr 34px 48px;font-size:9px;color:#9AABBA;padding:0 0 4px 18px;border-bottom:1px solid rgba(0,0,0,0.05);gap:4px;">
+                  <span>Source</span><span style="text-align:right;">Dev</span><span style="text-align:right;">Events/7d</span>
                 </div>
                 <div class="cc1-source-row"><div class="cc1-source-dot" style="background:#0066CC;"></div><span class="cc1-source-name">Windows / AD Logs</span><span class="cc1-source-count">21</span><span class="cc1-source-events">48.2M</span></div>
                 <div class="cc1-source-row"><div class="cc1-source-dot" style="background:#3B82F6;"></div><span class="cc1-source-name">Network Devices</span><span class="cc1-source-count">18</span><span class="cc1-source-events">31.7M</span></div>
@@ -2917,7 +2917,7 @@
 
               <!-- Center: Sankey + donut -->
               <div class="cc1-center">
-                <svg style="position:absolute;left:0;top:0;width:50%;height:100%;pointer-events:none;" preserveAspectRatio="none" viewBox="0 0 200 380">
+                <svg style="position:absolute;left:0;top:0;width:45%;height:100%;pointer-events:none;" preserveAspectRatio="none" viewBox="0 0 200 380">
                   <defs>
                     <linearGradient id="cc1-g1" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#0066CC" stop-opacity="0.5"/><stop offset="100%" stop-color="#0066CC" stop-opacity="0.06"/></linearGradient>
                     <linearGradient id="cc1-g2" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#3B82F6" stop-opacity="0.45"/><stop offset="100%" stop-color="#3B82F6" stop-opacity="0.06"/></linearGradient>
