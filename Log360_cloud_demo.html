@@ -2157,6 +2157,7 @@
                   <div class="ov-dd-item" data-view="command-center1">Command Center 1</div>
                   <div class="ov-dd-item" data-view="command-center2">Command Center 2</div>
                   <div class="ov-dd-item" data-view="command-center3">Command Center 3</div>
+                  <div class="ov-dd-item" data-view="command-center4">Command Center 4</div>
                 </div>
               </div>
 
@@ -3528,6 +3529,126 @@
               </div>
             </div>
           </div><!-- /th-panel-command-center3 -->
+
+          <!-- ═══ COMMAND CENTER 4 — Minimal Flat ═══ -->
+          <div class="view-panel" id="th-panel-command-center4" style="background:#F8F9FC;min-height:100%;">
+            <style>
+              .cc4-wrap{max-width:1200px;margin:0 auto;padding:0 0 16px 0;}
+              .cc4-header{display:flex;align-items:center;justify-content:space-between;padding:14px 24px;background:#fff;border-bottom:1px solid #E5E7EB;}
+              .cc4-logo{display:flex;align-items:center;gap:10px;}
+              .cc4-logo-icon{width:32px;height:32px;background:linear-gradient(135deg,#6366F1,#8B5CF6);border-radius:8px;display:flex;align-items:center;justify-content:center;}
+              .cc4-logo-text{font-size:14px;font-weight:800;color:#111827;}
+              .cc4-logo-sub{font-size:10px;color:#9CA3AF;font-weight:400;}
+              .cc4-kpi-row{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;padding:14px 16px;background:#F8F9FC;}
+              .cc4-kpi{background:#fff;border-radius:12px;padding:14px 16px;border:1px solid #F3F4F6;}
+              .cc4-kpi-n{font-size:22px;font-weight:800;color:#111827;margin-bottom:2px;}
+              .cc4-kpi-l{font-size:10px;color:#9CA3AF;font-weight:500;}
+              .cc4-kpi-badge{display:inline-block;font-size:9px;padding:2px 7px;border-radius:20px;font-weight:600;margin-top:3px;}
+              .cc4-section{padding:0 16px 14px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;}
+              .cc4-card{background:#fff;border-radius:12px;border:1px solid #F3F4F6;padding:16px;}
+              .cc4-card-h{font-size:12px;font-weight:700;color:#374151;margin-bottom:12px;display:flex;align-items:center;gap:6px;}
+              .cc4-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid #F9FAFB;font-size:11px;}
+              .cc4-row:last-child{border:none;}
+              .cc4-track{height:4px;background:#F3F4F6;border-radius:2px;margin-top:3px;overflow:hidden;}
+              .cc4-fill{height:100%;border-radius:2px;background:#6366F1;}
+              .cc4-bottom{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;padding:0 16px;}
+              .cc4-stat{background:#fff;border-radius:12px;border:1px solid #F3F4F6;padding:14px 16px;display:flex;flex-direction:column;gap:4px;}
+              .cc4-stat-n{font-size:20px;font-weight:800;color:#111827;}
+              .cc4-stat-l{font-size:10px;color:#9CA3AF;}
+            </style>
+
+            <div class="cc4-wrap">
+              <!-- Header -->
+              <div class="cc4-header">
+                <div class="cc4-logo">
+                  <div class="cc4-logo-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+                  <div><div class="cc4-logo-text">Log360 AI &mdash; Command Center</div><div class="cc4-logo-sub">SOC Intelligence Dashboard &nbsp;&bull;&nbsp; Apr 24, 2026</div></div>
+                </div>
+                <div style="display:flex;gap:8px;align-items:center;">
+                  <span style="font-size:10px;color:#6366F1;background:#EEF2FF;padding:4px 12px;border-radius:20px;font-weight:600;">&#9679; Live</span>
+                  <span style="font-size:10px;color:#9CA3AF;background:#F9FAFB;padding:4px 12px;border-radius:20px;">Last 7 Days</span>
+                </div>
+              </div>
+
+              <!-- KPI row -->
+              <div class="cc4-kpi-row">
+                <div class="cc4-kpi"><div class="cc4-kpi-n" style="color:#6366F1;">128.4M</div><div class="cc4-kpi-l">Events Processed</div><div class="cc4-kpi-badge" style="background:#EEF2FF;color:#6366F1;">&#9650; 12%</div></div>
+                <div class="cc4-kpi"><div class="cc4-kpi-n" style="color:#F59E0B;">18,452</div><div class="cc4-kpi-l">Total Alerts</div><div class="cc4-kpi-badge" style="background:#FFFBEB;color:#D97706;">&#9650; 30%</div></div>
+                <div class="cc4-kpi"><div class="cc4-kpi-n" style="color:#10B981;">2,891</div><div class="cc4-kpi-l">AI Investigated</div><div class="cc4-kpi-badge" style="background:#ECFDF5;color:#059669;">15.7%</div></div>
+                <div class="cc4-kpi"><div class="cc4-kpi-n" style="color:#3B82F6;">247</div><div class="cc4-kpi-l">Incidents</div><div class="cc4-kpi-badge" style="background:#EFF6FF;color:#2563EB;">218 open</div></div>
+                <div class="cc4-kpi"><div class="cc4-kpi-n" style="color:#10B981;">83%</div><div class="cc4-kpi-l">True Positive Rate</div><div class="cc4-kpi-badge" style="background:#ECFDF5;color:#059669;">50 FP</div></div>
+                <div class="cc4-kpi"><div class="cc4-kpi-n">4m 22s</div><div class="cc4-kpi-l">MTTI</div><div class="cc4-kpi-badge" style="background:#F0FDF4;color:#16A34A;">SLA 94.2%</div></div>
+              </div>
+
+              <!-- 3-col section -->
+              <div class="cc4-section">
+                <!-- Col 1: ZIA summary -->
+                <div class="cc4-card">
+                  <div class="cc4-card-h" style="color:#6366F1;">ZIA Investigation Summary</div>
+                  <div id="cc4-bar" style="width:100%;height:130px;"></div>
+                  <div class="cc4-row"><span style="color:#6B7280;">Investigated</span><span style="font-weight:700;color:#6366F1;">2,891</span></div>
+                  <div class="cc4-row"><span style="color:#6B7280;">True Positives (83%)</span><span style="font-weight:700;color:#10B981;">250</span></div>
+                  <div class="cc4-row"><span style="color:#6B7280;">False Positives</span><span style="font-weight:700;color:#F59E0B;">50</span></div>
+                  <div class="cc4-row"><span style="color:#6B7280;">Analyst Hours Saved</span><span style="font-weight:700;color:#6366F1;">210 hrs</span></div>
+                </div>
+
+                <!-- Col 2: Severity + incidents -->
+                <div class="cc4-card">
+                  <div class="cc4-card-h" style="color:#EF4444;">Severity Distribution</div>
+                  <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:10px;">
+                    <div><div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:2px;"><span style="color:#6B7280;">Critical</span><span style="font-weight:600;color:#EF4444;">560</span></div><div class="cc4-track"><div class="cc4-fill" style="width:88%;background:#EF4444;"></div></div></div>
+                    <div><div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:2px;"><span style="color:#6B7280;">High</span><span style="font-weight:600;color:#F59E0B;">220</span></div><div class="cc4-track"><div class="cc4-fill" style="width:55%;background:#F59E0B;"></div></div></div>
+                    <div><div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:2px;"><span style="color:#6B7280;">Medium</span><span style="font-weight:600;color:#3B82F6;">59</span></div><div class="cc4-track"><div class="cc4-fill" style="width:22%;background:#3B82F6;"></div></div></div>
+                  </div>
+                  <div class="cc4-card-h" style="color:#3B82F6;">Incident Status</div>
+                  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;">
+                    <div style="background:#EFF6FF;border-radius:8px;padding:8px;text-align:center;"><div style="font-size:20px;font-weight:800;color:#3B82F6;">218</div><div style="font-size:9px;color:#9CA3AF;">Open</div></div>
+                    <div style="background:#F0FDF4;border-radius:8px;padding:8px;text-align:center;"><div style="font-size:20px;font-weight:800;color:#10B981;">168</div><div style="font-size:9px;color:#9CA3AF;">Resolved</div></div>
+                    <div style="background:#FFF1F2;border-radius:8px;padding:8px;text-align:center;"><div style="font-size:20px;font-weight:800;color:#EF4444;">41</div><div style="font-size:9px;color:#9CA3AF;">Escalated</div></div>
+                  </div>
+                </div>
+
+                <!-- Col 3: Coverage -->
+                <div class="cc4-card">
+                  <div class="cc4-card-h" style="color:#8B5CF6;">Coverage &amp; Intelligence</div>
+                  <div class="cc4-row"><span style="color:#6B7280;">Log Sources Connected</span><span style="font-weight:700;color:#6366F1;">87</span></div>
+                  <div class="cc4-row"><span style="color:#6B7280;">Correlation Rules Fired</span><span style="font-weight:700;">342 <span style="font-size:10px;color:#9CA3AF;">/528</span></span></div>
+                  <div class="cc4-row"><span style="color:#6B7280;">Threat Intel Matches</span><span style="font-weight:700;color:#F59E0B;">1,247</span></div>
+                  <div class="cc4-row"><span style="color:#6B7280;">Affected Assets</span><span style="font-weight:700;color:#EF4444;">1,836</span></div>
+                  <div class="cc4-row"><span style="color:#6B7280;">High-Risk Assets</span><span style="font-weight:700;color:#EF4444;">312</span></div>
+                  <div id="cc4-pie" style="width:100%;height:110px;margin-top:4px;"></div>
+                </div>
+              </div>
+
+              <!-- Bottom stats -->
+              <div class="cc4-bottom">
+                <div class="cc4-stat">
+                  <div class="cc4-stat-l">Alert Volume Trend</div>
+                  <div class="cc4-stat-n" style="color:#F59E0B;">18,452</div>
+                  <div id="cc4-sp1" style="height:28px;width:100%;"></div>
+                  <div style="font-size:10px;color:#10B981;">&#9650; 30% WoW</div>
+                </div>
+                <div class="cc4-stat">
+                  <div class="cc4-stat-l">ZIA Investigations</div>
+                  <div class="cc4-stat-n" style="color:#6366F1;">2,891</div>
+                  <div id="cc4-sp2" style="height:28px;width:100%;"></div>
+                  <div style="font-size:10px;color:#10B981;">413/day average</div>
+                </div>
+                <div class="cc4-stat">
+                  <div class="cc4-stat-l">Hours Saved (ROI)</div>
+                  <div class="cc4-stat-n" style="color:#10B981;">210 hrs</div>
+                  <div style="font-size:12px;color:#059669;font-weight:600;margin-top:2px;">$31,500 saved</div>
+                  <div style="font-size:10px;color:#9CA3AF;">@$150/analyst hr</div>
+                </div>
+                <div class="cc4-stat">
+                  <div class="cc4-stat-l">MTTI / MTTD</div>
+                  <div class="cc4-stat-n">4m 22s</div>
+                  <div style="font-size:12px;color:#9CA3AF;">MTTD: 2m 08s</div>
+                  <div style="font-size:10px;color:#10B981;">SLA 94.2% met</div>
+                </div>
+              </div>
+            </div>
+          </div><!-- /th-panel-command-center4 -->
 
           <div class="view-panel" id="th-panel-my-alert-ov">
             <div class="dash">
@@ -8611,6 +8732,7 @@ function initThreatHub() {
     if (v === 'command-center1') initCommandCenter1();
     if (v === 'command-center2') initCommandCenter2();
     if (v === 'command-center3') initCommandCenter3();
+    if (v === 'command-center4') initCommandCenter4();
     setTimeout(function () { ElegantEChart.resize(); }, 150);
   }
 
@@ -9290,6 +9412,59 @@ function initThreatHub() {
           lineStyle:{color:cfg[2],width:1.5},areaStyle:{color:cfg[3]}}]});
     });
   }  /* end initCommandCenter3 */
+
+  function initCommandCenter4() {
+    /* Bar chart - ZIA breakdown */
+    (function(){
+      var dom=document.getElementById('cc4-bar'); if(!dom) return;
+      var ex=echarts.getInstanceByDom(dom); if(ex) ex.dispose();
+      var c=echarts.init(dom,null,{renderer:'canvas'});
+      c.setOption({
+        backgroundColor:'transparent',
+        grid:{top:8,bottom:28,left:40,right:8},
+        xAxis:{type:'category',data:['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
+          axisLabel:{fontSize:9,color:'#9CA3AF'},axisLine:{lineStyle:{color:'#F3F4F6'}}},
+        yAxis:{show:false},
+        series:[{type:'bar',barWidth:'55%',
+          data:[380,420,460,350,510,390,381],
+          itemStyle:{color:new echarts.graphic.LinearGradient(0,0,0,1,[{offset:0,color:'#8B5CF6'},{offset:1,color:'#6366F1'}])},
+          label:{show:true,position:'top',fontSize:9,color:'#374151'}
+        }]
+      });
+    })();
+    /* Pie - Log source types */
+    (function(){
+      var dom=document.getElementById('cc4-pie'); if(!dom) return;
+      var ex=echarts.getInstanceByDom(dom); if(ex) ex.dispose();
+      var c=echarts.init(dom,null,{renderer:'canvas'});
+      c.setOption({
+        backgroundColor:'transparent',
+        legend:{show:false},
+        series:[{
+          type:'pie',radius:['35%','60%'],center:['50%','50%'],silent:true,
+          label:{show:true,fontSize:9,color:'#374151',formatter:'{b} {d}%'},
+          data:[
+            {value:892,name:'Workstations',itemStyle:{color:'#6366F1'}},
+            {value:541,name:'Servers',itemStyle:{color:'#8B5CF6'}},
+            {value:287,name:'Cloud',itemStyle:{color:'#A78BFA'}},
+            {value:116,name:'Network',itemStyle:{color:'#C4B5FD'}}
+          ]
+        }]
+      });
+    })();
+    /* Sparklines */
+    [['cc4-sp1',[2100,2450,2800,2600,3000,2750,3200],'#F59E0B','rgba(245,158,11,0.1)'],
+     ['cc4-sp2',[350,420,480,390,520,440,480],'#6366F1','rgba(99,102,241,0.1)']
+    ].forEach(function(cfg){
+      var dom=document.getElementById(cfg[0]); if(!dom) return;
+      var ex=echarts.getInstanceByDom(dom); if(ex) ex.dispose();
+      var c=echarts.init(dom,null,{renderer:'canvas'});
+      c.setOption({backgroundColor:'transparent',grid:{top:0,bottom:0,left:0,right:0},
+        xAxis:{show:false,type:'category'},yAxis:{show:false},
+        series:[{type:'line',smooth:true,symbol:'none',data:cfg[1],
+          lineStyle:{color:cfg[2],width:1.5},areaStyle:{color:cfg[3]}}]});
+    });
+  }  /* end initCommandCenter4 */
 
   /* ═══ EXPLORER — Sidebar Widgets + Thread Table ═══ */
   var thThreadInit = false;
