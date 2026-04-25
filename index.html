@@ -2156,6 +2156,7 @@
                   <div class="ov-dd-item" data-view="command-center">Command Center</div>
                   <div class="ov-dd-item" data-view="command-center1">Command Center 1</div>
                   <div class="ov-dd-item" data-view="command-center2">Command Center 2</div>
+                  <div class="ov-dd-item" data-view="command-center3">Command Center 3</div>
                 </div>
               </div>
 
@@ -3471,6 +3472,199 @@
               </div>
             </div>
           </div><!-- /th-panel-command-center2 -->
+
+          <!-- ═══ COMMAND CENTER 3 — PURPLE RISK INTELLIGENCE BOARD ═══ -->
+          <div class="view-panel" id="th-panel-command-center3" style="background:#12001F;min-height:100%;color:#E9D5FF;font-family:'Segoe UI',system-ui,sans-serif;display:flex;flex-direction:column;overflow:hidden;">
+            <style>
+              #th-panel-command-center3 * { box-sizing:border-box; }
+
+              /* ── top header ── */
+              .c3hd { display:flex;align-items:center;justify-content:space-between;padding:12px 26px;background:linear-gradient(90deg,rgba(124,58,237,0.2),rgba(232,121,249,0.08));border-bottom:1px solid rgba(167,139,250,0.2);flex-shrink:0; }
+              .c3hd-brand { display:flex;align-items:center;gap:12px; }
+              .c3hd-orb { width:38px;height:38px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#E879F9,#7C3AED);box-shadow:0 0 16px rgba(232,121,249,0.5);flex-shrink:0; }
+              .c3hd-title { font-size:15px;font-weight:800;background:linear-gradient(90deg,#E879F9,#A78BFA);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text; }
+              .c3hd-sub { font-size:10px;color:#6D28D9;margin-top:1px;letter-spacing:.4px;text-transform:uppercase; }
+              .c3badge { background:linear-gradient(90deg,#7C3AED,#EC4899);color:#fff;font-size:10px;font-weight:700;padding:3px 12px;border-radius:20px;letter-spacing:.5px; }
+              .c3hd-right { display:flex;align-items:center;gap:18px; }
+              .c3risk-badge { padding:5px 18px;border-radius:8px;font-size:12px;font-weight:800;border:1px solid;letter-spacing:.3px; }
+              .c3risk-badge.high { background:rgba(239,68,68,0.15);color:#F87171;border-color:rgba(239,68,68,0.35); }
+              .c3ts2 { font-size:11px;color:#4C1D95; }
+
+              /* ── gauge row ── */
+              .c3gauges { display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid rgba(167,139,250,0.12);flex-shrink:0; }
+              .c3gauge-cell { padding:10px 16px;display:flex;flex-direction:column;align-items:center;border-right:1px solid rgba(167,139,250,0.1); }
+              .c3gauge-cell:last-child { border-right:none; }
+              .c3gauge-chart { width:100%;height:140px; }
+              .c3gauge-lbl { font-size:10px;color:#6D28D9;font-weight:700;text-transform:uppercase;letter-spacing:.6px;margin-top:-6px; }
+
+              /* ── body ── */
+              .c3body { flex:1;display:grid;grid-template-columns:1fr 1fr 300px;min-height:0;overflow:hidden; }
+              .c3col { display:flex;flex-direction:column;border-right:1px solid rgba(167,139,250,0.1);overflow:hidden; }
+              .c3col:last-child { border-right:none; }
+              .c3sec-hd { padding:12px 16px 8px;font-size:10px;font-weight:700;color:#6D28D9;text-transform:uppercase;letter-spacing:.7px;display:flex;align-items:center;gap:7px;border-bottom:1px solid rgba(167,139,250,0.08);flex-shrink:0; }
+              .c3chart-wrap { flex:1;min-height:0;padding:8px 10px 4px; }
+
+              /* ── attack matrix heatmap ── */
+              .c3matrix { padding:8px 14px;flex:1;overflow-y:auto; }
+              .c3mx-row { display:flex;gap:3px;margin-bottom:3px;align-items:center; }
+              .c3mx-lbl { font-size:10px;color:#6D28D9;width:120px;flex-shrink:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:600; }
+              .c3mx-cell { flex:1;height:20px;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:rgba(255,255,255,0.75); }
+
+              /* ── right panel ── */
+              .c3stat-row { display:flex;align-items:center;gap:12px;padding:9px 16px;border-bottom:1px solid rgba(167,139,250,0.07); }
+              .c3stat-row:last-child { border-bottom:none; }
+              .c3stat-icon { width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0; }
+              .c3stat-val { font-size:22px;font-weight:900;line-height:1; }
+              .c3stat-lbl { font-size:11px;color:#6D28D9;margin-top:1px; }
+              .c3stat-delta { font-size:11px;font-weight:600;margin-top:2px; }
+              .c3prog2 { height:4px;background:rgba(167,139,250,0.15);border-radius:2px;overflow:hidden;margin-top:5px; }
+              .c3prog2-fill { height:100%;border-radius:2px; }
+              .c3tag { display:inline-block;font-size:10px;font-weight:700;padding:2px 7px;border-radius:4px;margin-top:4px; }
+            </style>
+
+            <!-- Header -->
+            <div class="c3hd">
+              <div class="c3hd-brand">
+                <div class="c3hd-orb"></div>
+                <div>
+                  <div class="c3hd-title">Cyber Risk Intelligence Board</div>
+                  <div class="c3hd-sub">Predictive threat exposure &amp; resilience analytics</div>
+                </div>
+                <span class="c3badge">⬡ AI-POWERED</span>
+              </div>
+              <div class="c3hd-right">
+                <div class="c3risk-badge high">RISK LEVEL: HIGH</div>
+                <div>
+                  <div style="font-size:18px;font-weight:900;color:#E879F9;line-height:1;">78<span style="font-size:12px;color:#6D28D9;">/100</span></div>
+                  <div style="font-size:10px;color:#6D28D9;text-transform:uppercase;letter-spacing:.4px;">Risk Score</div>
+                </div>
+                <span class="c3ts2">Apr 25, 2026 · 09:41</span>
+              </div>
+            </div>
+
+            <!-- Gauge row: 3 large speedometers -->
+            <div class="c3gauges">
+              <div class="c3gauge-cell">
+                <div class="c3gauge-chart" id="cc3-gauge-risk"></div>
+                <div class="c3gauge-lbl">Overall Risk Score</div>
+              </div>
+              <div class="c3gauge-cell">
+                <div class="c3gauge-chart" id="cc3-gauge-coverage"></div>
+                <div class="c3gauge-lbl">Detection Coverage</div>
+              </div>
+              <div class="c3gauge-cell">
+                <div class="c3gauge-chart" id="cc3-gauge-response"></div>
+                <div class="c3gauge-lbl">Response Efficiency</div>
+              </div>
+            </div>
+
+            <!-- Body: Radar | Heatmap | Stats -->
+            <div class="c3body">
+
+              <!-- Radar: framework coverage -->
+              <div class="c3col">
+                <div class="c3sec-hd">
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#A78BFA" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  Framework Coverage — Radar
+                </div>
+                <div class="c3chart-wrap">
+                  <div id="cc3-radar" style="width:100%;height:100%;min-height:160px;"></div>
+                </div>
+              </div>
+
+              <!-- Heatmap: MITRE tactics x days -->
+              <div class="c3col">
+                <div class="c3sec-hd">
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#E879F9" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></svg>
+                  MITRE Tactic Heatmap — 7 Days
+                </div>
+                <div class="c3matrix" id="cc3-matrix">
+                  <!-- JS-filled -->
+                </div>
+              </div>
+
+              <!-- Stats column -->
+              <div class="c3col">
+                <div class="c3sec-hd">
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#F0ABFC" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+                  Key Risk Indicators
+                </div>
+
+                <div class="c3stat-row">
+                  <div class="c3stat-icon" style="background:rgba(239,68,68,0.15);border:1px solid rgba(239,68,68,0.25);">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#F87171" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                  </div>
+                  <div style="flex:1;">
+                    <div class="c3stat-val" style="color:#F87171;">41</div>
+                    <div class="c3stat-lbl">Escalated Incidents</div>
+                    <div class="c3prog2"><div class="c3prog2-fill" style="width:68%;background:linear-gradient(90deg,#EF4444,#F87171);"></div></div>
+                    <div class="c3stat-delta" style="color:#F87171;">&#9650; 18% vs last week</div>
+                  </div>
+                </div>
+
+                <div class="c3stat-row">
+                  <div class="c3stat-icon" style="background:rgba(232,121,249,0.12);border:1px solid rgba(232,121,249,0.25);">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#E879F9" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  </div>
+                  <div style="flex:1;">
+                    <div class="c3stat-val" style="color:#E879F9;">6h 14m</div>
+                    <div class="c3stat-lbl">Mean Time to Respond</div>
+                    <div class="c3prog2"><div class="c3prog2-fill" style="width:52%;background:linear-gradient(90deg,#7C3AED,#E879F9);"></div></div>
+                    <div class="c3stat-delta" style="color:#A78BFA;">&#9660; 10% improved</div>
+                  </div>
+                </div>
+
+                <div class="c3stat-row">
+                  <div class="c3stat-icon" style="background:rgba(167,139,250,0.12);border:1px solid rgba(167,139,250,0.25);">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#A78BFA" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                  </div>
+                  <div style="flex:1;">
+                    <div class="c3stat-val" style="color:#A78BFA;">94.2%</div>
+                    <div class="c3stat-lbl">ZIA Confidence Level</div>
+                    <div class="c3prog2"><div class="c3prog2-fill" style="width:94%;background:linear-gradient(90deg,#7C3AED,#A78BFA);"></div></div>
+                    <div class="c3stat-delta" style="color:#A78BFA;">Excellent threshold</div>
+                  </div>
+                </div>
+
+                <div class="c3stat-row">
+                  <div class="c3stat-icon" style="background:rgba(251,191,36,0.12);border:1px solid rgba(251,191,36,0.25);">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FBB124" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                  </div>
+                  <div style="flex:1;">
+                    <div class="c3stat-val" style="color:#FBB124;">560</div>
+                    <div class="c3stat-lbl">Critical Priority Alerts</div>
+                    <div class="c3prog2"><div class="c3prog2-fill" style="width:80%;background:linear-gradient(90deg,#D97706,#FBB124);"></div></div>
+                    <div class="c3stat-delta" style="color:#FBB124;">P1 unresolved: 112</div>
+                  </div>
+                </div>
+
+                <div class="c3stat-row">
+                  <div class="c3stat-icon" style="background:rgba(52,211,153,0.12);border:1px solid rgba(52,211,153,0.25);">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#34D399" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                  </div>
+                  <div style="flex:1;">
+                    <div class="c3stat-val" style="color:#34D399;">82.6%</div>
+                    <div class="c3stat-lbl">Noise Reduction</div>
+                    <div class="c3prog2"><div class="c3prog2-fill" style="width:82%;background:linear-gradient(90deg,#059669,#34D399);"></div></div>
+                    <div class="c3stat-delta" style="color:#34D399;">210h analyst time saved</div>
+                  </div>
+                </div>
+
+                <div class="c3stat-row">
+                  <div class="c3stat-icon" style="background:rgba(96,165,250,0.12);border:1px solid rgba(96,165,250,0.25);">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#60A5FA" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                  </div>
+                  <div style="flex:1;">
+                    <div class="c3stat-val" style="color:#60A5FA;">128M</div>
+                    <div class="c3stat-lbl">Events Processed / 7d</div>
+                    <div class="c3prog2"><div class="c3prog2-fill" style="width:72%;background:linear-gradient(90deg,#2563EB,#60A5FA);"></div></div>
+                    <div class="c3stat-delta" style="color:#60A5FA;">&#9650; 12% volume growth</div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div><!-- /th-panel-command-center3 -->
 
           <!-- ═══ COMMAND CENTER 2 — Deep Space NOC ═══ -->
 
@@ -8556,6 +8750,7 @@ function initThreatHub() {
     if (v === 'command-center') initCommandCenter();
     if (v === 'command-center1') initCommandCenter1();
     if (v === 'command-center2') initCommandCenter2();
+    if (v === 'command-center3') initCommandCenter3();
     setTimeout(function () { ElegantEChart.resize(); }, 150);
   }
 
@@ -9185,6 +9380,126 @@ function initThreatHub() {
       });
     })();
   }  /* end initCommandCenter2 */
+
+  function initCommandCenter3() {
+    /* ---- Gauge: Risk Score ---- */
+    function makeGauge(id, value, color1, color2, label) {
+      var dom = document.getElementById(id);
+      if (!dom) return;
+      var ex = echarts.getInstanceByDom(dom); if (ex) ex.dispose();
+      var c = echarts.init(dom, null, {renderer:'canvas', backgroundColor:'transparent'});
+      c.setOption({
+        backgroundColor:'transparent',
+        series:[{
+          type:'gauge',
+          center:['50%','62%'],
+          radius:'88%',
+          startAngle:200, endAngle:-20,
+          min:0, max:100,
+          splitNumber:5,
+          progress:{show:true,width:10,itemStyle:{color:new echarts.graphic.LinearGradient(0,0,1,0,[{offset:0,color:color1},{offset:1,color:color2}])}},
+          axisLine:{lineStyle:{width:10,color:[[1,'rgba(167,139,250,0.1)']]}},
+          axisTick:{show:false},
+          splitLine:{show:false},
+          axisLabel:{show:false},
+          pointer:{show:false},
+          anchor:{show:false},
+          detail:{
+            valueAnimation:false,
+            formatter:'{value}',
+            color:color2,
+            fontSize:28,
+            fontWeight:900,
+            offsetCenter:[0,'0%']
+          },
+          data:[{value:value}]
+        }]
+      });
+    }
+    makeGauge('cc3-gauge-risk',    78,  '#7C3AED','#E879F9','Risk');
+    makeGauge('cc3-gauge-coverage',73,  '#1D4ED8','#60A5FA','Coverage');
+    makeGauge('cc3-gauge-response',81,  '#065F46','#34D399','Response');
+
+    /* ---- Radar chart: framework coverage ---- */
+    (function(){
+      var dom = document.getElementById('cc3-radar');
+      if (!dom) return;
+      var ex = echarts.getInstanceByDom(dom); if (ex) ex.dispose();
+      var c = echarts.init(dom, null, {renderer:'canvas',backgroundColor:'transparent'});
+      c.setOption({
+        backgroundColor:'transparent',
+        legend:{bottom:0,textStyle:{color:'#6D28D9',fontSize:10},icon:'circle',itemWidth:8,itemHeight:8},
+        radar:{
+          center:['50%','48%'],radius:'62%',
+          splitNumber:4,
+          axisName:{color:'#6D28D9',fontSize:10},
+          splitArea:{areaStyle:{color:['rgba(124,58,237,0.04)','rgba(124,58,237,0.08)']}},
+          splitLine:{lineStyle:{color:'rgba(124,58,237,0.2)'}},
+          axisLine:{lineStyle:{color:'rgba(124,58,237,0.2)'}},
+          indicator:[
+            {name:'Initial Access',max:100},
+            {name:'Execution',max:100},
+            {name:'Persistence',max:100},
+            {name:'Privilege Esc.',max:100},
+            {name:'Lateral Move',max:100},
+            {name:'Exfiltration',max:100}
+          ]
+        },
+        series:[
+          {name:'Detection',type:'radar',
+           data:[{value:[85,72,68,75,60,55],name:'Detection',
+                  areaStyle:{color:'rgba(124,58,237,0.2)'},
+                  lineStyle:{color:'#A78BFA',width:2},
+                  itemStyle:{color:'#A78BFA'}}]},
+          {name:'Response',type:'radar',
+           data:[{value:[70,60,55,65,45,42],name:'Response',
+                  areaStyle:{color:'rgba(232,121,249,0.15)'},
+                  lineStyle:{color:'#E879F9',width:2,type:'dashed'},
+                  itemStyle:{color:'#E879F9'}}]}
+        ]
+      });
+    })();
+
+    /* ---- MITRE Heatmap (HTML matrix) ---- */
+    (function(){
+      var el = document.getElementById('cc3-matrix');
+      if (!el) return;
+      var tactics = [
+        'Reconnaissance','Resource Dev.','Initial Access','Execution',
+        'Persistence','Privilege Esc.','Defense Evasion','Credential Access',
+        'Discovery','Lateral Movement','Collection','C2','Exfiltration','Impact'
+      ];
+      var days = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+      function heat(v) {
+        if (v===0) return ['rgba(124,58,237,0.06)',''];
+        if (v<5)   return ['rgba(124,58,237,0.20)',v];
+        if (v<15)  return ['rgba(167,139,250,0.40)',v];
+        if (v<30)  return ['rgba(232,121,249,0.55)',v];
+        if (v<60)  return ['rgba(236,72,153,0.65)',v];
+        return ['rgba(239,68,68,0.80)',v];
+      }
+      var data = [
+        [0,2,0,1,0,0,3],[12,18,9,14,20,8,11],[5,8,3,6,9,2,4],[22,31,18,25,28,12,19],
+        [3,5,2,4,6,1,3],[18,24,15,20,22,9,14],[8,12,6,10,14,4,7],[35,48,28,40,52,20,33],
+        [6,9,4,7,11,2,5],[14,19,11,16,21,7,13],[4,6,3,5,8,1,3],[9,13,7,11,15,4,8],
+        [2,4,1,3,5,0,2],[7,11,5,9,13,3,6]
+      ];
+      var html = '<div style="display:flex;gap:3px;margin-bottom:5px;padding-left:123px;">';
+      days.forEach(function(d){ html += '<div style="flex:1;text-align:center;font-size:9px;color:#6D28D9;font-weight:700;">'+d+'</div>'; });
+      html += '</div>';
+      tactics.forEach(function(t,i){
+        html += '<div class="c3mx-row">';
+        html += '<div class="c3mx-lbl">'+t+'</div>';
+        days.forEach(function(_,j){
+          var v = data[i][j];
+          var h = heat(v);
+          html += '<div class="c3mx-cell" style="background:'+h[0]+';border:1px solid rgba(167,139,250,0.08);">'+(h[1]||'')+'</div>';
+        });
+        html += '</div>';
+      });
+      el.innerHTML = html;
+    })();
+  }  /* end initCommandCenter3 */
 
 
 
