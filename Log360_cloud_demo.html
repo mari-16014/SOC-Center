@@ -737,8 +737,8 @@
     #threatHubPage .dash__row--3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--dash-gap); }
     #threatHubPage .dash__row--3fr2fr { display: grid; grid-template-columns: 3fr 2fr; gap: var(--dash-gap); }
     #threatHubPage .ciso-grid { display: grid; grid-template-columns: 1fr 340px; gap: var(--dash-gap); }
-    #threatHubPage .view-panel { display: none; }
-    #threatHubPage .view-panel.active { display: block; }
+    #threatHubPage .view-panel { display: none !important; }
+    #threatHubPage .view-panel.active { display: block !important; }
     #th-panel-command-center2.active { display: flex !important; flex-direction: column !important; }
     #th-panel-command-center3.active { display: flex !important; flex-direction: column !important; }
 
@@ -3201,7 +3201,7 @@
           </div><!-- /th-panel-command-center1 -->
 
           <!-- ═══ COMMAND CENTER 2 — DARK NOC WALLBOARD ═══ -->
-          <div class="view-panel" id="th-panel-command-center2" style="background:#FFFFFF;min-height:100%;color:#1E293B;font-family:'Segoe UI',system-ui,sans-serif;display:flex;flex-direction:column;">
+          <div class="view-panel" id="th-panel-command-center2" style="background:#FFFFFF;min-height:100%;color:#1E293B;font-family:'Segoe UI',system-ui,sans-serif;">
             <style>
               /* ── CC2 reset ── */
               #th-panel-command-center2 * { box-sizing:border-box; }
@@ -3476,7 +3476,7 @@
           </div><!-- /th-panel-command-center2 -->
 
           <!-- ═══ COMMAND CENTER 3 — PURPLE RISK INTELLIGENCE BOARD ═══ -->
-          <div class="view-panel" id="th-panel-command-center3" style="background:#FDFAFF;min-height:100%;color:#1E1030;font-family:'Segoe UI',system-ui,sans-serif;display:flex;flex-direction:column;overflow:hidden;">
+          <div class="view-panel" id="th-panel-command-center3" style="background:#FDFAFF;min-height:100%;color:#1E1030;font-family:'Segoe UI',system-ui,sans-serif;overflow:hidden;">
             <style>
               #th-panel-command-center3 * { box-sizing:border-box; }
 
