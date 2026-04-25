@@ -9327,6 +9327,7 @@ function initThreatHub() {
   }  /* end initCommandCenter1 */
 
   function initCommandCenter2() {
+    setTimeout(function(){
     /* -- Timeline: Alert volume + ZIA investigations + Incidents (7 days) -- */
     (function(){
       var dom = document.getElementById('cc2-timeline');
@@ -9381,9 +9382,11 @@ function initThreatHub() {
                  {type:'text',left:'center',top:'54%',style:{text:'Sources',fill:'#475569',fontSize:10,textAlign:'center'}}]
       });
     })();
+    }, 80);
   }  /* end initCommandCenter2 */
 
   function initCommandCenter3() {
+    setTimeout(function(){
     /* ---- Gauge: Risk Score ---- */
     function makeGauge(id, value, color1, color2, label) {
       var dom = document.getElementById(id);
@@ -9501,6 +9504,7 @@ function initThreatHub() {
       });
       el.innerHTML = html;
     })();
+    }, 80);
   }  /* end initCommandCenter3 */
 
 
