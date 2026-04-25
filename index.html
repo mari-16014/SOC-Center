@@ -2781,438 +2781,418 @@
           </div><!-- /th-panel-command-center -->
 
           <!-- ═══ COMMAND CENTER 1 — White Theme ═══ -->
-          <div class="view-panel" id="th-panel-command-center1" style="background:#F5F7FA;min-height:100%;">
+          <div class="view-panel" id="th-panel-command-center1" style="background:#F0F4F8;min-height:100%;font-family:'Segoe UI',system-ui,sans-serif;">
             <style>
-              #th-panel-command-center1 { color:#1A2332; }
-              .cc1-header { display:flex;align-items:center;justify-content:space-between;padding:14px 24px;border-bottom:1px solid rgba(0,0,0,0.08);background:#fff; }
-              .cc1-title { font-size:15px;font-weight:700;color:#1A2332;display:flex;align-items:center;gap:8px; }
-              .cc1-badge { font-size:10px;background:rgba(0,102,204,0.1);color:#0066CC;border:1px solid rgba(0,102,204,0.3);padding:2px 10px;border-radius:20px;font-weight:600; }
-              .cc1-time-pill { display:flex;align-items:center;gap:6px;font-size:12px;color:#0066CC;border:1px solid rgba(0,102,204,0.3);border-radius:20px;padding:4px 14px;cursor:pointer;background:#fff; }
-              .cc1-kpi-bar { display:grid;grid-template-columns:repeat(6,1fr);gap:0;background:#fff;border-bottom:1px solid rgba(0,0,0,0.07); }
-              .cc1-kpi-cell { padding:13px 18px;border-right:1px solid rgba(0,0,0,0.06);display:flex;flex-direction:column;gap:2px; }
-              .cc1-kpi-cell:last-child { border-right:none; }
-              .cc1-kpi-label { font-size:10px;color:#6B7A8D;font-weight:500;white-space:nowrap; }
-              .cc1-kpi-val { font-size:18px;font-weight:800;color:#1A2332;line-height:1.2; }
-              .cc1-kpi-sub { font-size:10px;color:#6B7A8D; }
-              .cc1-flow-section { display:flex;align-items:stretch;border-bottom:1px solid rgba(0,0,0,0.07);background:#fff; }
-              .cc1-sources { width:220px;flex-shrink:0;padding:14px 0 14px 16px;display:flex;flex-direction:column;justify-content:flex-start;gap:5px;border-right:1px solid rgba(0,0,0,0.07); }
-              .cc1-source-row { display:flex;align-items:center;gap:8px;font-size:11px;color:#6B7A8D; }
-              .cc1-source-dot { width:9px;height:9px;border-radius:50%;flex-shrink:0; }
-              .cc1-source-name { flex:1; }
-              .cc1-source-count { color:#1A2332;font-weight:700;font-size:11px; }
-              .cc1-source-events { font-size:10px;color:#6B7A8D;min-width:52px;text-align:right; }
-              .cc1-center { flex:1;display:flex;align-items:center;justify-content:center;position:relative;background:#fff;overflow:hidden;min-width:0; }
-              .cc1-right { width:340px;flex-shrink:0;display:flex;flex-direction:column;justify-content:flex-start;padding:16px 18px;gap:0;border-left:1px solid rgba(0,0,0,0.07);background:#fff; }
-              .cc1-flow-circle { border-radius:50%;background:rgba(0,102,204,0.1);border:2px solid #0066CC;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,102,204,0.1); }
-              .cc1-flow-circle--amber { background:rgba(217,119,6,0.08);border-color:#D97706;box-shadow:0 2px 8px rgba(217,119,6,0.08); }
-              .cc1-flow-circle--green { background:rgba(5,150,105,0.08);border-color:#059669;box-shadow:0 2px 8px rgba(5,150,105,0.08); }
-              .cc1-bottom-strip { display:flex;align-items:stretch;border-top:1px solid rgba(0,0,0,0.07);background:#fff; }
-              .cc1-strip-cell { flex:1;padding:12px 18px;border-right:1px solid rgba(0,0,0,0.07);display:flex;flex-direction:column;gap:3px; }
-              .cc1-strip-cell:last-child { border-right:none; }
-              .cc1-strip-label { font-size:10px;color:#6B7A8D;font-weight:500; }
-              .cc1-strip-val { font-size:19px;font-weight:800;color:#1A2332;display:flex;align-items:center;gap:8px; }
-              .cc1-strip-spark { flex:1;height:26px;min-width:70px; }
-              .cc1-threat-section { display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;border-top:1px solid rgba(0,0,0,0.07);background:#F5F7FA; }
-              .cc1-threat-card { background:#fff;margin:10px;border-radius:8px;padding:14px 16px;box-shadow:0 1px 4px rgba(0,0,0,0.06);display:flex;flex-direction:column;gap:8px; }
-              .cc1-threat-title { font-size:11px;font-weight:700;color:#1A2332;display:flex;align-items:center;gap:6px; }
-              .cc1-atk-row { display:flex;align-items:center;gap:8px;font-size:11px; }
-              .cc1-atk-bar-wrap { flex:1;height:6px;background:rgba(0,0,0,0.06);border-radius:3px;overflow:hidden; }
-              .cc1-atk-bar { height:100%;border-radius:3px; }
-              .cc1-atk-name { width:130px;color:#1A2332;font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis; }
-              .cc1-atk-cnt { width:32px;text-align:right;color:#1A2332;font-weight:700;font-size:10px; }
-              .cc1-metrics-section { display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:0;border-top:1px solid rgba(0,0,0,0.07);background:#fff; }
-              .cc1-metric-cell { padding:18px;border-right:1px solid rgba(0,0,0,0.07);display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:4px; }
-              .cc1-metric-cell:last-child { border-right:none; }
-              .cc1-metric-label { font-size:11px;color:#6B7A8D;font-weight:500;text-align:center;line-height:1.4; }
-              .cc1-gauge-wrap { width:170px;height:100px; }
-              .cc1-mini-stat { display:flex;justify-content:space-between;align-items:center;width:100%;padding:5px 0;border-top:1px solid rgba(0,0,0,0.05);font-size:10px; }
-              .cc1-mini-stat-label { color:#6B7A8D; }
-              .cc1-mini-stat-val { font-weight:700;color:#1A2332; }
+              #th-panel-command-center1 { color:#1A2332; font-size:13px; }
+              .c1h { display:flex;align-items:center;justify-content:space-between;padding:16px 28px;background:#fff;border-bottom:2px solid #E2E8F0;flex-shrink:0; }
+              .c1logo { display:flex;align-items:center;gap:10px; }
+              .c1logo-title { font-size:16px;font-weight:800;color:#1A2332; }
+              .c1logo-sub { font-size:12px;color:#64748B;margin-top:1px; }
+              .c1badge { background:#DBEAFE;color:#1D4ED8;font-size:11px;font-weight:700;padding:3px 12px;border-radius:20px;letter-spacing:.3px; }
+              .c1status { display:flex;align-items:center;gap:16px; }
+              .c1status-dot { width:8px;height:8px;border-radius:50%;background:#10B981;flex-shrink:0; }
+              .c1status-text { font-size:12px;color:#10B981;font-weight:600; }
+              .c1time { font-size:11px;color:#94A3B8; }
+
+              .c1kpi { display:grid;grid-template-columns:repeat(6,1fr);background:#fff;border-bottom:1px solid #E2E8F0; }
+              .c1kpi-cell { padding:16px 20px;border-right:1px solid #E2E8F0;position:relative; }
+              .c1kpi-cell:last-child { border-right:none; }
+              .c1kpi-cell:hover { background:#F8FAFC; }
+              .c1kpi-label { font-size:11px;color:#64748B;font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px; }
+              .c1kpi-val { font-size:26px;font-weight:800;color:#1A2332;line-height:1;margin-bottom:4px; }
+              .c1kpi-val span { font-size:14px;font-weight:600;color:#94A3B8; }
+              .c1kpi-trend { font-size:12px;font-weight:600; }
+              .c1kpi-trend.up { color:#10B981; }
+              .c1kpi-trend.danger { color:#EF4444; }
+              .c1kpi-trend.warn { color:#F59E0B; }
+              .c1kpi-trend.neutral { color:#64748B; }
+
+              .c1body { display:grid;grid-template-columns:280px 1fr 320px;gap:0;background:#F0F4F8; }
+              .c1col { background:#fff;border-radius:0;display:flex;flex-direction:column; }
+
+              .c1sec-hd { font-size:11px;font-weight:700;color:#64748B;text-transform:uppercase;letter-spacing:.8px;display:flex;align-items:center;gap:6px;padding:16px 20px 12px;border-bottom:1px solid #F1F5F9; }
+              .c1sec-hd svg { flex-shrink:0; }
+
+              .c1src-row { display:flex;align-items:center;gap:10px;padding:8px 20px;border-bottom:1px solid #F8FAFC;transition:background .15s; }
+              .c1src-row:last-of-type { border-bottom:none; }
+              .c1src-row:hover { background:#F8FAFC; }
+              .c1src-dot { width:10px;height:10px;border-radius:50%;flex-shrink:0; }
+              .c1src-name { flex:1;font-size:12px;color:#334155;font-weight:500; }
+              .c1src-dev { font-size:12px;color:#94A3B8;min-width:24px;text-align:right; }
+              .c1src-evt { font-size:12px;color:#475569;font-weight:600;min-width:52px;text-align:right; }
+
+              .c1chart-wrap { flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;gap:14px;border-left:1px solid #E2E8F0;border-right:1px solid #E2E8F0; }
+
+              .c1out-block { padding:16px 20px;border-bottom:1px solid #F1F5F9; }
+              .c1out-title { font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;margin-bottom:8px;display:flex;align-items:center;gap:7px; }
+              .c1out-val { font-size:32px;font-weight:900;line-height:1;margin-bottom:4px; }
+              .c1out-sub { font-size:12px;color:#64748B;margin-bottom:8px; }
+              .c1prog { height:6px;background:#E2E8F0;border-radius:3px;overflow:hidden;margin-bottom:4px; }
+              .c1prog-fill { height:100%;border-radius:3px; }
+              .c1grid3 { display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px; }
+              .c1badge-cell { border-radius:8px;padding:8px 10px;text-align:center; }
+              .c1badge-num { font-size:18px;font-weight:800;line-height:1; }
+              .c1badge-lbl { font-size:11px;color:#64748B;margin-top:2px; }
+              .c1grid2 { display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:6px; }
+              .c1stat { }
+              .c1stat-lbl { font-size:11px;color:#64748B;margin-bottom:2px; }
+              .c1stat-val { font-size:17px;font-weight:800;color:#1A2332; }
+
+              .c1bottom { display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:16px;background:#F0F4F8; }
+              .c1card { background:#fff;border-radius:12px;padding:20px;box-shadow:0 1px 3px rgba(0,0,0,0.06); }
+              .c1card-title { font-size:12px;font-weight:700;color:#1A2332;display:flex;align-items:center;gap:7px;margin-bottom:14px; }
+              .c1atk-row { display:flex;align-items:center;gap:10px;padding:6px 0;border-bottom:1px solid #F1F5F9; }
+              .c1atk-row:last-child { border-bottom:none; }
+              .c1atk-name { width:160px;font-size:12px;color:#334155;white-space:nowrap;overflow:hidden;text-overflow:ellipsis; }
+              .c1atk-bar-wrap { flex:1;height:7px;background:#F1F5F9;border-radius:4px;overflow:hidden; }
+              .c1atk-bar { height:100%;border-radius:4px; }
+              .c1atk-cnt { width:36px;text-align:right;font-size:12px;font-weight:700;color:#1A2332; }
+              .c1met-grid { display:grid;grid-template-columns:1fr 1fr;gap:12px; }
+              .c1met-item { background:#F8FAFC;border-radius:8px;padding:14px 16px; }
+              .c1met-lbl { font-size:11px;color:#64748B;font-weight:600;margin-bottom:6px;text-transform:uppercase;letter-spacing:.4px; }
+              .c1met-val { font-size:28px;font-weight:900;color:#1A2332;line-height:1; }
+              .c1met-sub { font-size:11px;color:#94A3B8;margin-top:3px; }
+              .c1usr-row { display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid #F1F5F9;font-size:12px; }
+              .c1usr-row:last-child { border-bottom:none; }
             </style>
 
             <!-- Header -->
-            <div class="cc1-header">
-              <div class="cc1-title">
-                <img src="./assets/icons/icon-tile-zia.svg" alt="" style="width:20px;height:20px;filter:hue-rotate(200deg) saturate(1.2);" />
-                Log360 AI &mdash; Autonomous SOC Command Center
-                <span class="cc1-badge">LAST 7 DAYS</span>
-              </div>
-              <div style="display:flex;align-items:center;gap:10px;">
-                <span style="font-size:11px;color:#059669;font-weight:600;">&#9679; All Systems Operational</span>
-                <span style="font-size:11px;color:#6B7A8D;">Updated: Apr 24, 2026 &nbsp;09:41 AM</span>
-                <div class="cc1-time-pill">
-                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#0066CC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                  Last 7 Days
+            <div class="c1h">
+              <div class="c1logo">
+                <img src="./assets/icons/icon-tile-zia.svg" alt="" style="width:28px;height:28px;filter:hue-rotate(200deg) saturate(1.3);" />
+                <div>
+                  <div class="c1logo-title">Log360 AI — Autonomous SOC Command Center</div>
+                  <div class="c1logo-sub">Real-time visibility into your security posture &amp; ZIA operations</div>
                 </div>
+                <span class="c1badge" style="margin-left:12px;">LAST 7 DAYS</span>
+              </div>
+              <div class="c1status">
+                <div style="display:flex;align-items:center;gap:6px;">
+                  <div class="c1status-dot"></div>
+                  <span class="c1status-text">All Systems Operational</span>
+                </div>
+                <span class="c1time">Updated: Apr 24, 2026 &nbsp;09:41 AM</span>
               </div>
             </div>
 
-            <!-- KPI Summary Bar -->
-            <div class="cc1-kpi-bar">
-              <div class="cc1-kpi-cell">
-                <div class="cc1-kpi-label">Total Events Processed</div>
-                <div class="cc1-kpi-val">128.4<span style="font-size:12px;font-weight:600;color:#6B7A8D;">M</span></div>
-                <div class="cc1-kpi-sub">&#9650; 18.3M/day avg &nbsp;<span style="color:#059669;">&#9650; 12%</span></div>
+            <!-- KPI Bar -->
+            <div class="c1kpi">
+              <div class="c1kpi-cell">
+                <div class="c1kpi-label">Events Processed</div>
+                <div class="c1kpi-val">128.4<span>M</span></div>
+                <div class="c1kpi-trend up">&#9650; 12% vs last week</div>
               </div>
-              <div class="cc1-kpi-cell">
-                <div class="cc1-kpi-label">Log Sources Active</div>
-                <div class="cc1-kpi-val">87</div>
-                <div class="cc1-kpi-sub">87 healthy &nbsp;<span style="color:#059669;">100% up</span></div>
+              <div class="c1kpi-cell">
+                <div class="c1kpi-label">Active Log Sources</div>
+                <div class="c1kpi-val">87</div>
+                <div class="c1kpi-trend up">100% healthy</div>
               </div>
-              <div class="cc1-kpi-cell">
-                <div class="cc1-kpi-label">Correlation Rules Fired</div>
-                <div class="cc1-kpi-val">342</div>
-                <div class="cc1-kpi-sub">of 528 active rules &nbsp;<span style="color:#D97706;">64.8% hit</span></div>
+              <div class="c1kpi-cell">
+                <div class="c1kpi-label">Rules Fired</div>
+                <div class="c1kpi-val">342</div>
+                <div class="c1kpi-trend warn">of 528 active (64.8%)</div>
               </div>
-              <div class="cc1-kpi-cell">
-                <div class="cc1-kpi-label">Threat Intel Matches</div>
-                <div class="cc1-kpi-val">1,247</div>
-                <div class="cc1-kpi-sub">across 5 intel feeds &nbsp;<span style="color:#DC2626;">&#9650; 22%</span></div>
+              <div class="c1kpi-cell">
+                <div class="c1kpi-label">Threat Intel Matches</div>
+                <div class="c1kpi-val">1,247</div>
+                <div class="c1kpi-trend danger">&#9650; 22% increase</div>
               </div>
-              <div class="cc1-kpi-cell">
-                <div class="cc1-kpi-label">SLA Compliance</div>
-                <div class="cc1-kpi-val" style="color:#059669;">94.2%</div>
-                <div class="cc1-kpi-sub">8 SLA violations this week</div>
+              <div class="c1kpi-cell">
+                <div class="c1kpi-label">SLA Compliance</div>
+                <div class="c1kpi-val" style="color:#10B981;">94.2<span>%</span></div>
+                <div class="c1kpi-trend neutral">8 violations this week</div>
               </div>
-              <div class="cc1-kpi-cell">
-                <div class="cc1-kpi-label">Affected Assets Detected</div>
-                <div class="cc1-kpi-val">1,836</div>
-                <div class="cc1-kpi-sub">312 high-risk &nbsp;<span style="color:#DC2626;">&#9650; 8%</span></div>
+              <div class="c1kpi-cell">
+                <div class="c1kpi-label">Affected Assets</div>
+                <div class="c1kpi-val">1,836</div>
+                <div class="c1kpi-trend danger">312 high-risk &#9650; 8%</div>
               </div>
             </div>
 
-            <!-- Flow section -->
-            <div class="cc1-flow-section">
-              <!-- Data Sources -->
-              <div class="cc1-sources">
-                <div style="font-size:10px;color:#6B7A8D;font-weight:600;margin-bottom:4px;letter-spacing:0.5px;">LOG SOURCES &nbsp;<span style="font-weight:400;color:#0066CC;">87 connected</span></div>
-                <div style="display:grid;grid-template-columns:1fr 34px 48px;font-size:9px;color:#9AABBA;padding:0 0 4px 18px;border-bottom:1px solid rgba(0,0,0,0.05);gap:4px;">
+            <!-- 3-column body -->
+            <div class="c1body">
+
+              <!-- Left: Log Sources -->
+              <div class="c1col" style="border-right:1px solid #E2E8F0;">
+                <div class="c1sec-hd">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#0066CC" stroke-width="2.2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+                  Log Sources &nbsp;<span style="font-weight:400;color:#0066CC;text-transform:none;letter-spacing:0;">87 connected</span>
+                </div>
+                <div style="display:grid;grid-template-columns:1fr 32px 56px;font-size:10px;color:#94A3B8;padding:4px 20px 4px;font-weight:600;text-transform:uppercase;letter-spacing:.4px;">
                   <span>Source</span><span style="text-align:right;">Dev</span><span style="text-align:right;">Events/7d</span>
                 </div>
-                <div class="cc1-source-row"><div class="cc1-source-dot" style="background:#0066CC;"></div><span class="cc1-source-name">Windows / AD Logs</span><span class="cc1-source-count">21</span><span class="cc1-source-events">48.2M</span></div>
-                <div class="cc1-source-row"><div class="cc1-source-dot" style="background:#3B82F6;"></div><span class="cc1-source-name">Network Devices</span><span class="cc1-source-count">18</span><span class="cc1-source-events">31.7M</span></div>
-                <div class="cc1-source-row"><div class="cc1-source-dot" style="background:#DC2626;"></div><span class="cc1-source-name">Cloud (AWS / Azure)</span><span class="cc1-source-count">15</span><span class="cc1-source-events">22.4M</span></div>
-                <div class="cc1-source-row"><div class="cc1-source-dot" style="background:#7C3AED;"></div><span class="cc1-source-name">Identity &amp; IAM</span><span class="cc1-source-count">12</span><span class="cc1-source-events">11.3M</span></div>
-                <div class="cc1-source-row"><div class="cc1-source-dot" style="background:#059669;"></div><span class="cc1-source-name">Web / Proxy</span><span class="cc1-source-count">9</span><span class="cc1-source-events">8.6M</span></div>
-                <div class="cc1-source-row"><div class="cc1-source-dot" style="background:#D97706;"></div><span class="cc1-source-name">Email Gateway</span><span class="cc1-source-count">7</span><span class="cc1-source-events">4.1M</span></div>
-                <div class="cc1-source-row"><div class="cc1-source-dot" style="background:#DB2777;"></div><span class="cc1-source-name">UEBA / DLP</span><span class="cc1-source-count">5</span><span class="cc1-source-events">2.1M</span></div>
-                <div style="margin-top:10px;height:1px;background:rgba(0,0,0,0.07);"></div>
-                <div style="margin-top:8px;">
-                  <div style="font-size:10px;color:#6B7A8D;">Total Alert Count</div>
-                  <div style="font-size:20px;font-weight:800;color:#1A2332;line-height:1.3;">18,452 <span style="font-size:11px;color:#DC2626;font-weight:600;">&#9650; 30%</span></div>
-                  <div style="display:flex;gap:8px;margin-top:4px;font-size:10px;">
-                    <span style="color:#DC2626;">&#9679; 560 Crit</span>
-                    <span style="color:#EA580C;">&#9679; 220 High</span>
-                    <span style="color:#CA8A04;">&#9679; 59 Med</span>
+                <div class="c1src-row"><div class="c1src-dot" style="background:#1D4ED8;"></div><span class="c1src-name">Windows / AD Logs</span><span class="c1src-dev">21</span><span class="c1src-evt">48.2M</span></div>
+                <div class="c1src-row"><div class="c1src-dot" style="background:#3B82F6;"></div><span class="c1src-name">Network Devices</span><span class="c1src-dev">18</span><span class="c1src-evt">31.7M</span></div>
+                <div class="c1src-row"><div class="c1src-dot" style="background:#EF4444;"></div><span class="c1src-name">Cloud (AWS / Azure)</span><span class="c1src-dev">15</span><span class="c1src-evt">22.4M</span></div>
+                <div class="c1src-row"><div class="c1src-dot" style="background:#7C3AED;"></div><span class="c1src-name">Identity &amp; IAM</span><span class="c1src-dev">12</span><span class="c1src-evt">11.3M</span></div>
+                <div class="c1src-row"><div class="c1src-dot" style="background:#10B981;"></div><span class="c1src-name">Web / Proxy</span><span class="c1src-dev">9</span><span class="c1src-evt">8.6M</span></div>
+                <div class="c1src-row"><div class="c1src-dot" style="background:#F59E0B;"></div><span class="c1src-name">Email Gateway</span><span class="c1src-dev">7</span><span class="c1src-evt">4.1M</span></div>
+                <div class="c1src-row" style="border-bottom:none;"><div class="c1src-dot" style="background:#EC4899;"></div><span class="c1src-name">UEBA / DLP</span><span class="c1src-dev">5</span><span class="c1src-evt">2.1M</span></div>
+
+                <div style="margin:0 20px;height:1px;background:#E2E8F0;"></div>
+                <div style="padding:16px 20px;">
+                  <div style="font-size:11px;color:#64748B;font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;">Alert Summary</div>
+                  <div style="font-size:32px;font-weight:900;color:#1A2332;line-height:1;">18,452</div>
+                  <div style="font-size:12px;color:#EF4444;font-weight:600;margin:2px 0 10px;">&#9650; 30% vs prior period</div>
+                  <div style="display:flex;gap:10px;margin-bottom:14px;">
+                    <span style="font-size:12px;color:#EF4444;font-weight:600;">&#9679; 560 Critical</span>
+                    <span style="font-size:12px;color:#F97316;font-weight:600;">&#9679; 220 High</span>
                   </div>
-                  <div style="margin-top:10px;display:grid;grid-template-columns:1fr 1fr;gap:6px;">
-                    <div style="background:#F5F7FA;border-radius:6px;padding:6px 8px;">
-                      <div style="font-size:13px;font-weight:800;color:#1A2332;">3,214</div>
-                      <div style="font-size:9px;color:#6B7A8D;">Noise suppressed</div>
+                  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+                    <div style="background:#F8FAFC;border-radius:8px;padding:10px 12px;">
+                      <div style="font-size:16px;font-weight:800;color:#1A2332;">3,214</div>
+                      <div style="font-size:11px;color:#64748B;margin-top:2px;">Noise suppressed</div>
                     </div>
-                    <div style="background:#F5F7FA;border-radius:6px;padding:6px 8px;">
-                      <div style="font-size:13px;font-weight:800;color:#1A2332;">110</div>
-                      <div style="font-size:9px;color:#6B7A8D;">Alerts/hour avg</div>
-                    </div>
-                    <div style="background:#F5F7FA;border-radius:6px;padding:6px 8px;">
-                      <div style="font-size:13px;font-weight:800;color:#1A2332;">247</div>
-                      <div style="font-size:9px;color:#6B7A8D;">Correlated</div>
-                    </div>
-                    <div style="background:#F5F7FA;border-radius:6px;padding:6px 8px;">
-                      <div style="font-size:13px;font-weight:800;color:#DC2626;">312/hr</div>
-                      <div style="font-size:9px;color:#6B7A8D;">Peak (Tue 02:00)</div>
+                    <div style="background:#F8FAFC;border-radius:8px;padding:10px 12px;">
+                      <div style="font-size:16px;font-weight:800;color:#1A2332;">247</div>
+                      <div style="font-size:11px;color:#64748B;margin-top:2px;">Correlated</div>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <!-- Center: Sankey + donut -->
-              <div class="cc1-center">
-                <svg style="position:absolute;left:0;top:0;width:45%;height:100%;pointer-events:none;" preserveAspectRatio="none" viewBox="0 0 200 380">
-                  <defs>
-                    <linearGradient id="cc1-g1" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#0066CC" stop-opacity="0.5"/><stop offset="100%" stop-color="#0066CC" stop-opacity="0.06"/></linearGradient>
-                    <linearGradient id="cc1-g2" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#3B82F6" stop-opacity="0.45"/><stop offset="100%" stop-color="#3B82F6" stop-opacity="0.06"/></linearGradient>
-                    <linearGradient id="cc1-g3" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#DC2626" stop-opacity="0.4"/><stop offset="100%" stop-color="#DC2626" stop-opacity="0.06"/></linearGradient>
-                    <linearGradient id="cc1-g4" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#7C3AED" stop-opacity="0.4"/><stop offset="100%" stop-color="#7C3AED" stop-opacity="0.06"/></linearGradient>
-                    <linearGradient id="cc1-g5" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#059669" stop-opacity="0.35"/><stop offset="100%" stop-color="#059669" stop-opacity="0.06"/></linearGradient>
-                    <linearGradient id="cc1-g6" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#D97706" stop-opacity="0.35"/><stop offset="100%" stop-color="#D97706" stop-opacity="0.06"/></linearGradient>
-                    <linearGradient id="cc1-g7" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#DB2777" stop-opacity="0.3"/><stop offset="100%" stop-color="#DB2777" stop-opacity="0.06"/></linearGradient>
-                  </defs>
-                  <path d="M0,44 C100,44 150,190 200,190" stroke="url(#cc1-g1)" stroke-width="3.5" fill="none"/>
-                  <path d="M0,87 C100,87 150,190 200,190" stroke="url(#cc1-g2)" stroke-width="3" fill="none"/>
-                  <path d="M0,130 C95,130 148,190 200,190" stroke="url(#cc1-g3)" stroke-width="2.5" fill="none"/>
-                  <path d="M0,173 C90,173 145,190 200,190" stroke="url(#cc1-g4)" stroke-width="2.5" fill="none"/>
-                  <path d="M0,216 C90,216 145,190 200,190" stroke="url(#cc1-g5)" stroke-width="2" fill="none"/>
-                  <path d="M0,259 C95,259 148,190 200,190" stroke="url(#cc1-g6)" stroke-width="2" fill="none"/>
-                  <path d="M0,302 C100,302 150,190 200,190" stroke="url(#cc1-g7)" stroke-width="1.5" fill="none"/>
-                </svg>
-                <div style="position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:8px;">
-                  <div id="cc1-donut-issues" style="width:220px;height:220px;"></div>
-                  <div style="display:flex;gap:14px;padding:7px 14px;background:#fff;border-radius:8px;border:1px solid rgba(0,0,0,0.08);box-shadow:0 1px 4px rgba(0,0,0,0.05);">
+              <!-- Center: Donut + sparklines -->
+              <div class="c1col">
+                <div class="c1sec-hd">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#0066CC" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                  AI Investigation Overview
+                </div>
+                <div class="c1chart-wrap">
+                  <div id="cc1-donut-issues" style="width:240px;height:240px;"></div>
+                  <div style="display:flex;gap:20px;padding:12px 20px;background:#F8FAFC;border-radius:10px;border:1px solid #E2E8F0;">
                     <div style="text-align:center;">
-                      <div style="font-size:16px;font-weight:800;color:#1A2332;">18,452</div>
-                      <div style="font-size:9px;color:#6B7A8D;margin-top:1px;">Total Alerts</div>
+                      <div style="font-size:22px;font-weight:900;color:#1A2332;">18,452</div>
+                      <div style="font-size:11px;color:#64748B;margin-top:2px;">Total Alerts</div>
                     </div>
-                    <div style="width:1px;background:rgba(0,0,0,0.08);"></div>
+                    <div style="width:1px;background:#E2E8F0;"></div>
                     <div style="text-align:center;">
-                      <div style="font-size:16px;font-weight:800;color:#0066CC;">2,891</div>
-                      <div style="font-size:9px;color:#6B7A8D;margin-top:1px;">Auto-Investigated</div>
+                      <div style="font-size:22px;font-weight:900;color:#0066CC;">2,891</div>
+                      <div style="font-size:11px;color:#64748B;margin-top:2px;">Auto-Investigated</div>
+                    </div>
+                    <div style="width:1px;background:#E2E8F0;"></div>
+                    <div style="text-align:center;">
+                      <div style="font-size:22px;font-weight:900;color:#10B981;">83%</div>
+                      <div style="font-size:11px;color:#64748B;margin-top:2px;">TP Rate</div>
                     </div>
                   </div>
-                  <div style="display:flex;gap:12px;font-size:10px;">
-                    <span style="color:#DC2626;">&#9679; Critical 560</span>
-                    <span style="color:#EA580C;">&#9679; High 220</span>
-                    <span style="color:#CA8A04;">&#9679; Med 59</span>
+                  <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;">
+                    <span style="font-size:12px;color:#EF4444;font-weight:600;">&#9679; Critical 560</span>
+                    <span style="font-size:12px;color:#F97316;font-weight:600;">&#9679; High 220</span>
+                    <span style="font-size:12px;color:#F59E0B;font-weight:600;">&#9679; Medium 59</span>
+                    <span style="font-size:12px;color:#1D4ED8;font-weight:600;">&#9679; Auto-triaged 2,891</span>
+                  </div>
+                  <div style="width:100%;padding:0 12px;">
+                    <div style="font-size:11px;color:#64748B;font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;">Daily Alert Volume (7-day trend)</div>
+                    <div id="cc1-spark-events" style="height:56px;width:100%;"></div>
+                  </div>
+                  <div style="width:100%;padding:0 12px;">
+                    <div style="font-size:11px;color:#64748B;font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;">Daily ZIA Investigations</div>
+                    <div id="cc1-spark-data" style="height:56px;width:100%;"></div>
                   </div>
                 </div>
               </div>
 
-              <!-- Right outcomes -->
-              <div class="cc1-right">
+              <!-- Right: Outcomes -->
+              <div class="c1col" style="border-left:1px solid #E2E8F0;">
+                <div class="c1sec-hd">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#0066CC" stroke-width="2.2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                  ZIA Outcomes
+                </div>
+
                 <!-- ZIA block -->
-                <div style="display:flex;align-items:flex-start;gap:12px;padding-bottom:14px;border-bottom:1px solid rgba(0,0,0,0.06);">
-                  <div class="cc1-flow-circle" style="width:40px;height:40px;flex-shrink:0;">
-                    <img src="./assets/icons/icon-tile-zia.svg" alt="" style="width:20px;height:20px;filter:hue-rotate(200deg) saturate(1.2);" />
+                <div class="c1out-block">
+                  <div class="c1out-title" style="color:#0066CC;">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#0066CC" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M16 12l-4-4-4 4"/><line x1="12" y1="16" x2="12" y2="8"/></svg>
+                    ZIA Auto-Investigated
                   </div>
-                  <div style="flex:1;">
-                    <div style="font-size:11px;color:#0066CC;font-weight:600;margin-bottom:1px;">ZIA AUTO-INVESTIGATED</div>
-                    <div style="font-size:26px;font-weight:800;color:#1A2332;line-height:1.1;">2,891</div>
-                    <div style="font-size:10px;color:#6B7A8D;">of 18,452 total (15.7%) — 81.7% queue</div>
-                    <div style="display:flex;gap:12px;margin-top:6px;font-size:10px;">
-                      <span style="color:#059669;">&#10003; 250 True Positive</span>
-                      <span style="color:#DC2626;">&#10007; 50 False Positive</span>
-                    </div>
-                    <div style="margin-top:6px;height:5px;background:rgba(0,0,0,0.06);border-radius:3px;overflow:hidden;">
-                      <div style="height:100%;width:83%;background:linear-gradient(90deg,#059669,#34D399);border-radius:3px;"></div>
-                    </div>
-                    <div style="font-size:10px;color:#059669;margin-top:2px;">83% TP rate</div>
+                  <div class="c1out-val" style="color:#1D4ED8;">2,891</div>
+                  <div class="c1out-sub">15.7% of 18,452 total alerts triaged</div>
+                  <div class="c1prog"><div class="c1prog-fill" style="width:83%;background:linear-gradient(90deg,#10B981,#34D399);"></div></div>
+                  <div style="display:flex;justify-content:space-between;font-size:12px;color:#64748B;">
+                    <span>83% True Positive rate</span>
+                    <span style="color:#10B981;font-weight:600;">250 TP &nbsp;/&nbsp; 50 FP</span>
                   </div>
                 </div>
+
                 <!-- Incidents block -->
-                <div style="display:flex;align-items:flex-start;gap:12px;padding:14px 0;border-bottom:1px solid rgba(0,0,0,0.06);">
-                  <div class="cc1-flow-circle cc1-flow-circle--amber" style="width:40px;height:40px;flex-shrink:0;">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#D97706" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                <div class="c1out-block">
+                  <div class="c1out-title" style="color:#F59E0B;">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                    Incidents Created
                   </div>
-                  <div style="flex:1;">
-                    <div style="font-size:11px;color:#D97706;font-weight:600;margin-bottom:1px;">INCIDENTS CREATED</div>
-                    <div style="font-size:26px;font-weight:800;color:#1A2332;line-height:1.1;">247 <span style="font-size:11px;font-weight:400;color:#6B7A8D;">(13% of investigations)</span></div>
-                    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-top:8px;">
-                      <div style="background:rgba(37,99,235,0.07);border-radius:6px;padding:6px 8px;text-align:center;">
-                        <div style="font-size:16px;font-weight:800;color:#2563EB;">218</div>
-                        <div style="font-size:9px;color:#6B7A8D;">Open</div>
+                  <div class="c1out-val" style="color:#1A2332;">247</div>
+                  <div class="c1out-sub">13% of investigations escalated to incident</div>
+                  <div class="c1grid3">
+                    <div class="c1badge-cell" style="background:#DBEAFE;">
+                      <div class="c1badge-num" style="color:#2563EB;">218</div>
+                      <div class="c1badge-lbl">Open</div>
+                    </div>
+                    <div class="c1badge-cell" style="background:#DCFCE7;">
+                      <div class="c1badge-num" style="color:#16A34A;">168</div>
+                      <div class="c1badge-lbl">Resolved</div>
+                    </div>
+                    <div class="c1badge-cell" style="background:#FEF9C3;">
+                      <div class="c1badge-num" style="color:#CA8A04;">41</div>
+                      <div class="c1badge-lbl">Escalated</div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- AI Accuracy block -->
+                <div class="c1out-block">
+                  <div class="c1out-title" style="color:#10B981;">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                    AI Accuracy &amp; Efficiency
+                  </div>
+                  <div class="c1grid2">
+                    <div class="c1stat"><div class="c1stat-lbl">Avg Confidence</div><div class="c1stat-val">94.2%</div></div>
+                    <div class="c1stat"><div class="c1stat-lbl">Triage Accuracy</div><div class="c1stat-val">91.8%</div></div>
+                    <div class="c1stat"><div class="c1stat-lbl">Noise Reduction</div><div class="c1stat-val" style="color:#10B981;">82.6%</div></div>
+                    <div class="c1stat"><div class="c1stat-lbl">Avg Resolve Time</div><div class="c1stat-val">6h 14m</div></div>
+                  </div>
+                </div>
+
+                <!-- Top users -->
+                <div class="c1out-block" style="border-bottom:none;">
+                  <div class="c1out-title" style="color:#7C3AED;">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                    Top Investigated Users
+                  </div>
+                  <div class="c1usr-row"><span style="color:#334155;">john.doe@corp.com</span><span style="color:#EF4444;font-weight:700;">14 alerts</span></div>
+                  <div class="c1usr-row"><span style="color:#334155;">svc-backup@corp.com</span><span style="color:#F97316;font-weight:700;">11 alerts</span></div>
+                  <div class="c1usr-row"><span style="color:#334155;">admin.portal@corp.com</span><span style="color:#F59E0B;font-weight:700;">9 alerts</span></div>
+                  <div class="c1usr-row"><span style="color:#334155;">alice.martin@corp.com</span><span style="color:#F59E0B;font-weight:700;">7 alerts</span></div>
+                  <div class="c1usr-row" style="border-bottom:none;"><span style="color:#334155;">guest-vpn-12@corp.com</span><span style="color:#94A3B8;font-weight:700;">5 alerts</span></div>
+                </div>
+              </div>
+            </div><!-- /c1body -->
+
+            <!-- Bottom cards -->
+            <div class="c1bottom">
+
+              <!-- Left: Threat Intel + Attack Types -->
+              <div style="display:flex;flex-direction:column;gap:16px;">
+                <!-- Attack Types -->
+                <div class="c1card">
+                  <div class="c1card-title">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                    Top Attack Types
+                  </div>
+                  <div class="c1atk-row"><span class="c1atk-name">Brute Force Login</span><div class="c1atk-bar-wrap"><div class="c1atk-bar" style="width:88%;background:#EF4444;"></div></div><span class="c1atk-cnt">1,247</span></div>
+                  <div class="c1atk-row"><span class="c1atk-name">Privilege Escalation</span><div class="c1atk-bar-wrap"><div class="c1atk-bar" style="width:62%;background:#F97316;"></div></div><span class="c1atk-cnt">884</span></div>
+                  <div class="c1atk-row"><span class="c1atk-name">Lateral Movement</span><div class="c1atk-bar-wrap"><div class="c1atk-bar" style="width:48%;background:#F59E0B;"></div></div><span class="c1atk-cnt">682</span></div>
+                  <div class="c1atk-row"><span class="c1atk-name">Data Exfiltration</span><div class="c1atk-bar-wrap"><div class="c1atk-bar" style="width:34%;background:#7C3AED;"></div></div><span class="c1atk-cnt">483</span></div>
+                  <div class="c1atk-row"><span class="c1atk-name">Phishing / Email</span><div class="c1atk-bar-wrap"><div class="c1atk-bar" style="width:22%;background:#2563EB;"></div></div><span class="c1atk-cnt">312</span></div>
+                </div>
+
+                <!-- MITRE + Affected Assets -->
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+                  <div class="c1card">
+                    <div class="c1card-title">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18"/></svg>
+                      MITRE ATT&amp;CK
+                    </div>
+                    <div class="c1met-grid">
+                      <div class="c1met-item">
+                        <div class="c1met-lbl">Tactics</div>
+                        <div class="c1met-val" style="color:#EF4444;">14</div>
+                        <div class="c1met-sub">detected</div>
                       </div>
-                      <div style="background:rgba(5,150,105,0.07);border-radius:6px;padding:6px 8px;text-align:center;">
-                        <div style="font-size:16px;font-weight:800;color:#059669;">168</div>
-                        <div style="font-size:9px;color:#6B7A8D;">Resolved</div>
+                      <div class="c1met-item">
+                        <div class="c1met-lbl">Techniques</div>
+                        <div class="c1met-val" style="color:#7C3AED;">68</div>
+                        <div class="c1met-sub">mapped</div>
                       </div>
-                      <div style="background:rgba(202,138,4,0.08);border-radius:6px;padding:6px 8px;text-align:center;">
-                        <div style="font-size:16px;font-weight:800;color:#CA8A04;">41</div>
-                        <div style="font-size:9px;color:#6B7A8D;">Escalated</div>
+                      <div class="c1met-item" style="grid-column:span 2;background:#DCFCE7;">
+                        <div class="c1met-lbl">Coverage Score</div>
+                        <div class="c1met-val" style="color:#16A34A;font-size:32px;">89%</div>
+                        <div class="c1met-sub">Top tactic: Credential Access</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="c1card">
+                    <div class="c1card-title">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                      Affected Assets
+                    </div>
+                    <div style="display:flex;flex-direction:column;gap:8px;">
+                      <div>
+                        <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px;"><span style="color:#64748B;">Workstations</span><span style="font-weight:700;color:#1A2332;">892</span></div>
+                        <div style="height:6px;background:#F1F5F9;border-radius:3px;overflow:hidden;"><div style="height:100%;width:75%;background:#1D4ED8;border-radius:3px;"></div></div>
+                      </div>
+                      <div>
+                        <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px;"><span style="color:#64748B;">Servers</span><span style="font-weight:700;color:#1A2332;">541</span></div>
+                        <div style="height:6px;background:#F1F5F9;border-radius:3px;overflow:hidden;"><div style="height:100%;width:55%;background:#7C3AED;border-radius:3px;"></div></div>
+                      </div>
+                      <div>
+                        <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px;"><span style="color:#64748B;">Cloud Instances</span><span style="font-weight:700;color:#1A2332;">287</span></div>
+                        <div style="height:6px;background:#F1F5F9;border-radius:3px;overflow:hidden;"><div style="height:100%;width:35%;background:#10B981;border-radius:3px;"></div></div>
+                      </div>
+                      <div>
+                        <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px;"><span style="color:#64748B;">Network Devices</span><span style="font-weight:700;color:#1A2332;">116</span></div>
+                        <div style="height:6px;background:#F1F5F9;border-radius:3px;overflow:hidden;"><div style="height:100%;width:18%;background:#F59E0B;border-radius:3px;"></div></div>
+                      </div>
+                    </div>
+                    <div style="font-size:12px;color:#EF4444;font-weight:600;margin-top:8px;">&#9888; 312 require immediate attention</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Right: SOC Efficiency -->
+              <div style="display:flex;flex-direction:column;gap:16px;">
+                <div class="c1card">
+                  <div class="c1card-title">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0066CC" stroke-width="2"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
+                    SOC Efficiency Metrics
+                  </div>
+                  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;">
+                    <div class="c1met-item">
+                      <div class="c1met-lbl">Analyst Hours Saved</div>
+                      <div style="display:flex;align-items:flex-end;gap:5px;"><div class="c1met-val">210</div><span style="font-size:14px;color:#94A3B8;margin-bottom:3px;">Hrs</span></div>
+                      <div class="c1met-sub">Cost saved: <span style="color:#10B981;font-weight:700;">$31,500</span></div>
+                    </div>
+                    <div class="c1met-item">
+                      <div class="c1met-lbl">True Positive Rate</div>
+                      <div class="c1met-val" style="color:#10B981;">83%</div>
+                      <div class="c1met-sub">50 FP filtered out</div>
+                    </div>
+                    <div class="c1met-item">
+                      <div class="c1met-lbl">MTTI (Avg)</div>
+                      <div class="c1met-val" style="font-size:22px;">4m 22s</div>
+                      <div class="c1met-sub">&#9650; 10% faster</div>
+                    </div>
+                    <div class="c1met-item">
+                      <div class="c1met-lbl">MTTR (Avg)</div>
+                      <div class="c1met-val" style="font-size:22px;">6h 14m</div>
+                      <div class="c1met-sub">SLA: 94.2% met</div>
+                    </div>
+                  </div>
+                  <div style="font-size:11px;color:#64748B;font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;">Analyst Hours Saved — Daily</div>
+                  <div id="cc1-bar-soc-hours" style="height:72px;width:100%;"></div>
+                </div>
+
+                <div class="c1card">
+                  <div class="c1card-title">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0066CC" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    Mean Time to Investigate (Gauge)
+                  </div>
+                  <div style="display:flex;align-items:center;gap:20px;">
+                    <div id="cc1-gauge-mttd" style="width:160px;height:100px;flex-shrink:0;"></div>
+                    <div style="flex:1;display:flex;flex-direction:column;gap:8px;">
+                      <div class="c1met-item" style="padding:10px 14px;">
+                        <div class="c1met-lbl">MTTD (Detect)</div>
+                        <div style="font-size:18px;font-weight:800;color:#1A2332;">2m 08s</div>
+                      </div>
+                      <div class="c1met-item" style="padding:10px 14px;">
+                        <div class="c1met-lbl">Investigations (7d)</div>
+                        <div style="font-size:18px;font-weight:800;color:#1A2332;">2,891 <span style="font-size:12px;font-weight:400;color:#94A3B8;">completed</span></div>
                       </div>
                     </div>
                   </div>
                 </div>
-                <!-- AI Confidence block -->
-                <div style="display:flex;align-items:flex-start;gap:12px;padding:14px 0;border-bottom:1px solid rgba(0,0,0,0.06);">
-                  <div class="cc1-flow-circle cc1-flow-circle--green" style="width:40px;height:40px;flex-shrink:0;">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-                  </div>
-                  <div style="flex:1;">
-                    <div style="font-size:11px;color:#059669;font-weight:600;margin-bottom:1px;">AI CONFIDENCE &amp; ACCURACY</div>
-                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:4px;font-size:10px;">
-                      <div><span style="color:#6B7A8D;">Avg confidence score</span><br/><span style="font-size:15px;font-weight:800;color:#1A2332;">94.2%</span></div>
-                      <div><span style="color:#6B7A8D;">AI triage accuracy</span><br/><span style="font-size:15px;font-weight:800;color:#1A2332;">91.8%</span></div>
-                      <div><span style="color:#6B7A8D;">Noise reduction</span><br/><span style="font-size:15px;font-weight:800;color:#059669;">82.6%</span></div>
-                      <div><span style="color:#6B7A8D;">Avg resolve time</span><br/><span style="font-size:15px;font-weight:800;color:#1A2332;">6h 14m</span></div>
-                    </div>
-                  </div>
-                </div>
-                <!-- Top affected users -->
-                <div style="padding-top:12px;">
-                  <div style="font-size:10px;color:#6B7A8D;font-weight:600;margin-bottom:6px;">TOP INVESTIGATED USERS (7 DAYS)</div>
-                  <div style="display:flex;flex-direction:column;gap:4px;">
-                    <div style="display:flex;justify-content:space-between;font-size:10px;"><span style="color:#1A2332;">john.doe@corp.com</span><span style="color:#DC2626;font-weight:700;">14 alerts</span></div>
-                    <div style="display:flex;justify-content:space-between;font-size:10px;"><span style="color:#1A2332;">svc-backup@corp.com</span><span style="color:#D97706;font-weight:700;">11 alerts</span></div>
-                    <div style="display:flex;justify-content:space-between;font-size:10px;"><span style="color:#1A2332;">admin.portal@corp.com</span><span style="color:#D97706;font-weight:700;">9 alerts</span></div>
-                    <div style="display:flex;justify-content:space-between;font-size:10px;"><span style="color:#1A2332;">alice.martin@corp.com</span><span style="color:#CA8A04;font-weight:700;">7 alerts</span></div>
-                    <div style="display:flex;justify-content:space-between;font-size:10px;"><span style="color:#1A2332;">guest-vpn-12@corp.com</span><span style="color:#6B7A8D;font-weight:700;">5 alerts</span></div>
-                  </div>
-                </div>
               </div>
-            </div><!-- /cc1-flow-section -->
 
-            <!-- Bottom strip — 6 cells -->
-            <div class="cc1-bottom-strip">
-              <div class="cc1-strip-cell">
-                <div class="cc1-strip-label">Total Alerts (7 Days)</div>
-                <div class="cc1-strip-val">18,452<div class="cc1-strip-spark" id="cc1-spark-events"></div></div>
-                <div style="font-size:10px;color:#DC2626;">&#9650; 30% vs prior period</div>
-                <div style="font-size:10px;color:#6B7A8D;margin-top:2px;">Daily avg: 2,636 &nbsp;|&nbsp; Peak: 3,200 (Fri)</div>
-              </div>
-              <div class="cc1-strip-cell">
-                <div class="cc1-strip-label">Auto-Investigated by ZIA</div>
-                <div class="cc1-strip-val">2,891<div class="cc1-strip-spark" id="cc1-spark-data"></div></div>
-                <div style="font-size:10px;color:#059669;">15.7% of total alerts triaged</div>
-                <div style="font-size:10px;color:#6B7A8D;margin-top:2px;">Daily avg: 413 &nbsp;|&nbsp; Peak: 520 (Fri)</div>
-              </div>
-              <div class="cc1-strip-cell">
-                <div class="cc1-strip-label">Open Incidents</div>
-                <div class="cc1-strip-val">218</div>
-                <div style="display:flex;gap:6px;font-size:10px;margin-top:2px;">
-                  <span style="color:#DC2626;">&#9679; Crit 560</span>
-                  <span style="color:#EA580C;">&#9679; High 220</span>
-                  <span style="color:#CA8A04;">&#9679; Med 59</span>
-                </div>
-                <div style="font-size:10px;color:#6B7A8D;margin-top:2px;">Avg age: 18.4 hrs &nbsp;|&nbsp; 8 SLA breached</div>
-              </div>
-              <div class="cc1-strip-cell">
-                <div class="cc1-strip-label">Escalated Incidents</div>
-                <div class="cc1-strip-val" style="color:#D97706;">41</div>
-                <div style="font-size:10px;color:#6B7A8D;">of 247 created (16.6% escalation rate)</div>
-                <div style="font-size:10px;color:#6B7A8D;margin-top:2px;">Avg MTTR escalated: 4h 38m</div>
-              </div>
-              <div class="cc1-strip-cell">
-                <div class="cc1-strip-label">Rules Triggered (7 Days)</div>
-                <div class="cc1-strip-val">342</div>
-                <div style="font-size:10px;color:#6B7A8D;">of 528 rules &nbsp;<span style="color:#D97706;">64.8% hit rate</span></div>
-                <div style="font-size:10px;color:#6B7A8D;margin-top:2px;">Top: Brute Force (1,247 hits)</div>
-              </div>
-              <div class="cc1-strip-cell">
-                <div class="cc1-strip-label">Threat Intel Matches</div>
-                <div class="cc1-strip-val" style="color:#DC2626;">1,247</div>
-                <div style="font-size:10px;color:#DC2626;">&#9650; 22% vs prior period</div>
-                <div style="font-size:10px;color:#6B7A8D;margin-top:2px;">IPs: 843 &nbsp;|&nbsp; Domains: 289 &nbsp;|&nbsp; Hashes: 115</div>
-              </div>
-            </div>
-
-            <!-- Threat Intelligence & Attack Surface -->
-            <div style="padding:14px 24px 6px;border-top:1px solid rgba(0,0,0,0.07);background:#F5F7FA;">
-              <div style="font-size:12px;font-weight:700;color:#1A2332;display:flex;align-items:center;gap:8px;">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#DC2626" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                Threat Intelligence &amp; Attack Surface
-              </div>
-            </div>
-            <div class="cc1-threat-section">
-              <!-- Top Attack Types -->
-              <div class="cc1-threat-card">
-                <div class="cc1-threat-title">
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#DC2626" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-                  Top 5 Attack Types
-                </div>
-                <div class="cc1-atk-row"><span class="cc1-atk-name">Brute Force Login</span><div class="cc1-atk-bar-wrap"><div class="cc1-atk-bar" style="width:88%;background:#DC2626;"></div></div><span class="cc1-atk-cnt">1,247</span></div>
-                <div class="cc1-atk-row"><span class="cc1-atk-name">Privilege Escalation</span><div class="cc1-atk-bar-wrap"><div class="cc1-atk-bar" style="width:62%;background:#EA580C;"></div></div><span class="cc1-atk-cnt">884</span></div>
-                <div class="cc1-atk-row"><span class="cc1-atk-name">Lateral Movement</span><div class="cc1-atk-bar-wrap"><div class="cc1-atk-bar" style="width:48%;background:#D97706;"></div></div><span class="cc1-atk-cnt">682</span></div>
-                <div class="cc1-atk-row"><span class="cc1-atk-name">Data Exfiltration</span><div class="cc1-atk-bar-wrap"><div class="cc1-atk-bar" style="width:34%;background:#7C3AED;"></div></div><span class="cc1-atk-cnt">483</span></div>
-                <div class="cc1-atk-row"><span class="cc1-atk-name">Phishing / Email</span><div class="cc1-atk-bar-wrap"><div class="cc1-atk-bar" style="width:22%;background:#2563EB;"></div></div><span class="cc1-atk-cnt">312</span></div>
-              </div>
-              <!-- MITRE ATT&CK Coverage -->
-              <div class="cc1-threat-card">
-                <div class="cc1-threat-title">
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18"/></svg>
-                  MITRE ATT&amp;CK Coverage
-                </div>
-                <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:10px;">
-                  <div style="background:rgba(220,38,38,0.07);border-radius:5px;padding:7px 9px;">
-                    <div style="font-size:14px;font-weight:800;color:#DC2626;">14</div>
-                    <div style="color:#6B7A8D;">Tactics detected</div>
-                  </div>
-                  <div style="background:rgba(124,58,237,0.07);border-radius:5px;padding:7px 9px;">
-                    <div style="font-size:14px;font-weight:800;color:#7C3AED;">68</div>
-                    <div style="color:#6B7A8D;">Techniques mapped</div>
-                  </div>
-                  <div style="background:rgba(217,119,6,0.07);border-radius:5px;padding:7px 9px;">
-                    <div style="font-size:14px;font-weight:800;color:#D97706;">23</div>
-                    <div style="color:#6B7A8D;">Sub-techniques</div>
-                  </div>
-                  <div style="background:rgba(5,150,105,0.07);border-radius:5px;padding:7px 9px;">
-                    <div style="font-size:14px;font-weight:800;color:#059669;">89%</div>
-                    <div style="color:#6B7A8D;">Coverage score</div>
-                  </div>
-                </div>
-                <div style="font-size:10px;color:#6B7A8D;margin-top:4px;">Top tactic: <span style="color:#DC2626;font-weight:600;">Credential Access</span> (412 events)</div>
-              </div>
-              <!-- Affected Assets -->
-              <div class="cc1-threat-card">
-                <div class="cc1-threat-title">
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#D97706" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-                  Affected Assets (1,836 total)
-                </div>
-                <div style="display:flex;flex-direction:column;gap:6px;">
-                  <div>
-                    <div style="display:flex;justify-content:space-between;font-size:10px;margin-bottom:2px;"><span style="color:#6B7A8D;">Workstations</span><span style="color:#1A2332;font-weight:700;">892 <span style="color:#DC2626;">312 high-risk</span></span></div>
-                    <div style="height:5px;background:rgba(0,0,0,0.06);border-radius:3px;overflow:hidden;"><div style="height:100%;width:75%;background:#0066CC;border-radius:3px;"></div></div>
-                  </div>
-                  <div>
-                    <div style="display:flex;justify-content:space-between;font-size:10px;margin-bottom:2px;"><span style="color:#6B7A8D;">Servers</span><span style="color:#1A2332;font-weight:700;">541</span></div>
-                    <div style="height:5px;background:rgba(0,0,0,0.06);border-radius:3px;overflow:hidden;"><div style="height:100%;width:55%;background:#7C3AED;border-radius:3px;"></div></div>
-                  </div>
-                  <div>
-                    <div style="display:flex;justify-content:space-between;font-size:10px;margin-bottom:2px;"><span style="color:#6B7A8D;">Cloud Instances</span><span style="color:#1A2332;font-weight:700;">287</span></div>
-                    <div style="height:5px;background:rgba(0,0,0,0.06);border-radius:3px;overflow:hidden;"><div style="height:100%;width:35%;background:#059669;border-radius:3px;"></div></div>
-                  </div>
-                  <div>
-                    <div style="display:flex;justify-content:space-between;font-size:10px;margin-bottom:2px;"><span style="color:#6B7A8D;">Network Devices</span><span style="color:#1A2332;font-weight:700;">116</span></div>
-                    <div style="height:5px;background:rgba(0,0,0,0.06);border-radius:3px;overflow:hidden;"><div style="height:100%;width:18%;background:#D97706;border-radius:3px;"></div></div>
-                  </div>
-                </div>
-                <div style="font-size:10px;color:#DC2626;margin-top:4px;">&#9888; 312 assets require immediate attention</div>
-              </div>
-            </div>
-
-            <!-- SOC Value Metrics -->
-            <div style="padding:14px 24px 6px;border-top:1px solid rgba(0,0,0,0.07);background:#fff;">
-              <div style="font-size:12px;font-weight:700;color:#1A2332;display:flex;align-items:center;gap:8px;">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#0066CC" stroke-width="2"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
-                SOC Efficiency Metrics
-              </div>
-            </div>
-            <div class="cc1-metrics-section">
-              <div class="cc1-metric-cell">
-                <div class="cc1-metric-label">Analyst Hours Saved by ZIA<br/><span style="font-size:10px;color:rgba(107,122,141,0.8);">(2,891 &times; 4m 22s avg)</span></div>
-                <div style="display:flex;align-items:flex-end;gap:6px;margin-top:4px;">
-                  <div style="font-size:40px;font-weight:900;color:#1A2332;line-height:1;">210</div>
-                  <div style="font-size:16px;font-weight:700;color:#6B7A8D;margin-bottom:5px;">Hrs</div>
-                </div>
-                <div style="height:58px;width:100%;" id="cc1-bar-soc-hours"></div>
-                <div class="cc1-mini-stat"><span class="cc1-mini-stat-label">Cost saved (est.)</span><span class="cc1-mini-stat-val" style="color:#059669;">$31,500</span></div>
-                <div class="cc1-mini-stat"><span class="cc1-mini-stat-label">Hours/day avg</span><span class="cc1-mini-stat-val">30 hrs</span></div>
-                <div class="cc1-mini-stat"><span class="cc1-mini-stat-label">FTE equivalent</span><span class="cc1-mini-stat-val">1.3 analysts</span></div>
-              </div>
-              <div class="cc1-metric-cell">
-                <div class="cc1-metric-label">True Positive Rate<br/><span style="font-size:10px;color:rgba(107,122,141,0.8);">(250 TP of 300 verdicts)</span></div>
-                <div style="font-size:50px;font-weight:900;color:#059669;line-height:1;margin-top:4px;">83%</div>
-                <div style="font-size:11px;color:#6B7A8D;margin-top:2px;">50 False Positives filtered</div>
-                <div style="width:100%;max-width:160px;margin-top:6px;">
-                  <div style="height:7px;background:rgba(0,0,0,0.07);border-radius:4px;overflow:hidden;">
-                    <div style="height:100%;width:83%;background:linear-gradient(90deg,#059669,#34D399);border-radius:4px;"></div>
-                  </div>
-                </div>
-                <div class="cc1-mini-stat"><span class="cc1-mini-stat-label">AI Triage Accuracy</span><span class="cc1-mini-stat-val">91.8%</span></div>
-                <div class="cc1-mini-stat"><span class="cc1-mini-stat-label">Noise Reduction</span><span class="cc1-mini-stat-val" style="color:#059669;">82.6%</span></div>
-                <div class="cc1-mini-stat"><span class="cc1-mini-stat-label">Alerts suppressed</span><span class="cc1-mini-stat-val">3,214</span></div>
-              </div>
-              <div class="cc1-metric-cell">
-                <div class="cc1-metric-label">Mean Time to Investigate<br/><span style="font-size:10px;color:rgba(107,122,141,0.8);">per completed investigation</span></div>
-                <div class="cc1-gauge-wrap" id="cc1-gauge-mttd"></div>
-                <div style="font-size:14px;font-weight:700;color:#1A2332;">4m 22s <span style="font-size:11px;font-weight:400;color:#059669;">&#9650; 10%</span></div>
-                <div class="cc1-mini-stat"><span class="cc1-mini-stat-label">MTTD (detect)</span><span class="cc1-mini-stat-val">2m 08s</span></div>
-                <div class="cc1-mini-stat"><span class="cc1-mini-stat-label">MTTR (resolve)</span><span class="cc1-mini-stat-val">6h 14m</span></div>
-                <div class="cc1-mini-stat"><span class="cc1-mini-stat-label">SLA compliance</span><span class="cc1-mini-stat-val" style="color:#059669;">94.2%</span></div>
-              </div>
-              <div class="cc1-metric-cell">
-                <div class="cc1-metric-label">Investigations Running<br/><span style="font-size:10px;color:rgba(107,122,141,0.8);">Queue utilisation</span></div>
-                <div style="font-size:40px;font-weight:900;color:#1A2332;line-height:1;margin-top:4px;">247</div>
-                <div style="width:100%;max-width:160px;margin-top:6px;">
-                  <div style="height:8px;background:rgba(0,0,0,0.07);border-radius:4px;overflow:hidden;">
-                    <div style="height:100%;width:81.7%;background:linear-gradient(90deg,#6D28D9,#0066CC);border-radius:4px;"></div>
-                  </div>
-                  <div style="font-size:11px;color:#0066CC;margin-top:3px;text-align:center;">81.7% queue used</div>
-                </div>
-                <div class="cc1-mini-stat"><span class="cc1-mini-stat-label">Completed (7d)</span><span class="cc1-mini-stat-val">2,891</span></div>
-                <div class="cc1-mini-stat"><span class="cc1-mini-stat-label">Avg queue/day</span><span class="cc1-mini-stat-val">413</span></div>
-                <div class="cc1-mini-stat"><span class="cc1-mini-stat-label">Max concurrent</span><span class="cc1-mini-stat-val">302 (Thu)</span></div>
-              </div>
-            </div>
+            </div><!-- /c1bottom -->
 
           </div><!-- /th-panel-command-center1 -->
 
