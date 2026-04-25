@@ -741,6 +741,11 @@
     #threatHubPage .view-panel.active { display: block !important; }
     #th-panel-command-center2.active { display: flex !important; flex-direction: column !important; }
     #th-panel-command-center3.active { display: flex !important; flex-direction: column !important; }
+    #th-panel-command-center4.active { display: flex !important; flex-direction: column !important; }
+    #th-panel-command-center5.active { display: flex !important; flex-direction: column !important; }
+    #th-panel-command-center6.active { display: flex !important; flex-direction: column !important; }
+    #th-panel-command-center7.active { display: flex !important; flex-direction: column !important; }
+    #th-panel-command-center8.active { display: flex !important; flex-direction: column !important; }
 
     #threatHubPage .det-header { display: flex; align-items: center; height: 40px; border-bottom: 1px solid #E9E9E9; background: #fff; padding: 0 16px; flex-shrink: 0; }
     #threatHubPage .det-header__tabs { display: flex; align-items: center; gap: 12px; height: 100%; }
@@ -2159,6 +2164,11 @@
                   <div class="ov-dd-item" data-view="command-center1">Command Center 1</div>
                   <div class="ov-dd-item" data-view="command-center2">Command Center 2</div>
                   <div class="ov-dd-item" data-view="command-center3">Command Center 3</div>
+                  <div class="ov-dd-item" data-view="command-center4">Command Center 4</div>
+                  <div class="ov-dd-item" data-view="command-center5">Command Center 5</div>
+                  <div class="ov-dd-item" data-view="command-center6">Command Center 6</div>
+                  <div class="ov-dd-item" data-view="command-center7">Command Center 7</div>
+                  <div class="ov-dd-item" data-view="command-center8">Command Center 8</div>
                 </div>
               </div>
 
@@ -3700,6 +3710,369 @@
 
             </div>
           </div><!-- /th-panel-command-center3 -->
+          <!-- ═══ CC4: User Behaviour Analytics ═══ -->
+          <div class="view-panel" id="th-panel-command-center4" style="background:#FFFBF5;min-height:100%;color:#1C1A16;font-family:'Segoe UI',system-ui,sans-serif;overflow:hidden;">
+            <style>
+              #th-panel-command-center4 * { box-sizing:border-box; }
+              .u4hd { display:flex;align-items:center;justify-content:space-between;padding:11px 24px;background:#fff;border-bottom:1px solid #FED7AA;flex-shrink:0; }
+              .u4hd-left { display:flex;align-items:center;gap:11px; }
+              .u4hd-icon { width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#F97316,#EA580C);display:flex;align-items:center;justify-content:center;flex-shrink:0; }
+              .u4hd-title { font-size:15px;font-weight:800;color:#1C1A16; }
+              .u4hd-sub { font-size:10px;color:#92400E;margin-top:1px;letter-spacing:.3px;text-transform:uppercase; }
+              .u4badge { background:#FFF7ED;color:#EA580C;font-size:10px;font-weight:700;padding:3px 11px;border-radius:20px;letter-spacing:.4px;border:1px solid #FED7AA; }
+              .u4ts { font-size:11px;color:#94A3B8; }
+              .u4kpis { display:grid;grid-template-columns:repeat(4,1fr);background:#fff;border-bottom:1px solid #FED7AA;flex-shrink:0; }
+              .u4kpi { padding:12px 20px;border-right:1px solid #FED7AA;position:relative;overflow:hidden; }
+              .u4kpi:last-child { border-right:none; }
+              .u4kpi-acc { position:absolute;left:0;top:0;bottom:0;width:3px; }
+              .u4kpi-lbl { font-size:10px;font-weight:700;color:#92400E;text-transform:uppercase;letter-spacing:.5px; }
+              .u4kpi-val { font-size:26px;font-weight:900;line-height:1;margin-top:2px; }
+              .u4kpi-sub { font-size:11px;color:#78716C;margin-top:3px; }
+              .u4kpi-delta { font-size:11px;font-weight:600;margin-top:3px; }
+              .u4main { flex:1;display:grid;grid-template-columns:320px 1fr;min-height:0;overflow:hidden; }
+              .u4left { background:#fff;border-right:1px solid #FED7AA;display:flex;flex-direction:column;overflow:hidden; }
+              .u4right { display:flex;flex-direction:column;overflow:hidden; }
+              .u4sh { padding:10px 16px 8px;font-size:10px;font-weight:700;color:#92400E;text-transform:uppercase;letter-spacing:.7px;border-bottom:1px solid #FED7AA;background:#fff;flex-shrink:0;display:flex;align-items:center;gap:6px; }
+              .u4sh-dot { width:7px;height:7px;border-radius:50%;flex-shrink:0; }
+              .u4tbl { width:100%;border-collapse:collapse;font-size:12px; }
+              .u4tbl th { padding:7px 14px;font-size:10px;font-weight:700;color:#92400E;text-transform:uppercase;letter-spacing:.4px;border-bottom:1px solid #FEF3C7;text-align:left;background:#FFFBF5; }
+              .u4tbl td { padding:8px 14px;border-bottom:1px solid #FEF3C7;color:#44403C; }
+              .u4tbl tr:last-child td { border-bottom:none; }
+              .u4risk-bar { height:5px;border-radius:3px;background:#F1F5F9;overflow:hidden; }
+              .u4risk-fill { height:100%;border-radius:3px; }
+              .u4sev { font-size:9px;font-weight:700;padding:2px 7px;border-radius:3px; }
+            </style>
+            <div class="u4hd">
+              <div class="u4hd-left">
+                <div class="u4hd-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div>
+                <div><div class="u4hd-title">User Behaviour Analytics</div><div class="u4hd-sub">Identity risk &amp; insider threat detection</div></div>
+                <span class="u4badge">&#9679; LIVE MONITORING</span>
+              </div>
+              <span class="u4ts">Apr 25, 2026 &middot; 09:41</span>
+            </div>
+            <div class="u4kpis">
+              <div class="u4kpi"><div class="u4kpi-acc" style="background:#F97316;"></div><div class="u4kpi-lbl">Users Monitored</div><div class="u4kpi-val" style="color:#EA580C;">8,342</div><div class="u4kpi-sub">Across all domains</div><div class="u4kpi-delta" style="color:#22C55E;">&#9650; 124 new today</div></div>
+              <div class="u4kpi"><div class="u4kpi-acc" style="background:#EF4444;"></div><div class="u4kpi-lbl">High Risk Users</div><div class="u4kpi-val" style="color:#DC2626;">47</div><div class="u4kpi-sub">Score &gt; 80</div><div class="u4kpi-delta" style="color:#DC2626;">&#9650; 8 new this week</div></div>
+              <div class="u4kpi"><div class="u4kpi-acc" style="background:#F59E0B;"></div><div class="u4kpi-lbl">Anomalies Detected</div><div class="u4kpi-val" style="color:#D97706;">312</div><div class="u4kpi-sub">Last 7 days</div><div class="u4kpi-delta" style="color:#D97706;">&#9650; 18% vs prev week</div></div>
+              <div class="u4kpi"><div class="u4kpi-acc" style="background:#8B5CF6;"></div><div class="u4kpi-lbl">Avg Risk Score</div><div class="u4kpi-val" style="color:#7C3AED;">34.2</div><div class="u4kpi-sub">Org baseline</div><div class="u4kpi-delta" style="color:#22C55E;">&#9660; 2.1 pts improved</div></div>
+            </div>
+            <div class="u4main">
+              <div class="u4left">
+                <div class="u4sh"><span class="u4sh-dot" style="background:#EF4444;"></span>Top Risky Users</div>
+                <div style="overflow-y:auto;flex:1;">
+                  <table class="u4tbl">
+                    <thead><tr><th>User</th><th>Dept</th><th>Risk</th><th>Status</th></tr></thead>
+                    <tbody>
+                      <tr><td><b>j.morrison@corp</b></td><td>Finance</td><td><div class="u4risk-bar"><div class="u4risk-fill" style="width:94%;background:linear-gradient(90deg,#DC2626,#F87171);"></div></div><div style="font-size:10px;color:#DC2626;font-weight:700;">94</div></td><td><span class="u4sev" style="background:#FEF2F2;color:#DC2626;">CRITICAL</span></td></tr>
+                      <tr><td><b>a.chen@corp</b></td><td>IT Admin</td><td><div class="u4risk-bar"><div class="u4risk-fill" style="width:88%;background:linear-gradient(90deg,#EA580C,#FB923C);"></div></div><div style="font-size:10px;color:#EA580C;font-weight:700;">88</div></td><td><span class="u4sev" style="background:#FFF7ED;color:#C2410C;">HIGH</span></td></tr>
+                      <tr><td><b>r.patel@corp</b></td><td>HR</td><td><div class="u4risk-bar"><div class="u4risk-fill" style="width:82%;background:linear-gradient(90deg,#D97706,#FCD34D);"></div></div><div style="font-size:10px;color:#D97706;font-weight:700;">82</div></td><td><span class="u4sev" style="background:#FFF7ED;color:#92400E;">HIGH</span></td></tr>
+                      <tr><td><b>s.williams@corp</b></td><td>Sales</td><td><div class="u4risk-bar"><div class="u4risk-fill" style="width:76%;background:linear-gradient(90deg,#F59E0B,#FDE68A);"></div></div><div style="font-size:10px;color:#D97706;font-weight:700;">76</div></td><td><span class="u4sev" style="background:#FFFBEB;color:#92400E;">HIGH</span></td></tr>
+                      <tr><td><b>m.garcia@corp</b></td><td>DevOps</td><td><div class="u4risk-bar"><div class="u4risk-fill" style="width:71%;background:linear-gradient(90deg,#F59E0B,#FDE68A);"></div></div><div style="font-size:10px;color:#D97706;font-weight:700;">71</div></td><td><span class="u4sev" style="background:#FFFBEB;color:#92400E;">MED</span></td></tr>
+                      <tr><td><b>l.kumar@corp</b></td><td>Research</td><td><div class="u4risk-bar"><div class="u4risk-fill" style="width:65%;background:linear-gradient(90deg,#F59E0B,#FDE68A);"></div></div><div style="font-size:10px;color:#D97706;font-weight:700;">65</div></td><td><span class="u4sev" style="background:#FFFBEB;color:#92400E;">MED</span></td></tr>
+                      <tr><td><b>t.brown@corp</b></td><td>Legal</td><td><div class="u4risk-bar"><div class="u4risk-fill" style="width:58%;background:linear-gradient(90deg,#F59E0B,#FDE68A);"></div></div><div style="font-size:10px;color:#D97706;font-weight:700;">58</div></td><td><span class="u4sev" style="background:#FFFBEB;color:#92400E;">MED</span></td></tr>
+                      <tr><td><b>k.jones@corp</b></td><td>Finance</td><td><div class="u4risk-bar"><div class="u4risk-fill" style="width:44%;background:linear-gradient(90deg,#6366F1,#818CF8);"></div></div><div style="font-size:10px;color:#4F46E5;font-weight:700;">44</div></td><td><span class="u4sev" style="background:#EEF2FF;color:#3730A3;">LOW</span></td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="u4right">
+                <div class="u4sh"><span class="u4sh-dot" style="background:#F97316;"></span>Anomaly Timeline — 7 Days</div>
+                <div style="background:#fff;padding:8px 12px 4px;height:230px;"><div id="cc4-anomaly" style="width:100%;height:218px;"></div></div>
+                <div class="u4sh"><span class="u4sh-dot" style="background:#8B5CF6;"></span>Behaviour Risk Distribution</div>
+                <div style="background:#fff;padding:4px 12px 8px;flex:1;min-height:160px;"><div id="cc4-risk-dist" style="width:100%;height:180px;"></div></div>
+              </div>
+            </div>
+          </div><!-- /th-panel-command-center4 -->
+
+          <!-- ═══ CC5: Incident War Room ═══ -->
+          <div class="view-panel" id="th-panel-command-center5" style="background:#FFF5F5;min-height:100%;color:#1A0A0A;font-family:'Segoe UI',system-ui,sans-serif;overflow:hidden;">
+            <style>
+              #th-panel-command-center5 * { box-sizing:border-box; }
+              .w5hd { display:flex;align-items:center;justify-content:space-between;padding:11px 24px;background:#fff;border-bottom:1px solid #FECACA;flex-shrink:0; }
+              .w5hd-left { display:flex;align-items:center;gap:11px; }
+              .w5hd-icon { width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#EF4444,#B91C1C);display:flex;align-items:center;justify-content:center;flex-shrink:0; }
+              .w5hd-title { font-size:15px;font-weight:800;color:#1A0A0A; }
+              .w5hd-sub { font-size:10px;color:#991B1B;margin-top:1px;letter-spacing:.3px;text-transform:uppercase; }
+              .w5badge { background:#FEF2F2;color:#DC2626;font-size:10px;font-weight:700;padding:3px 11px;border-radius:20px;letter-spacing:.4px;border:1px solid #FECACA;animation:w5blink 1.4s infinite; }
+              @keyframes w5blink { 0%,100%{opacity:1} 50%{opacity:.5} }
+              .w5ts { font-size:11px;color:#94A3B8; }
+              .w5kpis { display:grid;grid-template-columns:repeat(4,1fr);background:#fff;border-bottom:1px solid #FECACA;flex-shrink:0; }
+              .w5kpi { padding:12px 20px;border-right:1px solid #FECACA; }
+              .w5kpi:last-child { border-right:none; }
+              .w5kpi-lbl { font-size:10px;font-weight:700;color:#991B1B;text-transform:uppercase;letter-spacing:.5px; }
+              .w5kpi-val { font-size:26px;font-weight:900;line-height:1;margin-top:2px; }
+              .w5kpi-sub { font-size:11px;color:#78716C;margin-top:3px; }
+              .w5kpi-delta { font-size:11px;font-weight:600;margin-top:3px; }
+              .w5main { flex:1;display:grid;grid-template-columns:1fr 340px;min-height:0;overflow:hidden; }
+              .w5left { display:flex;flex-direction:column;overflow-y:auto;border-right:1px solid #FECACA;background:#FFF5F5;padding:12px 16px;gap:8px; }
+              .w5right { display:flex;flex-direction:column;overflow:hidden; }
+              .w5sh { padding:10px 16px 8px;font-size:10px;font-weight:700;color:#991B1B;text-transform:uppercase;letter-spacing:.7px;border-bottom:1px solid #FECACA;background:#fff;flex-shrink:0;display:flex;align-items:center;gap:6px; }
+              .w5sh-dot { width:7px;height:7px;border-radius:50%;flex-shrink:0; }
+              .w5card { background:#fff;border-radius:8px;border:1px solid #FECACA;padding:12px 16px;display:flex;gap:12px;align-items:flex-start; }
+              .w5card-sev { width:6px;border-radius:3px;align-self:stretch;flex-shrink:0; }
+              .w5card-num { font-size:11px;font-weight:700;color:#94A3B8; }
+              .w5card-title { font-size:13px;font-weight:700;color:#1A0A0A;margin-top:2px; }
+              .w5card-meta { font-size:11px;color:#64748B;margin-top:3px; }
+              .w5card-right { margin-left:auto;text-align:right;flex-shrink:0; }
+              .w5timer { font-size:14px;font-weight:900; }
+              .w5owner { font-size:10px;color:#64748B;margin-top:2px; }
+              .w5tag { font-size:9px;font-weight:700;padding:2px 7px;border-radius:3px;margin-top:4px;display:inline-block; }
+              .w5responder { display:flex;align-items:center;gap:10px;padding:9px 16px;border-bottom:1px solid #FEF2F2; }
+              .w5av { width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;flex-shrink:0; }
+              .w5resp-name { font-size:12px;font-weight:600;color:#1A0A0A; }
+              .w5resp-stat { font-size:10px;color:#64748B; }
+            </style>
+            <div class="w5hd">
+              <div class="w5hd-left">
+                <div class="w5hd-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+                <div><div class="w5hd-title">Incident War Room</div><div class="w5hd-sub">Active incidents &amp; emergency response</div></div>
+                <span class="w5badge">&#9679; CRITICAL ACTIVE</span>
+              </div>
+              <span class="w5ts">Apr 25, 2026 &middot; 09:41</span>
+            </div>
+            <div class="w5kpis">
+              <div class="w5kpi"><div class="w5kpi-lbl">Active Incidents</div><div class="w5kpi-val" style="color:#DC2626;">100</div><div class="w5kpi-sub">Across all severities</div><div class="w5kpi-delta" style="color:#DC2626;">&#9650; 14 opened today</div></div>
+              <div class="w5kpi"><div class="w5kpi-lbl">P1 Open</div><div class="w5kpi-val" style="color:#EF4444;">25</div><div class="w5kpi-sub">Critical priority</div><div class="w5kpi-delta" style="color:#EF4444;">&#9650; Needs immediate action</div></div>
+              <div class="w5kpi"><div class="w5kpi-lbl">Avg MTTR</div><div class="w5kpi-val" style="color:#F97316;">2d 5h</div><div class="w5kpi-sub">Mean time to resolve</div><div class="w5kpi-delta" style="color:#DC2626;">&#9650; 3h slower this week</div></div>
+              <div class="w5kpi"><div class="w5kpi-lbl">SLA Breached</div><div class="w5kpi-val" style="color:#F59E0B;">20</div><div class="w5kpi-sub">18% of total</div><div class="w5kpi-delta" style="color:#DC2626;">&#9650; Action required</div></div>
+            </div>
+            <div class="w5main">
+              <div class="w5left">
+                <div class="w5card"><div class="w5card-sev" style="background:#DC2626;"></div><div style="flex:1;"><div class="w5card-num">INC-2024-1042</div><div class="w5card-title">Ransomware Detected — Finance Servers</div><div class="w5card-meta">Detected: 07:14 &middot; Affected: 3 servers &middot; Impact: HIGH</div></div><div class="w5card-right"><div class="w5timer" style="color:#DC2626;">02:14:38</div><div class="w5owner">&#128100; J. Williams</div><span class="w5tag" style="background:#FEF2F2;color:#DC2626;">P1 — SLA BREACHED</span></div></div>
+                <div class="w5card"><div class="w5card-sev" style="background:#EF4444;"></div><div style="flex:1;"><div class="w5card-num">INC-2024-1041</div><div class="w5card-title">Credential Stuffing Attack — Auth Service</div><div class="w5card-meta">Detected: 06:52 &middot; 1,200+ failed logins &middot; Origin: Multiple IPs</div></div><div class="w5card-right"><div class="w5timer" style="color:#EF4444;">00:58:12</div><div class="w5owner">&#128100; S. Rogers</div><span class="w5tag" style="background:#FEF2F2;color:#DC2626;">P1 — IN PROGRESS</span></div></div>
+                <div class="w5card"><div class="w5card-sev" style="background:#F97316;"></div><div style="flex:1;"><div class="w5card-num">INC-2024-1039</div><div class="w5card-title">Data Exfiltration Attempt — S3 Buckets</div><div class="w5card-meta">Detected: 05:30 &middot; 48GB flagged &middot; User: svc-backup@</div></div><div class="w5card-right"><div class="w5timer" style="color:#F97316;">04:30:00</div><div class="w5owner">&#128100; M. Brown</div><span class="w5tag" style="background:#FFF7ED;color:#C2410C;">P2 — INVESTIGATING</span></div></div>
+                <div class="w5card"><div class="w5card-sev" style="background:#F59E0B;"></div><div style="flex:1;"><div class="w5card-num">INC-2024-1038</div><div class="w5card-title">Privilege Escalation — AD Admin Account</div><div class="w5card-meta">Detected: 04:18 &middot; User: t.admin &middot; DC01 affected</div></div><div class="w5card-right"><div class="w5timer" style="color:#F59E0B;">05:42:00</div><div class="w5owner">&#128100; K. Patel</div><span class="w5tag" style="background:#FFFBEB;color:#92400E;">P2 — CONTAINMENT</span></div></div>
+                <div class="w5card"><div class="w5card-sev" style="background:#6366F1;"></div><div style="flex:1;"><div class="w5card-num">INC-2024-1035</div><div class="w5card-title">Lateral Movement — Internal Subnet Scan</div><div class="w5card-meta">Detected: 03:05 &middot; 14 hosts scanned &middot; Low confidence</div></div><div class="w5card-right"><div class="w5timer" style="color:#6366F1;">07:00:00</div><div class="w5owner">&#128100; Unassigned</div><span class="w5tag" style="background:#EEF2FF;color:#3730A3;">P3 — OPEN</span></div></div>
+              </div>
+              <div class="w5right">
+                <div class="w5sh"><span class="w5sh-dot" style="background:#EF4444;"></span>Resolution Funnel</div>
+                <div style="background:#fff;padding:8px 12px 4px;height:220px;"><div id="cc5-funnel" style="width:100%;height:208px;"></div></div>
+                <div class="w5sh"><span class="w5sh-dot" style="background:#F97316;"></span>Responder Leaderboard</div>
+                <div style="flex:1;background:#fff;overflow-y:auto;">
+                  <div class="w5responder"><div class="w5av" style="background:#2563EB;">JW</div><div style="flex:1;"><div class="w5resp-name">Johnson Williams</div><div class="w5resp-stat">28 incidents &middot; MTTR 3d 5h &middot; 5 SLA violations</div></div><div style="font-size:13px;font-weight:900;color:#2563EB;">28</div></div>
+                  <div class="w5responder"><div class="w5av" style="background:#16A34A;">SR</div><div style="flex:1;"><div class="w5resp-name">Sarah Rogers</div><div class="w5resp-stat">22 incidents &middot; MTTR 2d 12h &middot; 3 SLA violations</div></div><div style="font-size:13px;font-weight:900;color:#16A34A;">22</div></div>
+                  <div class="w5responder"><div class="w5av" style="background:#D97706;">MB</div><div style="flex:1;"><div class="w5resp-name">Mark Brown</div><div class="w5resp-stat">15 incidents &middot; MTTR 4d 2h &middot; 8 SLA violations</div></div><div style="font-size:13px;font-weight:900;color:#D97706;">15</div></div>
+                  <div class="w5responder"><div class="w5av" style="background:#7C3AED;">KP</div><div style="flex:1;"><div class="w5resp-name">Kiran Patel</div><div class="w5resp-stat">12 incidents &middot; MTTR 1d 8h &middot; 1 SLA violation</div></div><div style="font-size:13px;font-weight:900;color:#7C3AED;">12</div></div>
+                  <div class="w5responder"><div class="w5av" style="background:#64748B;">—</div><div style="flex:1;"><div class="w5resp-name">Unassigned</div><div class="w5resp-stat">23 incidents &middot; Pending assignment</div></div><div style="font-size:13px;font-weight:900;color:#64748B;">23</div></div>
+                </div>
+              </div>
+            </div>
+          </div><!-- /th-panel-command-center5 -->
+
+          <!-- ═══ CC6: Network Traffic Intelligence ═══ -->
+          <div class="view-panel" id="th-panel-command-center6" style="background:#F0F9FF;min-height:100%;color:#0C1E30;font-family:'Segoe UI',system-ui,sans-serif;overflow:hidden;">
+            <style>
+              #th-panel-command-center6 * { box-sizing:border-box; }
+              .n6hd { display:flex;align-items:center;justify-content:space-between;padding:11px 24px;background:#fff;border-bottom:1px solid #BAE6FD;flex-shrink:0; }
+              .n6hd-left { display:flex;align-items:center;gap:11px; }
+              .n6hd-icon { width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#0EA5E9,#0369A1);display:flex;align-items:center;justify-content:center;flex-shrink:0; }
+              .n6hd-title { font-size:15px;font-weight:800;color:#0C1E30; }
+              .n6hd-sub { font-size:10px;color:#0369A1;margin-top:1px;letter-spacing:.3px;text-transform:uppercase; }
+              .n6badge { background:#F0F9FF;color:#0284C7;font-size:10px;font-weight:700;padding:3px 11px;border-radius:20px;letter-spacing:.4px;border:1px solid #BAE6FD; }
+              .n6ts { font-size:11px;color:#94A3B8; }
+              .n6kpis { display:grid;grid-template-columns:repeat(4,1fr);background:#fff;border-bottom:1px solid #BAE6FD;flex-shrink:0; }
+              .n6kpi { padding:12px 20px;border-right:1px solid #BAE6FD;position:relative; }
+              .n6kpi:last-child { border-right:none; }
+              .n6kpi-acc { position:absolute;left:0;top:0;bottom:0;width:3px; }
+              .n6kpi-lbl { font-size:10px;font-weight:700;color:#0369A1;text-transform:uppercase;letter-spacing:.5px; }
+              .n6kpi-val { font-size:26px;font-weight:900;line-height:1;margin-top:2px; }
+              .n6kpi-sub { font-size:11px;color:#64748B;margin-top:3px; }
+              .n6kpi-delta { font-size:11px;font-weight:600;margin-top:3px; }
+              .n6main { flex:1;display:grid;grid-template-columns:1fr 340px;min-height:0;overflow:hidden; }
+              .n6left { display:flex;flex-direction:column;overflow:hidden;border-right:1px solid #BAE6FD; }
+              .n6right { display:flex;flex-direction:column;overflow:hidden; }
+              .n6sh { padding:10px 16px 8px;font-size:10px;font-weight:700;color:#0369A1;text-transform:uppercase;letter-spacing:.7px;border-bottom:1px solid #BAE6FD;background:#fff;flex-shrink:0;display:flex;align-items:center;gap:6px; }
+              .n6sh-dot { width:7px;height:7px;border-radius:50%;flex-shrink:0; }
+              .n6tlk-row { display:flex;align-items:center;gap:10px;padding:8px 16px;border-bottom:1px solid #F0F9FF;background:#fff; }
+              .n6tlk-name { font-size:11px;font-weight:700;color:#0C1E30;width:140px;flex-shrink:0; }
+              .n6tlk-bar-bg { flex:1;height:8px;background:#E0F2FE;border-radius:4px;overflow:hidden; }
+              .n6tlk-fill { height:100%;border-radius:4px; }
+              .n6tlk-val { font-size:11px;font-weight:700;width:52px;text-align:right;flex-shrink:0; }
+              .n6tlk-dir { font-size:9px;font-weight:700;padding:2px 6px;border-radius:3px;flex-shrink:0; }
+            </style>
+            <div class="n6hd">
+              <div class="n6hd-left">
+                <div class="n6hd-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+                <div><div class="n6hd-title">Network Traffic Intelligence</div><div class="n6hd-sub">Real-time flow analysis &amp; threat detection</div></div>
+                <span class="n6badge">&#9679; MONITORING</span>
+              </div>
+              <span class="n6ts">Apr 25, 2026 &middot; 09:41</span>
+            </div>
+            <div class="n6kpis">
+              <div class="n6kpi"><div class="n6kpi-acc" style="background:#0EA5E9;"></div><div class="n6kpi-lbl">Total Traffic</div><div class="n6kpi-val" style="color:#0284C7;">4.8 TB</div><div class="n6kpi-sub">Last 24 hours</div><div class="n6kpi-delta" style="color:#0284C7;">&#9650; 12% vs avg</div></div>
+              <div class="n6kpi"><div class="n6kpi-acc" style="background:#06B6D4;"></div><div class="n6kpi-lbl">Active Connections</div><div class="n6kpi-val" style="color:#0E7490;">28,441</div><div class="n6kpi-sub">Concurrent sessions</div><div class="n6kpi-delta" style="color:#22C55E;">&#9660; Normal range</div></div>
+              <div class="n6kpi"><div class="n6kpi-acc" style="background:#EF4444;"></div><div class="n6kpi-lbl">Blocked Attempts</div><div class="n6kpi-val" style="color:#DC2626;">1,842</div><div class="n6kpi-sub">By firewall today</div><div class="n6kpi-delta" style="color:#DC2626;">&#9650; 234 in last hour</div></div>
+              <div class="n6kpi"><div class="n6kpi-acc" style="background:#10B981;"></div><div class="n6kpi-lbl">Peak Bandwidth</div><div class="n6kpi-val" style="color:#059669;">9.2 Gbps</div><div class="n6kpi-sub">At 08:45 today</div><div class="n6kpi-delta" style="color:#22C55E;">&#9660; Below threshold</div></div>
+            </div>
+            <div class="n6main">
+              <div class="n6left">
+                <div class="n6sh"><span class="n6sh-dot" style="background:#0EA5E9;"></span>Traffic Volume — 24 Hours</div>
+                <div style="background:#fff;padding:8px 12px 4px;height:230px;"><div id="cc6-traffic" style="width:100%;height:218px;"></div></div>
+                <div class="n6sh"><span class="n6sh-dot" style="background:#EF4444;"></span>Top Talkers by Bandwidth</div>
+                <div style="flex:1;overflow-y:auto;">
+                  <div class="n6tlk-row"><div class="n6tlk-name">10.0.1.42 (DB-Prod-01)</div><div class="n6tlk-bar-bg"><div class="n6tlk-fill" style="width:92%;background:linear-gradient(90deg,#0EA5E9,#38BDF8);"></div></div><div class="n6tlk-val" style="color:#0284C7;">920 GB</div><div class="n6tlk-dir" style="background:#F0FDF4;color:#15803D;">OUT</div></div>
+                  <div class="n6tlk-row"><div class="n6tlk-name">10.0.2.18 (Web-Prod-03)</div><div class="n6tlk-bar-bg"><div class="n6tlk-fill" style="width:78%;background:linear-gradient(90deg,#0EA5E9,#38BDF8);"></div></div><div class="n6tlk-val" style="color:#0284C7;">780 GB</div><div class="n6tlk-dir" style="background:#F0FDF4;color:#15803D;">OUT</div></div>
+                  <div class="n6tlk-row"><div class="n6tlk-name">192.168.5.200 (Backup)</div><div class="n6tlk-bar-bg"><div class="n6tlk-fill" style="width:65%;background:linear-gradient(90deg,#F59E0B,#FCD34D);"></div></div><div class="n6tlk-val" style="color:#D97706;">650 GB</div><div class="n6tlk-dir" style="background:#FEF3C7;color:#92400E;">IN</div></div>
+                  <div class="n6tlk-row"><div class="n6tlk-name">172.16.0.5 (svc-backup)</div><div class="n6tlk-bar-bg"><div class="n6tlk-fill" style="width:48%;background:linear-gradient(90deg,#EF4444,#F87171);"></div></div><div class="n6tlk-val" style="color:#DC2626;">480 GB</div><div class="n6tlk-dir" style="background:#FEF2F2;color:#DC2626;">&#9888; OUT</div></div>
+                  <div class="n6tlk-row"><div class="n6tlk-name">10.0.3.91 (Analytics)</div><div class="n6tlk-bar-bg"><div class="n6tlk-fill" style="width:32%;background:linear-gradient(90deg,#6366F1,#818CF8);"></div></div><div class="n6tlk-val" style="color:#4F46E5;">320 GB</div><div class="n6tlk-dir" style="background:#EEF2FF;color:#3730A3;">IN</div></div>
+                </div>
+              </div>
+              <div class="n6right">
+                <div class="n6sh"><span class="n6sh-dot" style="background:#06B6D4;"></span>Protocol Distribution</div>
+                <div style="background:#fff;padding:4px 12px 4px;height:220px;"><div id="cc6-proto" style="width:100%;height:212px;"></div></div>
+                <div class="n6sh"><span class="n6sh-dot" style="background:#EF4444;"></span>Top Blocked Ports</div>
+                <div style="flex:1;background:#fff;overflow-y:auto;padding:10px 16px;">
+                  <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #E0F2FE;font-size:11px;"><span style="font-weight:700;color:#0C1E30;">Port 445 (SMB)</span><span style="color:#DC2626;font-weight:700;">842 blocks</span></div>
+                  <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #E0F2FE;font-size:11px;"><span style="font-weight:700;color:#0C1E30;">Port 22 (SSH)</span><span style="color:#F97316;font-weight:700;">421 blocks</span></div>
+                  <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #E0F2FE;font-size:11px;"><span style="font-weight:700;color:#0C1E30;">Port 3389 (RDP)</span><span style="color:#F97316;font-weight:700;">314 blocks</span></div>
+                  <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #E0F2FE;font-size:11px;"><span style="font-weight:700;color:#0C1E30;">Port 1433 (MSSQL)</span><span style="color:#F59E0B;font-weight:700;">178 blocks</span></div>
+                  <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #E0F2FE;font-size:11px;"><span style="font-weight:700;color:#0C1E30;">Port 23 (Telnet)</span><span style="color:#F59E0B;font-weight:700;">87 blocks</span></div>
+                  <div style="display:flex;justify-content:space-between;padding:6px 0;font-size:11px;"><span style="font-weight:700;color:#0C1E30;">Port 5900 (VNC)</span><span style="color:#94A3B8;font-weight:700;">0 blocks</span></div>
+                </div>
+              </div>
+            </div>
+          </div><!-- /th-panel-command-center6 -->
+
+          <!-- ═══ CC7: Executive CISO Summary ═══ -->
+          <div class="view-panel" id="th-panel-command-center7" style="background:#F8FAFC;min-height:100%;color:#0F172A;font-family:'Segoe UI',system-ui,sans-serif;overflow:hidden;">
+            <style>
+              #th-panel-command-center7 * { box-sizing:border-box; }
+              .e7hd { display:flex;align-items:center;justify-content:space-between;padding:13px 28px;background:linear-gradient(90deg,#0F172A,#1E293B);border-bottom:1px solid #334155;flex-shrink:0; }
+              .e7hd-left { display:flex;align-items:center;gap:12px; }
+              .e7hd-icon { width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,#10B981,#059669);display:flex;align-items:center;justify-content:center;flex-shrink:0; }
+              .e7hd-title { font-size:16px;font-weight:800;color:#F1F5F9; }
+              .e7hd-sub { font-size:10px;color:#94A3B8;margin-top:1px;letter-spacing:.3px;text-transform:uppercase; }
+              .e7badge { background:rgba(16,185,129,0.15);color:#34D399;font-size:10px;font-weight:700;padding:3px 12px;border-radius:20px;letter-spacing:.4px;border:1px solid rgba(52,211,153,0.3); }
+              .e7ts { font-size:11px;color:#64748B; }
+              .e7kpis { display:grid;grid-template-columns:repeat(6,1fr);background:#fff;border-bottom:1px solid #E2E8F0;flex-shrink:0; }
+              .e7kpi { padding:14px 16px;border-right:1px solid #E2E8F0;text-align:center; }
+              .e7kpi:last-child { border-right:none; }
+              .e7kpi-lbl { font-size:10px;font-weight:700;color:#64748B;text-transform:uppercase;letter-spacing:.5px; }
+              .e7kpi-val { font-size:24px;font-weight:900;line-height:1;margin-top:4px; }
+              .e7kpi-delta { font-size:11px;font-weight:600;margin-top:4px; }
+              .e7main { flex:1;display:grid;grid-template-columns:1fr 1fr;min-height:0;overflow:hidden; }
+              .e7col { display:flex;flex-direction:column;overflow:hidden; }
+              .e7col:first-child { border-right:1px solid #E2E8F0; }
+              .e7sh { padding:10px 20px 8px;font-size:10px;font-weight:700;color:#334155;text-transform:uppercase;letter-spacing:.7px;border-bottom:1px solid #E2E8F0;background:#fff;flex-shrink:0;display:flex;align-items:center;gap:6px; }
+              .e7sh-dot { width:7px;height:7px;border-radius:50%;flex-shrink:0; }
+              .e7cmp-row { display:flex;align-items:center;gap:14px;padding:10px 20px;border-bottom:1px solid #F1F5F9;background:#fff; }
+              .e7cmp-lbl { font-size:12px;font-weight:700;color:#334155;width:100px;flex-shrink:0; }
+              .e7cmp-bar-bg { flex:1;height:8px;background:#F1F5F9;border-radius:4px;overflow:hidden; }
+              .e7cmp-fill { height:100%;border-radius:4px; }
+              .e7cmp-pct { font-size:13px;font-weight:900;width:38px;text-align:right;flex-shrink:0; }
+              .e7cmp-status { font-size:9px;font-weight:700;padding:2px 7px;border-radius:3px;flex-shrink:0; }
+              .e7metric { display:flex;align-items:center;gap:16px;padding:12px 20px;border-bottom:1px solid #F1F5F9;background:#fff; }
+              .e7metric-icon { width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0; }
+              .e7metric-val { font-size:22px;font-weight:900; }
+              .e7metric-lbl { font-size:11px;color:#64748B;margin-top:1px; }
+              .e7metric-delta { font-size:11px;font-weight:600;margin-top:2px; }
+            </style>
+            <div class="e7hd">
+              <div class="e7hd-left">
+                <div class="e7hd-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+                <div><div class="e7hd-title">Executive CISO Summary</div><div class="e7hd-sub">Board-level security posture &amp; business impact</div></div>
+                <span class="e7badge">&#9679; BOARD READY</span>
+              </div>
+              <span class="e7ts">Apr 25, 2026 &middot; 09:41 &nbsp; Q2 2026</span>
+            </div>
+            <div class="e7kpis">
+              <div class="e7kpi"><div class="e7kpi-lbl">Security Score</div><div class="e7kpi-val" style="color:#10B981;">82/100</div><div class="e7kpi-delta" style="color:#10B981;">&#9650; +4 pts QoQ</div></div>
+              <div class="e7kpi"><div class="e7kpi-lbl">Incidents</div><div class="e7kpi-val" style="color:#DC2626;">100</div><div class="e7kpi-delta" style="color:#DC2626;">&#9650; 14% vs Q1</div></div>
+              <div class="e7kpi"><div class="e7kpi-lbl">Avg MTTR</div><div class="e7kpi-val" style="color:#F59E0B;">2.3d</div><div class="e7kpi-delta" style="color:#22C55E;">&#9660; -0.5d improved</div></div>
+              <div class="e7kpi"><div class="e7kpi-lbl">Cost Avoided</div><div class="e7kpi-val" style="color:#10B981;">$4.2M</div><div class="e7kpi-delta" style="color:#10B981;">&#9650; +$800K vs Q1</div></div>
+              <div class="e7kpi"><div class="e7kpi-lbl">Analyst Hours</div><div class="e7kpi-val" style="color:#6366F1;">210h</div><div class="e7kpi-delta" style="color:#10B981;">Saved by ZIA</div></div>
+              <div class="e7kpi"><div class="e7kpi-lbl">Data Breaches</div><div class="e7kpi-val" style="color:#64748B;">0</div><div class="e7kpi-delta" style="color:#10B981;">&#10003; Zero confirmed</div></div>
+            </div>
+            <div class="e7main">
+              <div class="e7col">
+                <div class="e7sh"><span class="e7sh-dot" style="background:#10B981;"></span>Compliance Status</div>
+                <div class="e7cmp-row"><div class="e7cmp-lbl">NIST 800-53</div><div class="e7cmp-bar-bg"><div class="e7cmp-fill" style="width:91%;background:linear-gradient(90deg,#059669,#34D399);"></div></div><div class="e7cmp-pct" style="color:#059669;">91%</div><span class="e7cmp-status" style="background:#ECFDF5;color:#065F46;">PASS</span></div>
+                <div class="e7cmp-row"><div class="e7cmp-lbl">CIS Benchmark</div><div class="e7cmp-bar-bg"><div class="e7cmp-fill" style="width:87%;background:linear-gradient(90deg,#0284C7,#38BDF8);"></div></div><div class="e7cmp-pct" style="color:#0284C7;">87%</div><span class="e7cmp-status" style="background:#F0F9FF;color:#075985;">PASS</span></div>
+                <div class="e7cmp-row"><div class="e7cmp-lbl">SOC 2 Type II</div><div class="e7cmp-bar-bg"><div class="e7cmp-fill" style="width:93%;background:linear-gradient(90deg,#4F46E5,#818CF8);"></div></div><div class="e7cmp-pct" style="color:#4F46E5;">93%</div><span class="e7cmp-status" style="background:#EEF2FF;color:#3730A3;">PASS</span></div>
+                <div class="e7cmp-row"><div class="e7cmp-lbl">ISO 27001</div><div class="e7cmp-bar-bg"><div class="e7cmp-fill" style="width:79%;background:linear-gradient(90deg,#D97706,#FCD34D);"></div></div><div class="e7cmp-pct" style="color:#D97706;">79%</div><span class="e7cmp-status" style="background:#FFFBEB;color:#92400E;">REVIEW</span></div>
+                <div class="e7cmp-row"><div class="e7cmp-lbl">PCI DSS v4</div><div class="e7cmp-bar-bg"><div class="e7cmp-fill" style="width:72%;background:linear-gradient(90deg,#E11D48,#FB7185);"></div></div><div class="e7cmp-pct" style="color:#E11D48;">72%</div><span class="e7cmp-status" style="background:#FEF2F2;color:#DC2626;">ACTION</span></div>
+                <div class="e7sh" style="margin-top:0;"><span class="e7sh-dot" style="background:#0EA5E9;"></span>Security Risk Trend</div>
+                <div style="background:#fff;padding:6px 12px 4px;flex:1;min-height:140px;"><div id="cc7-trend" style="width:100%;height:150px;"></div></div>
+              </div>
+              <div class="e7col">
+                <div class="e7sh"><span class="e7sh-dot" style="background:#6366F1;"></span>Key Business Metrics</div>
+                <div class="e7metric"><div class="e7metric-icon" style="background:#ECFDF5;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div><div style="flex:1;"><div class="e7metric-val" style="color:#059669;">$4.2M</div><div class="e7metric-lbl">Estimated Cost Avoided (Q2 2026)</div><div class="e7metric-delta" style="color:#10B981;">&#9650; +23% vs Q1 via ZIA automation</div></div></div>
+                <div class="e7metric"><div class="e7metric-icon" style="background:#EEF2FF;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6366F1" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div><div style="flex:1;"><div class="e7metric-val" style="color:#4F46E5;">210h</div><div class="e7metric-lbl">Analyst Hours Saved by Automation</div><div class="e7metric-delta" style="color:#6366F1;">Equivalent to $31,500 in capacity</div></div></div>
+                <div class="e7metric"><div class="e7metric-icon" style="background:#FFF7ED;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F97316" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div><div style="flex:1;"><div class="e7metric-val" style="color:#EA580C;">20</div><div class="e7metric-lbl">SLA Breaches This Quarter</div><div class="e7metric-delta" style="color:#DC2626;">&#9650; 4 more than Q1 — needs process review</div></div></div>
+                <div class="e7metric"><div class="e7metric-icon" style="background:#F0FDF4;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div style="flex:1;"><div class="e7metric-val" style="color:#16A34A;">0</div><div class="e7metric-lbl">Confirmed Data Breaches</div><div class="e7metric-delta" style="color:#22C55E;">&#10003; Zero breaches for 14 consecutive months</div></div></div>
+                <div class="e7sh" style="margin-top:0;"><span class="e7sh-dot" style="background:#F59E0B;"></span>Top Risk Areas</div>
+                <div style="flex:1;background:#fff;padding:8px 12px 4px;"><div id="cc7-risks" style="width:100%;height:150px;"></div></div>
+              </div>
+            </div>
+          </div><!-- /th-panel-command-center7 -->
+
+          <!-- ═══ CC8: Endpoint Security Dashboard ═══ -->
+          <div class="view-panel" id="th-panel-command-center8" style="background:#FAFAF9;min-height:100%;color:#1C1917;font-family:'Segoe UI',system-ui,sans-serif;overflow:hidden;">
+            <style>
+              #th-panel-command-center8 * { box-sizing:border-box; }
+              .ep8hd { display:flex;align-items:center;justify-content:space-between;padding:11px 24px;background:#fff;border-bottom:1px solid #E7E5E4;flex-shrink:0; }
+              .ep8hd-left { display:flex;align-items:center;gap:11px; }
+              .ep8hd-icon { width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#8B5CF6,#6D28D9);display:flex;align-items:center;justify-content:center;flex-shrink:0; }
+              .ep8hd-title { font-size:15px;font-weight:800;color:#1C1917; }
+              .ep8hd-sub { font-size:10px;color:#5B21B6;margin-top:1px;letter-spacing:.3px;text-transform:uppercase; }
+              .ep8badge { background:#F5F3FF;color:#7C3AED;font-size:10px;font-weight:700;padding:3px 11px;border-radius:20px;letter-spacing:.4px;border:1px solid #DDD6FE; }
+              .ep8ts { font-size:11px;color:#94A3B8; }
+              .ep8kpis { display:grid;grid-template-columns:repeat(4,1fr);background:#fff;border-bottom:1px solid #E7E5E4;flex-shrink:0; }
+              .ep8kpi { padding:12px 20px;border-right:1px solid #E7E5E4;position:relative; }
+              .ep8kpi:last-child { border-right:none; }
+              .ep8kpi-acc { position:absolute;left:0;top:0;bottom:0;width:3px; }
+              .ep8kpi-lbl { font-size:10px;font-weight:700;color:#5B21B6;text-transform:uppercase;letter-spacing:.5px; }
+              .ep8kpi-val { font-size:26px;font-weight:900;line-height:1;margin-top:2px; }
+              .ep8kpi-sub { font-size:11px;color:#78716C;margin-top:3px; }
+              .ep8kpi-delta { font-size:11px;font-weight:600;margin-top:3px; }
+              .ep8main { flex:1;display:grid;grid-template-columns:1fr 1fr;min-height:0;overflow:hidden; }
+              .ep8left { display:flex;flex-direction:column;overflow:hidden;border-right:1px solid #E7E5E4; }
+              .ep8right { display:flex;flex-direction:column;overflow:hidden; }
+              .ep8sh { padding:10px 16px 8px;font-size:10px;font-weight:700;color:#5B21B6;text-transform:uppercase;letter-spacing:.7px;border-bottom:1px solid #E7E5E4;background:#fff;flex-shrink:0;display:flex;align-items:center;gap:6px; }
+              .ep8sh-dot { width:7px;height:7px;border-radius:50%;flex-shrink:0; }
+              .ep8cve { display:flex;align-items:center;gap:12px;padding:9px 16px;border-bottom:1px solid #FAFAF9;background:#fff; }
+              .ep8cve-id { font-size:11px;font-weight:700;color:#5B21B6;width:130px;flex-shrink:0; }
+              .ep8cve-desc { font-size:11px;color:#44403C;flex:1; }
+              .ep8cve-score { font-size:13px;font-weight:900;width:36px;text-align:right;flex-shrink:0; }
+              .ep8cve-tag { font-size:9px;font-weight:700;padding:2px 7px;border-radius:3px;flex-shrink:0; }
+            </style>
+            <div class="ep8hd">
+              <div class="ep8hd-left">
+                <div class="ep8hd-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/><path d="M7 8h10M7 12h6"/></svg></div>
+                <div><div class="ep8hd-title">Endpoint Security Dashboard</div><div class="ep8hd-sub">Device health, vulnerabilities &amp; patch status</div></div>
+                <span class="ep8badge">&#9679; EDR ACTIVE</span>
+              </div>
+              <span class="ep8ts">Apr 25, 2026 &middot; 09:41</span>
+            </div>
+            <div class="ep8kpis">
+              <div class="ep8kpi"><div class="ep8kpi-acc" style="background:#8B5CF6;"></div><div class="ep8kpi-lbl">Total Endpoints</div><div class="ep8kpi-val" style="color:#7C3AED;">12,844</div><div class="ep8kpi-sub">Managed devices</div><div class="ep8kpi-delta" style="color:#22C55E;">&#9650; 248 added this week</div></div>
+              <div class="ep8kpi"><div class="ep8kpi-acc" style="background:#10B981;"></div><div class="ep8kpi-lbl">Healthy</div><div class="ep8kpi-val" style="color:#059669;">11,820</div><div class="ep8kpi-sub">92.1% of total</div><div class="ep8kpi-delta" style="color:#10B981;">&#9650; 0.3% improvement</div></div>
+              <div class="ep8kpi"><div class="ep8kpi-acc" style="background:#EF4444;"></div><div class="ep8kpi-lbl">At Risk</div><div class="ep8kpi-val" style="color:#DC2626;">1,024</div><div class="ep8kpi-sub">Need attention</div><div class="ep8kpi-delta" style="color:#DC2626;">&#9650; 124 critical</div></div>
+              <div class="ep8kpi"><div class="ep8kpi-acc" style="background:#F59E0B;"></div><div class="ep8kpi-lbl">Patch Coverage</div><div class="ep8kpi-val" style="color:#D97706;">88.4%</div><div class="ep8kpi-sub">Up-to-date patches</div><div class="ep8kpi-delta" style="color:#22C55E;">&#9650; 2.1% this cycle</div></div>
+            </div>
+            <div class="ep8main">
+              <div class="ep8left">
+                <div class="ep8sh"><span class="ep8sh-dot" style="background:#8B5CF6;"></span>Endpoint Health Distribution</div>
+                <div style="background:#fff;padding:8px 12px 4px;height:230px;"><div id="cc8-health" style="width:100%;height:218px;"></div></div>
+                <div class="ep8sh"><span class="ep8sh-dot" style="background:#F59E0B;"></span>Vulnerability Age Distribution</div>
+                <div style="background:#fff;padding:8px 12px 4px;flex:1;min-height:140px;"><div id="cc8-vuln-age" style="width:100%;height:160px;"></div></div>
+              </div>
+              <div class="ep8right">
+                <div class="ep8sh"><span class="ep8sh-dot" style="background:#EF4444;"></span>Top CVEs — Active Exploits</div>
+                <div style="flex:1;overflow-y:auto;">
+                  <div class="ep8cve"><div class="ep8cve-id">CVE-2024-21413</div><div class="ep8cve-desc">Microsoft Outlook RCE — 342 endpoints exposed</div><div class="ep8cve-score" style="color:#DC2626;">9.8</div><span class="ep8cve-tag" style="background:#FEF2F2;color:#DC2626;">CRITICAL</span></div>
+                  <div class="ep8cve"><div class="ep8cve-id">CVE-2024-3400</div><div class="ep8cve-desc">PAN-OS GlobalProtect RCE — 14 firewalls</div><div class="ep8cve-score" style="color:#DC2626;">10.0</div><span class="ep8cve-tag" style="background:#FEF2F2;color:#DC2626;">CRITICAL</span></div>
+                  <div class="ep8cve"><div class="ep8cve-id">CVE-2024-1709</div><div class="ep8cve-desc">ConnectWise Auth Bypass — 8 servers</div><div class="ep8cve-score" style="color:#DC2626;">10.0</div><span class="ep8cve-tag" style="background:#FEF2F2;color:#DC2626;">CRITICAL</span></div>
+                  <div class="ep8cve"><div class="ep8cve-id">CVE-2024-20767</div><div class="ep8cve-desc">Adobe CF Auth Bypass — 22 endpoints</div><div class="ep8cve-score" style="color:#EA580C;">9.1</div><span class="ep8cve-tag" style="background:#FFF7ED;color:#C2410C;">HIGH</span></div>
+                  <div class="ep8cve"><div class="ep8cve-id">CVE-2024-29988</div><div class="ep8cve-desc">Windows SmartScreen Bypass — 211 devices</div><div class="ep8cve-score" style="color:#EA580C;">8.8</div><span class="ep8cve-tag" style="background:#FFF7ED;color:#C2410C;">HIGH</span></div>
+                  <div class="ep8cve"><div class="ep8cve-id">CVE-2024-21338</div><div class="ep8cve-desc">Windows Kernel EoP — 188 devices</div><div class="ep8cve-score" style="color:#F59E0B;">7.8</div><span class="ep8cve-tag" style="background:#FFFBEB;color:#92400E;">HIGH</span></div>
+                  <div class="ep8cve"><div class="ep8cve-id">CVE-2024-30051</div><div class="ep8cve-desc">DWM Core Library EoP — 94 devices</div><div class="ep8cve-score" style="color:#F59E0B;">7.8</div><span class="ep8cve-tag" style="background:#FFFBEB;color:#92400E;">HIGH</span></div>
+                  <div class="ep8cve"><div class="ep8cve-id">CVE-2024-26234</div><div class="ep8cve-desc">Win Proxy Driver Spoofing — 64 devices</div><div class="ep8cve-score" style="color:#F59E0B;">6.7</div><span class="ep8cve-tag" style="background:#FFFBEB;color:#92400E;">MED</span></div>
+                </div>
+              </div>
+            </div>
+          </div><!-- /th-panel-command-center8 -->
+
 
           <!-- ═══ COMMAND CENTER 2 — Deep Space NOC ═══ -->
 
@@ -8786,6 +9159,11 @@ function initThreatHub() {
     if (v === 'command-center1') initCommandCenter1();
     if (v === 'command-center2') initCommandCenter2();
     if (v === 'command-center3') initCommandCenter3();
+    if (v === 'command-center4') initCommandCenter4();
+    if (v === 'command-center5') initCommandCenter5();
+    if (v === 'command-center6') initCommandCenter6();
+    if (v === 'command-center7') initCommandCenter7();
+    if (v === 'command-center8') initCommandCenter8();
     setTimeout(function () { ElegantEChart.resize(); }, 150);
   }
 
@@ -9479,6 +9857,234 @@ function initThreatHub() {
     })();
     }, 80);
   }  /* end initCommandCenter3 */
+
+  function initCommandCenter4() {
+    setTimeout(function(){
+    /* anomaly timeline */
+    (function(){
+      var dom = document.getElementById('cc4-anomaly'); if (!dom) return;
+      var ex = echarts.getInstanceByDom(dom); if (ex) ex.dispose();
+      var c = echarts.init(dom, null, {renderer:'canvas',backgroundColor:'transparent'});
+      var hours = ['00','02','04','06','08','10','12','14','16','18','20','22'];
+      c.setOption({
+        backgroundColor:'transparent',
+        grid:{top:24,bottom:24,left:40,right:16},
+        tooltip:{trigger:'axis',backgroundColor:'#fff',borderColor:'#E2E8F0',textStyle:{color:'#1C1A16',fontSize:11}},
+        legend:{top:2,right:4,textStyle:{color:'#64748B',fontSize:10},icon:'circle',itemWidth:7,itemHeight:7},
+        xAxis:{type:'category',data:hours,axisLabel:{color:'#94A3B8',fontSize:10},axisLine:{lineStyle:{color:'#FED7AA'}},axisTick:{show:false}},
+        yAxis:{type:'value',axisLine:{show:false},splitLine:{lineStyle:{color:'#FFF7ED'}},axisLabel:{color:'#94A3B8',fontSize:10}},
+        series:[
+          {name:'Anomalies',type:'bar',data:[2,4,3,8,12,34,28,41,52,38,29,22],
+           itemStyle:{color:new echarts.graphic.LinearGradient(0,0,0,1,[{offset:0,color:'#F97316'},{offset:1,color:'rgba(249,115,22,0.2)'}]),borderRadius:[3,3,0,0]},barWidth:'55%'},
+          {name:'Baseline',type:'line',smooth:true,symbol:'none',
+           data:[15,15,14,16,15,16,15,15,16,15,14,15],
+           lineStyle:{color:'#94A3B8',width:1.5,type:'dashed'}}
+        ]
+      });
+    })();
+    /* risk distribution donut */
+    (function(){
+      var dom = document.getElementById('cc4-risk-dist'); if (!dom) return;
+      var ex = echarts.getInstanceByDom(dom); if (ex) ex.dispose();
+      var c = echarts.init(dom, null, {renderer:'canvas',backgroundColor:'transparent'});
+      c.setOption({
+        backgroundColor:'transparent',
+        tooltip:{trigger:'item',formatter:'{b}: {c} users ({d}%)',backgroundColor:'#fff',borderColor:'#FED7AA',textStyle:{color:'#1C1A16',fontSize:11}},
+        legend:{bottom:4,textStyle:{color:'#64748B',fontSize:10},icon:'circle',itemWidth:8,itemHeight:8},
+        series:[{type:'pie',radius:['40%','65%'],center:['50%','44%'],label:{show:false},
+          data:[
+            {value:47,name:'High Risk (>80)',itemStyle:{color:'#DC2626'}},
+            {value:186,name:'Medium Risk (40-80)',itemStyle:{color:'#F59E0B'}},
+            {value:8109,name:'Low Risk (<40)',itemStyle:{color:'#10B981'}}
+          ]
+        }]
+      });
+    })();
+    }, 80);
+  }  /* end initCommandCenter4 */
+
+  function initCommandCenter5() {
+    setTimeout(function(){
+    /* incident resolution funnel */
+    (function(){
+      var dom = document.getElementById('cc5-funnel'); if (!dom) return;
+      var ex = echarts.getInstanceByDom(dom); if (ex) ex.dispose();
+      var c = echarts.init(dom, null, {renderer:'canvas',backgroundColor:'transparent'});
+      c.setOption({
+        backgroundColor:'transparent',
+        tooltip:{trigger:'item',formatter:'{b}: {c}',backgroundColor:'#fff',borderColor:'#FECACA',textStyle:{color:'#1A0A0A',fontSize:11}},
+        series:[{
+          type:'funnel',left:'10%',width:'80%',top:10,bottom:10,
+          labelLine:{show:false},label:{position:'inside',color:'#fff',fontSize:11,fontWeight:700},
+          data:[
+            {value:100,name:'Total Open',itemStyle:{color:'#64748B'}},
+            {value:75,name:'Assigned',itemStyle:{color:'#6366F1'}},
+            {value:55,name:'In Progress',itemStyle:{color:'#F97316'}},
+            {value:35,name:'Contained',itemStyle:{color:'#F59E0B'}},
+            {value:23,name:'Resolved (7d)',itemStyle:{color:'#10B981'}}
+          ]
+        }]
+      });
+    })();
+    }, 80);
+  }  /* end initCommandCenter5 */
+
+  function initCommandCenter6() {
+    setTimeout(function(){
+    /* traffic volume line chart */
+    (function(){
+      var dom = document.getElementById('cc6-traffic'); if (!dom) return;
+      var ex = echarts.getInstanceByDom(dom); if (ex) ex.dispose();
+      var c = echarts.init(dom, null, {renderer:'canvas',backgroundColor:'transparent'});
+      var hrs = ['00','02','04','06','08','10','12','14','16','18','20','22'];
+      c.setOption({
+        backgroundColor:'transparent',
+        grid:{top:24,bottom:24,left:44,right:16},
+        tooltip:{trigger:'axis',backgroundColor:'#fff',borderColor:'#BAE6FD',textStyle:{color:'#0C1E30',fontSize:11}},
+        legend:{top:2,right:4,textStyle:{color:'#64748B',fontSize:10},icon:'circle',itemWidth:7,itemHeight:7},
+        xAxis:{type:'category',data:hrs,axisLabel:{color:'#94A3B8',fontSize:10},axisLine:{lineStyle:{color:'#BAE6FD'}},axisTick:{show:false}},
+        yAxis:{type:'value',name:'Gbps',nameTextStyle:{color:'#94A3B8',fontSize:9},axisLine:{show:false},splitLine:{lineStyle:{color:'#E0F2FE'}},axisLabel:{color:'#94A3B8',fontSize:10}},
+        series:[
+          {name:'Inbound',type:'line',smooth:true,symbol:'none',
+           data:[2.1,1.8,1.4,2.0,4.8,7.2,8.1,9.2,8.8,7.4,5.6,3.9],
+           lineStyle:{color:'#0EA5E9',width:2.5},
+           areaStyle:{color:new echarts.graphic.LinearGradient(0,0,0,1,[{offset:0,color:'rgba(14,165,233,0.3)'},{offset:1,color:'rgba(14,165,233,0.02)'}])}},
+          {name:'Outbound',type:'line',smooth:true,symbol:'none',
+           data:[1.4,1.2,1.0,1.5,3.6,5.8,6.4,7.1,6.9,5.8,4.2,2.8],
+           lineStyle:{color:'#06B6D4',width:2,type:'dashed'},
+           areaStyle:{color:new echarts.graphic.LinearGradient(0,0,0,1,[{offset:0,color:'rgba(6,182,212,0.15)'},{offset:1,color:'rgba(6,182,212,0.01)'}])}},
+          {name:'Blocked',type:'bar',
+           data:[12,8,5,9,42,98,124,142,131,88,52,34],
+           yAxisIndex:0,
+           itemStyle:{color:'rgba(239,68,68,0.7)',borderRadius:[2,2,0,0]},barWidth:'30%'}
+        ]
+      });
+    })();
+    /* protocol donut */
+    (function(){
+      var dom = document.getElementById('cc6-proto'); if (!dom) return;
+      var ex = echarts.getInstanceByDom(dom); if (ex) ex.dispose();
+      var c = echarts.init(dom, null, {renderer:'canvas',backgroundColor:'transparent'});
+      c.setOption({
+        backgroundColor:'transparent',
+        tooltip:{trigger:'item',formatter:'{b}: {d}%',backgroundColor:'#fff',borderColor:'#BAE6FD',textStyle:{color:'#0C1E30',fontSize:11}},
+        legend:{bottom:2,textStyle:{color:'#64748B',fontSize:10},icon:'circle',itemWidth:8,itemHeight:8},
+        series:[{type:'pie',radius:['40%','68%'],center:['50%','44%'],label:{show:false},
+          data:[
+            {value:42,name:'HTTPS',itemStyle:{color:'#0EA5E9'}},
+            {value:22,name:'DNS',itemStyle:{color:'#06B6D4'}},
+            {value:14,name:'SMB',itemStyle:{color:'#6366F1'}},
+            {value:10,name:'SSH',itemStyle:{color:'#10B981'}},
+            {value:8, name:'RDP',itemStyle:{color:'#F97316'}},
+            {value:4, name:'Other',itemStyle:{color:'#94A3B8'}}
+          ]
+        }]
+      });
+    })();
+    }, 80);
+  }  /* end initCommandCenter6 */
+
+  function initCommandCenter7() {
+    setTimeout(function(){
+    /* risk trend line */
+    (function(){
+      var dom = document.getElementById('cc7-trend'); if (!dom) return;
+      var ex = echarts.getInstanceByDom(dom); if (ex) ex.dispose();
+      var c = echarts.init(dom, null, {renderer:'canvas',backgroundColor:'transparent'});
+      c.setOption({
+        backgroundColor:'transparent',
+        grid:{top:16,bottom:24,left:36,right:12},
+        tooltip:{trigger:'axis',backgroundColor:'#fff',borderColor:'#E2E8F0',textStyle:{color:'#0F172A',fontSize:11}},
+        xAxis:{type:'category',data:['Jan','Feb','Mar','Apr','May','Jun'],axisLabel:{color:'#94A3B8',fontSize:10},axisLine:{lineStyle:{color:'#E2E8F0'}},axisTick:{show:false}},
+        yAxis:{type:'value',min:60,max:100,axisLine:{show:false},splitLine:{lineStyle:{color:'#F1F5F9'}},axisLabel:{color:'#94A3B8',fontSize:10}},
+        series:[{
+          name:'Security Score',type:'line',smooth:true,symbol:'circle',symbolSize:5,
+          data:[70,72,74,76,79,82],
+          lineStyle:{color:'#10B981',width:2.5},
+          itemStyle:{color:'#10B981',borderColor:'#fff',borderWidth:2},
+          areaStyle:{color:new echarts.graphic.LinearGradient(0,0,0,1,[{offset:0,color:'rgba(16,185,129,0.25)'},{offset:1,color:'rgba(16,185,129,0.02)'}])}
+        }]
+      });
+    })();
+    /* top risk areas bar */
+    (function(){
+      var dom = document.getElementById('cc7-risks'); if (!dom) return;
+      var ex = echarts.getInstanceByDom(dom); if (ex) ex.dispose();
+      var c = echarts.init(dom, null, {renderer:'canvas',backgroundColor:'transparent'});
+      c.setOption({
+        backgroundColor:'transparent',
+        grid:{top:8,bottom:8,left:90,right:48},
+        tooltip:{trigger:'axis',backgroundColor:'#fff',borderColor:'#E2E8F0',textStyle:{color:'#0F172A',fontSize:11}},
+        xAxis:{type:'value',axisLine:{show:false},splitLine:{lineStyle:{color:'#F1F5F9'}},axisLabel:{show:false}},
+        yAxis:{type:'category',data:['Identity','Endpoints','3rd Party','Cloud Config','Patching'],axisLine:{show:false},axisLabel:{color:'#334155',fontSize:11},axisTick:{show:false}},
+        series:[{
+          type:'bar',barWidth:12,
+          data:[
+            {value:82,itemStyle:{color:'#EF4444',borderRadius:[0,4,4,0]}},
+            {value:74,itemStyle:{color:'#F97316',borderRadius:[0,4,4,0]}},
+            {value:68,itemStyle:{color:'#F59E0B',borderRadius:[0,4,4,0]}},
+            {value:55,itemStyle:{color:'#6366F1',borderRadius:[0,4,4,0]}},
+            {value:41,itemStyle:{color:'#10B981',borderRadius:[0,4,4,0]}}
+          ],
+          label:{show:true,position:'right',color:'#64748B',fontSize:10,formatter:'{c}%'}
+        }]
+      });
+    })();
+    }, 80);
+  }  /* end initCommandCenter7 */
+
+  function initCommandCenter8() {
+    setTimeout(function(){
+    /* endpoint health bar */
+    (function(){
+      var dom = document.getElementById('cc8-health'); if (!dom) return;
+      var ex = echarts.getInstanceByDom(dom); if (ex) ex.dispose();
+      var c = echarts.init(dom, null, {renderer:'canvas',backgroundColor:'transparent'});
+      var cats = ['Windows 11','Windows 10','macOS','Linux','Mobile','IoT'];
+      c.setOption({
+        backgroundColor:'transparent',
+        grid:{top:24,bottom:24,left:70,right:16},
+        tooltip:{trigger:'axis',backgroundColor:'#fff',borderColor:'#E7E5E4',textStyle:{color:'#1C1917',fontSize:11}},
+        legend:{top:2,right:4,textStyle:{color:'#64748B',fontSize:10},icon:'circle',itemWidth:7,itemHeight:7},
+        xAxis:{type:'value',axisLine:{show:false},splitLine:{lineStyle:{color:'#F5F5F4'}},axisLabel:{color:'#94A3B8',fontSize:10}},
+        yAxis:{type:'category',data:cats,axisLine:{show:false},axisLabel:{color:'#44403C',fontSize:11},axisTick:{show:false}},
+        series:[
+          {name:'Healthy',type:'bar',stack:'s',data:[3820,2940,1840,1540,920,760],
+           itemStyle:{color:'#10B981',borderRadius:[0,0,0,0]},barWidth:14},
+          {name:'At Risk',type:'bar',stack:'s',data:[220,180,84,120,210,210],
+           itemStyle:{color:'#F59E0B',borderRadius:[0,0,0,0]}},
+          {name:'Critical',type:'bar',stack:'s',data:[42,28,12,14,18,10],
+           itemStyle:{color:'#EF4444',borderRadius:[0,4,4,0]}}
+        ]
+      });
+    })();
+    /* vulnerability age */
+    (function(){
+      var dom = document.getElementById('cc8-vuln-age'); if (!dom) return;
+      var ex = echarts.getInstanceByDom(dom); if (ex) ex.dispose();
+      var c = echarts.init(dom, null, {renderer:'canvas',backgroundColor:'transparent'});
+      c.setOption({
+        backgroundColor:'transparent',
+        grid:{top:16,bottom:28,left:44,right:16},
+        tooltip:{trigger:'axis',backgroundColor:'#fff',borderColor:'#E7E5E4',textStyle:{color:'#1C1917',fontSize:11}},
+        xAxis:{type:'category',data:['<7d','7-14d','14-30d','30-60d','60-90d','>90d'],axisLabel:{color:'#94A3B8',fontSize:10},axisLine:{lineStyle:{color:'#E7E5E4'}},axisTick:{show:false}},
+        yAxis:{type:'value',axisLine:{show:false},splitLine:{lineStyle:{color:'#F5F5F4'}},axisLabel:{color:'#94A3B8',fontSize:10}},
+        series:[{
+          type:'bar',barWidth:'55%',
+          data:[
+            {value:312,itemStyle:{color:'#10B981',borderRadius:[3,3,0,0]}},
+            {value:428,itemStyle:{color:'#F59E0B',borderRadius:[3,3,0,0]}},
+            {value:524,itemStyle:{color:'#F97316',borderRadius:[3,3,0,0]}},
+            {value:384,itemStyle:{color:'#EF4444',borderRadius:[3,3,0,0]}},
+            {value:218,itemStyle:{color:'#DC2626',borderRadius:[3,3,0,0]}},
+            {value:158,itemStyle:{color:'#991B1B',borderRadius:[3,3,0,0]}}
+          ]
+        }]
+      });
+    })();
+    }, 80);
+  }  /* end initCommandCenter8 */
+
 
 
 
