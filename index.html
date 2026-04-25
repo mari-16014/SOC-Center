@@ -3199,76 +3199,76 @@
           </div><!-- /th-panel-command-center1 -->
 
           <!-- ═══ COMMAND CENTER 2 — DARK NOC WALLBOARD ═══ -->
-          <div class="view-panel" id="th-panel-command-center2" style="background:#080C18;min-height:100%;color:#E2E8F0;font-family:'Segoe UI',system-ui,sans-serif;display:flex;flex-direction:column;">
+          <div class="view-panel" id="th-panel-command-center2" style="background:#FFFFFF;min-height:100%;color:#1E293B;font-family:'Segoe UI',system-ui,sans-serif;display:flex;flex-direction:column;">
             <style>
               /* ── CC2 reset ── */
               #th-panel-command-center2 * { box-sizing:border-box; }
               /* ── header ── */
-              .c2hd { display:flex;align-items:center;justify-content:space-between;padding:14px 28px;background:rgba(255,255,255,0.03);border-bottom:1px solid rgba(0,212,255,0.12);flex-shrink:0; }
+              .c2hd { display:flex;align-items:center;justify-content:space-between;padding:14px 28px;background:#F8FBFF;border-bottom:1px solid #E0F0FF;flex-shrink:0; }
               .c2hd-left { display:flex;align-items:center;gap:14px; }
-              .c2hd-icon { width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#00D4FF22,#00D4FF44);border:1px solid rgba(0,212,255,0.3);display:flex;align-items:center;justify-content:center;flex-shrink:0; }
-              .c2hd-title { font-size:15px;font-weight:800;color:#F1F5F9;letter-spacing:.2px; }
+              .c2hd-icon { width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#E0F7FF,#B3EEFF);border:1px solid #7DD3FC;display:flex;align-items:center;justify-content:center;flex-shrink:0; }
+              .c2hd-title { font-size:15px;font-weight:800;color:#0F172A;letter-spacing:.2px; }
               .c2hd-sub { font-size:11px;color:#64748B;margin-top:1px; }
-              .c2hd-pill { background:rgba(0,212,255,0.12);color:#00D4FF;font-size:10px;font-weight:700;padding:3px 12px;border-radius:20px;border:1px solid rgba(0,212,255,0.25);letter-spacing:.5px; }
+              .c2hd-pill { background:#E0F7FF;color:#0284C7;font-size:10px;font-weight:700;padding:3px 12px;border-radius:20px;border:1px solid #7DD3FC;letter-spacing:.5px; }
               .c2hd-right { display:flex;align-items:center;gap:20px; }
-              .c2live { display:flex;align-items:center;gap:6px;font-size:11px;color:#00FF88;font-weight:600; }
-              .c2live-dot { width:7px;height:7px;border-radius:50%;background:#00FF88;box-shadow:0 0 6px #00FF88;animation:c2pulse 2s infinite; }
+              .c2live { display:flex;align-items:center;gap:6px;font-size:11px;color:#059669;font-weight:600; }
+              .c2live-dot { width:7px;height:7px;border-radius:50%;background:#10B981;animation:c2pulse 2s infinite; }
               @keyframes c2pulse { 0%,100%{opacity:1;} 50%{opacity:.4;} }
-              .c2ts { font-size:11px;color:#475569; }
+              .c2ts { font-size:11px;color:#94A3B8; }
 
               /* ── KPI row ── */
-              .c2kpi { display:grid;grid-template-columns:repeat(7,1fr);border-bottom:1px solid rgba(255,255,255,0.06);flex-shrink:0; }
-              .c2kpi-cell { padding:14px 18px;border-right:1px solid rgba(255,255,255,0.05);position:relative;overflow:hidden; }
-              .c2kpi-cell::after { content:'';position:absolute;bottom:0;left:0;right:0;height:2px; }
-              .c2kpi-cell.cyan::after { background:linear-gradient(90deg,transparent,#00D4FF,transparent); }
-              .c2kpi-cell.green::after { background:linear-gradient(90deg,transparent,#00FF88,transparent); }
-              .c2kpi-cell.red::after { background:linear-gradient(90deg,transparent,#FF3B3B,transparent); }
-              .c2kpi-cell.amber::after { background:linear-gradient(90deg,transparent,#FFB340,transparent); }
-              .c2kpi-cell.purple::after { background:linear-gradient(90deg,transparent,#A78BFA,transparent); }
-              .c2kpi-cell.blue::after { background:linear-gradient(90deg,transparent,#60A5FA,transparent); }
-              .c2kpi-cell.pink::after { background:linear-gradient(90deg,transparent,#FB7185,transparent); }
+              .c2kpi { display:grid;grid-template-columns:repeat(7,1fr);border-bottom:1px solid #E2E8F0;flex-shrink:0; }
+              .c2kpi-cell { padding:14px 18px;border-right:1px solid #F1F5F9;position:relative;overflow:hidden;background:#fff; }
+              .c2kpi-cell::after { content:'';position:absolute;bottom:0;left:0;right:0;height:3px; }
+              .c2kpi-cell.cyan::after { background:linear-gradient(90deg,transparent,#0EA5E9,transparent); }
+              .c2kpi-cell.green::after { background:linear-gradient(90deg,transparent,#10B981,transparent); }
+              .c2kpi-cell.red::after { background:linear-gradient(90deg,transparent,#EF4444,transparent); }
+              .c2kpi-cell.amber::after { background:linear-gradient(90deg,transparent,#F59E0B,transparent); }
+              .c2kpi-cell.purple::after { background:linear-gradient(90deg,transparent,#8B5CF6,transparent); }
+              .c2kpi-cell.blue::after { background:linear-gradient(90deg,transparent,#3B82F6,transparent); }
+              .c2kpi-cell.pink::after { background:linear-gradient(90deg,transparent,#EC4899,transparent); }
               .c2kpi-cell:last-child { border-right:none; }
-              .c2kpi-lbl { font-size:10px;color:#475569;font-weight:600;text-transform:uppercase;letter-spacing:.6px;margin-bottom:5px; }
+              .c2kpi-lbl { font-size:10px;color:#64748B;font-weight:600;text-transform:uppercase;letter-spacing:.6px;margin-bottom:5px; }
               .c2kpi-val { font-size:28px;font-weight:900;line-height:1;margin-bottom:3px; }
               .c2kpi-trend { font-size:11px;font-weight:600; }
 
               /* ── body ── */
               .c2body { flex:1;display:grid;grid-template-columns:1fr 340px;min-height:0; }
-              .c2main { display:flex;flex-direction:column;border-right:1px solid rgba(255,255,255,0.06); }
-              .c2chart-hd { display:flex;align-items:center;justify-content:space-between;padding:14px 20px 10px;border-bottom:1px solid rgba(255,255,255,0.05); }
-              .c2chart-title { font-size:12px;font-weight:700;color:#CBD5E1;display:flex;align-items:center;gap:8px; }
+              .c2main { display:flex;flex-direction:column;border-right:1px solid #E2E8F0; }
+              .c2chart-hd { display:flex;align-items:center;justify-content:space-between;padding:14px 20px 10px;border-bottom:1px solid #F1F5F9; }
+              .c2chart-title { font-size:12px;font-weight:700;color:#334155;display:flex;align-items:center;gap:8px; }
               .c2legend { display:flex;align-items:center;gap:16px; }
               .c2leg-item { display:flex;align-items:center;gap:5px;font-size:11px;color:#64748B; }
               .c2leg-dot { width:8px;height:8px;border-radius:50%;flex-shrink:0; }
               .c2chart-area { flex:1;min-height:0;padding:8px 12px 4px; }
-              .c2grid2 { display:grid;grid-template-columns:1fr 1fr;border-top:1px solid rgba(255,255,255,0.05);flex-shrink:0; }
-              .c2bottom-cell { padding:14px 20px;border-right:1px solid rgba(255,255,255,0.05); }
+              .c2grid2 { display:grid;grid-template-columns:1fr 1fr;border-top:1px solid #E2E8F0;flex-shrink:0; }
+              .c2bottom-cell { padding:14px 20px;border-right:1px solid #F1F5F9;background:#FAFCFF; }
               .c2bottom-cell:last-child { border-right:none; }
-              .c2bc-title { font-size:10px;color:#475569;font-weight:700;text-transform:uppercase;letter-spacing:.6px;margin-bottom:10px;display:flex;align-items:center;gap:6px; }
+              .c2bc-title { font-size:10px;color:#64748B;font-weight:700;text-transform:uppercase;letter-spacing:.6px;margin-bottom:10px;display:flex;align-items:center;gap:6px; }
               .c2atk-row { display:flex;align-items:center;gap:10px;padding:5px 0; }
-              .c2atk-name { width:150px;font-size:12px;color:#94A3B8;white-space:nowrap;overflow:hidden;text-overflow:ellipsis; }
-              .c2atk-bar-bg { flex:1;height:6px;background:rgba(255,255,255,0.07);border-radius:3px;overflow:hidden; }
+              .c2atk-name { width:150px;font-size:12px;color:#475569;white-space:nowrap;overflow:hidden;text-overflow:ellipsis; }
+              .c2atk-bar-bg { flex:1;height:6px;background:#E2E8F0;border-radius:3px;overflow:hidden; }
               .c2atk-bar { height:100%;border-radius:3px; }
-              .c2atk-cnt { width:40px;text-align:right;font-size:12px;font-weight:700;color:#CBD5E1; }
+              .c2atk-cnt { width:40px;text-align:right;font-size:12px;font-weight:700;color:#334155; }
 
               /* ── right sidebar ── */
-              .c2side { display:flex;flex-direction:column;overflow:hidden; }
-              .c2side-block { padding:16px 18px;border-bottom:1px solid rgba(255,255,255,0.05); }
-              .c2side-title { font-size:10px;font-weight:700;color:#475569;text-transform:uppercase;letter-spacing:.7px;margin-bottom:12px;display:flex;align-items:center;gap:7px; }
-              .c2out-row { display:flex;align-items:flex-start;gap:12px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.04); }
+              .c2side { display:flex;flex-direction:column;overflow:hidden;background:#F8FAFC; }
+              .c2side-block { padding:16px 18px;border-bottom:1px solid #E2E8F0; }
+              .c2side-title { font-size:10px;font-weight:700;color:#64748B;text-transform:uppercase;letter-spacing:.7px;margin-bottom:12px;display:flex;align-items:center;gap:7px; }
+              .c2out-row { display:flex;align-items:flex-start;gap:12px;padding:10px 0;border-bottom:1px solid #F1F5F9; }
               .c2out-row:last-child { border-bottom:none; }
               .c2out-icon { width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px; }
               .c2out-val { font-size:24px;font-weight:900;line-height:1; }
               .c2out-lbl { font-size:11px;color:#64748B;margin-top:2px; }
-              .c2out-sub { font-size:11px;color:#475569;margin-top:4px; }
-              .c2prog { height:5px;background:rgba(255,255,255,0.08);border-radius:3px;overflow:hidden;margin-top:6px; }
+              .c2out-sub { font-size:11px;color:#94A3B8;margin-top:4px; }
+              .c2prog { height:5px;background:#E2E8F0;border-radius:3px;overflow:hidden;margin-top:6px; }
               .c2prog-fill { height:100%;border-radius:3px; }
-              .c2usr-row { display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.04);font-size:12px; }
+              .c2usr-row { display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid #F1F5F9;font-size:12px; }
               .c2usr-row:last-child { border-bottom:none; }
               .c2mitre { display:grid;grid-template-columns:1fr 1fr;gap:8px; }
-              .c2mitre-cell { background:rgba(255,255,255,0.04);border-radius:8px;padding:10px 12px;border:1px solid rgba(255,255,255,0.06); }
+              .c2mitre-cell { background:#F8FAFC;border-radius:8px;padding:10px 12px;border:1px solid #E2E8F0; }
               .c2mitre-val { font-size:22px;font-weight:900;line-height:1.1; }
-              .c2mitre-lbl { font-size:10px;color:#475569;margin-top:3px;text-transform:uppercase;letter-spacing:.4px; }
+              .c2mitre-lbl { font-size:10px;color:#64748B;margin-top:3px;text-transform:uppercase;letter-spacing:.4px; }
             </style>
 
             <!-- Header -->
@@ -3293,37 +3293,37 @@
             <div class="c2kpi">
               <div class="c2kpi-cell cyan">
                 <div class="c2kpi-lbl">Events / 7d</div>
-                <div class="c2kpi-val" style="color:#00D4FF;">128<span style="font-size:16px;color:#475569;">M</span></div>
-                <div class="c2kpi-trend" style="color:#00FF88;">&#9650; 12%</div>
+                <div class="c2kpi-val" style="color:#0284C7;">128<span style="font-size:16px;color:#475569;">M</span></div>
+                <div class="c2kpi-trend" style="color:#059669;">&#9650; 12%</div>
               </div>
               <div class="c2kpi-cell red">
                 <div class="c2kpi-lbl">Total Alerts</div>
-                <div class="c2kpi-val" style="color:#FF3B3B;">18,452</div>
-                <div class="c2kpi-trend" style="color:#FF3B3B;">&#9650; 30%</div>
+                <div class="c2kpi-val" style="color:#DC2626;">18,452</div>
+                <div class="c2kpi-trend" style="color:#DC2626;">&#9650; 30%</div>
               </div>
               <div class="c2kpi-cell amber">
                 <div class="c2kpi-lbl">Critical</div>
-                <div class="c2kpi-val" style="color:#FFB340;">560</div>
+                <div class="c2kpi-val" style="color:#D97706;">560</div>
                 <div class="c2kpi-trend" style="color:#64748B;">Priority P1</div>
               </div>
               <div class="c2kpi-cell blue">
                 <div class="c2kpi-lbl">Auto-Investigated</div>
-                <div class="c2kpi-val" style="color:#60A5FA;">2,891</div>
-                <div class="c2kpi-trend" style="color:#00FF88;">15.7% rate</div>
+                <div class="c2kpi-val" style="color:#2563EB;">2,891</div>
+                <div class="c2kpi-trend" style="color:#059669;">15.7% rate</div>
               </div>
               <div class="c2kpi-cell green">
                 <div class="c2kpi-lbl">Incidents Open</div>
-                <div class="c2kpi-val" style="color:#00FF88;">218</div>
+                <div class="c2kpi-val" style="color:#059669;">218</div>
                 <div class="c2kpi-trend" style="color:#64748B;">41 escalated</div>
               </div>
               <div class="c2kpi-cell purple">
                 <div class="c2kpi-lbl">MTTR</div>
-                <div class="c2kpi-val" style="color:#A78BFA;font-size:22px;">6h 14m</div>
-                <div class="c2kpi-trend" style="color:#00FF88;">&#9660; 10%</div>
+                <div class="c2kpi-val" style="color:#7C3AED;font-size:22px;">6h 14m</div>
+                <div class="c2kpi-trend" style="color:#059669;">&#9660; 10%</div>
               </div>
               <div class="c2kpi-cell pink">
                 <div class="c2kpi-lbl">SLA Met</div>
-                <div class="c2kpi-val" style="color:#FB7185;">94.2<span style="font-size:16px;color:#475569;">%</span></div>
+                <div class="c2kpi-val" style="color:#DB2777;">94.2<span style="font-size:16px;color:#475569;">%</span></div>
                 <div class="c2kpi-trend" style="color:#64748B;">8 violations</div>
               </div>
             </div>
@@ -3335,7 +3335,7 @@
               <div class="c2main">
                 <div class="c2chart-hd">
                   <div class="c2chart-title">
-                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#0284C7" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
                     Alert Volume &amp; ZIA Investigation Timeline (7 Days)
                   </div>
                   <div class="c2legend">
@@ -3388,27 +3388,27 @@
                     ZIA Outcomes
                   </div>
                   <div class="c2out-row">
-                    <div class="c2out-icon" style="background:rgba(0,212,255,0.1);border:1px solid rgba(0,212,255,0.2);">
+                    <div class="c2out-icon" style="background:#E0F7FF;border:1px solid #7DD3FC;">
                       <img src="./assets/icons/icon-tile-zia.svg" style="width:18px;height:18px;filter:hue-rotate(180deg) saturate(2);" />
                     </div>
                     <div style="flex:1;">
-                      <div class="c2out-val" style="color:#00D4FF;">2,891</div>
+                      <div class="c2out-val" style="color:#0284C7;">2,891</div>
                       <div class="c2out-lbl">Auto-Investigated by ZIA</div>
                       <div class="c2prog"><div class="c2prog-fill" style="width:83%;background:linear-gradient(90deg,#00FF88,#00D4FF);"></div></div>
-                      <div style="display:flex;justify-content:space-between;font-size:11px;margin-top:3px;"><span style="color:#00FF88;">83% TP Rate</span><span style="color:#475569;">250 TP / 50 FP</span></div>
+                      <div style="display:flex;justify-content:space-between;font-size:11px;margin-top:3px;"><span style="color:#059669;">83% TP Rate</span><span style="color:#475569;">250 TP / 50 FP</span></div>
                     </div>
                   </div>
                   <div class="c2out-row">
-                    <div class="c2out-icon" style="background:rgba(255,179,64,0.1);border:1px solid rgba(255,179,64,0.2);">
+                    <div class="c2out-icon" style="background:#FEF3C7;border:1px solid #FCD34D;">
                       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFB340" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
                     </div>
                     <div style="flex:1;">
-                      <div class="c2out-val" style="color:#FFB340;">247</div>
+                      <div class="c2out-val" style="color:#D97706;">247</div>
                       <div class="c2out-lbl">Incidents Created</div>
                       <div style="display:flex;gap:8px;margin-top:6px;">
-                        <span style="font-size:11px;background:rgba(96,165,250,0.15);color:#60A5FA;padding:2px 8px;border-radius:4px;font-weight:600;">218 Open</span>
-                        <span style="font-size:11px;background:rgba(0,255,136,0.12);color:#00FF88;padding:2px 8px;border-radius:4px;font-weight:600;">168 Resolved</span>
-                        <span style="font-size:11px;background:rgba(255,59,59,0.12);color:#FF6B6B;padding:2px 8px;border-radius:4px;font-weight:600;">41 Escalated</span>
+                        <span style="font-size:11px;background:#EFF6FF;color:#2563EB;padding:2px 8px;border-radius:4px;font-weight:600;">218 Open</span>
+                        <span style="font-size:11px;background:#ECFDF5;color:#059669;padding:2px 8px;border-radius:4px;font-weight:600;">168 Resolved</span>
+                        <span style="font-size:11px;background:#FEF2F2;color:#DC2626;padding:2px 8px;border-radius:4px;font-weight:600;">41 Escalated</span>
                       </div>
                     </div>
                   </div>
@@ -3421,20 +3421,20 @@
                     AI Accuracy
                   </div>
                   <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
-                    <div style="background:rgba(0,212,255,0.06);border:1px solid rgba(0,212,255,0.12);border-radius:8px;padding:10px 12px;">
-                      <div style="font-size:20px;font-weight:900;color:#00D4FF;line-height:1;">94.2%</div>
+                    <div style="background:#F0F9FF;border:1px solid #BAE6FD;border-radius:8px;padding:10px 12px;">
+                      <div style="font-size:20px;font-weight:900;color:#0284C7;line-height:1;">94.2%</div>
                       <div style="font-size:10px;color:#475569;margin-top:3px;text-transform:uppercase;letter-spacing:.4px;">Avg Confidence</div>
                     </div>
-                    <div style="background:rgba(0,255,136,0.06);border:1px solid rgba(0,255,136,0.12);border-radius:8px;padding:10px 12px;">
-                      <div style="font-size:20px;font-weight:900;color:#00FF88;line-height:1;">91.8%</div>
+                    <div style="background:#F0FDF4;border:1px solid #BBF7D0;border-radius:8px;padding:10px 12px;">
+                      <div style="font-size:20px;font-weight:900;color:#059669;line-height:1;">91.8%</div>
                       <div style="font-size:10px;color:#475569;margin-top:3px;text-transform:uppercase;letter-spacing:.4px;">Triage Accuracy</div>
                     </div>
-                    <div style="background:rgba(167,139,250,0.06);border:1px solid rgba(167,139,250,0.12);border-radius:8px;padding:10px 12px;">
-                      <div style="font-size:20px;font-weight:900;color:#A78BFA;line-height:1;">82.6%</div>
+                    <div style="background:#F5F3FF;border:1px solid #DDD6FE;border-radius:8px;padding:10px 12px;">
+                      <div style="font-size:20px;font-weight:900;color:#7C3AED;line-height:1;">82.6%</div>
                       <div style="font-size:10px;color:#475569;margin-top:3px;text-transform:uppercase;letter-spacing:.4px;">Noise Reduction</div>
                     </div>
-                    <div style="background:rgba(251,113,133,0.06);border:1px solid rgba(251,113,133,0.12);border-radius:8px;padding:10px 12px;">
-                      <div style="font-size:20px;font-weight:900;color:#FB7185;line-height:1;">210h</div>
+                    <div style="background:#FFF1F2;border:1px solid #FECDD3;border-radius:8px;padding:10px 12px;">
+                      <div style="font-size:20px;font-weight:900;color:#DB2777;line-height:1;">210h</div>
                       <div style="font-size:10px;color:#475569;margin-top:3px;text-transform:uppercase;letter-spacing:.4px;">Analyst Hours Saved</div>
                     </div>
                   </div>
@@ -3447,11 +3447,11 @@
                     MITRE ATT&amp;CK
                   </div>
                   <div class="c2mitre">
-                    <div class="c2mitre-cell"><div class="c2mitre-val" style="color:#FF3B3B;">14</div><div class="c2mitre-lbl">Tactics</div></div>
-                    <div class="c2mitre-cell"><div class="c2mitre-val" style="color:#A78BFA;">68</div><div class="c2mitre-lbl">Techniques</div></div>
-                    <div class="c2mitre-cell" style="grid-column:span 2;background:rgba(0,255,136,0.06);border-color:rgba(0,255,136,0.15);">
-                      <div class="c2mitre-val" style="color:#00FF88;font-size:28px;">89%</div>
-                      <div class="c2mitre-lbl">Coverage Score — Top: <span style="color:#FFB340;">Credential Access</span></div>
+                    <div class="c2mitre-cell"><div class="c2mitre-val" style="color:#DC2626;">14</div><div class="c2mitre-lbl">Tactics</div></div>
+                    <div class="c2mitre-cell"><div class="c2mitre-val" style="color:#7C3AED;">68</div><div class="c2mitre-lbl">Techniques</div></div>
+                    <div class="c2mitre-cell" style="grid-column:span 2;background:#ECFDF5;border-color:#6EE7B7;">
+                      <div class="c2mitre-val" style="color:#059669;font-size:28px;">89%</div>
+                      <div class="c2mitre-lbl">Coverage Score — Top: <span style="color:#D97706;">Credential Access</span></div>
                     </div>
                   </div>
                 </div>
@@ -3462,11 +3462,11 @@
                     <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#60A5FA" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
                     Top Investigated Users
                   </div>
-                  <div class="c2usr-row"><span style="color:#94A3B8;font-size:12px;">john.doe@corp.com</span><span style="color:#FF3B3B;font-weight:700;font-size:12px;">14 alerts</span></div>
-                  <div class="c2usr-row"><span style="color:#94A3B8;font-size:12px;">svc-backup@corp.com</span><span style="color:#FFB340;font-weight:700;font-size:12px;">11 alerts</span></div>
-                  <div class="c2usr-row"><span style="color:#94A3B8;font-size:12px;">admin.portal@corp.com</span><span style="color:#FFB340;font-weight:700;font-size:12px;">9 alerts</span></div>
-                  <div class="c2usr-row"><span style="color:#94A3B8;font-size:12px;">alice.martin@corp.com</span><span style="color:#60A5FA;font-weight:700;font-size:12px;">7 alerts</span></div>
-                  <div class="c2usr-row" style="border-bottom:none;"><span style="color:#94A3B8;font-size:12px;">guest-vpn-12@corp.com</span><span style="color:#475569;font-weight:700;font-size:12px;">5 alerts</span></div>
+                  <div class="c2usr-row"><span style="color:#475569;font-size:12px;">john.doe@corp.com</span><span style="color:#FF3B3B;font-weight:700;font-size:12px;">14 alerts</span></div>
+                  <div class="c2usr-row"><span style="color:#475569;font-size:12px;">svc-backup@corp.com</span><span style="color:#FFB340;font-weight:700;font-size:12px;">11 alerts</span></div>
+                  <div class="c2usr-row"><span style="color:#475569;font-size:12px;">admin.portal@corp.com</span><span style="color:#FFB340;font-weight:700;font-size:12px;">9 alerts</span></div>
+                  <div class="c2usr-row"><span style="color:#475569;font-size:12px;">alice.martin@corp.com</span><span style="color:#60A5FA;font-weight:700;font-size:12px;">7 alerts</span></div>
+                  <div class="c2usr-row" style="border-bottom:none;"><span style="color:#475569;font-size:12px;">guest-vpn-12@corp.com</span><span style="color:#475569;font-weight:700;font-size:12px;">5 alerts</span></div>
                 </div>
 
               </div>
@@ -3474,50 +3474,50 @@
           </div><!-- /th-panel-command-center2 -->
 
           <!-- ═══ COMMAND CENTER 3 — PURPLE RISK INTELLIGENCE BOARD ═══ -->
-          <div class="view-panel" id="th-panel-command-center3" style="background:#12001F;min-height:100%;color:#E9D5FF;font-family:'Segoe UI',system-ui,sans-serif;display:flex;flex-direction:column;overflow:hidden;">
+          <div class="view-panel" id="th-panel-command-center3" style="background:#FDFAFF;min-height:100%;color:#1E1030;font-family:'Segoe UI',system-ui,sans-serif;display:flex;flex-direction:column;overflow:hidden;">
             <style>
               #th-panel-command-center3 * { box-sizing:border-box; }
 
               /* ── top header ── */
-              .c3hd { display:flex;align-items:center;justify-content:space-between;padding:12px 26px;background:linear-gradient(90deg,rgba(124,58,237,0.2),rgba(232,121,249,0.08));border-bottom:1px solid rgba(167,139,250,0.2);flex-shrink:0; }
+              .c3hd { display:flex;align-items:center;justify-content:space-between;padding:12px 26px;background:linear-gradient(90deg,rgba(124,58,237,0.07),rgba(232,121,249,0.03));border-bottom:1px solid #DDD6FE;flex-shrink:0; }
               .c3hd-brand { display:flex;align-items:center;gap:12px; }
-              .c3hd-orb { width:38px;height:38px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#E879F9,#7C3AED);box-shadow:0 0 16px rgba(232,121,249,0.5);flex-shrink:0; }
-              .c3hd-title { font-size:15px;font-weight:800;background:linear-gradient(90deg,#E879F9,#A78BFA);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text; }
-              .c3hd-sub { font-size:10px;color:#6D28D9;margin-top:1px;letter-spacing:.4px;text-transform:uppercase; }
+              .c3hd-orb { width:38px;height:38px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#E879F9,#7C3AED);box-shadow:0 0 12px rgba(124,58,237,0.25);flex-shrink:0; }
+              .c3hd-title { font-size:15px;font-weight:800;background:linear-gradient(90deg,#7C3AED,#EC4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text; }
+              .c3hd-sub { font-size:10px;color:#7C3AED;margin-top:1px;letter-spacing:.4px;text-transform:uppercase; }
               .c3badge { background:linear-gradient(90deg,#7C3AED,#EC4899);color:#fff;font-size:10px;font-weight:700;padding:3px 12px;border-radius:20px;letter-spacing:.5px; }
               .c3hd-right { display:flex;align-items:center;gap:18px; }
               .c3risk-badge { padding:5px 18px;border-radius:8px;font-size:12px;font-weight:800;border:1px solid;letter-spacing:.3px; }
-              .c3risk-badge.high { background:rgba(239,68,68,0.15);color:#F87171;border-color:rgba(239,68,68,0.35); }
-              .c3ts2 { font-size:11px;color:#4C1D95; }
+              .c3risk-badge.high { background:#FEF2F2;color:#DC2626;border-color:#FECACA; }
+              .c3ts2 { font-size:11px;color:#94A3B8; }
 
               /* ── gauge row ── */
-              .c3gauges { display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid rgba(167,139,250,0.12);flex-shrink:0; }
-              .c3gauge-cell { padding:10px 16px;display:flex;flex-direction:column;align-items:center;border-right:1px solid rgba(167,139,250,0.1); }
+              .c3gauges { display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid #EDE9FE;flex-shrink:0; }
+              .c3gauge-cell { padding:10px 16px;display:flex;flex-direction:column;align-items:center;border-right:1px solid #EDE9FE;background:#fff; }
               .c3gauge-cell:last-child { border-right:none; }
               .c3gauge-chart { width:100%;height:140px; }
-              .c3gauge-lbl { font-size:10px;color:#6D28D9;font-weight:700;text-transform:uppercase;letter-spacing:.6px;margin-top:-6px; }
+              .c3gauge-lbl { font-size:10px;color:#7C3AED;font-weight:700;text-transform:uppercase;letter-spacing:.6px;margin-top:-6px; }
 
               /* ── body ── */
               .c3body { flex:1;display:grid;grid-template-columns:1fr 1fr 300px;min-height:0;overflow:hidden; }
-              .c3col { display:flex;flex-direction:column;border-right:1px solid rgba(167,139,250,0.1);overflow:hidden; }
+              .c3col { display:flex;flex-direction:column;border-right:1px solid #EDE9FE;overflow:hidden; }
               .c3col:last-child { border-right:none; }
-              .c3sec-hd { padding:12px 16px 8px;font-size:10px;font-weight:700;color:#6D28D9;text-transform:uppercase;letter-spacing:.7px;display:flex;align-items:center;gap:7px;border-bottom:1px solid rgba(167,139,250,0.08);flex-shrink:0; }
-              .c3chart-wrap { flex:1;min-height:0;padding:8px 10px 4px; }
+              .c3sec-hd { padding:12px 16px 8px;font-size:10px;font-weight:700;color:#7C3AED;text-transform:uppercase;letter-spacing:.7px;display:flex;align-items:center;gap:7px;border-bottom:1px solid #EDE9FE;background:#FDFAFF;flex-shrink:0; }
+              .c3chart-wrap { flex:1;min-height:0;padding:8px 10px 4px;background:#fff; }
 
               /* ── attack matrix heatmap ── */
-              .c3matrix { padding:8px 14px;flex:1;overflow-y:auto; }
+              .c3matrix { padding:8px 14px;flex:1;overflow-y:auto;background:#fff; }
               .c3mx-row { display:flex;gap:3px;margin-bottom:3px;align-items:center; }
-              .c3mx-lbl { font-size:10px;color:#6D28D9;width:120px;flex-shrink:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:600; }
-              .c3mx-cell { flex:1;height:20px;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:rgba(255,255,255,0.75); }
+              .c3mx-lbl { font-size:10px;color:#5B21B6;width:120px;flex-shrink:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:600; }
+              .c3mx-cell { flex:1;height:20px;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:rgba(0,0,0,0.65); }
 
               /* ── right panel ── */
-              .c3stat-row { display:flex;align-items:center;gap:12px;padding:9px 16px;border-bottom:1px solid rgba(167,139,250,0.07); }
+              .c3stat-row { display:flex;align-items:center;gap:12px;padding:9px 16px;border-bottom:1px solid #EDE9FE;background:#fff; }
               .c3stat-row:last-child { border-bottom:none; }
               .c3stat-icon { width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0; }
               .c3stat-val { font-size:22px;font-weight:900;line-height:1; }
-              .c3stat-lbl { font-size:11px;color:#6D28D9;margin-top:1px; }
+              .c3stat-lbl { font-size:11px;color:#64748B;margin-top:1px; }
               .c3stat-delta { font-size:11px;font-weight:600;margin-top:2px; }
-              .c3prog2 { height:4px;background:rgba(167,139,250,0.15);border-radius:2px;overflow:hidden;margin-top:5px; }
+              .c3prog2 { height:4px;background:#EDE9FE;border-radius:2px;overflow:hidden;margin-top:5px; }
               .c3prog2-fill { height:100%;border-radius:2px; }
               .c3tag { display:inline-block;font-size:10px;font-weight:700;padding:2px 7px;border-radius:4px;margin-top:4px; }
             </style>
@@ -3535,8 +3535,8 @@
               <div class="c3hd-right">
                 <div class="c3risk-badge high">RISK LEVEL: HIGH</div>
                 <div>
-                  <div style="font-size:18px;font-weight:900;color:#E879F9;line-height:1;">78<span style="font-size:12px;color:#6D28D9;">/100</span></div>
-                  <div style="font-size:10px;color:#6D28D9;text-transform:uppercase;letter-spacing:.4px;">Risk Score</div>
+                  <div style="font-size:18px;font-weight:900;color:#7C3AED;line-height:1;">78<span style="font-size:12px;color:#94A3B8;">/100</span></div>
+                  <div style="font-size:10px;color:#64748B;text-transform:uppercase;letter-spacing:.4px;">Risk Score</div>
                 </div>
                 <span class="c3ts2">Apr 25, 2026 · 09:41</span>
               </div>
@@ -3595,10 +3595,10 @@
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#F87171" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
                   </div>
                   <div style="flex:1;">
-                    <div class="c3stat-val" style="color:#F87171;">41</div>
+                    <div class="c3stat-val" style="color:#DC2626;">41</div>
                     <div class="c3stat-lbl">Escalated Incidents</div>
                     <div class="c3prog2"><div class="c3prog2-fill" style="width:68%;background:linear-gradient(90deg,#EF4444,#F87171);"></div></div>
-                    <div class="c3stat-delta" style="color:#F87171;">&#9650; 18% vs last week</div>
+                    <div class="c3stat-delta" style="color:#DC2626;">&#9650; 18% vs last week</div>
                   </div>
                 </div>
 
@@ -3607,10 +3607,10 @@
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#E879F9" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
                   </div>
                   <div style="flex:1;">
-                    <div class="c3stat-val" style="color:#E879F9;">6h 14m</div>
+                    <div class="c3stat-val" style="color:#7C3AED;">6h 14m</div>
                     <div class="c3stat-lbl">Mean Time to Respond</div>
                     <div class="c3prog2"><div class="c3prog2-fill" style="width:52%;background:linear-gradient(90deg,#7C3AED,#E879F9);"></div></div>
-                    <div class="c3stat-delta" style="color:#A78BFA;">&#9660; 10% improved</div>
+                    <div class="c3stat-delta" style="color:#6D28D9;">&#9660; 10% improved</div>
                   </div>
                 </div>
 
@@ -3619,10 +3619,10 @@
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#A78BFA" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
                   </div>
                   <div style="flex:1;">
-                    <div class="c3stat-val" style="color:#A78BFA;">94.2%</div>
+                    <div class="c3stat-val" style="color:#7C3AED;">94.2%</div>
                     <div class="c3stat-lbl">ZIA Confidence Level</div>
                     <div class="c3prog2"><div class="c3prog2-fill" style="width:94%;background:linear-gradient(90deg,#7C3AED,#A78BFA);"></div></div>
-                    <div class="c3stat-delta" style="color:#A78BFA;">Excellent threshold</div>
+                    <div class="c3stat-delta" style="color:#6D28D9;">Excellent threshold</div>
                   </div>
                 </div>
 
@@ -9335,11 +9335,11 @@ function initThreatHub() {
       c.setOption({
         backgroundColor:'transparent',
         grid:{top:28,bottom:28,left:48,right:20},
-        tooltip:{trigger:'axis',backgroundColor:'#0F172A',borderColor:'rgba(0,212,255,0.3)',textStyle:{color:'#E2E8F0',fontSize:12}},
+        tooltip:{trigger:'axis',backgroundColor:'#0F172A',borderColor:'rgba(2,132,199,0.3)',borderWidth:1,textStyle:{color:'#1E293B',fontSize:12},backgroundColor:'#fff'},
         legend:{top:0,right:0,textStyle:{color:'#64748B',fontSize:11},icon:'circle',itemWidth:8,itemHeight:8},
-        xAxis:{type:'category',data:days,axisLine:{lineStyle:{color:'rgba(255,255,255,0.08)'}},axisLabel:{color:'#475569',fontSize:11},axisTick:{show:false}},
+        xAxis:{type:'category',data:days,axisLine:{lineStyle:{color:'#E2E8F0'}},axisLabel:{color:'#64748B',fontSize:11},axisTick:{show:false}},
         yAxis:[
-          {type:'value',name:'Alerts',nameTextStyle:{color:'#475569',fontSize:10},axisLine:{show:false},splitLine:{lineStyle:{color:'rgba(255,255,255,0.05)'}},axisLabel:{color:'#475569',fontSize:10}},
+          {type:'value',name:'Alerts',nameTextStyle:{color:'#475569',fontSize:10},axisLine:{show:false},splitLine:{lineStyle:{color:'rgba(0,0,0,0.06)'}},axisLabel:{color:'#64748B',fontSize:10}},
           {type:'value',name:'ZIA',nameTextStyle:{color:'#475569',fontSize:10},axisLine:{show:false},splitLine:{show:false},axisLabel:{color:'#475569',fontSize:10}}
         ],
         series:[
@@ -9350,7 +9350,7 @@ function initThreatHub() {
            lineStyle:{color:'#00D4FF',width:2.5},areaStyle:{color:new echarts.graphic.LinearGradient(0,0,0,1,[{offset:0,color:'rgba(0,212,255,0.25)'},{offset:1,color:'rgba(0,212,255,0.02)'}])}},
           {name:'Incidents',type:'line',yAxisIndex:1,smooth:true,symbol:'circle',symbolSize:5,
            data:[28,42,38,32,38,32,37],
-           lineStyle:{color:'#FFB340',width:2},itemStyle:{color:'#FFB340',borderColor:'#080C18',borderWidth:2}}
+           lineStyle:{color:'#FFB340',width:2},itemStyle:{color:'#FFB340',borderColor:'#ffffff',borderWidth:2}}
         ]
       });
     })();
@@ -9398,7 +9398,7 @@ function initThreatHub() {
           min:0, max:100,
           splitNumber:5,
           progress:{show:true,width:10,itemStyle:{color:new echarts.graphic.LinearGradient(0,0,1,0,[{offset:0,color:color1},{offset:1,color:color2}])}},
-          axisLine:{lineStyle:{width:10,color:[[1,'rgba(167,139,250,0.1)']]}},
+          axisLine:{lineStyle:{width:10,color:[[1,'#EDE9FE']]}},
           axisTick:{show:false},
           splitLine:{show:false},
           axisLabel:{show:false},
@@ -9428,11 +9428,11 @@ function initThreatHub() {
       var c = echarts.init(dom, null, {renderer:'canvas',backgroundColor:'transparent'});
       c.setOption({
         backgroundColor:'transparent',
-        legend:{bottom:0,textStyle:{color:'#6D28D9',fontSize:10},icon:'circle',itemWidth:8,itemHeight:8},
+        legend:{bottom:0,textStyle:{color:'#5B21B6',fontSize:10},icon:'circle',itemWidth:8,itemHeight:8},
         radar:{
           center:['50%','48%'],radius:'62%',
           splitNumber:4,
-          axisName:{color:'#6D28D9',fontSize:10},
+          axisName:{color:'#5B21B6',fontSize:10},
           splitArea:{areaStyle:{color:['rgba(124,58,237,0.04)','rgba(124,58,237,0.08)']}},
           splitLine:{lineStyle:{color:'rgba(124,58,237,0.2)'}},
           axisLine:{lineStyle:{color:'rgba(124,58,237,0.2)'}},
@@ -9471,12 +9471,12 @@ function initThreatHub() {
       ];
       var days = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
       function heat(v) {
-        if (v===0) return ['rgba(124,58,237,0.06)',''];
-        if (v<5)   return ['rgba(124,58,237,0.20)',v];
-        if (v<15)  return ['rgba(167,139,250,0.40)',v];
-        if (v<30)  return ['rgba(232,121,249,0.55)',v];
-        if (v<60)  return ['rgba(236,72,153,0.65)',v];
-        return ['rgba(239,68,68,0.80)',v];
+        if (v===0) return ['#F5F3FF',''];
+        if (v<5)   return ['#DDD6FE',v];
+        if (v<15)  return ['#C4B5FD',v];
+        if (v<30)  return ['#A78BFA',v];
+        if (v<60)  return ['#7C3AED',v];
+        return ['#4C1D95',v];
       }
       var data = [
         [0,2,0,1,0,0,3],[12,18,9,14,20,8,11],[5,8,3,6,9,2,4],[22,31,18,25,28,12,19],
@@ -9485,7 +9485,7 @@ function initThreatHub() {
         [2,4,1,3,5,0,2],[7,11,5,9,13,3,6]
       ];
       var html = '<div style="display:flex;gap:3px;margin-bottom:5px;padding-left:123px;">';
-      days.forEach(function(d){ html += '<div style="flex:1;text-align:center;font-size:9px;color:#6D28D9;font-weight:700;">'+d+'</div>'; });
+      days.forEach(function(d){ html += '<div style="flex:1;text-align:center;font-size:9px;color:#7C3AED;font-weight:700;">'+d+'</div>'; });
       html += '</div>';
       tactics.forEach(function(t,i){
         html += '<div class="c3mx-row">';
@@ -9493,7 +9493,7 @@ function initThreatHub() {
         days.forEach(function(_,j){
           var v = data[i][j];
           var h = heat(v);
-          html += '<div class="c3mx-cell" style="background:'+h[0]+';border:1px solid rgba(167,139,250,0.08);">'+(h[1]||'')+'</div>';
+          html += '<div class="c3mx-cell" style="background:'+h[0]+';border:1px solid #EDE9FE;">'+(h[1]||'')+'</div>';
         });
         html += '</div>';
       });
