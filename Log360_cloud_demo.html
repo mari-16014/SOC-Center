@@ -2155,6 +2155,7 @@
                   <div class="ov-dd-item" data-view="autoinv-ov">Autonomous Investigation</div>
                   <div class="ov-dd-item" data-view="command-center">Command Center</div>
                   <div class="ov-dd-item" data-view="command-center1">Command Center 1</div>
+                  <div class="ov-dd-item" data-view="command-center2">Command Center 2</div>
                 </div>
               </div>
 
@@ -3195,6 +3196,281 @@
             </div><!-- /c1bottom -->
 
           </div><!-- /th-panel-command-center1 -->
+
+          <!-- ═══ COMMAND CENTER 2 — DARK NOC WALLBOARD ═══ -->
+          <div class="view-panel" id="th-panel-command-center2" style="background:#080C18;min-height:100%;color:#E2E8F0;font-family:'Segoe UI',system-ui,sans-serif;display:flex;flex-direction:column;">
+            <style>
+              /* ── CC2 reset ── */
+              #th-panel-command-center2 * { box-sizing:border-box; }
+              /* ── header ── */
+              .c2hd { display:flex;align-items:center;justify-content:space-between;padding:14px 28px;background:rgba(255,255,255,0.03);border-bottom:1px solid rgba(0,212,255,0.12);flex-shrink:0; }
+              .c2hd-left { display:flex;align-items:center;gap:14px; }
+              .c2hd-icon { width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#00D4FF22,#00D4FF44);border:1px solid rgba(0,212,255,0.3);display:flex;align-items:center;justify-content:center;flex-shrink:0; }
+              .c2hd-title { font-size:15px;font-weight:800;color:#F1F5F9;letter-spacing:.2px; }
+              .c2hd-sub { font-size:11px;color:#64748B;margin-top:1px; }
+              .c2hd-pill { background:rgba(0,212,255,0.12);color:#00D4FF;font-size:10px;font-weight:700;padding:3px 12px;border-radius:20px;border:1px solid rgba(0,212,255,0.25);letter-spacing:.5px; }
+              .c2hd-right { display:flex;align-items:center;gap:20px; }
+              .c2live { display:flex;align-items:center;gap:6px;font-size:11px;color:#00FF88;font-weight:600; }
+              .c2live-dot { width:7px;height:7px;border-radius:50%;background:#00FF88;box-shadow:0 0 6px #00FF88;animation:c2pulse 2s infinite; }
+              @keyframes c2pulse { 0%,100%{opacity:1;} 50%{opacity:.4;} }
+              .c2ts { font-size:11px;color:#475569; }
+
+              /* ── KPI row ── */
+              .c2kpi { display:grid;grid-template-columns:repeat(7,1fr);border-bottom:1px solid rgba(255,255,255,0.06);flex-shrink:0; }
+              .c2kpi-cell { padding:14px 18px;border-right:1px solid rgba(255,255,255,0.05);position:relative;overflow:hidden; }
+              .c2kpi-cell::after { content:'';position:absolute;bottom:0;left:0;right:0;height:2px; }
+              .c2kpi-cell.cyan::after { background:linear-gradient(90deg,transparent,#00D4FF,transparent); }
+              .c2kpi-cell.green::after { background:linear-gradient(90deg,transparent,#00FF88,transparent); }
+              .c2kpi-cell.red::after { background:linear-gradient(90deg,transparent,#FF3B3B,transparent); }
+              .c2kpi-cell.amber::after { background:linear-gradient(90deg,transparent,#FFB340,transparent); }
+              .c2kpi-cell.purple::after { background:linear-gradient(90deg,transparent,#A78BFA,transparent); }
+              .c2kpi-cell.blue::after { background:linear-gradient(90deg,transparent,#60A5FA,transparent); }
+              .c2kpi-cell.pink::after { background:linear-gradient(90deg,transparent,#FB7185,transparent); }
+              .c2kpi-cell:last-child { border-right:none; }
+              .c2kpi-lbl { font-size:10px;color:#475569;font-weight:600;text-transform:uppercase;letter-spacing:.6px;margin-bottom:5px; }
+              .c2kpi-val { font-size:28px;font-weight:900;line-height:1;margin-bottom:3px; }
+              .c2kpi-trend { font-size:11px;font-weight:600; }
+
+              /* ── body ── */
+              .c2body { flex:1;display:grid;grid-template-columns:1fr 340px;min-height:0; }
+              .c2main { display:flex;flex-direction:column;border-right:1px solid rgba(255,255,255,0.06); }
+              .c2chart-hd { display:flex;align-items:center;justify-content:space-between;padding:14px 20px 10px;border-bottom:1px solid rgba(255,255,255,0.05); }
+              .c2chart-title { font-size:12px;font-weight:700;color:#CBD5E1;display:flex;align-items:center;gap:8px; }
+              .c2legend { display:flex;align-items:center;gap:16px; }
+              .c2leg-item { display:flex;align-items:center;gap:5px;font-size:11px;color:#64748B; }
+              .c2leg-dot { width:8px;height:8px;border-radius:50%;flex-shrink:0; }
+              .c2chart-area { flex:1;min-height:0;padding:8px 12px 4px; }
+              .c2grid2 { display:grid;grid-template-columns:1fr 1fr;border-top:1px solid rgba(255,255,255,0.05);flex-shrink:0; }
+              .c2bottom-cell { padding:14px 20px;border-right:1px solid rgba(255,255,255,0.05); }
+              .c2bottom-cell:last-child { border-right:none; }
+              .c2bc-title { font-size:10px;color:#475569;font-weight:700;text-transform:uppercase;letter-spacing:.6px;margin-bottom:10px;display:flex;align-items:center;gap:6px; }
+              .c2atk-row { display:flex;align-items:center;gap:10px;padding:5px 0; }
+              .c2atk-name { width:150px;font-size:12px;color:#94A3B8;white-space:nowrap;overflow:hidden;text-overflow:ellipsis; }
+              .c2atk-bar-bg { flex:1;height:6px;background:rgba(255,255,255,0.07);border-radius:3px;overflow:hidden; }
+              .c2atk-bar { height:100%;border-radius:3px; }
+              .c2atk-cnt { width:40px;text-align:right;font-size:12px;font-weight:700;color:#CBD5E1; }
+
+              /* ── right sidebar ── */
+              .c2side { display:flex;flex-direction:column;overflow:hidden; }
+              .c2side-block { padding:16px 18px;border-bottom:1px solid rgba(255,255,255,0.05); }
+              .c2side-title { font-size:10px;font-weight:700;color:#475569;text-transform:uppercase;letter-spacing:.7px;margin-bottom:12px;display:flex;align-items:center;gap:7px; }
+              .c2out-row { display:flex;align-items:flex-start;gap:12px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.04); }
+              .c2out-row:last-child { border-bottom:none; }
+              .c2out-icon { width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px; }
+              .c2out-val { font-size:24px;font-weight:900;line-height:1; }
+              .c2out-lbl { font-size:11px;color:#64748B;margin-top:2px; }
+              .c2out-sub { font-size:11px;color:#475569;margin-top:4px; }
+              .c2prog { height:5px;background:rgba(255,255,255,0.08);border-radius:3px;overflow:hidden;margin-top:6px; }
+              .c2prog-fill { height:100%;border-radius:3px; }
+              .c2usr-row { display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.04);font-size:12px; }
+              .c2usr-row:last-child { border-bottom:none; }
+              .c2mitre { display:grid;grid-template-columns:1fr 1fr;gap:8px; }
+              .c2mitre-cell { background:rgba(255,255,255,0.04);border-radius:8px;padding:10px 12px;border:1px solid rgba(255,255,255,0.06); }
+              .c2mitre-val { font-size:22px;font-weight:900;line-height:1.1; }
+              .c2mitre-lbl { font-size:10px;color:#475569;margin-top:3px;text-transform:uppercase;letter-spacing:.4px; }
+            </style>
+
+            <!-- Header -->
+            <div class="c2hd">
+              <div class="c2hd-left">
+                <div class="c2hd-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="2.2" stroke-linecap="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                </div>
+                <div>
+                  <div class="c2hd-title">SOC Threat Operations Center</div>
+                  <div class="c2hd-sub">Real-time threat intelligence &amp; incident response dashboard</div>
+                </div>
+                <span class="c2hd-pill">LIVE · 7 DAYS</span>
+              </div>
+              <div class="c2hd-right">
+                <div class="c2live"><div class="c2live-dot"></div>Live Feed Active</div>
+                <span class="c2ts">Last sync: Apr 24, 2026 — 09:41 AM</span>
+              </div>
+            </div>
+
+            <!-- KPI Strip -->
+            <div class="c2kpi">
+              <div class="c2kpi-cell cyan">
+                <div class="c2kpi-lbl">Events / 7d</div>
+                <div class="c2kpi-val" style="color:#00D4FF;">128<span style="font-size:16px;color:#475569;">M</span></div>
+                <div class="c2kpi-trend" style="color:#00FF88;">&#9650; 12%</div>
+              </div>
+              <div class="c2kpi-cell red">
+                <div class="c2kpi-lbl">Total Alerts</div>
+                <div class="c2kpi-val" style="color:#FF3B3B;">18,452</div>
+                <div class="c2kpi-trend" style="color:#FF3B3B;">&#9650; 30%</div>
+              </div>
+              <div class="c2kpi-cell amber">
+                <div class="c2kpi-lbl">Critical</div>
+                <div class="c2kpi-val" style="color:#FFB340;">560</div>
+                <div class="c2kpi-trend" style="color:#64748B;">Priority P1</div>
+              </div>
+              <div class="c2kpi-cell blue">
+                <div class="c2kpi-lbl">Auto-Investigated</div>
+                <div class="c2kpi-val" style="color:#60A5FA;">2,891</div>
+                <div class="c2kpi-trend" style="color:#00FF88;">15.7% rate</div>
+              </div>
+              <div class="c2kpi-cell green">
+                <div class="c2kpi-lbl">Incidents Open</div>
+                <div class="c2kpi-val" style="color:#00FF88;">218</div>
+                <div class="c2kpi-trend" style="color:#64748B;">41 escalated</div>
+              </div>
+              <div class="c2kpi-cell purple">
+                <div class="c2kpi-lbl">MTTR</div>
+                <div class="c2kpi-val" style="color:#A78BFA;font-size:22px;">6h 14m</div>
+                <div class="c2kpi-trend" style="color:#00FF88;">&#9660; 10%</div>
+              </div>
+              <div class="c2kpi-cell pink">
+                <div class="c2kpi-lbl">SLA Met</div>
+                <div class="c2kpi-val" style="color:#FB7185;">94.2<span style="font-size:16px;color:#475569;">%</span></div>
+                <div class="c2kpi-trend" style="color:#64748B;">8 violations</div>
+              </div>
+            </div>
+
+            <!-- Body -->
+            <div class="c2body">
+
+              <!-- Main column: big chart + attack types -->
+              <div class="c2main">
+                <div class="c2chart-hd">
+                  <div class="c2chart-title">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                    Alert Volume &amp; ZIA Investigation Timeline (7 Days)
+                  </div>
+                  <div class="c2legend">
+                    <div class="c2leg-item"><div class="c2leg-dot" style="background:#FF3B3B;"></div>Total Alerts</div>
+                    <div class="c2leg-item"><div class="c2leg-dot" style="background:#00D4FF;"></div>ZIA Investigated</div>
+                    <div class="c2leg-item"><div class="c2leg-dot" style="background:#FFB340;"></div>Incidents</div>
+                  </div>
+                </div>
+                <div class="c2chart-area">
+                  <div id="cc2-timeline" style="width:100%;height:100%;min-height:200px;"></div>
+                </div>
+
+                <!-- Bottom 2-col: Attack types + Source breakdown -->
+                <div class="c2grid2">
+                  <div class="c2bottom-cell">
+                    <div class="c2bc-title">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#FF3B3B" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                      Top Attack Vectors
+                    </div>
+                    <div class="c2atk-row"><span class="c2atk-name">Brute Force Login</span><div class="c2atk-bar-bg"><div class="c2atk-bar" style="width:88%;background:linear-gradient(90deg,#FF3B3B,#FF6B6B);"></div></div><span class="c2atk-cnt">1,247</span></div>
+                    <div class="c2atk-row"><span class="c2atk-name">Privilege Escalation</span><div class="c2atk-bar-bg"><div class="c2atk-bar" style="width:62%;background:linear-gradient(90deg,#FFB340,#FFD580);"></div></div><span class="c2atk-cnt">884</span></div>
+                    <div class="c2atk-row"><span class="c2atk-name">Lateral Movement</span><div class="c2atk-bar-bg"><div class="c2atk-bar" style="width:48%;background:linear-gradient(90deg,#A78BFA,#C4B5FD);"></div></div><span class="c2atk-cnt">682</span></div>
+                    <div class="c2atk-row"><span class="c2atk-name">Data Exfiltration</span><div class="c2atk-bar-bg"><div class="c2atk-bar" style="width:34%;background:linear-gradient(90deg,#60A5FA,#93C5FD);"></div></div><span class="c2atk-cnt">483</span></div>
+                    <div class="c2atk-row"><span class="c2atk-name">Phishing / Email</span><div class="c2atk-bar-bg"><div class="c2atk-bar" style="width:22%;background:linear-gradient(90deg,#00FF88,#6EE7B7);"></div></div><span class="c2atk-cnt">312</span></div>
+                    <div class="c2atk-row"><span class="c2atk-name">C2 Beaconing</span><div class="c2atk-bar-bg"><div class="c2atk-bar" style="width:16%;background:linear-gradient(90deg,#FB7185,#FDA4AF);"></div></div><span class="c2atk-cnt">228</span></div>
+                  </div>
+                  <div class="c2bottom-cell">
+                    <div class="c2bc-title">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+                      Log Source Distribution
+                    </div>
+                    <div id="cc2-donut" style="width:100%;height:150px;"></div>
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-top:4px;">
+                      <div style="font-size:11px;color:#64748B;">&#9679; <span style="color:#00D4FF;">Windows/AD</span> 48.2M</div>
+                      <div style="font-size:11px;color:#64748B;">&#9679; <span style="color:#60A5FA;">Network</span> 31.7M</div>
+                      <div style="font-size:11px;color:#64748B;">&#9679; <span style="color:#FF3B3B;">Cloud</span> 22.4M</div>
+                      <div style="font-size:11px;color:#64748B;">&#9679; <span style="color:#A78BFA;">Identity</span> 11.3M</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Right sidebar -->
+              <div class="c2side">
+
+                <!-- ZIA outcomes -->
+                <div class="c2side-block">
+                  <div class="c2side-title">
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    ZIA Outcomes
+                  </div>
+                  <div class="c2out-row">
+                    <div class="c2out-icon" style="background:rgba(0,212,255,0.1);border:1px solid rgba(0,212,255,0.2);">
+                      <img src="./assets/icons/icon-tile-zia.svg" style="width:18px;height:18px;filter:hue-rotate(180deg) saturate(2);" />
+                    </div>
+                    <div style="flex:1;">
+                      <div class="c2out-val" style="color:#00D4FF;">2,891</div>
+                      <div class="c2out-lbl">Auto-Investigated by ZIA</div>
+                      <div class="c2prog"><div class="c2prog-fill" style="width:83%;background:linear-gradient(90deg,#00FF88,#00D4FF);"></div></div>
+                      <div style="display:flex;justify-content:space-between;font-size:11px;margin-top:3px;"><span style="color:#00FF88;">83% TP Rate</span><span style="color:#475569;">250 TP / 50 FP</span></div>
+                    </div>
+                  </div>
+                  <div class="c2out-row">
+                    <div class="c2out-icon" style="background:rgba(255,179,64,0.1);border:1px solid rgba(255,179,64,0.2);">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFB340" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                    </div>
+                    <div style="flex:1;">
+                      <div class="c2out-val" style="color:#FFB340;">247</div>
+                      <div class="c2out-lbl">Incidents Created</div>
+                      <div style="display:flex;gap:8px;margin-top:6px;">
+                        <span style="font-size:11px;background:rgba(96,165,250,0.15);color:#60A5FA;padding:2px 8px;border-radius:4px;font-weight:600;">218 Open</span>
+                        <span style="font-size:11px;background:rgba(0,255,136,0.12);color:#00FF88;padding:2px 8px;border-radius:4px;font-weight:600;">168 Resolved</span>
+                        <span style="font-size:11px;background:rgba(255,59,59,0.12);color:#FF6B6B;padding:2px 8px;border-radius:4px;font-weight:600;">41 Escalated</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- AI Metrics -->
+                <div class="c2side-block">
+                  <div class="c2side-title">
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#00FF88" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                    AI Accuracy
+                  </div>
+                  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+                    <div style="background:rgba(0,212,255,0.06);border:1px solid rgba(0,212,255,0.12);border-radius:8px;padding:10px 12px;">
+                      <div style="font-size:20px;font-weight:900;color:#00D4FF;line-height:1;">94.2%</div>
+                      <div style="font-size:10px;color:#475569;margin-top:3px;text-transform:uppercase;letter-spacing:.4px;">Avg Confidence</div>
+                    </div>
+                    <div style="background:rgba(0,255,136,0.06);border:1px solid rgba(0,255,136,0.12);border-radius:8px;padding:10px 12px;">
+                      <div style="font-size:20px;font-weight:900;color:#00FF88;line-height:1;">91.8%</div>
+                      <div style="font-size:10px;color:#475569;margin-top:3px;text-transform:uppercase;letter-spacing:.4px;">Triage Accuracy</div>
+                    </div>
+                    <div style="background:rgba(167,139,250,0.06);border:1px solid rgba(167,139,250,0.12);border-radius:8px;padding:10px 12px;">
+                      <div style="font-size:20px;font-weight:900;color:#A78BFA;line-height:1;">82.6%</div>
+                      <div style="font-size:10px;color:#475569;margin-top:3px;text-transform:uppercase;letter-spacing:.4px;">Noise Reduction</div>
+                    </div>
+                    <div style="background:rgba(251,113,133,0.06);border:1px solid rgba(251,113,133,0.12);border-radius:8px;padding:10px 12px;">
+                      <div style="font-size:20px;font-weight:900;color:#FB7185;line-height:1;">210h</div>
+                      <div style="font-size:10px;color:#475569;margin-top:3px;text-transform:uppercase;letter-spacing:.4px;">Analyst Hours Saved</div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- MITRE -->
+                <div class="c2side-block">
+                  <div class="c2side-title">
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#A78BFA" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18"/></svg>
+                    MITRE ATT&amp;CK
+                  </div>
+                  <div class="c2mitre">
+                    <div class="c2mitre-cell"><div class="c2mitre-val" style="color:#FF3B3B;">14</div><div class="c2mitre-lbl">Tactics</div></div>
+                    <div class="c2mitre-cell"><div class="c2mitre-val" style="color:#A78BFA;">68</div><div class="c2mitre-lbl">Techniques</div></div>
+                    <div class="c2mitre-cell" style="grid-column:span 2;background:rgba(0,255,136,0.06);border-color:rgba(0,255,136,0.15);">
+                      <div class="c2mitre-val" style="color:#00FF88;font-size:28px;">89%</div>
+                      <div class="c2mitre-lbl">Coverage Score — Top: <span style="color:#FFB340;">Credential Access</span></div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Top users -->
+                <div class="c2side-block" style="border-bottom:none;flex:1;overflow-y:auto;">
+                  <div class="c2side-title">
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#60A5FA" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                    Top Investigated Users
+                  </div>
+                  <div class="c2usr-row"><span style="color:#94A3B8;font-size:12px;">john.doe@corp.com</span><span style="color:#FF3B3B;font-weight:700;font-size:12px;">14 alerts</span></div>
+                  <div class="c2usr-row"><span style="color:#94A3B8;font-size:12px;">svc-backup@corp.com</span><span style="color:#FFB340;font-weight:700;font-size:12px;">11 alerts</span></div>
+                  <div class="c2usr-row"><span style="color:#94A3B8;font-size:12px;">admin.portal@corp.com</span><span style="color:#FFB340;font-weight:700;font-size:12px;">9 alerts</span></div>
+                  <div class="c2usr-row"><span style="color:#94A3B8;font-size:12px;">alice.martin@corp.com</span><span style="color:#60A5FA;font-weight:700;font-size:12px;">7 alerts</span></div>
+                  <div class="c2usr-row" style="border-bottom:none;"><span style="color:#94A3B8;font-size:12px;">guest-vpn-12@corp.com</span><span style="color:#475569;font-weight:700;font-size:12px;">5 alerts</span></div>
+                </div>
+
+              </div>
+            </div>
+          </div><!-- /th-panel-command-center2 -->
 
           <!-- ═══ COMMAND CENTER 2 — Deep Space NOC ═══ -->
 
@@ -8279,6 +8555,7 @@ function initThreatHub() {
     if (v === 'autoinv-ov') initAutoInvOverview();
     if (v === 'command-center') initCommandCenter();
     if (v === 'command-center1') initCommandCenter1();
+    if (v === 'command-center2') initCommandCenter2();
     setTimeout(function () { ElegantEChart.resize(); }, 150);
   }
 
@@ -8851,6 +9128,63 @@ function initThreatHub() {
       });
     })();
   }  /* end initCommandCenter1 */
+
+  function initCommandCenter2() {
+    /* -- Timeline: Alert volume + ZIA investigations + Incidents (7 days) -- */
+    (function(){
+      var dom = document.getElementById('cc2-timeline');
+      if (!dom) return;
+      var ex = echarts.getInstanceByDom(dom); if (ex) ex.dispose();
+      var c = echarts.init(dom, null, {renderer:'canvas',backgroundColor:'transparent'});
+      var days = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+      c.setOption({
+        backgroundColor:'transparent',
+        grid:{top:28,bottom:28,left:48,right:20},
+        tooltip:{trigger:'axis',backgroundColor:'#0F172A',borderColor:'rgba(0,212,255,0.3)',textStyle:{color:'#E2E8F0',fontSize:12}},
+        legend:{top:0,right:0,textStyle:{color:'#64748B',fontSize:11},icon:'circle',itemWidth:8,itemHeight:8},
+        xAxis:{type:'category',data:days,axisLine:{lineStyle:{color:'rgba(255,255,255,0.08)'}},axisLabel:{color:'#475569',fontSize:11},axisTick:{show:false}},
+        yAxis:[
+          {type:'value',name:'Alerts',nameTextStyle:{color:'#475569',fontSize:10},axisLine:{show:false},splitLine:{lineStyle:{color:'rgba(255,255,255,0.05)'}},axisLabel:{color:'#475569',fontSize:10}},
+          {type:'value',name:'ZIA',nameTextStyle:{color:'#475569',fontSize:10},axisLine:{show:false},splitLine:{show:false},axisLabel:{color:'#475569',fontSize:10}}
+        ],
+        series:[
+          {name:'Total Alerts',type:'bar',data:[2100,3200,2800,2600,3000,2750,2002],
+           itemStyle:{color:new echarts.graphic.LinearGradient(0,0,0,1,[{offset:0,color:'rgba(255,59,59,0.85)'},{offset:1,color:'rgba(255,59,59,0.15)'}]),borderRadius:[3,3,0,0]},barWidth:'40%'},
+          {name:'ZIA Investigated',type:'line',yAxisIndex:1,smooth:true,symbol:'none',
+           data:[350,520,480,390,480,430,241],
+           lineStyle:{color:'#00D4FF',width:2.5},areaStyle:{color:new echarts.graphic.LinearGradient(0,0,0,1,[{offset:0,color:'rgba(0,212,255,0.25)'},{offset:1,color:'rgba(0,212,255,0.02)'}])}},
+          {name:'Incidents',type:'line',yAxisIndex:1,smooth:true,symbol:'circle',symbolSize:5,
+           data:[28,42,38,32,38,32,37],
+           lineStyle:{color:'#FFB340',width:2},itemStyle:{color:'#FFB340',borderColor:'#080C18',borderWidth:2}}
+        ]
+      });
+    })();
+    /* -- Donut: source distribution -- */
+    (function(){
+      var dom = document.getElementById('cc2-donut');
+      if (!dom) return;
+      var ex = echarts.getInstanceByDom(dom); if (ex) ex.dispose();
+      var c = echarts.init(dom, null, {renderer:'canvas',backgroundColor:'transparent'});
+      c.setOption({
+        backgroundColor:'transparent',
+        tooltip:{show:false},
+        series:[{
+          type:'pie',radius:['48%','72%'],center:['50%','50%'],silent:true,label:{show:false},
+          data:[
+            {value:48.2,itemStyle:{color:'#00D4FF'}},
+            {value:31.7,itemStyle:{color:'#60A5FA'}},
+            {value:22.4,itemStyle:{color:'#FF3B3B'}},
+            {value:11.3,itemStyle:{color:'#A78BFA'}},
+            {value:8.6,itemStyle:{color:'#00FF88'}},
+            {value:4.1,itemStyle:{color:'#FFB340'}},
+            {value:2.1,itemStyle:{color:'#FB7185'}}
+          ]
+        }],
+        graphic:[{type:'text',left:'center',top:'38%',style:{text:'87',fill:'#00D4FF',fontSize:20,fontWeight:'bold',textAlign:'center'}},
+                 {type:'text',left:'center',top:'54%',style:{text:'Sources',fill:'#475569',fontSize:10,textAlign:'center'}}]
+      });
+    })();
+  }  /* end initCommandCenter2 */
 
 
 
