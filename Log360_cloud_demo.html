@@ -11314,6 +11314,201 @@ function sbShowResults(logs) {
   /* ══ OVERVIEW ══ */
   var ovEl = document.getElementById('sb-tab-overview');
   if (ovEl) ovEl.innerHTML =
+    '<div style="display:flex;flex-direction:column;gap:0;overflow-y:auto;">' +
+
+    /* Header: title + badge */
+    '<div style="padding:10px 12px 8px;border-bottom:1px solid #F0F0F0;">' +
+      '<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:6px;">' +
+        '<div style="display:flex;align-items:center;gap:6px;">' +
+          '<span style="width:8px;height:8px;border-radius:50%;background:#DC2626;flex-shrink:0;"></span>' +
+          '<span style="font-size:12.5px;font-weight:700;color:#1a1a1a;line-height:1.3;">DDoS / TCP SYN Flood Attack \u2014 Active</span>' +
+        '</div>' +
+        '<span style="flex-shrink:0;background:#FEE2E2;color:#DC2626;font-size:10px;font-weight:700;border-radius:20px;padding:2px 8px;white-space:nowrap;">\u25cf New</span>' +
+      '</div>' +
+      '<div style="margin-top:4px;font-size:11px;color:#7B3FE4;font-weight:600;">TA0040 \u2014 Impact</div>' +
+      '<div style="margin-top:5px;height:3px;background:linear-gradient(90deg,#DC2626 0%,#F87171 100%);border-radius:2px;"></div>' +
+      '<div style="margin-top:4px;font-size:11px;color:#555;">AI Confidence: <b style="color:#1a1a1a;">99%</b></div>' +
+    '</div>' +
+
+    /* Two-col rows */
+    '<div style="display:grid;grid-template-columns:90px 1fr;border-bottom:1px solid #F0F0F0;">' +
+
+      /* Description */
+      '<div style="padding:8px 10px;font-size:10px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:.4px;line-height:1.4;border-right:1px solid #F0F0F0;">Description</div>' +
+      '<div style="padding:8px 10px;font-size:11.5px;color:#333;line-height:1.55;">Active DDoS/SYN flood detected on Cisco ASA firewall. Peak burst rate: <b>12,000 pps</b> (configured max: 1000 pps). Total dropped packets: <b>287,441</b>. Connection table exhausted \u2014 new connections are being refused. Attack sources: 192.168.45.102, 45.33.32.156, 10.0.0.1, 198.20.69.74, 141.101.104.0. Targets: <b>10.0.0.1</b>.</div>' +
+
+      /* MITRE */
+      '<div style="padding:8px 10px;font-size:10px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:.4px;line-height:1.4;border-right:1px solid #F0F0F0;border-top:1px solid #F0F0F0;">MITRE ATT&amp;CK</div>' +
+      '<div style="padding:8px 10px;display:flex;align-items:center;gap:6px;flex-wrap:wrap;border-top:1px solid #F0F0F0;">' +
+        '<span style="background:#EEF3FF;color:#2C66DD;font-size:10px;font-weight:700;border-radius:4px;padding:3px 8px;">T1498</span>' +
+        '<span style="background:#EEF3FF;color:#2C66DD;font-size:10px;font-weight:700;border-radius:4px;padding:3px 8px;">T1498.001</span>' +
+        '<span style="background:#EEF3FF;color:#2C66DD;font-size:10px;font-weight:700;border-radius:4px;padding:3px 8px;">T1499</span>' +
+      '</div>' +
+
+      /* Severity */
+      '<div style="padding:8px 10px;font-size:10px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:.4px;border-right:1px solid #F0F0F0;border-top:1px solid #F0F0F0;">Severity</div>' +
+      '<div style="padding:8px 10px;font-size:12px;font-weight:700;color:#DC2626;border-top:1px solid #F0F0F0;">Critical</div>' +
+
+      /* Log Lines */
+      '<div style="padding:8px 10px;font-size:10px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:.4px;border-right:1px solid #F0F0F0;border-top:1px solid #F0F0F0;">Log Lines</div>' +
+      '<div style="padding:8px 10px;font-size:12px;font-weight:700;color:#1a1a1a;border-top:1px solid #F0F0F0;">18 analyzed</div>' +
+
+    '</div>' +
+
+    /* Key Evidence */
+    '<div style="padding:8px 12px 6px;border-bottom:1px solid #F0F0F0;">' +
+      '<div style="font-size:10px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:.4px;margin-bottom:6px;">Key Evidence</div>' +
+      '<div style="background:#1E1E2E;border-radius:6px;padding:10px 12px;font-family:monospace;font-size:10.5px;color:#A9B1D6;line-height:1.8;max-height:115px;overflow-y:auto;">' +
+        'SYN flood events: 2<br>' +
+        'Drop rate exceeded: 3 times<br>' +
+        'Conn limit hit: 2<br>' +
+        'Shunned IPs: 2<br>' +
+        'Duplicate SYNs: 2<br>' +
+        'Peak rate: 12,000 pps | Total dropped: 287,441<br>' +
+        'Attack sources: 192.168.45.102, 45.33.32.156,<br>10.0.0.1, 198.20.69.74, 141.101.104.0' +
+      '</div>' +
+    '</div>' +
+
+    /* Recommended Actions */
+    '<div style="padding:8px 12px 12px;">' +
+      '<div style="display:flex;align-items:center;gap:5px;margin-bottom:6px;">' +
+        '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#166534" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>' +
+        '<span style="font-size:11.5px;font-weight:700;color:#166534;">Recommended Actions:</span>' +
+      '</div>' +
+      '<ol style="margin:0;padding-left:16px;display:flex;flex-direction:column;gap:3px;">' +
+        '<li style="font-size:11px;color:#333;line-height:1.5;"><b>IMMEDIATE:</b> Enable ASA rate limiting \u2014 increase embryonic conn limits (set conn embryonic-conn-max)</li>' +
+        '<li style="font-size:11px;color:#333;line-height:1.5;">Enable TCP Intercept / SYN Cookies: policy-map global tcp-options syn-data-drop</li>' +
+        '<li style="font-size:11px;color:#333;line-height:1.5;">Block confirmed attack IPs: 192.168.45.102, 45.33.32.156, 10.0.0.1, 198.20.69.74</li>' +
+        '<li style="font-size:11px;color:#333;line-height:1.5;">Contact upstream ISP for traffic scrubbing / null routing</li>' +
+        '<li style="font-size:11px;color:#333;line-height:1.5;">Enable Cisco ASA botnet filter + threat detection</li>' +
+        '<li style="font-size:11px;color:#333;line-height:1.5;">Consider activating cloud DDoS mitigation (Cloudflare / Radware / AWS Shield)</li>' +
+        '<li style="font-size:11px;color:#333;line-height:1.5;">Monitor connection table: show conn count</li>' +
+        '<li style="font-size:11px;color:#333;line-height:1.5;">Configure shun on top sources: shun</li>' +
+      '</ol>' +
+    '</div>' +
+
+    '</div>';
+
+  /* ══ IOCs ══ */
+  var iocEl = document.getElementById('sb-tab-iocs');
+  if (iocEl) iocEl.innerHTML =
+    '<div style="padding:14px;display:flex;flex-direction:column;gap:14px;">' +
+    '<div>' +
+      '<div style="display:flex;align-items:center;gap:6px;margin-bottom:8px;">' +
+        '<div style="font-size:10px;font-weight:700;color:#555;text-transform:uppercase;letter-spacing:.5px;flex:1;">IP Addresses</div>' +
+        '<span style="font-size:10px;font-weight:700;background:#E8E8E8;color:#555;border-radius:10px;padding:1px 7px;">8</span>' +
+      '</div>' +
+      '<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">' +
+        ['192.168.45.102','45.33.32.156','10.0.0.1','198.20.69.74','103.21.244.0','141.101.104.0','172.64.80.1','185.220.101.0'].map(function(ip) {
+          return '<div onclick="navigator.clipboard&&navigator.clipboard.writeText(\''+ip+'\')" style="display:flex;align-items:center;gap:6px;padding:5px 8px;border:1px solid #E0E0E0;border-radius:4px;cursor:pointer;background:#FAFAFA;" title="Click to copy">' +
+            '<span style="font-size:9px;font-weight:700;color:#2C66DD;background:#EEF3FF;border-radius:3px;padding:1px 5px;flex-shrink:0;">IP</span>' +
+            '<span style="font-size:11px;font-family:monospace;color:#1a1a1a;">'+ip+'</span></div>';
+        }).join('') +
+      '</div>' +
+    '</div>' +
+    '<div>' +
+      '<div style="display:flex;align-items:center;gap:6px;margin-bottom:8px;">' +
+        '<div style="font-size:10px;font-weight:700;color:#555;text-transform:uppercase;letter-spacing:.5px;flex:1;">Hostnames</div>' +
+        '<span style="font-size:10px;font-weight:700;background:#E8E8E8;color:#555;border-radius:10px;padding:1px 7px;">8</span>' +
+      '</div>' +
+      '<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">' +
+        ['ASA-4-733100','ASA-2-106017','ASA-1-507001','ASA-2-106001','ASA-4-419002','ASA-2-106006','ASA-3-210007','ASA-3-201008'].map(function(h) {
+          return '<div onclick="navigator.clipboard&&navigator.clipboard.writeText(\''+h+'\')" style="display:flex;align-items:center;gap:6px;padding:5px 8px;border:1px solid #FFE4B5;border-radius:4px;cursor:pointer;background:#FFFBF0;" title="Click to copy">' +
+            '<span style="font-size:9px;font-weight:700;color:#B45309;background:#FEF3C7;border-radius:3px;padding:1px 5px;flex-shrink:0;">HOST</span>' +
+            '<span style="font-size:11px;font-family:monospace;color:#1a1a1a;">'+h+'</span></div>';
+        }).join('') +
+      '</div>' +
+    '</div>' +
+    '<div style="font-size:11px;color:#AAA;text-align:center;padding-top:2px;">Click any IOC to copy to clipboard</div>' +
+    '</div>';
+
+  /* ══ TIMELINE ══ */
+  var tlEl = document.getElementById('sb-tab-timeline');
+  var tlEvents = [
+    { time:'2024-01-15T14:22:01Z', json:'{"device":"Cisco-ASA","event":"%ASA-4-733100","msg":"SYN flood from 45.33.32.156, dropping...', color:'#DC2626' },
+    { time:'2024-01-15T14:22:15Z', json:'{"device":"Cisco-ASA","event":"%ASA-2-106017","msg":"Deny TCP (no connection) from 192.168...', color:'#DC2626' },
+    { time:'2024-01-15T14:22:30Z', json:'{"device":"Cisco-ASA","event":"%ASA-1-507001","msg":"Network interface link up/down...conn...', color:'#7B3FE4' },
+    { time:'2024-01-15T14:23:00Z', json:'{"device":"Cisco-ASA","event":"%ASA-2-106001","msg":"Inbound TCP conn denied from 198.20.69...', color:'#DC2626' },
+    { time:'2024-01-15T14:23:44Z', json:'{"device":"Cisco-ASA","event":"%ASA-4-419002","msg":"Duplicate TCP SYN from 141.101.104.0...', color:'#DC2626' },
+    { time:'2024-01-15T14:24:10Z', json:'{"device":"Cisco-ASA","event":"%ASA-2-106006","msg":"Deny inbound UDP from 103.21.244.0...', color:'#7B3FE4' },
+    { time:'2024-01-15T14:25:44Z', json:'{"device":"Cisco-ASA","event":"%ASA-3-210007","msg":"LU allocate connection failed — conn...', color:'#DC2626' }
+  ];
+  if (tlEl) tlEl.innerHTML =
+    '<div style="display:flex;flex-direction:column;padding:14px;">' +
+    tlEvents.map(function(e, i) {
+      return '<div style="display:flex;gap:10px;padding-bottom:10px;">' +
+        '<div style="display:flex;flex-direction:column;align-items:center;flex-shrink:0;">' +
+          '<div style="width:10px;height:10px;border-radius:50%;background:'+e.color+';margin-top:2px;flex-shrink:0;border:2px solid #fff;box-shadow:0 0 0 1px '+e.color+';"></div>' +
+          (i < tlEvents.length-1 ? '<div style="width:2px;flex:1;background:#E8E0FF;margin-top:4px;min-height:20px;"></div>' : '') +
+        '</div>' +
+        '<div style="min-width:0;padding-bottom:4px;">' +
+          '<div style="font-size:10px;color:#888;font-family:monospace;margin-bottom:3px;">'+e.time+'</div>' +
+          '<div style="background:#F5F5F5;border:1px solid #EBEBEB;border-radius:5px;padding:6px 8px;font-family:monospace;font-size:10px;color:#444;line-height:1.5;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%;">'+e.json+'</div>' +
+        '</div>' +
+      '</div>';
+    }).join('') +
+    '</div>';
+
+  sbSwitchTab('overview', document.querySelector('.sb-rtab[data-tab="overview"]'));
+
+  var ch = document.getElementById('sb-chat-history');
+  if (ch) {
+    ch.innerHTML += '<div style="display:flex;align-items:flex-start;gap:8px;margin-top:8px;">' +
+      '<div style="width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,#7B3FE4,#4F8EF7);display:flex;align-items:center;justify-content:center;flex-shrink:0;">' +
+      '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 100 20A10 10 0 0012 2z"/><path d="M12 8v4l3 3"/></svg></div>' +
+      '<div style="background:#fff;border:1px solid #E8E2FF;border-radius:0 10px 10px 10px;padding:9px 12px;max-width:85%;font-size:12px;color:#333;line-height:1.5;">' +
+      '&#x26A0;&#xFE0F; <b>Active DDoS detected</b> \u2014 TCP SYN Flood with 99% confidence.<br/>' +
+      'Peak: <b>12,000 pps</b>, dropped: <b>287,441 packets</b>. Immediate action required.' +
+      '</div></div>';
+    ch.scrollTop = ch.scrollHeight;
+  }
+}
+
+function sbSwitchTab(tab, btn) {
+  ['overview', 'iocs', 'timeline'].forEach(function(t) {
+    var el = document.getElementById('sb-tab-' + t);
+    if (el) el.style.display = t === tab ? 'flex' : 'none';
+  });
+  document.querySelectorAll('#sandboxOverlay .sb-rtab').forEach(function(b) {
+    b.style.color = '#888'; b.style.borderBottomColor = 'transparent'; b.style.fontWeight = '500';
+  });
+  if (btn) { btn.style.color = '#7B3FE4'; btn.style.borderBottomColor = '#7B3FE4'; btn.style.fontWeight = '600'; }
+}
+function sbRunDetection() {
+  var logPane = document.getElementById('sbLogPane-paste');
+  var histPane = document.getElementById('sbLogPane-historic');
+  var isPaste = logPane && logPane.style.display !== 'none';
+  var logEl = document.getElementById('sb-log-input');
+  var logs = isPaste && logEl ? logEl.value.trim() : '__historic__';
+  if (isPaste && !logs) { alert('Please add log data first.'); return; }
+
+  var btn = document.querySelector('#sandboxOverlay button[onclick="sbRunDetection()"]');
+  if (btn) {
+    btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="animation:spin 1s linear infinite;"><path d="M21 12a9 9 0 11-6.219-8.56"/></svg> Analyzing\u2026';
+    btn.disabled = true;
+  }
+
+  /* Loading state in right panel */
+  var ovEl = document.getElementById('sb-tab-overview');
+  if (ovEl) ovEl.innerHTML = '<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 20px;gap:12px;">' +
+    '<div style="width:36px;height:36px;border:3px solid #EDE9FF;border-top-color:#7B3FE4;border-radius:50%;animation:spin 0.9s linear infinite;"></div>' +
+    '<div style="font-size:12px;color:#7B3FE4;font-weight:600;">AI is analyzing logs\u2026</div>' +
+    '<div style="font-size:11px;color:#AAA;">Matching rules, extracting IOCs, building timeline</div></div>';
+  sbSwitchTab('overview', document.querySelector('.sb-rtab[data-tab="overview"]'));
+
+  setTimeout(function() {
+    sbShowResults(logs);
+    if (btn) {
+      btn.innerHTML = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg> Run AI Detection';
+      btn.disabled = false;
+    }
+  }, 1800);
+}
+
+function sbShowResults(logs) {
+  /* ══ OVERVIEW ══ */
+  var ovEl = document.getElementById('sb-tab-overview');
+  if (ovEl) ovEl.innerHTML =
     '<div style="display:flex;flex-direction:column;gap:0;padding:0;">' +
 
     /* Title bar */
