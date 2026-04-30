@@ -3348,29 +3348,36 @@
             <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
               <span style="font-size:16px;font-weight:700;color:#1a1a1a;">Global Context</span>
             </div>
-            <p style="margin:0 0 16px;font-size:12.5px;color:#777;line-height:1.6;">Give Zia the organisational context it needs to investigate smarter — such as known maintenance accounts, trusted IPs, authorised scanners, and expected after-hours behaviours. Context entries can be added in two ways: use <strong style="font-weight:500;color:#555;">Add Context</strong> to manually define an entry, or enable the <strong style="font-weight:500;color:#555;">Feedback</strong> option while reviewing any investigation to have Zia capture it automatically.</p>
+            <p style="margin:0 0 16px;font-size:12px;color:#999;line-height:1.5;">Add organisational context to help Zia investigate smarter — trusted IPs, known accounts, authorised scanners, and more.</p>
           </div>
           <div style="padding:20px 28px;">
 
             <!-- Toolbar -->
-            <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;flex-wrap:wrap;">
-              <button onclick="gcOpenAddForm()" style="display:flex;align-items:center;gap:6px;height:30px;padding:0 12px;background:#1565C0;border:none;border-radius:4px;color:#fff;font-size:12px;font-weight:500;cursor:pointer;">
-                <svg width="10" height="10" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/></svg>
-                Add Context
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;">
+              <!-- Left: search + filter icon -->
+              <div style="display:flex;align-items:center;height:32px;border:1px solid #D0D5DD;border-radius:6px;background:#fff;padding:0 10px;gap:6px;min-width:260px;">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="#999" stroke-width="1.8"/><path d="M16.5 16.5l3.5 3.5" stroke="#999" stroke-width="1.8" stroke-linecap="round"/></svg>
+                <input id="gcSearchInput" type="text" placeholder="Search" oninput="gcRender()" style="border:none;outline:none;font-size:12.5px;color:#333;width:100%;background:transparent;" />
+              </div>
+              <button onclick="gcToggleFilterPills()" id="gcFilterBtn" title="Filter by type" style="display:flex;align-items:center;justify-content:center;width:32px;height:32px;border:1px solid #D0D5DD;border-radius:6px;background:#fff;cursor:pointer;flex-shrink:0;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M3 6h18M7 12h10M10 18h4" stroke="#555" stroke-width="1.8" stroke-linecap="round"/></svg>
               </button>
-              <button onclick="gcImportFile()" style="display:flex;align-items:center;gap:6px;height:30px;padding:0 12px;background:#fff;border:1px solid #D0D5DD;border-radius:4px;color:#344054;font-size:12px;font-weight:500;cursor:pointer;">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" stroke="#555" stroke-width="1.8" stroke-linecap="round"/><polyline points="17 8 12 3 7 8" stroke="#555" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><line x1="12" y1="3" x2="12" y2="15" stroke="#555" stroke-width="1.8" stroke-linecap="round"/></svg>
-                Import
-              </button>
-              <input type="file" id="gcFileInput" accept=".json,.yaml,.yml,.csv,.txt" style="display:none;" onchange="gcHandleFile(event)" />
-              <div style="margin-left:auto;display:flex;align-items:center;gap:3px;height:30px;border:1px solid #E0E0E0;border-radius:4px;background:#fff;padding:0 8px;">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="#999" stroke-width="1.8"/><path d="M16.5 16.5l3.5 3.5" stroke="#999" stroke-width="1.8" stroke-linecap="round"/></svg>
-                <input id="gcSearchInput" type="text" placeholder="Search context..." oninput="gcRender()" style="border:none;outline:none;font-size:12px;color:#333;width:160px;background:transparent;" />
+              <!-- Right: Import + Add Context -->
+              <div style="margin-left:auto;display:flex;align-items:center;gap:8px;">
+                <input type="file" id="gcFileInput" accept=".json,.yaml,.yml,.csv,.txt" style="display:none;" onchange="gcHandleFile(event)" />
+                <button onclick="gcImportFile()" style="display:flex;align-items:center;gap:6px;height:32px;padding:0 14px;background:#fff;border:1px solid #D0D5DD;border-radius:6px;color:#344054;font-size:12.5px;font-weight:500;cursor:pointer;">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" stroke="#555" stroke-width="1.8" stroke-linecap="round"/><polyline points="17 8 12 3 7 8" stroke="#555" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><line x1="12" y1="3" x2="12" y2="15" stroke="#555" stroke-width="1.8" stroke-linecap="round"/></svg>
+                  Import
+                </button>
+                <button onclick="gcOpenAddForm()" style="display:flex;align-items:center;gap:6px;height:32px;padding:0 14px;background:#1565C0;border:none;border-radius:6px;color:#fff;font-size:12.5px;font-weight:500;cursor:pointer;">
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/></svg>
+                  Add Context
+                </button>
               </div>
             </div>
 
-            <!-- Type filter pills -->
-            <div style="display:flex;align-items:center;gap:6px;margin-bottom:16px;flex-wrap:wrap;" id="gcTypePills">
+            <!-- Type filter pills (hidden by default, toggled by filter icon) -->
+            <div style="display:none;align-items:center;gap:6px;margin-bottom:16px;flex-wrap:wrap;" id="gcTypePills">
               <span style="font-size:11px;color:#888;margin-right:2px;">Filter:</span>
               <button onclick="gcSetTypeFilter('')"   data-gc-type=""        class="gc-pill gc-pill--active" style="height:24px;padding:0 10px;border-radius:12px;border:1px solid #1565C0;background:#E8F0FE;color:#1565C0;font-size:11.5px;font-weight:500;cursor:pointer;">All</button>
               <button onclick="gcSetTypeFilter('User')"    data-gc-type="User"    class="gc-pill" style="height:24px;padding:0 10px;border-radius:12px;border:1px solid #D0D5DD;background:#fff;color:#555;font-size:11.5px;font-weight:500;cursor:pointer;">User</button>
@@ -3380,35 +3387,49 @@
               <button onclick="gcSetTypeFilter('Other')"   data-gc-type="Other"   class="gc-pill" style="height:24px;padding:0 10px;border-radius:12px;border:1px solid #D0D5DD;background:#fff;color:#555;font-size:11.5px;font-weight:500;cursor:pointer;">Other</button>
             </div>
 
-            <!-- Inline Add/Edit Form -->
-            <div id="gcAddForm" style="display:none;border:1px solid #C9D4FF;border-radius:6px;background:#F5F8FF;padding:14px 16px;margin-bottom:12px;">
-              <div style="font-size:12.5px;font-weight:600;color:#1a1a1a;margin-bottom:10px;" id="gcFormTitle">Add Context Entry</div>
-              <div style="display:grid;grid-template-columns:150px 1fr;gap:10px;margin-bottom:10px;">
-                <div>
-                  <label style="display:block;font-size:10.5px;font-weight:600;color:#555;margin-bottom:4px;text-transform:uppercase;letter-spacing:.04em;">Type</label>
-                  <div style="position:relative;">
-                    <select id="gcFormType" style="width:100%;height:32px;border:1px solid #D1D5DB;border-radius:4px;background:#fff;font-size:12px;color:#333;padding:0 24px 0 8px;appearance:none;cursor:pointer;">
-                      <option value="User">User</option>
-                      <option value="IP">IP Address</option>
-                      <option value="Host">Host / Asset</option>
-                      <option value="Network">Network</option>
-                      <option value="Other">Other</option>
-                    </select>
-                    <svg style="position:absolute;right:7px;top:50%;transform:translateY(-50%);pointer-events:none;" width="9" height="9" viewBox="0 0 24 24" fill="none"><polyline points="6 9 12 15 18 9" stroke="#888" stroke-width="2"/></svg>
+            <!-- Add/Edit Context Drawer (right-side panel) -->
+            <div id="gcDrawerBackdrop" onclick="gcCancelForm()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:1100;"></div>
+            <div id="gcDrawerPanel" style="display:none;position:fixed;top:0;right:0;height:100vh;width:440px;background:#fff;box-shadow:-4px 0 24px rgba(0,0,0,.12);z-index:1101;flex-direction:column;">
+              <!-- Drawer header -->
+              <div style="display:flex;align-items:center;gap:10px;padding:18px 20px;border-bottom:1px solid #F0F0F0;flex-shrink:0;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="2" stroke="#333" stroke-width="1.8"/><path d="M8 12h8M8 8h5M8 16h3" stroke="#333" stroke-width="1.8" stroke-linecap="round"/></svg>
+                <span id="gcDrawerTitle" style="font-size:15px;font-weight:700;color:#1a1a1a;flex:1;">Add Context</span>
+                <button onclick="gcCancelForm()" style="width:28px;height:28px;border:none;background:none;cursor:pointer;display:flex;align-items:center;justify-content:center;border-radius:4px;" onmouseover="this.style.background='#F3F4F6'" onmouseout="this.style.background='none'">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M18 6L6 18M6 6l12 12" stroke="#555" stroke-width="2" stroke-linecap="round"/></svg>
+                </button>
+              </div>
+              <!-- Drawer body -->
+              <div style="flex:1;overflow-y:auto;padding:22px 20px;">
+                <!-- Entity Type -->
+                <div style="margin-bottom:18px;">
+                  <label style="display:block;font-size:12px;font-weight:600;color:#374151;margin-bottom:6px;">Entity Type</label>
+                  <div style="position:relative;" id="gcTypeDropWrap">
+                    <div id="gcTypeDropBtn" onclick="gcToggleTypeDropdown()" style="display:flex;align-items:center;gap:8px;height:36px;border:1px solid #D1D5DB;border-radius:6px;background:#fff;padding:0 10px;cursor:pointer;user-select:none;">
+                      <span id="gcTypeDropIcon" style="display:flex;align-items:center;color:#555;"></span>
+                      <span id="gcTypeDropLabel" style="flex:1;font-size:13px;color:#374151;">-Select Entity Type-</span>
+                      <svg width="10" height="10" viewBox="0 0 24 24" fill="none"><polyline points="6 9 12 15 18 9" stroke="#888" stroke-width="2"/></svg>
+                    </div>
+                    <div id="gcTypeDropList" style="display:none;position:fixed;border:1px solid #E5E7EB;border-radius:6px;background:#fff;box-shadow:0 4px 12px rgba(0,0,0,.15);z-index:9999;overflow:hidden;min-width:200px;">
+                    </div>
                   </div>
+                  <!-- hidden value holder -->
+                  <input type="hidden" id="gcFormType" value="" />
                 </div>
-                <div>
-                  <label style="display:block;font-size:10.5px;font-weight:600;color:#555;margin-bottom:4px;text-transform:uppercase;letter-spacing:.04em;">Subject (Username / IP / Hostname&hellip;)</label>
-                  <input id="gcFormSubject" type="text" placeholder="e.g. john.admin@corp.com" style="width:100%;height:32px;border:1px solid #D1D5DB;border-radius:4px;font-size:12px;color:#333;padding:0 8px;box-sizing:border-box;outline:none;" />
+                <!-- Entity Name -->
+                <div style="margin-bottom:18px;">
+                  <label style="display:block;font-size:12px;font-weight:600;color:#374151;margin-bottom:6px;">Entity Name</label>
+                  <input id="gcFormSubject" type="text" placeholder="Enter Value" style="width:100%;height:36px;border:1px solid #D1D5DB;border-radius:6px;font-size:13px;color:#333;padding:0 10px;box-sizing:border-box;outline:none;" onfocus="this.style.borderColor='#1565C0'" onblur="this.style.borderColor='#D1D5DB'" />
+                </div>
+                <!-- Description -->
+                <div style="margin-bottom:18px;">
+                  <label style="display:block;font-size:12px;font-weight:600;color:#374151;margin-bottom:6px;">Description</label>
+                  <textarea id="gcFormDesc" rows="5" placeholder="" style="width:100%;border:1px solid #D1D5DB;border-radius:6px;font-size:13px;color:#333;padding:8px 10px;box-sizing:border-box;resize:vertical;outline:none;font-family:inherit;line-height:1.5;" onfocus="this.style.borderColor='#1565C0'" onblur="this.style.borderColor='#D1D5DB'"></textarea>
                 </div>
               </div>
-              <div style="margin-bottom:10px;">
-                <label style="display:block;font-size:10.5px;font-weight:600;color:#555;margin-bottom:4px;text-transform:uppercase;letter-spacing:.04em;">Context Description</label>
-                <textarea id="gcFormDesc" rows="3" placeholder="Describe why this entity should be treated differently. e.g. This account belongs to a maintenance engineer and logs in outside business hours regularly." style="width:100%;border:1px solid #D1D5DB;border-radius:4px;font-size:12px;color:#333;padding:7px 8px;box-sizing:border-box;resize:vertical;outline:none;font-family:inherit;line-height:1.5;"></textarea>
-              </div>
-              <div style="display:flex;align-items:center;justify-content:flex-end;gap:8px;">
-                <button onclick="gcCancelForm()" style="height:30px;padding:0 14px;border:1px solid #D1D5DB;border-radius:4px;background:#fff;font-size:12px;color:#555;cursor:pointer;">Cancel</button>
-                <button onclick="gcSaveForm()" style="height:30px;padding:0 16px;border:none;border-radius:4px;background:#1565C0;color:#fff;font-size:12px;font-weight:500;cursor:pointer;">Save</button>
+              <!-- Drawer footer -->
+              <div style="display:flex;align-items:center;gap:8px;padding:14px 20px;border-top:1px solid #F0F0F0;flex-shrink:0;">
+                <button onclick="gcSaveForm()" style="height:34px;padding:0 20px;border:none;border-radius:6px;background:#1565C0;color:#fff;font-size:13px;font-weight:500;cursor:pointer;">Save</button>
+                <button onclick="gcCancelForm()" style="height:34px;padding:0 16px;border:1px solid #D1D5DB;border-radius:6px;background:#fff;font-size:13px;color:#555;cursor:pointer;">Cancel</button>
               </div>
             </div>
 
@@ -3436,18 +3457,26 @@
                   <span style="font-size:16px;font-weight:700;color:#1a1a1a;">Runbooks</span>
                   <span style="font-size:10px;font-weight:600;padding:2px 8px;border-radius:10px;background:#EDE9FF;color:#5B21B6;border:1px solid #C4B5FD;">AI Investigation</span>
                 </div>
-                <p style="margin:0;font-size:12.5px;color:#777;line-height:1.6;max-width:720px;">Define step-by-step investigation workflows that Zia executes automatically during AI Investigation. Each runbook maps to an alert type and controls exactly which data Zia queries, how it correlates findings, and what output it produces.</p>
+                <p style="margin:0;font-size:12px;color:#999;line-height:1.5;">Define step-by-step investigation workflows that Zia executes automatically during AI Investigation.</p>
               </div>
-              <div style="display:flex;align-items:center;gap:8px;flex-shrink:0;">
-                <button onclick="rbOpenImport()" style="display:flex;align-items:center;gap:6px;height:32px;padding:0 14px;background:#fff;border:1px solid #D0D5DD;border-radius:6px;color:#344054;font-size:12px;font-weight:500;cursor:pointer;">
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" stroke="#555" stroke-width="1.8" stroke-linecap="round"/><polyline points="17 8 12 3 7 8" stroke="#555" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><line x1="12" y1="3" x2="12" y2="15" stroke="#555" stroke-width="1.8" stroke-linecap="round"/></svg>
-                  Import YAML
-                </button>
-                <button onclick="rbOpenAdd()" style="display:flex;align-items:center;gap:6px;height:32px;padding:0 14px;background:#1565C0;border:none;border-radius:6px;color:#fff;font-size:12px;font-weight:500;cursor:pointer;">
-                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/></svg>
-                  Add Runbook
-                </button>
-              </div>
+            </div>
+          </div>
+
+          <!-- Toolbar -->
+          <div style="display:flex;align-items:center;gap:8px;padding:12px 28px;border-bottom:1px solid #F0F0F0;flex-shrink:0;">
+            <div style="display:flex;align-items:center;height:32px;border:1px solid #D0D5DD;border-radius:6px;background:#fff;padding:0 10px;gap:6px;min-width:220px;">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="#999" stroke-width="1.8"/><path d="M16.5 16.5l3.5 3.5" stroke="#999" stroke-width="1.8" stroke-linecap="round"/></svg>
+              <input id="rbSearchInput" type="text" placeholder="Search" oninput="rbRender()" style="border:none;outline:none;font-size:12.5px;color:#333;width:100%;background:transparent;" />
+            </div>
+            <div style="margin-left:auto;display:flex;align-items:center;gap:8px;">
+              <button onclick="rbOpenImport()" style="display:flex;align-items:center;gap:6px;height:32px;padding:0 14px;background:#fff;border:1px solid #D0D5DD;border-radius:6px;color:#344054;font-size:12.5px;font-weight:500;cursor:pointer;">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" stroke="#555" stroke-width="1.8" stroke-linecap="round"/><polyline points="17 8 12 3 7 8" stroke="#555" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><line x1="12" y1="3" x2="12" y2="15" stroke="#555" stroke-width="1.8" stroke-linecap="round"/></svg>
+                Import YAML
+              </button>
+              <button onclick="rbOpenAdd()" style="display:flex;align-items:center;gap:6px;height:32px;padding:0 14px;background:#1565C0;border:none;border-radius:6px;color:#fff;font-size:12.5px;font-weight:500;cursor:pointer;">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/></svg>
+                Add Runbook
+              </button>
             </div>
           </div>
 
@@ -3465,36 +3494,38 @@
 
         <!-- ══ RUNBOOK EDITOR PANEL ══ -->
         <div id="rbEditorBackdrop" onclick="rbCloseEditor()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.35);z-index:3000;"></div>
-        <div id="rbEditorPanel" style="display:none;position:fixed;top:0;right:0;width:660px;max-width:100vw;height:100%;background:#fff;z-index:3001;flex-direction:column;box-shadow:-4px 0 32px rgba(0,0,0,0.15);">
+        <div id="rbEditorPanel" style="display:none;position:fixed;top:0;right:0;width:680px;max-width:100vw;height:100%;background:#fff;z-index:3001;flex-direction:column;box-shadow:-4px 0 32px rgba(0,0,0,0.15);">
+          <!-- Header -->
           <div style="display:flex;align-items:center;justify-content:space-between;padding:18px 24px 16px;border-bottom:1px solid #E8E8E8;flex-shrink:0;">
             <div style="display:flex;align-items:center;gap:10px;">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="#1565C0" stroke-width="1.8"/><path d="M8 8h8M8 12h6M8 16h4" stroke="#1565C0" stroke-width="1.8" stroke-linecap="round"/></svg>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="#333" stroke-width="1.8"/><path d="M8 8h8M8 12h6M8 16h4" stroke="#333" stroke-width="1.8" stroke-linecap="round"/></svg>
               <span id="rbEditorTitle" style="font-size:15px;font-weight:700;color:#1a1a1a;">Add Runbook</span>
             </div>
-            <button onclick="rbCloseEditor()" style="background:none;border:none;cursor:pointer;padding:4px;display:flex;align-items:center;">
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M14 4L4 14M4 4l10 10" stroke="#555" stroke-width="1.8" stroke-linecap="round"/></svg>
+            <button onclick="rbCloseEditor()" style="background:none;border:none;cursor:pointer;padding:4px;display:flex;align-items:center;border-radius:4px;" onmouseover="this.style.background='#F3F4F6'" onmouseout="this.style.background='none'">
+              <svg width="16" height="16" viewBox="0 0 18 18" fill="none"><path d="M14 4L4 14M4 4l10 10" stroke="#555" stroke-width="1.8" stroke-linecap="round"/></svg>
             </button>
           </div>
-          <div style="flex:1;overflow-y:auto;padding:24px 24px 16px;">
-
+          <!-- Body -->
+          <div style="flex:1;overflow-y:auto;padding:24px;">
             <!-- Runbook Name -->
-            <div style="margin-bottom:20px;">
-              <label style="display:block;font-size:11px;font-weight:600;color:#555;margin-bottom:6px;text-transform:uppercase;letter-spacing:.05em;">Runbook Name</label>
-              <input id="rbFormName" type="text" placeholder="e.g. Phishing Investigation Runbook" style="width:100%;height:36px;border:1px solid #D1D5DB;border-radius:6px;font-size:13px;color:#333;padding:0 12px;box-sizing:border-box;outline:none;" />
+            <div style="display:grid;grid-template-columns:130px 1fr;gap:16px;align-items:start;margin-bottom:20px;">
+              <label style="font-size:13px;font-weight:500;color:#374151;padding-top:8px;">Runbook Name</label>
+              <input id="rbFormName" type="text" placeholder="Enter Value" style="width:100%;height:36px;border:1px solid #D1D5DB;border-radius:6px;font-size:13px;color:#333;padding:0 12px;box-sizing:border-box;outline:none;" onfocus="this.style.borderColor='#1565C0'" onblur="this.style.borderColor='#D1D5DB'" />
             </div>
-
-            <!-- Steps label -->
-            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
-              <label style="font-size:11px;font-weight:600;color:#555;text-transform:uppercase;letter-spacing:.05em;">Context</label>
-              <span style="font-size:11px;color:#aaa;">Each context is an investigation action</span>
+            <!-- Description -->
+            <div style="display:grid;grid-template-columns:130px 1fr;gap:16px;align-items:start;margin-bottom:20px;">
+              <label style="font-size:13px;font-weight:500;color:#374151;padding-top:8px;">Description</label>
+              <textarea id="rbFormDesc" rows="4" style="width:100%;border:1px solid #D1D5DB;border-radius:6px;font-size:13px;color:#333;padding:8px 12px;box-sizing:border-box;outline:none;resize:vertical;font-family:inherit;line-height:1.5;" onfocus="this.style.borderColor='#1565C0'" onblur="this.style.borderColor='#D1D5DB'"></textarea>
             </div>
-
-            <!-- Steps list -->
-            <div id="rbStepsList" style="display:flex;flex-direction:column;gap:12px;"></div>
-
+            <!-- Context steps -->
+            <div style="display:grid;grid-template-columns:130px 1fr;gap:16px;align-items:start;">
+              <label style="font-size:13px;font-weight:500;color:#374151;padding-top:10px;">Context</label>
+              <div id="rbStepsList" style="border:1.5px dashed #D1D5DB;border-radius:6px;padding:10px 12px;min-height:52px;"></div>
+            </div>
           </div>
-          <div style="padding:14px 24px;border-top:1px solid #E8E8E8;display:flex;align-items:center;justify-content:flex-start;gap:10px;flex-shrink:0;background:#fff;">
-            <button onclick="rbSaveEditor()" id="rbSaveBtn" style="height:34px;padding:0 24px;border:none;border-radius:6px;background:#1565C0;color:#fff;font-size:13px;font-weight:500;cursor:pointer;">Add Runbook</button>
+          <!-- Footer -->
+          <div style="padding:14px 24px;border-top:1px solid #E8E8E8;display:flex;align-items:center;gap:10px;flex-shrink:0;background:#fff;">
+            <button onclick="rbSaveEditor()" id="rbSaveBtn" style="height:34px;padding:0 24px;border:none;border-radius:6px;background:#1565C0;color:#fff;font-size:13px;font-weight:500;cursor:pointer;">Save</button>
             <button onclick="rbCloseEditor()" style="height:34px;padding:0 20px;border:1px solid #D1D5DB;border-radius:6px;background:#fff;font-size:13px;color:#555;cursor:pointer;">Cancel</button>
           </div>
         </div><!-- /rbEditorPanel -->
@@ -7257,6 +7288,13 @@
             </div>
           </div><!-- /rl-view-coverage-body -->
 
+          <!-- ATT&CK Technique Detail Drawer -->
+          <div id="rlcDrawerBackdrop" onclick="rlcCloseDrawer()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.3);z-index:1200;"></div>
+          <div id="rlcDrawerPanel" style="display:none;position:fixed;top:0;right:0;height:100vh;width:460px;background:#fff;box-shadow:-4px 0 28px rgba(0,0,0,.13);z-index:1201;flex-direction:column;font-family:inherit;">
+            <div id="rlcDrawerHeader" style="display:flex;align-items:center;gap:10px;padding:16px 20px;border-bottom:1px solid #E5E7EB;flex-shrink:0;"></div>
+            <div id="rlcDrawerBody" style="flex:1;overflow-y:auto;padding:20px;"></div>
+          </div>
+
           <!-- Rule ↔ Alert Mapping lens -->
           <div id="rl-view-activity-body" style="display:none;">
             <!-- Row 1: Top rules by alert profile mappings + Predefined vs Custom donut -->
@@ -10866,6 +10904,13 @@ function gcSetTypeFilter(type) {
 }
 
 function gcRender() {
+  /* inject hover CSS once */
+  if (!document.getElementById('gcHoverStyle')) {
+    var s = document.createElement('style');
+    s.id = 'gcHoverStyle';
+    s.textContent = '.gc-row:hover{background:#fafafa!important;}.gc-row:hover .gc-actions{opacity:1!important;}';
+    document.head.appendChild(s);
+  }
   var list   = document.getElementById('gcListWrap');
   var empty  = document.getElementById('gcEmptyState');
   if (!list) return;
@@ -10882,68 +10927,165 @@ function gcRender() {
     return;
   }
   empty.style.display = 'none';
-  list.innerHTML = filtered.map(function(it) {
+
+  /* per-type avatar SVG icons */
+  var _gcIcons = {
+    User:    '<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.8"/><path d="M4 20c0-4 3.582-7 8-7s8 3 8 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',
+    IP:      '<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M12 3c-3 3-4.5 5.5-4.5 9s1.5 6 4.5 9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M12 3c3 3 4.5 5.5 4.5 9s-1.5 6-4.5 9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M3 12h18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M3.5 8h17M3.5 16h17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',
+    Host:    '<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="2" y="3" width="20" height="14" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',
+    Network: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="9" y="2" width="6" height="5" rx="1" stroke="currentColor" stroke-width="1.8"/><rect x="2" y="17" width="6" height="5" rx="1" stroke="currentColor" stroke-width="1.8"/><rect x="16" y="17" width="6" height="5" rx="1" stroke="currentColor" stroke-width="1.8"/><path d="M12 7v4M5 17v-4h14v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+    Other:   '<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M12 8v4M12 16h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>'
+  };
+
+  list.innerHTML = '<div style="border:1px solid #E8E8E8;border-radius:8px;overflow:hidden;background:#fff;">'
+    + filtered.map(function(it, idx) {
     var m = _gcTypeMeta[it.type] || _gcTypeMeta.Other;
+    var icon = _gcIcons[it.type] || _gcIcons.Other;
     var sourceBadge = it.source === 'feedback'
-      ? '<span style="font-size:10px;padding:2px 7px;border-radius:10px;background:#FFF8E1;color:#F57F17;border:1px solid #FFE082;font-weight:500;margin-left:6px;">From Feedback</span>'
+      ? '<span style="font-size:10px;padding:2px 7px;border-radius:10px;background:#FFF8E1;color:#F57F17;border:1px solid #FFE082;font-weight:500;">From Feedback</span>'
       : '';
-    return '<div data-gc-id="'+it.id+'" style="border:1px solid #E8E8E8;border-radius:8px;background:#fff;padding:14px 18px 12px;margin-bottom:8px;">'
-      +'<div style="display:flex;align-items:flex-start;gap:12px;">'
-      +'<span style="flex-shrink:0;display:inline-flex;align-items:center;height:22px;padding:0 9px;border-radius:11px;background:'+m.bg+';color:'+m.color+';font-size:11px;font-weight:600;border:1px solid '+m.color+'33;margin-top:1px;">'+m.label+'</span>'
+    var borderTop = idx > 0 ? 'border-top:1px solid #F0F0F0;' : '';
+    return '<div class="gc-row" data-gc-id="'+it.id+'" style="'+borderTop+'position:relative;display:flex;align-items:flex-start;gap:14px;padding:14px 18px;background:#fff;transition:background .15s;">'
+      /* avatar */
+      +'<div style="flex-shrink:0;width:36px;height:36px;border-radius:50%;background:'+m.bg+';color:'+m.color+';display:flex;align-items:center;justify-content:center;margin-top:1px;">'+icon+'</div>'
+      /* content */
       +'<div style="flex:1;min-width:0;">'
-      +'<div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:4px;">'
-      +'<span style="font-size:13px;font-weight:600;color:#1a1a1a;">'+_gcEsc(it.subject)+'</span>'
-      +sourceBadge
+        +'<div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:3px;">'
+          +'<span style="font-size:13px;font-weight:600;color:#1a1a1a;">'+_gcEsc(it.subject)+'</span>'
+          +'<span style="display:inline-flex;align-items:center;height:18px;padding:0 7px;border-radius:9px;background:'+m.bg+';color:'+m.color+';font-size:10.5px;font-weight:600;border:1px solid '+m.color+'33;">'+m.label+'</span>'
+          +sourceBadge
+        +'</div>'
+        +'<p style="margin:0 0 6px;font-size:12.5px;color:#555;line-height:1.6;">'+_gcEsc(it.desc)+'</p>'
+        +'<div style="font-size:11px;color:#999;">'
+          +'Added by: <strong style="color:#777;font-weight:600;">'+_gcEsc(it.addedBy)+'</strong>'
+          +'&nbsp;&nbsp;&nbsp;Date: '+_gcEsc(it.addedOn)
+        +'</div>'
       +'</div>'
-      +'<p style="margin:0;font-size:12.5px;color:#555;line-height:1.65;">'+_gcEsc(it.desc)+'</p>'
-      +'<div style="margin-top:8px;display:flex;align-items:center;gap:10px;">'
-      +'<span style="font-size:11px;color:#999;">Added by <strong style="color:#777;">'+_gcEsc(it.addedBy)+'</strong> &middot; '+_gcEsc(it.addedOn)+'</span>'
-      +'</div>'
-      +'</div>'
-      +'<div style="display:flex;align-items:center;gap:4px;flex-shrink:0;">'
-      +'<button onclick="gcOpenEdit('+it.id+')" title="Edit" style="width:28px;height:28px;border:1px solid #E0E0E0;border-radius:4px;background:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" stroke="#555" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" stroke="#555" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>'
-      +'<button onclick="gcOpenDelete('+it.id+')" title="Delete" style="width:28px;height:28px;border:1px solid #E0E0E0;border-radius:4px;background:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><polyline points="3 6 5 6 21 6" stroke="#888" stroke-width="1.8" stroke-linecap="round"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6" stroke="#888" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 11v6M14 11v6" stroke="#888" stroke-width="1.8" stroke-linecap="round"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2" stroke="#888" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>'
-      +'</div>'
+      /* hover actions */
+      +'<div class="gc-actions" style="opacity:0;transition:opacity .15s;display:flex;align-items:center;gap:4px;flex-shrink:0;">'
+        +'<button onclick="gcOpenEdit('+it.id+')" title="Edit" style="width:28px;height:28px;border:1px solid #E0E0E0;border-radius:4px;background:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" stroke="#555" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" stroke="#555" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>'
+        +'<button onclick="gcOpenDelete('+it.id+')" title="Delete" style="width:28px;height:28px;border:1px solid #E0E0E0;border-radius:4px;background:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><polyline points="3 6 5 6 21 6" stroke="#888" stroke-width="1.8" stroke-linecap="round"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6" stroke="#888" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 11v6M14 11v6" stroke="#888" stroke-width="1.8" stroke-linecap="round"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2" stroke="#888" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>'
       +'</div>'
       +'</div>';
-  }).join('');
+  }).join('')
+  + '</div>';
 }
 
 function _gcEsc(s) {
   return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
+function gcToggleFilterPills() {
+  var pills = document.getElementById('gcTypePills');
+  var btn   = document.getElementById('gcFilterBtn');
+  if (!pills) return;
+  var open = pills.style.display === 'flex';
+  pills.style.display = open ? 'none' : 'flex';
+  btn.style.background  = open ? '#fff'    : '#E8F0FE';
+  btn.style.borderColor = open ? '#D0D5DD' : '#1565C0';
+  btn.querySelector('svg path, svg line, svg polyline, svg circle') && [].forEach.call(btn.querySelectorAll('svg path'), function(el){ el.setAttribute('stroke', open ? '#555' : '#1565C0'); });
+}
+
+/* ── Global Context type options for drawer dropdown ── */
+var _gcTypeOptions = [
+  { value:'User',    label:'User',        icon:'<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.8"/><path d="M4 20c0-4 3.582-7 8-7s8 3 8 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>' },
+  { value:'IP',      label:'IP Address',  icon:'<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M12 3c-3 3-4.5 5.5-4.5 9s1.5 6 4.5 9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M12 3c3 3 4.5 5.5 4.5 9s-1.5 6-4.5 9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M3 12h18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>' },
+  { value:'Host',    label:'Host',        icon:'<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="2" y="3" width="20" height="14" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>' },
+  { value:'Network', label:'Network',     icon:'<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="9" y="2" width="6" height="5" rx="1" stroke="currentColor" stroke-width="1.8"/><rect x="2" y="17" width="6" height="5" rx="1" stroke="currentColor" stroke-width="1.8"/><rect x="16" y="17" width="6" height="5" rx="1" stroke="currentColor" stroke-width="1.8"/><path d="M12 7v4M5 17v-4h14v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>' },
+  { value:'Other',   label:'Other',       icon:'<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="5" cy="12" r="1.5" fill="currentColor"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/><circle cx="19" cy="12" r="1.5" fill="currentColor"/></svg>' }
+];
+
+function _gcBuildTypeDropdown() {
+  var list = document.getElementById('gcTypeDropList');
+  if (!list) return;
+  list.innerHTML = _gcTypeOptions.map(function(o) {
+    return '<div onclick="_gcSelectType(\''+o.value+'\')" style="display:flex;align-items:center;gap:10px;padding:8px 12px;cursor:pointer;font-size:13px;color:#374151;" onmouseover="this.style.background=\'#F3F4F6\'" onmouseout="this.style.background=\'\'">'
+      +'<span style="color:#555;">'+o.icon+'</span>'
+      +'<span>'+o.label+'</span>'
+      +'</div>';
+  }).join('');
+}
+
+function gcToggleTypeDropdown() {
+  var list = document.getElementById('gcTypeDropList');
+  var btn  = document.getElementById('gcTypeDropBtn');
+  if (!list || !btn) return;
+  if (!list.innerHTML) _gcBuildTypeDropdown();
+  if (list.style.display === 'block') {
+    list.style.display = 'none';
+    return;
+  }
+  /* position relative to the trigger button */
+  var r = btn.getBoundingClientRect();
+  list.style.top   = (r.bottom + 4) + 'px';
+  list.style.left  = r.left + 'px';
+  list.style.width = r.width + 'px';
+  list.style.display = 'block';
+  /* close on outside click */
+  setTimeout(function(){
+    document.addEventListener('click', _gcDropOutside, true);
+  }, 0);
+}
+function _gcDropOutside(e) {
+  var list = document.getElementById('gcTypeDropList');
+  var btn  = document.getElementById('gcTypeDropBtn');
+  if (list && !list.contains(e.target) && btn && !btn.contains(e.target)) {
+    list.style.display = 'none';
+    document.removeEventListener('click', _gcDropOutside, true);
+  }
+}
+
+function _gcSelectType(value) {
+  var opt = _gcTypeOptions.find(function(o){return o.value===value;});
+  if (!opt) return;
+  document.getElementById('gcFormType').value     = value;
+  document.getElementById('gcTypeDropIcon').innerHTML = opt.icon;
+  document.getElementById('gcTypeDropLabel').textContent = opt.label;
+  document.getElementById('gcTypeDropList').style.display = 'none';
+  document.getElementById('gcTypeDropBtn').style.borderColor = '#1565C0';
+  document.removeEventListener('click', _gcDropOutside, true);
+}
+
+function _gcOpenDrawer(title) {
+  if (!document.getElementById('gcTypeDropList').innerHTML) _gcBuildTypeDropdown();
+  document.getElementById('gcDrawerTitle').textContent = title;
+  document.getElementById('gcDrawerPanel').style.display = 'flex';
+  document.getElementById('gcDrawerBackdrop').style.display = 'block';
+  setTimeout(function(){ document.getElementById('gcFormSubject').focus(); }, 50);
+}
+
 function gcOpenAddForm() {
   _gcEditId = null;
-  document.getElementById('gcFormTitle').textContent = 'Add Context Entry';
-  document.getElementById('gcFormType').value    = 'User';
+  document.getElementById('gcFormType').value          = '';
+  document.getElementById('gcTypeDropIcon').innerHTML  = '';
+  document.getElementById('gcTypeDropLabel').textContent = '-Select Entity Type-';
+  document.getElementById('gcTypeDropList').style.display = 'none';
   document.getElementById('gcFormSubject').value = '';
   document.getElementById('gcFormDesc').value    = '';
-  document.getElementById('gcAddForm').style.display = 'block';
-  document.getElementById('gcFormSubject').focus();
+  _gcOpenDrawer('Add Context');
 }
 
 function gcOpenEdit(id) {
   var it = _gcItems.find(function(x){return x.id===id;});
   if (!it) return;
   _gcEditId = id;
-  document.getElementById('gcFormTitle').textContent = 'Edit Context Entry';
-  document.getElementById('gcFormType').value    = it.type;
+  _gcSelectType(it.type);
   document.getElementById('gcFormSubject').value = it.subject;
   document.getElementById('gcFormDesc').value    = it.desc;
-  document.getElementById('gcAddForm').style.display = 'block';
-  document.getElementById('gcFormSubject').focus();
+  _gcOpenDrawer('Edit Context');
 }
 
 function gcCancelForm() {
   _gcEditId = null;
-  document.getElementById('gcAddForm').style.display = 'none';
+  document.getElementById('gcDrawerPanel').style.display    = 'none';
+  document.getElementById('gcDrawerBackdrop').style.display = 'none';
 }
 
 function gcSaveForm() {
   var type    = document.getElementById('gcFormType').value.trim();
   var subject = document.getElementById('gcFormSubject').value.trim();
   var desc    = document.getElementById('gcFormDesc').value.trim();
+  if (!type)    { gcToggleTypeDropdown(); return; }
   if (!subject) { document.getElementById('gcFormSubject').focus(); return; }
   if (!desc)    { document.getElementById('gcFormDesc').focus();    return; }
   if (_gcEditId !== null) {
@@ -10956,7 +11098,8 @@ function gcSaveForm() {
     var dateStr = now.getDate()+' '+months[now.getMonth()]+' '+now.getFullYear();
     _gcItems.unshift({ id: _gcNextId++, type: type, subject: subject, desc: desc, addedBy: 'Admin', addedOn: dateStr, source: 'manual' });
   }
-  document.getElementById('gcAddForm').style.display = 'none';
+  document.getElementById('gcDrawerPanel').style.display    = 'none';
+  document.getElementById('gcDrawerBackdrop').style.display = 'none';
   gcRender();
 }
 
@@ -11210,12 +11353,10 @@ function rbToggleEnabled(id) { var rb = _rbItems.find(function(x){return x.id===
 
 function rbOpenAdd() {
   _rbEditId = null;
-  _rbEditSteps = [{ id: _rbStepNextId++, fn: 'extract_user', label: '' }];
-  _rbActiveStepIdx = 0;
+  _rbEditSteps = [];
   document.getElementById('rbEditorTitle').textContent = 'Add Runbook';
   document.getElementById('rbFormName').value = '';
-  var saveBtn = document.getElementById('rbSaveBtn');
-  if (saveBtn) saveBtn.textContent = 'Add Runbook';
+  document.getElementById('rbFormDesc').value = '';
   _rbRenderSteps();
   document.getElementById('rbEditorPanel').style.display = 'flex';
   document.getElementById('rbEditorBackdrop').style.display = 'block';
@@ -11224,12 +11365,10 @@ function rbOpenEditor(id) {
   var rb = _rbItems.find(function(x){return x.id===id;});
   if (!rb) return;
   _rbEditId = id;
-  _rbEditSteps = rb.steps.map(function(s){return {id:s.id,fn:s.fn,label:s.label};});
-  _rbActiveStepIdx = _rbEditSteps.length - 1;
+  _rbEditSteps = rb.steps.map(function(s){return {id:s.id, fn:s.fn, label:s.label};});
   document.getElementById('rbEditorTitle').textContent = 'Edit Runbook';
   document.getElementById('rbFormName').value = rb.name;
-  var saveBtn = document.getElementById('rbSaveBtn');
-  if (saveBtn) saveBtn.textContent = 'Save Runbook';
+  document.getElementById('rbFormDesc').value = rb.description || '';
   _rbRenderSteps();
   document.getElementById('rbEditorPanel').style.display = 'flex';
   document.getElementById('rbEditorBackdrop').style.display = 'block';
@@ -11251,244 +11390,44 @@ var _rbActiveStepIdx = 0;
 function _rbRenderSteps() {
   var cont = document.getElementById('rbStepsList');
   if (!cont) return;
-  if (_rbEditSteps.length === 0) {
-    _rbEditSteps.push({ id: _rbStepNextId++, fn: 'extract_user', label: '', type: 'question' });
-    _rbActiveStepIdx = 0;
-  }
-  if (_rbActiveStepIdx >= _rbEditSteps.length) _rbActiveStepIdx = _rbEditSteps.length - 1;
-
-  var typeMeta = {
-    question: { label: 'Question', placeholder: 'e.g. Has this user logged in from multiple countries in the last 24 hours?', color: '#1565C0', bg: '#EEF3FF' },
-    script:   { label: 'Script',   placeholder: 'e.g. python3 enrich_user.py --user {{user}}', color: '#065F46', bg: '#ECFDF5' },
-    function: { label: 'Function', placeholder: 'e.g. custom_lookup_entity(entity_type, entity_value)', color: '#6B21A8', bg: '#F5F3FF' }
-  };
-
-  cont.innerHTML = _rbEditSteps.map(function(s, idx) {
-    var isLast   = idx === _rbEditSteps.length - 1;
-    var isActive = idx === _rbActiveStepIdx;
-    var sType    = s.type || 'question';
-    var meta     = typeMeta[sType];
-
-    var inputBox;
-    if (isActive) {
-      // Type pills row
-      var pills = ['question','script','function'].map(function(t) {
-        var m = typeMeta[t];
-        var active = t === sType;
-        return '<button onclick="_rbStepSetType('+idx+',\''+t+'\')" style="height:22px;padding:0 9px;border-radius:4px;border:1.5px solid '+(active?m.color:'#D1D5DB')+';background:'+(active?m.bg:'#fff')+';color:'+(active?m.color:'#888')+';font-size:11px;font-weight:'+(active?'700':'500')+';cursor:pointer;">'+m.label+'</button>';
-      }).join('');
-
-      var isCode = sType === 'script' || sType === 'function';
-      var inputEl = isCode
-        ? '<textarea id="rbStep-'+s.id+'" rows="3" oninput="_rbStepLabelChange('+idx+',this.value)" placeholder="'+meta.placeholder+'" style="width:100%;border:none;outline:none;padding:8px 12px;font-size:12.5px;color:#1a1a1a;background:transparent;resize:none;font-family:monospace;line-height:1.55;box-sizing:border-box;">'+_rbEsc(s.label)+'</textarea>'
-        : '<input id="rbStep-'+s.id+'" type="text" value="'+_rbEsc(s.label)+'" oninput="_rbStepLabelChange('+idx+',this.value)" placeholder="'+meta.placeholder+'" style="flex:1;width:100%;border:none;outline:none;height:36px;padding:0 12px;font-size:13px;color:#333;background:transparent;" />';
-
-      inputBox = '<div style="flex:1;border:1.5px solid '+meta.color+';border-radius:8px;overflow:hidden;background:#fff;">'
-        + '<div style="display:flex;align-items:center;justify-content:space-between;padding:6px 10px 4px;border-bottom:1px solid #F0F0F0;gap:6px;">'
-          + '<div style="display:flex;gap:5px;">'+pills+'</div>'
-          + '<button onclick="_rbStepImport('+idx+')" style="height:22px;padding:0 10px;border:1.5px solid #1565C0;border-radius:4px;background:#EEF3FF;color:#1565C0;font-size:11px;font-weight:600;cursor:pointer;white-space:nowrap;display:flex;align-items:center;gap:4px;">'
-              + '<svg width="10" height="10" viewBox="0 0 24 24" fill="none"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" stroke="#1565C0" stroke-width="2.2" stroke-linecap="round"/><polyline points="17 8 12 3 7 8" stroke="#1565C0" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>'
-              + 'Import</button>'
-        + '</div>'
-        + inputEl
+  var rows = _rbEditSteps.map(function(s, idx) {
+    return '<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">'
+      + '<input type="text" value="'+_rbEsc(s.label)+'" oninput="_rbStepLabelChange('+idx+',this.value)" placeholder="Enter context step..." '
+      + 'style="flex:1;height:34px;border:1px solid #D1D5DB;border-radius:6px;font-size:13px;color:#333;padding:0 10px;outline:none;box-sizing:border-box;" '
+      + 'onfocus="this.style.borderColor=\'#1565C0\'" onblur="this.style.borderColor=\'#D1D5DB\'" />'
+      + '<button onclick="_rbRemoveStep('+idx+')" style="flex-shrink:0;width:24px;height:24px;border:none;background:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#aaa;font-size:18px;line-height:1;" title="Remove">'
+      + '<svg width="14" height="14" viewBox="0 0 18 18" fill="none"><path d="M14 4L4 14M4 4l10 10" stroke="#999" stroke-width="1.8" stroke-linecap="round"/></svg>'
+      + '</button>'
       + '</div>';
-    } else {
-      // Frozen: show small type badge + value
-      var badge = '<span style="font-size:10px;font-weight:600;padding:1px 7px;border-radius:3px;background:'+meta.bg+';color:'+meta.color+';border:1px solid '+meta.color+'20;flex-shrink:0;">'+meta.label+'</span>';
-      inputBox = '<div style="flex:1;display:flex;align-items:center;gap:8px;border:1.5px solid #E0E0E0;border-radius:8px;padding:0 10px;height:38px;background:#F8F8F8;">'
-        + badge
-        + '<span style="font-size:13px;color:#888;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;">'+(s.label || '<em style="color:#bbb;">Empty</em>')+'</span>'
-      + '</div>';
-    }
-
-    var actionBtns = isLast
-      ? '<button onclick="rbAddStep()" title="Add step" style="width:30px;height:30px;border-radius:50%;border:2px solid #1565C0;background:#fff;color:#1565C0;font-size:22px;font-weight:300;line-height:1;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;">+</button>'
-      : '<button onclick="_rbMakeActiveStep('+idx+')" title="Edit" style="width:28px;height:28px;border-radius:50%;border:1px solid #D1D5DB;background:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" stroke="#555" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" stroke="#555" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>'
-        + '<button onclick="_rbRemoveStep('+idx+')" title="Remove" style="width:28px;height:28px;border-radius:50%;border:1px solid #FECACA;background:#FFF5F5;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;"><svg width="12" height="12" viewBox="0 0 18 18" fill="none"><path d="M14 4L4 14M4 4l10 10" stroke="#C62828" stroke-width="1.8" stroke-linecap="round"/></svg></button>';
-
-    return '<div style="display:flex;align-items:'+(isActive?'flex-start':'center')+';gap:10px;margin-bottom:2px;">'
-      + '<div style="width:26px;height:26px;border-radius:50%;background:'+(isActive?'#EDE9FF':'#F0F0F0')+';color:'+(isActive?'#5B21B6':'#999')+';font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:'+(isActive?'6px':'0')+'">'+(idx+1)+'</div>'
-      + inputBox
-      + '<div style="display:flex;flex-direction:column;gap:4px;align-items:center;margin-top:'+(isActive?'6px':'0')+'">'+actionBtns+'</div>'
-    + '</div>';
   }).join('');
-
-  var active = _rbEditSteps[_rbActiveStepIdx];
-  if (active) { var el = document.getElementById('rbStep-'+active.id); if (el) setTimeout(function(){ el.focus(); }, 0); }
+  cont.innerHTML = rows
+    + '<button onclick="rbAddStep()" style="display:inline-flex;align-items:center;gap:5px;background:none;border:none;color:#1565C0;font-size:13px;cursor:pointer;padding:4px 0;margin-top:2px;font-weight:500;">'
+    + '<svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="#1565C0" stroke-width="2.2" stroke-linecap="round"/></svg>'
+    + ' Add Context</button>';
 }
 
 function _rbStepLabelChange(idx, val) { if (_rbEditSteps[idx]) _rbEditSteps[idx].label = val; }
-function _rbStepSetType(idx, type) {
-  var s = _rbEditSteps[idx];
-  if (!s) return;
-  // sync current value before switching
-  var el = document.getElementById('rbStep-'+s.id);
-  if (el) s.label = el.value;
-  s.type = type;
-  _rbRenderSteps();
-}
-var _rbStepImportTargetIdx = -1;
-function _rbStepImport(idx) {
-  _rbStepImportTargetIdx = idx;
-  var fi = document.getElementById('rbStepImportFileInput');
-  if (fi) { fi.value = ''; fi.click(); }
-}
-function _rbStepImportFileRead(e) {
-  var file = e.target.files[0];
-  if (!file) return;
-  var idx = _rbStepImportTargetIdx;
-  var s = _rbEditSteps[idx];
-  if (!s) return;
-  var reader = new FileReader();
-  reader.onload = function(ev) {
-    var content = (ev.target.result || '').trim();
-    s.label = content;
-    // auto-detect type from extension
-    var ext = file.name.split('.').pop().toLowerCase();
-    if (ext === 'py' || ext === 'sh' || ext === 'rb') s.type = 'script';
-    else if (ext === 'js') s.type = 'function';
-    _rbRenderSteps();
-  };
-  reader.readAsText(file);
-}
-
-function _rbStepImport_unused(idx) {
-  var suggestions = [];
-
-  var panelEl = document.getElementById('rbEditorPanel');
-  var panelRect = panelEl ? panelEl.getBoundingClientRect() : { left: 0, right: window.innerWidth, bottom: window.innerHeight };
-  var inpRect = inp.getBoundingClientRect();
-  var ddWidth = 360;
-  var leftPos = Math.max(panelRect.left + 8, Math.min(inpRect.left, panelRect.right - ddWidth - 8));
-  var topPos = inpRect.bottom + 6;
-
-  var sugHtml = suggestions.map(function(label) {
-    var safe = label.replace(/'/g, "\\'");
-    return '<div class="rb-sug-item" onclick="_rbImportPick(' + idx + ',\'' + safe + '\')" '
-      + 'style="padding:7px 14px;font-size:12.5px;color:#333;cursor:pointer;display:flex;align-items:center;gap:8px;border-bottom:1px solid #F3F4F6;" '
-      + 'onmouseover="this.style.background=\'#F0F4FF\'" onmouseout="this.style.background=\'#fff\'">'
-      + '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" style="flex-shrink:0;"><circle cx="12" cy="12" r="9" stroke="#94A3B8" stroke-width="1.6"/><path d="M9 12l2 2 4-4" stroke="#94A3B8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>'
-      + '<span>' + label + '</span>'
-      + '</div>';
-  }).join('');
-
-  var dd = document.createElement('div');
-  dd.id = 'rbImportDropdown';
-  dd._idx = idx;
-  dd.style.cssText = 'position:fixed;z-index:9999;background:#fff;border:1px solid #D1D5DB;border-radius:10px;box-shadow:0 8px 30px rgba(0,0,0,.14);width:' + ddWidth + 'px;top:' + topPos + 'px;left:' + leftPos + 'px;overflow:hidden;';
-
-  dd.innerHTML =
-    /* header */
-    '<div style="padding:10px 14px 8px;border-bottom:1px solid #EAECF0;">'
-      + '<div style="font-size:11px;font-weight:700;color:#6B7280;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px;">Suggestions</div>'
-      + '<input id="rbImpSearch" type="text" placeholder="Search actions..." oninput="_rbImpFilter()" autocomplete="off" '
-        + 'style="width:100%;height:28px;border:1px solid #E0E5ED;border-radius:6px;padding:0 10px;font-size:12px;color:#333;outline:none;box-sizing:border-box;background:#F9FAFB;"/>'
-    + '</div>'
-
-    /* suggestions list */
-    + '<div id="rbImpSugList" style="max-height:190px;overflow-y:auto;background:#fff;">' + sugHtml + '</div>'
-
-    /* divider */
-    + '<div style="border-top:1px solid #EAECF0;padding:10px 14px 12px;">'
-      + '<div style="font-size:11px;font-weight:700;color:#6B7280;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px;">Custom Context</div>'
-      + '<div style="display:flex;gap:6px;margin-bottom:7px;">'
-          + '<button onclick="_rbImpSetMode(\'question\')" id="rbImpModeQ" style="height:24px;padding:0 10px;border-radius:4px;border:1.5px solid #1565C0;background:#EEF3FF;color:#1565C0;font-size:11px;font-weight:600;cursor:pointer;">Question</button>'
-          + '<button onclick="_rbImpSetMode(\'script\')" id="rbImpModeS" style="height:24px;padding:0 10px;border-radius:4px;border:1.5px solid #D1D5DB;background:#fff;color:#555;font-size:11px;font-weight:500;cursor:pointer;">Script</button>'
-          + '<button onclick="_rbImpSetMode(\'function\')" id="rbImpModeF" style="height:24px;padding:0 10px;border-radius:4px;border:1.5px solid #D1D5DB;background:#fff;color:#555;font-size:11px;font-weight:500;cursor:pointer;">Function</button>'
-        + '</div>'
-      + '<textarea id="rbImpCustomText" rows="3" placeholder="e.g. Has this user logged in from multiple countries in the last 24 hours?" '
-          + 'style="width:100%;border:1px solid #D1D5DB;border-radius:6px;font-size:12px;color:#333;padding:7px 10px;box-sizing:border-box;resize:none;outline:none;font-family:inherit;line-height:1.5;background:#F9FAFB;"></textarea>'
-      + '<button onclick="_rbImportApplyCustom(' + idx + ')" '
-          + 'style="margin-top:7px;width:100%;height:30px;background:#1565C0;border:none;border-radius:6px;color:#fff;font-size:12.5px;font-weight:600;cursor:pointer;">Add to Context</button>'
-    + '</div>';
-
-  document.body.appendChild(dd);
-
-  setTimeout(function() {
-    document.addEventListener('click', function _rbImpClose(e) {
-      var d = document.getElementById('rbImportDropdown');
-      if (d && !d.contains(e.target)) { d.remove(); document.removeEventListener('click', _rbImpClose); }
-    });
-  }, 10);
-}
-
-function _rbImpFilter() {
-  var q = (document.getElementById('rbImpSearch').value || '').toLowerCase();
-  document.querySelectorAll('#rbImpSugList .rb-sug-item').forEach(function(el) {
-    el.style.display = el.textContent.toLowerCase().indexOf(q) > -1 ? '' : 'none';
-  });
-}
-
-function _rbImpSetMode(mode) {
-  var placeholders = {
-    question: 'e.g. Has this user logged in from multiple countries in the last 24 hours?',
-    script:   'e.g. python3 enrich_user.py --user {{user}}',
-    'function': 'e.g. custom_lookup_entity(entity_type, entity_value)'
-  };
-  var ta = document.getElementById('rbImpCustomText');
-  if (ta) ta.placeholder = placeholders[mode] || '';
-  ['Q','S','F'].forEach(function(k, i) {
-    var m = ['question','script','function'][i];
-    var btn = document.getElementById('rbImpMode' + k);
-    if (!btn) return;
-    var active = m === mode;
-    btn.style.borderColor = active ? '#1565C0' : '#D1D5DB';
-    btn.style.background  = active ? '#EEF3FF' : '#fff';
-    btn.style.color       = active ? '#1565C0' : '#555';
-    btn.style.fontWeight  = active ? '600' : '500';
-  });
-}
-
-function _rbImportApplyCustom(idx) {
-  var val = (document.getElementById('rbImpCustomText').value || '').trim();
-  if (!val) return;
-  _rbImportPick(idx, val);
-}
-
-function _rbImportPick(idx, label) {
-  if (_rbEditSteps[idx]) _rbEditSteps[idx].label = label;
-  var dd = document.getElementById('rbImportDropdown');
-  if (dd) dd.remove();
-  var s = _rbEditSteps[idx];
-  if (s) { var el = document.getElementById('rbStep-' + s.id); if (el) el.value = label; }
-}
-
-function _rbMakeActiveStep(idx) {
-  // sync current active input before switching
-  var cur = _rbEditSteps[_rbActiveStepIdx];
-  if (cur) { var el = document.getElementById('rbStep-'+cur.id); if (el) cur.label = el.value; }
-  _rbActiveStepIdx = idx;
-  _rbRenderSteps();
-}
-function rbAddStep() {
-  // sync all visible inputs
-  _rbEditSteps.forEach(function(s) {
-    var el = document.getElementById('rbStep-'+s.id);
-    if (el) s.label = el.value;
-  });
-  _rbEditSteps.push({ id: _rbStepNextId++, fn: 'query_user_activities', label: '', type: 'question' });
-  _rbActiveStepIdx = _rbEditSteps.length - 1;
-  _rbRenderSteps();
-}
-function _rbRemoveStep(idx) {
-  _rbEditSteps.splice(idx, 1);
-  if (_rbEditSteps.length === 0) { _rbEditSteps.push({ id: _rbStepNextId++, fn: 'extract_user', label: '', type: 'question' }); }
-  _rbActiveStepIdx = _rbEditSteps.length - 1;
-  _rbRenderSteps();
-}
+function _rbRemoveStep(idx) { _rbEditSteps.splice(idx, 1); _rbRenderSteps(); }
+function rbAddStep() { _rbEditSteps.push({ id: _rbStepNextId++, fn: 'custom', label: '' }); _rbRenderSteps(); }
+function _rbMakeActiveStep(idx) { _rbRenderSteps(); }
 function _rbMoveStep(idx, dir) { var n=idx+dir; if(n<0||n>=_rbEditSteps.length)return; var t=_rbEditSteps[idx];_rbEditSteps[idx]=_rbEditSteps[n];_rbEditSteps[n]=t; _rbRenderSteps(); }
 
 function rbSaveEditor() {
   var name = (document.getElementById('rbFormName').value||'').trim();
   if (!name){document.getElementById('rbFormName').style.borderColor='#C62828';document.getElementById('rbFormName').focus();return;}
   document.getElementById('rbFormName').style.borderColor='#D1D5DB';
-  // sync step labels from live inputs
-  _rbEditSteps.forEach(function(s,idx){
-    var el = document.getElementById('rbStep-'+s.id);
-    if (el) s.label = el.value;
+  var desc = (document.getElementById('rbFormDesc').value||'').trim();
+  /* sync any live inputs */
+  document.querySelectorAll('#rbStepsList input[type=text]').forEach(function(inp, idx){
+    if (_rbEditSteps[idx]) _rbEditSteps[idx].label = inp.value.trim();
   });
-  if (_rbEditId!==null){var rb=_rbItems.find(function(x){return x.id===_rbEditId;});if(rb){rb.name=name;rb.steps=_rbEditSteps.slice();}}
-  else{_rbItems.unshift({id:_rbNextId++,name:name,type:'Custom',enabled:true,source:'custom',description:'',steps:_rbEditSteps.slice()});}
+  var steps = _rbEditSteps.filter(function(s){ return s.label.trim(); });
+  if (_rbEditId!==null){
+    var rb=_rbItems.find(function(x){return x.id===_rbEditId;});
+    if(rb){rb.name=name;rb.description=desc;rb.steps=steps;}
+  } else {
+    _rbItems.unshift({id:_rbNextId++,name:name,type:'Custom',enabled:true,source:'custom',description:desc,steps:steps});
+  }
   rbCloseEditor();rbRender();
 }
 
@@ -11966,8 +11905,92 @@ function rlcStatesAll(on){document.querySelectorAll('#rlc-states-menu input[type
 function rlcResetFilters(){var qEl=document.getElementById('rlc-filter-search');var tEl=document.getElementById('rlc-filter-tactic');var cEl=document.getElementById('rlc-filter-category');if(qEl)qEl.value='';if(tEl)tEl.value='';if(cEl)cEl.value='';document.querySelectorAll('#rlc-filter-states input[type=checkbox]').forEach(function(cb){cb.checked=true;});rlcApplyFilters();}
 function rlcTraceRule(ruleId){var banner=document.getElementById('rlc-trace-banner');document.querySelectorAll('#rlc-matrix .rlc-cell.s-trace').forEach(function(c){c.classList.remove('s-trace');});if(!ruleId){if(banner)banner.classList.remove('on');return;}var rule=RLC_SAMPLE_RULES.filter(function(r){return r.id===ruleId;})[0];var hits=rlcTechniquesForRule(ruleId);hits.forEach(function(h){var c=document.querySelector('#rlc-matrix .rlc-cell[data-rlc-tactic="'+h.ci+'"][data-rlc-tech="'+h.ti+'"]');if(c)c.classList.add('s-trace');});if(banner){banner.classList.add('on');document.getElementById('rlc-trace-rule-id').textContent=ruleId;document.getElementById('rlc-trace-rule-name').textContent=rule?rule.name:'';document.getElementById('rlc-trace-count').textContent=hits.length;}}
 function rlcFocus(kind){var cells=document.querySelectorAll('#rlc-matrix .rlc-cell');cells.forEach(function(c){c.classList.remove('s-active');});var matchClass=null;if(kind==='covered')matchClass=['s-strong','s-partial'];else if(kind==='weak')matchClass=['s-weak','s-partial'];else if(kind==='gaps')matchClass=['s-gap'];if(matchClass)cells.forEach(function(c){if(matchClass.some(function(cls){return c.classList.contains(cls);}))c.classList.add('s-active');});var matrix=document.getElementById('rlc-matrix');if(matrix){var container=document.getElementById('rl-view-insights-body');if(container){var top=matrix.offsetTop-container.offsetTop-8;container.scrollTop=top>0?top:0;}else{matrix.scrollIntoView({behavior:'smooth',block:'nearest',inline:'nearest'}); }}}
-function rlcOpenTechnique(ci,ti,el){/* placeholder for detail drawer */}
-function rlcOpenGap(gi){/* placeholder */}
+function rlcCloseDrawer(){
+  document.getElementById('rlcDrawerPanel').style.display='none';
+  document.getElementById('rlcDrawerBackdrop').style.display='none';
+}
+var _rlcStateLabels={strong:'Strong',partial:'Partial',weak:'Weak',gap:'Gap',broken:'Broken'};
+var _rlcStateBg={strong:'#E8F5E9',partial:'#E3F2FD',weak:'#FFF8E1',gap:'#F5F5F5',broken:'#FFEBEE'};
+var _rlcStateColor={strong:'#2E7D32',partial:'#1565C0',weak:'#F57F17',gap:'#9E9E9E',broken:'#C62828'};
+function rlcOpenTechnique(ci,ti,el){
+  var col=RLC_MATRIX[ci]; if(!col) return;
+  var t=col.techniques[ti]; if(!t) return;
+  var rules=rlcRulesForTechnique(t);
+  var stBg=_rlcStateBg[t.state]||'#F5F5F5';
+  var stCol=_rlcStateColor[t.state]||'#555';
+  var stLbl=_rlcStateLabels[t.state]||t.state;
+  var closeBtn='<button onclick="rlcCloseDrawer()" style="width:28px;height:28px;border:none;background:none;cursor:pointer;display:flex;align-items:center;justify-content:center;border-radius:4px;flex-shrink:0;" onmouseover="this.style.background=\'#F3F4F6\'" onmouseout="this.style.background=\'none\'"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M18 6L6 18M6 6l12 12" stroke="#555" stroke-width="2" stroke-linecap="round"/></svg></button>';
+  document.getElementById('rlcDrawerHeader').innerHTML=
+    '<div style="flex:1;min-width:0;">'
+    +'<div style="display:flex;align-items:center;gap:8px;margin-bottom:2px;">'
+    +'<span style="font-size:11px;font-weight:600;color:#888;letter-spacing:.04em;">'+col.tactic.toUpperCase()+'</span>'
+    +'<span style="font-size:11px;padding:2px 8px;border-radius:10px;background:'+stBg+';color:'+stCol+';font-weight:600;">'+stLbl+'</span>'
+    +'</div>'
+    +'<div style="font-size:15px;font-weight:700;color:#1a1a1a;">'+t.name+'</div>'
+    +'<div style="font-size:11.5px;color:#888;margin-top:2px;">'+t.id+'</div>'
+    +'</div>'+closeBtn;
+  var rulesHtml=rules.length
+    ? rules.map(function(r){
+        return '<div style="display:flex;align-items:center;justify-content:space-between;padding:9px 12px;border:1px solid #E5E7EB;border-radius:6px;margin-bottom:6px;">'
+          +'<div style="min-width:0;"><div style="font-size:12.5px;font-weight:600;color:#1a1a1a;">'+r.name+'</div><div style="font-size:11px;color:#888;margin-top:2px;">'+r.id+'</div></div>'
+          +'<div style="flex-shrink:0;margin-left:12px;text-align:right;"><div style="font-size:11px;color:#555;white-space:nowrap;">'+r.det+'</div><div style="font-size:10.5px;color:#aaa;">detections</div></div>'
+          +'</div>';
+      }).join('')
+    : '<div style="padding:24px 0;text-align:center;"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" style="margin:0 auto 8px;display:block;"><circle cx="12" cy="12" r="9" stroke="#D1D5DB" stroke-width="1.5"/><path d="M12 8v4M12 16h.01" stroke="#D1D5DB" stroke-width="1.8" stroke-linecap="round"/></svg><div style="font-size:13px;font-weight:600;color:#9CA3AF;">No detection rules mapped</div><div style="font-size:12px;color:#C0C0C0;margin-top:4px;">Create a rule to cover this technique</div></div>';
+  var mitreUrl='https://attack.mitre.org/techniques/'+t.id.replace('.','/');
+  document.getElementById('rlcDrawerBody').innerHTML=
+    '<div style="display:flex;gap:10px;margin-bottom:18px;">'
+    +'<div style="flex:1;background:#F9FAFB;border:1px solid #E5E7EB;border-radius:8px;padding:12px 14px;"><div style="font-size:11px;color:#888;margin-bottom:4px;">Mapped Rules</div><div style="font-size:22px;font-weight:700;color:#1a1a1a;">'+rules.length+'</div></div>'
+    +'<div style="flex:1;background:#F9FAFB;border:1px solid #E5E7EB;border-radius:8px;padding:12px 14px;"><div style="font-size:11px;color:#888;margin-bottom:4px;">Coverage</div><div style="font-size:22px;font-weight:700;color:'+stCol+';">'+stLbl+'</div></div>'
+    +'</div>'
+    +'<div style="font-size:12px;font-weight:700;color:#374151;text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px;">Detection Rules</div>'
+    +rulesHtml
+    +'<div style="margin-top:16px;padding-top:14px;border-top:1px solid #F0F0F0;">'
+    +'<a href="'+mitreUrl+'" target="_blank" style="display:inline-flex;align-items:center;gap:5px;font-size:12px;color:#1565C0;text-decoration:none;">'
+    +'<svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" stroke="#1565C0" stroke-width="1.8" stroke-linecap="round"/><polyline points="15 3 21 3 21 9" stroke="#1565C0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><line x1="10" y1="14" x2="21" y2="3" stroke="#1565C0" stroke-width="1.8" stroke-linecap="round"/></svg>'
+    +'View on MITRE ATT&CK</a></div>';
+  document.getElementById('rlcDrawerPanel').style.display='flex';
+  document.getElementById('rlcDrawerBackdrop').style.display='block';
+}
+function rlcOpenGap(gi){
+  var g=RLC_GAPS[gi]; if(!g) return;
+  var sevBg={critical:'#FFEBEE',high:'#FFF8E1',medium:'#FFF3E0',low:'#F3E5F5'}[g.severity]||'#F5F5F5';
+  var sevCol={critical:'#C62828',high:'#E65100',medium:'#E65100',low:'#6A1B9A'}[g.severity]||'#555';
+  var closeBtn='<button onclick="rlcCloseDrawer()" style="width:28px;height:28px;border:none;background:none;cursor:pointer;display:flex;align-items:center;justify-content:center;border-radius:4px;flex-shrink:0;" onmouseover="this.style.background=\'#F3F4F6\'" onmouseout="this.style.background=\'none\'"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M18 6L6 18M6 6l12 12" stroke="#555" stroke-width="2" stroke-linecap="round"/></svg></button>';
+  document.getElementById('rlcDrawerHeader').innerHTML=
+    '<div style="flex:1;min-width:0;">'
+    +'<div style="display:flex;align-items:center;gap:8px;margin-bottom:2px;">'
+    +'<span style="font-size:11px;font-weight:600;color:#888;letter-spacing:.04em;">'+g.tactic.toUpperCase()+'</span>'
+    +'<span style="font-size:11px;padding:2px 8px;border-radius:10px;background:'+sevBg+';color:'+sevCol+';font-weight:700;">'+g.severity.toUpperCase()+'</span>'
+    +'</div>'
+    +'<div style="font-size:15px;font-weight:700;color:#1a1a1a;">'+g.name+'</div>'
+    +'<div style="font-size:11.5px;color:#888;margin-top:2px;">'+g.id+'</div>'
+    +'</div>'+closeBtn;
+  document.getElementById('rlcDrawerBody').innerHTML=
+    '<div style="margin-bottom:18px;padding:14px;background:#FFF8F8;border:1px solid #FFCDD2;border-radius:8px;">'
+    +'<div style="font-size:11px;font-weight:600;color:#888;margin-bottom:6px;text-transform:uppercase;letter-spacing:.04em;">Adversary Prevalence (90d)</div>'
+    +'<div style="display:flex;align-items:center;gap:10px;">'
+    +'<div style="flex:1;height:8px;background:#FDE8E8;border-radius:4px;overflow:hidden;"><div style="height:100%;width:'+g.prev+'%;background:'+sevCol+';border-radius:4px;"></div></div>'
+    +'<span style="font-size:14px;font-weight:700;color:'+sevCol+';">'+g.prev+'%</span>'
+    +'</div></div>'
+    +'<div style="margin-bottom:16px;">'
+    +'<div style="font-size:12px;font-weight:700;color:#374151;text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px;">Known Adversaries</div>'
+    +g.groups.split(', ').map(function(grp){
+        return '<span style="display:inline-block;margin:0 4px 6px 0;padding:3px 10px;border-radius:12px;background:#F3F4F6;font-size:12px;color:#374151;font-weight:500;">'+grp+'</span>';
+    }).join('')
+    +'</div>'
+    +'<div style="margin-bottom:16px;">'
+    +'<div style="font-size:12px;font-weight:700;color:#374151;text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px;">Last Observed in the Wild</div>'
+    +'<div style="font-size:13px;color:#555;">'+g.observed+'</div>'
+    +'</div>'
+    +'<div style="padding-top:14px;border-top:1px solid #F0F0F0;">'
+    +'<div style="font-size:12px;font-weight:700;color:#374151;text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px;">Recommendation</div>'
+    +'<div style="font-size:12.5px;color:#555;line-height:1.65;">No detection rules are currently mapped to this technique. Create a new rule targeting <strong>'+g.tactic+'</strong> behaviours to close this coverage gap.</div>'
+    +'<button style="margin-top:12px;height:32px;padding:0 16px;background:#1565C0;border:none;border-radius:6px;color:#fff;font-size:12.5px;font-weight:500;cursor:pointer;">+ Create Detection Rule</button>'
+    +'</div>';
+  document.getElementById('rlcDrawerPanel').style.display='flex';
+  document.getElementById('rlcDrawerBackdrop').style.display='block';
+}
 function rlcToggleExpand(){var matrixCard=document.getElementById('rlc-matrix');while(matrixCard&&!matrixCard.classList.contains('rlc-card'))matrixCard=matrixCard.parentElement;if(!matrixCard)return;var btn=document.getElementById('rlc-expand-btn');var isOn=matrixCard.classList.toggle('rlc-fullscreen');document.body.classList.toggle('rlc-expanded',isOn);if(btn)btn.innerHTML=isOn?'\u21e2 Collapse':'\u26f6 Expand';}
 function rlcToggleExport(ev){if(ev)ev.stopPropagation();var menu=document.getElementById('rlc-export-menu');if(!menu)return;if(menu.hasAttribute('hidden')){menu.removeAttribute('hidden');document.addEventListener('click',rlcCloseExportOnce,true);}else{menu.setAttribute('hidden','');}}
 function rlcCloseExportOnce(e){var menu=document.getElementById('rlc-export-menu');if(!menu)return;if(!menu.contains(e.target)){menu.setAttribute('hidden','');document.removeEventListener('click',rlcCloseExportOnce,true);}}
@@ -21545,13 +21568,13 @@ document.querySelectorAll('#graphSvg g.graph-node').forEach(g => {
     <div class="topnavbar__row2">
       <div class="topnavbar__row2-container">
         <nav class="topnavbar__tabs">
-          <a href="#" class="topnavbar__tab topnavbar__tab--unselected" data-nav-page="dashboard">Dashboard</a>
-          <a href="#" class="topnavbar__tab topnavbar__tab--unselected" data-nav-page="reports">Reports</a>
+          <a href="#" class="topnavbar__tab topnavbar__tab--unselected" data-nav-page="dashboard" onclick="event.preventDefault();thCloseAttackGraph();document.querySelector('.topnavbar').setAttribute('data-active-tab','Dashboard');">Dashboard</a>
+          <a href="#" class="topnavbar__tab topnavbar__tab--unselected" data-nav-page="reports" onclick="event.preventDefault();thCloseAttackGraph();document.querySelector('.topnavbar').setAttribute('data-active-tab','Reports');">Reports</a>
           <a href="#" class="topnavbar__tab topnavbar__tab--unselected topnavbar__tab--disabled">Compliance</a>
           <a href="#" class="topnavbar__tab topnavbar__tab--unselected topnavbar__tab--disabled">Search</a>
-          <a href="#" class="topnavbar__tab topnavbar__tab--selected" data-nav-page="threathub">SOC Center</a>
+          <a href="#" class="topnavbar__tab topnavbar__tab--selected" data-nav-page="threathub" onclick="event.preventDefault();thCloseAttackGraph();document.querySelector('.topnavbar').setAttribute('data-active-tab','SOC Center');">SOC Center</a>
           <a href="#" class="topnavbar__tab topnavbar__tab--unselected topnavbar__tab--disabled">Cloud Protection</a>
-          <a href="#" class="topnavbar__tab topnavbar__tab--unselected" data-nav-page="settings">Settings</a>
+          <a href="#" class="topnavbar__tab topnavbar__tab--unselected" data-nav-page="settings" onclick="event.preventDefault();thCloseAttackGraph();document.querySelector('.topnavbar').setAttribute('data-active-tab','Settings');">Settings</a>
           <a href="#" class="topnavbar__tab topnavbar__tab--unselected topnavbar__tab--disabled">Support</a>
         </nav>
         <button class="topnavbar__more" title="More tabs" aria-label="Show all tabs">
