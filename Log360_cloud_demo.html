@@ -18734,35 +18734,37 @@ function renderEntitySliderBody(entityId) {
       { id:'risk', label:'Risk & Identity', sections:['uebaProfile','loginStatistics','cloudIdentities','identityRisk','privilegedRoleChanges'] },
       { id:'activity', label:'Activity', sections:['logonActivity','networkActivity','processes','serviceTriggered','resourceFileAccess','recentAppAccess'] },
       { id:'changes', label:'Account Changes', sections:['accountLockouts','passwordHistory','groupMembershipChanges','mailboxForwarding'] },
-      { id:'threats', label:'Threats & Response', sections:['recentAlerts','threatIntelContext','dlpIncidents','complianceImpact','remediationGuide'] }
+      { id:'threats', label:'Recent Alerts', sections:['recentAlerts'] }
     ],
     device: [
       { id:'overview', label:'Overview', sections:['riskSummary','deviceDetails','agentStatus','gpoApplied','securityEventSummary'] },
       { id:'host', label:'Host Activity', sections:['processesOnHost','servicesOnHost','usersLoggedOn','loginActivity'] },
       { id:'persistence', label:'Persistence & Exfil', sections:['scheduledTasks','usbDeviceEvents'] },
-      { id:'alerts', label:'Alerts & Response', sections:['recentAlerts','remediationGuide'] }
+      { id:'alerts', label:'Recent Alerts', sections:['recentAlerts'] }
     ],
     ip: [
       { id:'overview', label:'Overview', sections:['riskSummary','ipDetails','geoContext','associatedUsers','associatedDevices'] },
-      { id:'threat', label:'Threat Intel', sections:['threatIntelligence','idsAlerts','firewallSummary','remediationGuide'] },
+      { id:'threat', label:'Threat Intel', sections:['threatIntelligence','idsAlerts','firewallSummary'] },
       { id:'connections', label:'Connections', sections:['connectionHistory','dnsHistory','vpnSessions','trafficSummary'] },
-      { id:'logon', label:'Logon Activity', sections:['logonActivity'] }
+      { id:'logon', label:'Logon Activity', sections:['logonActivity'] },
+      { id:'alerts', label:'Recent Alerts', sections:['recentAlerts'] }
     ],
     service: [
       { id:'overview', label:'Overview', sections:['riskSummary','serviceDetails','serviceInfo'] },
       { id:'config', label:'Config & Policy', sections:['oauthConsentGrants','conditionalAccess','dlpPolicies'] },
       { id:'activity', label:'Activity', sections:['signInAudit','adminActivity','fileAccessAnomaly','sensitiveFiles','serviceTimeline','networkConnections','fileDrops','wmiEvents','processes'] },
-      { id:'alerts', label:'Alerts & Response', sections:['recentAlerts','serviceTriggered','remediationGuide'] }
+      { id:'alerts', label:'Recent Alerts', sections:['recentAlerts'] }
     ],
     process: [
-      { id:'overview', label:'Overview', sections:['riskSummary','processDetails','details','processTree','childProcesses','serviceTriggered','recentAlerts','remediationGuide'] },
+      { id:'overview', label:'Overview', sections:['riskSummary','processDetails','details','processTree','childProcesses','serviceTriggered'] },
       { id:'anomaly', label:'Anomalies', sections:['tokenAnomaly','amsiEvents','registryModifications','namedPipes'] },
-      { id:'activity', label:'Activity', sections:['tokenUsage','networkActivity','fileOperations','processes','dllLoads','processDnsQueries'] }
+      { id:'activity', label:'Activity', sections:['tokenUsage','networkActivity','fileOperations','processes','dllLoads','processDnsQueries'] },
+      { id:'alerts', label:'Recent Alerts', sections:['recentAlerts'] }
     ],
     alert: [
       { id:'overview', label:'Overview', sections:['alertDetails','triggerConditions','details'] },
       { id:'scope', label:'Scope', sections:['affectedEntities','correlatedAlerts','processes'] },
-      { id:'response', label:'Response', sections:['remediationGuide','serviceTriggered','recentAlerts'] }
+      { id:'response', label:'Recent Alerts', sections:['recentAlerts'] }
     ]
   };
 
@@ -18847,7 +18849,7 @@ function renderEntitySection(entityId, secKey, sec) {
     return html;
   }
 
-  const collapsed = sec.expanded ? '' : ' collapsed';
+  const collapsed = sec.collapsed ? ' collapsed' : '';
   const noCollapse = sec.noCollapse ? ' no-collapse' : '';
   html += `<div class="em-section${collapsed}${noCollapse}" id="em-${secKey}">`;
 
