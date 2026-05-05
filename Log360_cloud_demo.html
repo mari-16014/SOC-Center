@@ -11499,6 +11499,7 @@ function rbToggleEnabled(id) { var rb = _rbItems.find(function(x){return x.id===
 function rbOpenAdd() {
   _rbEditId = null;
   _rbEditSteps = [];
+  _rbAddingStep = false;
   document.getElementById('rbEditorTitle').textContent = 'Add Runbook';
   document.getElementById('rbFormName').value = '';
   document.getElementById('rbFormDesc').value = '';
@@ -11510,7 +11511,8 @@ function rbOpenEditor(id) {
   var rb = _rbItems.find(function(x){return x.id===id;});
   if (!rb) return;
   _rbEditId = id;
-  _rbEditSteps = rb.steps.map(function(s){return {id:s.id, fn:s.fn, label:s.label};});
+  _rbAddingStep = false;
+  _rbEditSteps = rb.steps.map(function(s){return {id:s.id, fn:s.fn, connection:s.connection||'', label:s.label};});
   document.getElementById('rbEditorTitle').textContent = 'Edit Runbook';
   document.getElementById('rbFormName').value = rb.name;
   document.getElementById('rbFormDesc').value = rb.description || '';
@@ -11519,6 +11521,7 @@ function rbOpenEditor(id) {
   document.getElementById('rbEditorBackdrop').style.display = 'block';
 }
 function rbCloseEditor() {
+  _rbAddingStep = false;
   document.getElementById('rbEditorPanel').style.display = 'none';
   document.getElementById('rbEditorBackdrop').style.display = 'none';
 }
@@ -11533,79 +11536,53 @@ var _rbAllFns = ['extract_user','extract_ip','extract_hostname','extract_file_ha
 var _rbActiveStepIdx = 0;
 
 var _rbCustomFunctions = [
-  { value: '', label: '— Select Function —' },
-  /* ── Data Extraction ── */
-  { value: 'extract_email',           label: '📧  Extract Email & Identity' },
-  { value: 'extract_ip_entities',     label: '🌐  Extract IP Entities' },
-  { value: 'extract_url_domains',     label: '🔗  Extract URLs & Domains' },
-  { value: 'extract_file_artifacts',  label: '📄  Extract File Artifacts' },
-  { value: 'extract_registry_keys',   label: '🗝️  Extract Registry Keys' },
-  /* ── Enrichment ── */
-  { value: 'enrich_user_context',     label: '👤  Enrich User Context' },
-  { value: 'enrich_host_context',     label: '🖥️  Enrich Host Context' },
-  { value: 'geo_ip_lookup',           label: '📍  Geo IP Lookup' },
-  { value: 'whois_domain',            label: '🔍  WHOIS Domain Lookup' },
-  { value: 'dns_reverse_lookup',      label: '📡  DNS Reverse Lookup' },
-  /* ── Threat Intelligence ── */
-  { value: 'query_threat_intel',      label: '🛡️  Query Threat Intelligence' },
-  { value: 'check_file_hash',         label: '🔒  Check File Hash (VirusTotal)' },
-  { value: 'check_url_reputation',    label: '🚨  Check URL Reputation' },
-  { value: 'check_ip_reputation',     label: '⚠️  Check IP Reputation' },
-  { value: 'check_cve_details',       label: '📋  Lookup CVE Details' },
-  /* ── Log & Alert Analysis ── */
-  { value: 'parse_log_events',        label: '📊  Parse Log Events' },
-  { value: 'correlate_alerts',        label: '🔗  Correlate Alerts' },
-  { value: 'baseline_deviation',      label: '📈  Detect Baseline Deviation' },
-  { value: 'timeline_builder',        label: '🕒  Build Attack Timeline' },
-  { value: 'process_tree_analysis',   label: '🌳  Process Tree Analysis' },
-  /* ── Response & Reporting ── */
-  { value: 'generate_findings',       label: '📝  Generate Findings Report' },
-  { value: 'create_incident',         label: '🚒  Create Incident Ticket' },
-  { value: 'notify_stakeholders',     label: '📣  Notify Stakeholders' },
-  { value: 'quarantine_endpoint',     label: '🔐  Quarantine Endpoint' },
-  { value: 'block_ip_firewall',       label: '🛑  Block IP on Firewall' },
-  { value: 'reset_user_password',     label: '🔑  Reset User Password' },
-  { value: 'disable_user_account',    label: '🚫  Disable User Account' },
-  { value: 'revoke_oauth_tokens',     label: '❌  Revoke OAuth Tokens' }
+  { value: '',                      label: '-Select Custom Function-' },
+  { value: 'extract_email',         label: 'Extract Email & Identity' },
+  { value: 'extract_ip_entries',    label: 'Extract IP Entries' },
+  { value: 'extract_url_domains',   label: 'Extract URLs & Domains' },
+  { value: 'extract_file_artifacts',label: 'Extract File Artifacts' },
+  { value: 'extract_registry_keys', label: 'Extract Registry Keys' },
+  { value: 'enrich_user_context',   label: 'Enrich User Context' },
+  { value: 'enrich_host_context',   label: 'Enrich Host Context' },
+  { value: 'geo_ip_lookup',         label: 'Geo IP Lookup' },
+  { value: 'query_threat_intel',    label: 'Query Threat Intelligence' },
+  { value: 'check_file_hash',       label: 'Check File Hash' },
+  { value: 'check_ip_reputation',   label: 'Check IP Reputation' },
+  { value: 'parse_log_events',      label: 'Parse Log Events' },
+  { value: 'correlate_alerts',      label: 'Correlate Alerts' },
+  { value: 'timeline_builder',      label: 'Build Attack Timeline' },
+  { value: 'process_tree_analysis', label: 'Process Tree Analysis' },
+  { value: 'generate_findings',     label: 'Generate Findings Report' },
+  { value: 'create_incident',       label: 'Create Incident Ticket' },
+  { value: 'notify_stakeholders',   label: 'Notify Stakeholders' },
+  { value: 'quarantine_endpoint',   label: 'Quarantine Endpoint' },
+  { value: 'block_ip_firewall',     label: 'Block IP on Firewall' },
+  { value: 'reset_user_password',   label: 'Reset User Password' },
+  { value: 'disable_user_account',  label: 'Disable User Account' }
 ];
 var _rbConnections = [
-  { value: '', label: '— Select Connection —' },
-  /* ── Identity & Cloud ── */
-  { value: 'azure_ad',         label: '🔷  Azure Active Directory' },
-  { value: 'ms365',            label: '🟦  Microsoft 365' },
-  { value: 'ms_defender',      label: '🛡️  Microsoft Defender' },
-  { value: 'ms_sentinel',      label: '🔭  Microsoft Sentinel' },
-  { value: 'aws_cloudtrail',   label: '🟠  AWS CloudTrail' },
-  { value: 'aws_guardduty',    label: '🟠  AWS GuardDuty' },
-  { value: 'gcp_scc',          label: '🔵  GCP Security Command Center' },
-  { value: 'okta',             label: '🔑  Okta Identity' },
-  /* ── SIEM & Endpoint ── */
-  { value: 'splunk',           label: '🟢  Splunk SIEM' },
-  { value: 'qradar',           label: '⚫  IBM QRadar' },
-  { value: 'crowdstrike',      label: '🔴  CrowdStrike Falcon' },
-  { value: 'sentinelone',      label: '🟣  SentinelOne' },
-  { value: 'carbon_black',     label: '⚫  Carbon Black' },
-  { value: 'defender_edr',     label: '🔵  Microsoft Defender EDR' },
-  /* ── Threat Intelligence ── */
-  { value: 'virustotal',       label: '🦠  VirusTotal' },
-  { value: 'misp',             label: '🕷️  MISP Threat Intel' },
-  { value: 'threatconnect',    label: '🔗  ThreatConnect' },
-  { value: 'recorded_future',  label: '📡  Recorded Future' },
-  { value: 'alienvault_otx',   label: '👽  AlienVault OTX' },
-  /* ── ITSM & Ticketing ── */
-  { value: 'servicenow',       label: '🟩  ServiceNow' },
-  { value: 'jira',             label: '🔵  Jira' },
-  { value: 'pagerduty',        label: '🟡  PagerDuty' },
-  { value: 'freshservice',     label: '🌿  Freshservice' },
-  /* ── Communication ── */
-  { value: 'slack',            label: '💬  Slack' },
-  { value: 'teams',            label: '🟦  Microsoft Teams' },
-  { value: 'email_smtp',       label: '📧  Email (SMTP)' },
-  /* ── Network & Firewall ── */
-  { value: 'palo_alto',        label: '🔥  Palo Alto Networks' },
-  { value: 'fortinet',         label: '🔴  Fortinet FortiGate' },
-  { value: 'cisco_asa',        label: '🔵  Cisco ASA Firewall' }
+  { value: '',              label: '-Select Connections-' },
+  { value: 'azure_ad',      label: 'Azure Active Directory' },
+  { value: 'ms365',         label: 'Microsoft 365' },
+  { value: 'ms_defender',   label: 'Microsoft Defender' },
+  { value: 'ms_entra',      label: 'Microsoft Entra ID' },
+  { value: 'ms_sentinel',   label: 'Microsoft Sentinel' },
+  { value: 'cisco',         label: 'Cisco' },
+  { value: 'zoho_oauth',    label: 'Zoho oAuth' },
+  { value: 'splunk',        label: 'Splunk SIEM' },
+  { value: 'crowdstrike',   label: 'CrowdStrike Falcon' },
+  { value: 'sentinelone',   label: 'SentinelOne' },
+  { value: 'virustotal',    label: 'VirusTotal' },
+  { value: 'servicenow',    label: 'ServiceNow' },
+  { value: 'jira',          label: 'Jira' },
+  { value: 'pagerduty',     label: 'PagerDuty' },
+  { value: 'slack',         label: 'Slack' },
+  { value: 'teams',         label: 'Microsoft Teams' },
+  { value: 'palo_alto',     label: 'Palo Alto Networks' },
+  { value: 'fortinet',      label: 'Fortinet FortiGate' }
 ];
+var _rbAddingStep = false;
+var _rbTempStep = { label: '', fn: '', connection: '' };
 
 function _rbFnOptions(sel) {
   return _rbCustomFunctions.map(function(o){
@@ -11621,52 +11598,72 @@ function _rbConnOptions(sel) {
 function _rbRenderSteps() {
   var cont = document.getElementById('rbStepsList');
   if (!cont) return;
-  var selStyle = 'height:30px;border:1px solid #D1D5DB;border-radius:6px;font-size:12px;color:#333;padding:0 8px;outline:none;background:#fff;cursor:pointer;width:100%;box-sizing:border-box;';
-  var rows = _rbEditSteps.map(function(s, idx) {
-    return '<div style="border:1px solid #E5E7EB;border-radius:8px;padding:10px 12px;margin-bottom:10px;background:#FAFAFA;position:relative;">'
-      /* remove button */
+  var selStyle = 'height:32px;border:1px solid #D1D5DB;border-radius:6px;font-size:12.5px;color:#333;padding:0 8px;outline:none;background:#fff;cursor:pointer;flex:1;min-width:0;';
+
+  /* Saved context cards */
+  var cardsHtml = _rbEditSteps.map(function(s, idx) {
+    var fnObj = _rbCustomFunctions.find(function(o){return o.value && o.value===s.fn;});
+    var fnLabel = fnObj ? fnObj.label : '';
+    var connObj = _rbConnections.find(function(o){return o.value && o.value===s.connection;});
+    var connLabel = connObj ? connObj.label : '';
+    var metaParts = [];
+    if (fnLabel) metaParts.push('Custom Function: <span style="color:#555;">' + _rbEsc(fnLabel) + '</span>');
+    if (connLabel) metaParts.push('Connections: <span style="color:#555;">' + _rbEsc(connLabel) + '</span>');
+    var metaHtml = metaParts.length ? '<div style="font-size:11.5px;color:#888;margin-top:3px;">' + metaParts.join(' &nbsp;|&nbsp; ') + '</div>' : '';
+    return '<div style="border:1px solid #E5E7EB;border-radius:6px;padding:10px 36px 10px 12px;margin-bottom:8px;background:#fff;position:relative;">'
       + '<button onclick="_rbRemoveStep('+idx+')" title="Remove" style="position:absolute;top:8px;right:8px;width:20px;height:20px;border:none;background:none;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;">'
-      + '<svg width="13" height="13" viewBox="0 0 18 18" fill="none"><path d="M14 4L4 14M4 4l10 10" stroke="#aaa" stroke-width="1.8" stroke-linecap="round"/></svg>'
+      + '<svg width="12" height="12" viewBox="0 0 18 18" fill="none"><path d="M14 4L4 14M4 4l10 10" stroke="#aaa" stroke-width="1.8" stroke-linecap="round"/></svg>'
       + '</button>'
-      /* step number */
-      + '<div style="font-size:11px;font-weight:600;color:#888;margin-bottom:8px;text-transform:uppercase;letter-spacing:.4px;">Context '+(idx+1)+'</div>'
-      /* prompt row */
-      + '<div style="margin-bottom:8px;">'
-      + '<div style="font-size:11.5px;font-weight:600;color:#555;margin-bottom:4px;">Prompt</div>'
-      + '<input type="text" data-rb-prompt="'+idx+'" value="'+_rbEsc(s.label)+'" oninput="_rbStepLabelChange('+idx+',this.value)" placeholder="Describe what this step should do..." '
-      + 'style="width:100%;height:32px;border:1px solid #D1D5DB;border-radius:6px;font-size:12.5px;color:#333;padding:0 10px;outline:none;box-sizing:border-box;background:#fff;" '
-      + 'onfocus="this.style.borderColor=\'#1565C0\'" onblur="this.style.borderColor=\'#D1D5DB\'" />'
-      + '</div>'
-      /* function + connection row */
-      + '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">'
-      /* custom function */
-      + '<div>'
-      + '<div style="font-size:11.5px;font-weight:600;color:#555;margin-bottom:4px;">Custom Function</div>'
-      + '<select data-rb-fn="'+idx+'" onchange="_rbStepFnChange('+idx+',this.value)" style="'+selStyle+'">'
-      + _rbFnOptions(s.fn||'')
-      + '</select>'
-      + '</div>'
-      /* connection */
-      + '<div>'
-      + '<div style="font-size:11.5px;font-weight:600;color:#555;margin-bottom:4px;">Connection</div>'
-      + '<select data-rb-conn="'+idx+'" onchange="_rbStepConnChange('+idx+',this.value)" style="'+selStyle+'">'
-      + _rbConnOptions(s.connection||'')
-      + '</select>'
-      + '</div>'
-      + '</div>'
+      + '<div style="font-size:13px;font-weight:500;color:#1a1a1a;">' + _rbEsc(s.label) + '</div>'
+      + metaHtml
       + '</div>';
   }).join('');
-  cont.innerHTML = rows
-    + '<button onclick="rbAddStep()" style="display:inline-flex;align-items:center;gap:5px;background:none;border:none;color:#1565C0;font-size:13px;cursor:pointer;padding:4px 0;margin-top:2px;font-weight:500;">'
-    + '<svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="#1565C0" stroke-width="2.2" stroke-linecap="round"/></svg>'
-    + ' Add Context</button>';
+
+  /* Inline add form or + Add Context link */
+  var formHtml;
+  if (_rbAddingStep) {
+    formHtml = '<div style="background:#fff;border:1px solid #E5E7EB;border-radius:6px;padding:10px 12px;">'
+      + '<textarea id="rbTempLabel" rows="2" placeholder="Describe what this step should do..." style="width:100%;border:1px solid #D1D5DB;border-radius:6px;font-size:13px;color:#333;padding:8px 10px;box-sizing:border-box;outline:none;resize:none;font-family:inherit;line-height:1.5;margin-bottom:8px;display:block;" onfocus="this.style.borderColor=\'#1565C0\'" onblur="this.style.borderColor=\'#D1D5DB\'"></textarea>'
+      + '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;">'
+      + '<select id="rbTempFn" style="'+selStyle+'" onchange="_rbTempStep.fn=this.value">'+_rbFnOptions('')+'</select>'
+      + '<select id="rbTempConn" style="'+selStyle+'" onchange="_rbTempStep.connection=this.value">'+_rbConnOptions('')+'</select>'
+      + '</div>'
+      + '<div style="display:flex;align-items:center;gap:8px;">'
+      + '<button onclick="_rbCommitStep()" style="height:30px;padding:0 18px;background:#1565C0;color:#fff;border:none;border-radius:6px;font-size:12.5px;font-weight:500;cursor:pointer;">Add</button>'
+      + '<button onclick="_rbCancelStep()" style="height:30px;padding:0 14px;background:#fff;color:#555;border:1px solid #D1D5DB;border-radius:6px;font-size:12.5px;cursor:pointer;">Cancel</button>'
+      + '<button onclick="_rbImportStepFile()" style="height:30px;padding:0 12px;background:#fff;color:#555;border:1px solid #D1D5DB;border-radius:6px;font-size:12.5px;cursor:pointer;display:inline-flex;align-items:center;gap:5px;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" stroke="#555" stroke-width="1.8" stroke-linecap="round"/><polyline points="17 8 12 3 7 8" stroke="#555" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><line x1="12" y1="3" x2="12" y2="15" stroke="#555" stroke-width="1.8" stroke-linecap="round"/></svg>Import</button>'
+      + '</div>'
+      + '</div>';
+  } else {
+    var mt = _rbEditSteps.length > 0 ? '6' : '0';
+    formHtml = '<button onclick="_rbStartAddStep()" style="display:inline-flex;align-items:center;gap:5px;background:none;border:none;color:#1565C0;font-size:13px;cursor:pointer;padding:4px 0;margin-top:'+mt+'px;font-weight:500;">'
+      + '<svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="#1565C0" stroke-width="2.2" stroke-linecap="round"/></svg>'
+      + ' Add Context</button>';
+  }
+  cont.innerHTML = cardsHtml + formHtml;
 }
 
-function _rbStepLabelChange(idx, val) { if (_rbEditSteps[idx]) _rbEditSteps[idx].label = val; }
-function _rbStepFnChange(idx, val)    { if (_rbEditSteps[idx]) _rbEditSteps[idx].fn = val; }
-function _rbStepConnChange(idx, val)  { if (_rbEditSteps[idx]) _rbEditSteps[idx].connection = val; }
-function _rbRemoveStep(idx) { _rbEditSteps.splice(idx, 1); _rbRenderSteps(); }
-function rbAddStep() { _rbEditSteps.push({ id: _rbStepNextId++, fn: '', connection: '', label: '' }); _rbRenderSteps(); }
+function _rbStartAddStep() {
+  _rbAddingStep = true;
+  _rbTempStep = { label: '', fn: '', connection: '' };
+  _rbRenderSteps();
+  var ta = document.getElementById('rbTempLabel');
+  if (ta) setTimeout(function(){ ta.focus(); }, 30);
+}
+function _rbCancelStep() { _rbAddingStep = false; _rbRenderSteps(); }
+function _rbCommitStep() {
+  var ta   = document.getElementById('rbTempLabel');
+  var fn   = document.getElementById('rbTempFn');
+  var conn = document.getElementById('rbTempConn');
+  var label = (ta ? ta.value.trim() : '');
+  if (!label) { if (ta) { ta.style.borderColor = '#C62828'; ta.focus(); } return; }
+  _rbEditSteps.push({ id: _rbStepNextId++, fn: fn ? fn.value : '', connection: conn ? conn.value : '', label: label });
+  _rbAddingStep = false;
+  _rbRenderSteps();
+}
+function _rbImportStepFile() { var el = document.getElementById('rbStepImportFileInput'); if (el) el.click(); }
+function _rbRemoveStep(idx) { _rbEditSteps.splice(idx, 1); _rbAddingStep = false; _rbRenderSteps(); }
+function rbAddStep() { _rbStartAddStep(); }
 function _rbMakeActiveStep(idx) { _rbRenderSteps(); }
 function _rbMoveStep(idx, dir) { var n=idx+dir; if(n<0||n>=_rbEditSteps.length)return; var t=_rbEditSteps[idx];_rbEditSteps[idx]=_rbEditSteps[n];_rbEditSteps[n]=t; _rbRenderSteps(); }
 
@@ -11675,16 +11672,7 @@ function rbSaveEditor() {
   if (!name){document.getElementById('rbFormName').style.borderColor='#C62828';document.getElementById('rbFormName').focus();return;}
   document.getElementById('rbFormName').style.borderColor='#D1D5DB';
   var desc = (document.getElementById('rbFormDesc').value||'').trim();
-  /* sync any live inputs */
-  document.querySelectorAll('#rbStepsList input[data-rb-prompt]').forEach(function(inp, idx){
-    if (_rbEditSteps[idx]) _rbEditSteps[idx].label = inp.value.trim();
-  });
-  document.querySelectorAll('#rbStepsList select[data-rb-fn]').forEach(function(sel, idx){
-    if (_rbEditSteps[idx]) _rbEditSteps[idx].fn = sel.value;
-  });
-  document.querySelectorAll('#rbStepsList select[data-rb-conn]').forEach(function(sel, idx){
-    if (_rbEditSteps[idx]) _rbEditSteps[idx].connection = sel.value;
-  });
+  _rbAddingStep = false;
   var steps = _rbEditSteps.filter(function(s){ return s.label.trim(); });
   if (_rbEditId!==null){
     var rb=_rbItems.find(function(x){return x.id===_rbEditId;});
