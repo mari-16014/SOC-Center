@@ -7388,13 +7388,6 @@
             </div>
           </div><!-- /rl-view-coverage-body -->
 
-          <!-- ATT&CK Technique Detail Drawer -->
-          <div id="rlcDrawerBackdrop" onclick="rlcCloseDrawer()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.3);z-index:1200;"></div>
-          <div id="rlcDrawerPanel" style="display:none;position:fixed;top:0;right:0;height:100vh;width:460px;background:#fff;box-shadow:-4px 0 28px rgba(0,0,0,.13);z-index:1201;flex-direction:column;font-family:inherit;">
-            <div id="rlcDrawerHeader" style="display:flex;align-items:center;gap:10px;padding:16px 20px;border-bottom:1px solid #E5E7EB;flex-shrink:0;"></div>
-            <div id="rlcDrawerBody" style="flex:1;overflow-y:auto;padding:20px;"></div>
-          </div>
-
           <!-- Rule ↔ Alert Mapping lens -->
           <div id="rl-view-activity-body" style="display:none;">
             <!-- Row 1: Top rules by alert profile mappings + Predefined vs Custom donut -->
@@ -22560,5 +22553,11 @@ document.querySelectorAll('#graphSvg g.graph-node').forEach(g => {
 
 
 
+  <!-- ATT&CK Technique Detail Drawer (body-level so position:fixed always works) -->
+  <div id="rlcDrawerBackdrop" onclick="rlcCloseDrawer()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.3);z-index:1200;"></div>
+  <div id="rlcDrawerPanel" style="display:none;position:fixed;top:0;right:0;height:100vh;width:460px;background:#fff;box-shadow:-4px 0 28px rgba(0,0,0,.13);z-index:1201;flex-direction:column;font-family:inherit;">
+    <div id="rlcDrawerHeader" style="display:flex;align-items:center;gap:10px;padding:16px 20px;border-bottom:1px solid #E5E7EB;flex-shrink:0;"></div>
+    <div id="rlcDrawerBody" style="flex:1;overflow-y:auto;padding:20px;"></div>
+  </div>
 </body>
 </html>
