@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<title>Log Data Source — Design Options</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #F0F2F5; color: #333; padding: 32px; }
+  h1 { font-size: 20px; font-weight: 700; color: #111; margin-bottom: 6px; }
+  .subtitle { font-size: 13px; color: #888; margin-bottom: 36px; }
+  .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px; }
+  .card { background: #fff; border-radius: 10px; box-shadow: 0 2px 12px rgba(0,0,0,.07); overflow: hidden; }
+  .card-label { background: #1A2340; color: #fff; font-size: 12px; font-weight: 600; padding: 8px 16px; letter-spacing: .5px; text-transform: uppercase; display: flex; align-items: center; gap: 10px; }
+  .card-label span.tag { background: #2C66DD; border-radius: 20px; padding: 2px 10px; font-size: 10.5px; font-weight: 500; letter-spacing: 0; text-transform: none; }
+  .card-body { padding: 20px; }
+  .subtitle { font-size: 13px; color: #888; margin-bottom: 36px; }
+
+  /* ── DESIGN 9: Inline banner selector ── */
+  .d9-banner { display:flex; gap:0; margin-bottom:14px; }
+  .d9-opt { flex:1; display:flex; flex-direction:column; align-items:center; padding:12px 8px 10px; border:1px solid #E5E7EB; border-right:none; cursor:pointer; transition:all .13s; user-select:none; background:#FAFAFA; }
+  .d9-opt:first-child { border-radius:6px 0 0 6px; }
+  .d9-opt:last-child { border-right:1px solid #E5E7EB; border-radius:0 6px 6px 0; }
+  .d9-opt:hover { background:#F0F5FF; }
+  .d9-opt.active { background:#EEF4FF; border-color:#2C66DD; position:relative; z-index:1; box-shadow: 0 0 0 1px #2C66DD; }
+  .d9-opt .d9-ic { font-size:20px; margin-bottom:5px; }
+  .d9-opt .d9-lbl { font-size:11.5px; font-weight:600; color:#333; }
+  .d9-opt.active .d9-lbl { color:#2C66DD; }
+  .d9-opt .d9-sub { font-size:10.5px; color:#AAA; margin-top:2px; }
+  .d9-body { padding:12px; background:#F8F9FB; border-radius:6px; border:1px solid #E5E7EB; font-size:12px; min-height:48px; }
+
+  /* ── DESIGN 10: Floating label form ── */
+  .d10-wrap { border:1px solid #E5E7EB; border-radius:8px; padding:16px; }
+  .d10-field { position:relative; margin-bottom:14px; }
+  .d10-field label { position:absolute; top:-8px; left:10px; background:#fff; padding:0 4px; font-size:11px; color:#2C66DD; font-weight:600; }
+  .d10-field select, .d10-field textarea { width:100%; border:1px solid #C4C4C4; border-radius:4px; padding:8px 10px; font-size:12.5px; color:#333; outline:none; background:#fff; font-family:inherit; }
+  .d10-field select:focus, .d10-field textarea:focus { border-color:#2C66DD; }
+
+  /* ── DESIGN 11: Split left-right ── */
+  .d11-wrap { display:flex; gap:14px; align-items:flex-start; }
+  .d11-left { display:flex; flex-direction:column; gap:6px; width:130px; flex-shrink:0; }
+  .d11-btn { display:flex; align-items:center; gap:8px; padding:9px 12px; border:1px solid #E5E7EB; border-radius:6px; cursor:pointer; font-size:12px; color:#555; background:#fff; transition:all .12s; user-select:none; }
+  .d11-btn:hover { background:#F5F8FF; border-color:#93BFFD; }
+  .d11-btn.active { background:#EEF4FF; border-color:#2C66DD; color:#2C66DD; font-weight:600; }
+  .d11-right { flex:1; padding:12px 14px; background:#F8F9FB; border-radius:6px; border:1px solid #E5E7EB; font-size:12px; min-height:80px; }
+
+  /* ── DESIGN 12: Dark / terminal style ── */
+  .d12-wrap { background:#1E2433; border-radius:8px; padding:16px; }
+  .d12-tabs { display:flex; gap:6px; margin-bottom:14px; }
+  .d12-tab { padding:5px 14px; border-radius:4px; font-size:12px; color:#AAB; cursor:pointer; user-select:none; border:1px solid transparent; transition:all .13s; }
+  .d12-tab:hover { background:#2A3347; color:#DDE; }
+  .d12-tab.active { background:#2C66DD; color:#fff; border-color:#2C66DD; font-weight:600; }
+  .d12-body { background:#141824; border-radius:6px; padding:12px 14px; font-size:12px; color:#C8D0E0; min-height:52px; }
+  .d12-body select { background:#1E2433; border:1px solid #3A4560; color:#C8D0E0; border-radius:4px; height:28px; padding:0 8px; font-size:12px; outline:none; cursor:pointer; }
+  .d12-body textarea { background:#1E2433; border:1px solid #3A4560; color:#8BE06A; border-radius:4px; padding:8px 10px; font-size:12px; font-family:monospace; width:100%; outline:none; resize:vertical; }
+
+  /* ── DESIGN 13: Mini wizard / stepper bar ── */
+  .d13-steps { display:flex; align-items:center; margin-bottom:16px; }
+  .d13-step { display:flex; align-items:center; gap:6px; cursor:pointer; user-select:none; }
+  .d13-dot { width:24px; height:24px; border-radius:50%; border:2px solid #D1D5DB; background:#fff; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:700; color:#999; transition:all .13s; flex-shrink:0; }
+  .d13-step.active .d13-dot { border-color:#2C66DD; background:#2C66DD; color:#fff; }
+  .d13-step.done .d13-dot { border-color:#22C55E; background:#22C55E; color:#fff; }
+  .d13-steplabel { font-size:12px; color:#888; transition:all .13s; }
+  .d13-step.active .d13-steplabel { color:#2C66DD; font-weight:600; }
+  .d13-line { flex:1; height:2px; background:#E5E7EB; margin:0 6px; }
+  .d13-body { padding:12px 14px; background:#F8F9FB; border-radius:6px; border:1px solid #E5E7EB; font-size:12px; min-height:52px; }
+
+  /* ── DESIGN 15: Option 12 White Theme ── */
+  .d15-wrap { background:#F8F9FB; border:1px solid #E5E7EB; border-radius:8px; padding:16px; }
+  .d15-tabs { display:flex; gap:6px; margin-bottom:14px; }
+  .d15-tab { padding:5px 14px; border-radius:4px; font-size:12px; color:#888; cursor:pointer; user-select:none; border:1px solid transparent; transition:all .13s; }
+  .d15-tab:hover { background:#EAECF0; color:#444; }
+  .d15-tab.active { background:#2C66DD; color:#fff; border-color:#2C66DD; font-weight:600; }
+  .d15-body { background:#fff; border:1px solid #E5E7EB; border-radius:6px; padding:12px 14px; font-size:12px; color:#444; min-height:52px; }
+  .d15-time-row { display:flex; align-items:center; gap:8px; }
+  .d15-label { font-size:12px; color:#555; white-space:nowrap; }
+
+  .d14-wrap { background:linear-gradient(135deg,#EEF4FF 0%,#F5F0FF 100%); border-radius:10px; padding:16px; border:1px solid #D6E4FF; }
+  .d14-options { display:flex; flex-direction:column; gap:8px; margin-bottom:12px; }
+  .d14-opt { display:flex; align-items:center; gap:10px; padding:10px 14px; border-radius:8px; background:rgba(255,255,255,0.7); border:1px solid rgba(255,255,255,0.9); cursor:pointer; user-select:none; transition:all .13s; backdrop-filter:blur(4px); }
+  .d14-opt:hover { background:rgba(255,255,255,0.9); box-shadow:0 2px 8px rgba(44,102,221,.1); }
+  .d14-opt.active { background:#fff; border-color:#2C66DD; box-shadow:0 2px 10px rgba(44,102,221,.18); }
+  .d14-opt input { accent-color:#2C66DD; flex-shrink:0; }
+  .d14-opt .d14-ic { font-size:16px; }
+  .d14-opt .d14-title { font-size:12.5px; font-weight:600; color:#222; flex:1; }
+  .d14-opt .d14-desc { font-size:11px; color:#888; }
+  .d14-body { background:rgba(255,255,255,0.8); border-radius:8px; padding:12px 14px; font-size:12px; backdrop-filter:blur(4px); border:1px solid rgba(255,255,255,0.9); min-height:48px; }
+
+  /* shared utils */
+  .field-label { font-size: 11.5px; color: #666; margin-bottom: 5px; }
+  textarea { resize: vertical; outline: none; }
+  select { outline: none; cursor: pointer; }
+  input[type=radio], input[type=checkbox] { cursor: pointer; }
+
+  /* ── DESIGN 1: Segmented pills ── */
+  .d1-pills { display: flex; border: 1px solid #D1D5DB; border-radius: 6px; overflow: hidden; width: 100%; }
+  .d1-pills label { flex: 1; text-align: center; padding: 8px 4px; font-size: 12.5px; color: #555; cursor: pointer; transition: background .15s; border-right: 1px solid #D1D5DB; user-select: none; }
+  .d1-pills label:last-child { border-right: none; }
+  .d1-pills input { display: none; }
+  .d1-pills input:checked + span { font-weight: 600; color: #2C66DD; }
+  .d1-pills label:has(input:checked) { background: #EEF4FF; color: #2C66DD; font-weight: 600; }
+  .d1-body { margin-top: 14px; padding: 12px; background: #F8F9FB; border-radius: 6px; border: 1px solid #E5E7EB; font-size: 12px; color: #444; min-height: 52px; }
+
+  /* ── DESIGN 2: Icon cards ── */
+  .d2-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .d2-card { border: 2px solid #E5E7EB; border-radius: 8px; padding: 14px 10px 12px; text-align: center; cursor: pointer; transition: all .15s; user-select: none; }
+  .d2-card:hover { border-color: #93BFFD; background: #F5F9FF; }
+  .d2-card.active { border-color: #2C66DD; background: #EEF4FF; }
+  .d2-card .icon { font-size: 22px; margin-bottom: 6px; }
+  .d2-card .title { font-size: 12px; font-weight: 600; color: #333; margin-bottom: 2px; }
+  .d2-card .desc { font-size: 10.5px; color: #888; line-height: 1.4; }
+  .d2-body { margin-top: 14px; padding: 12px; background: #F8F9FB; border-radius: 6px; border: 1px solid #E5E7EB; font-size: 12px; color: #444; min-height: 52px; }
+
+  /* ── DESIGN 3: Vertical tabs ── */
+  .d3-wrap { display: flex; gap: 0; border: 1px solid #E0E0E0; border-radius: 6px; overflow: hidden; min-height: 140px; }
+  .d3-tabs { display: flex; flex-direction: column; width: 140px; flex-shrink: 0; background: #F4F6FA; border-right: 1px solid #E0E0E0; }
+  .d3-tab { padding: 11px 14px; font-size: 12px; color: #555; cursor: pointer; border-left: 3px solid transparent; transition: all .12s; user-select: none; display: flex; align-items: center; gap: 7px; }
+  .d3-tab:hover { background: #EAEDF5; }
+  .d3-tab.active { border-left-color: #2C66DD; background: #fff; color: #2C66DD; font-weight: 600; }
+  .d3-panel { flex: 1; padding: 14px 16px; font-size: 12px; color: #444; }
+
+  /* ── DESIGN 4: Dropdown select ── */
+  .d4-select-wrap { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+  .d4-select-wrap label { font-size: 12.5px; font-weight: 600; color: #333; white-space: nowrap; }
+  .d4-select-wrap select { flex: 1; height: 32px; border: 1px solid #C4C4C4; border-radius: 4px; background: #fff; font-size: 12.5px; color: #333; padding: 0 10px; }
+  .d4-body { padding: 12px 14px; background: #F8F9FB; border-radius: 6px; border: 1px solid #E5E7EB; font-size: 12px; color: #444; min-height: 52px; }
+
+  /* ── DESIGN 5: Step / accordion ── */
+  .d5-step { border: 1px solid #E5E7EB; border-radius: 6px; margin-bottom: 8px; overflow: hidden; }
+  .d5-step-head { display: flex; align-items: center; gap: 10px; padding: 10px 14px; cursor: pointer; user-select: none; background: #fff; transition: background .12s; }
+  .d5-step-head:hover { background: #F7F9FF; }
+  .d5-step-head.active { background: #EEF4FF; }
+  .d5-num { width: 22px; height: 22px; border-radius: 50%; background: #E5E7EB; color: #555; font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .d5-step-head.active .d5-num { background: #2C66DD; color: #fff; }
+  .d5-title { font-size: 12.5px; font-weight: 600; color: #333; }
+  .d5-subdesc { font-size: 11px; color: #888; margin-left: auto; }
+  .d5-body { display: none; padding: 12px 14px 14px; background: #FAFBFF; border-top: 1px solid #E5E7EB; font-size: 12px; color: #444; }
+  .d5-body.open { display: block; }
+
+  /* ── DESIGN 6: Horizontal radio with big labels ── */
+  .d6-options { display: flex; flex-direction: column; gap: 0; border: 1px solid #E5E7EB; border-radius: 6px; overflow: hidden; }
+  .d6-option { display: flex; align-items: flex-start; gap: 12px; padding: 12px 14px; cursor: pointer; border-bottom: 1px solid #F0F0F0; transition: background .12s; user-select: none; }
+  .d6-option:last-child { border-bottom: none; }
+  .d6-option:hover { background: #F5F8FF; }
+  .d6-option.active { background: #EEF4FF; }
+  .d6-option input { margin-top: 3px; accent-color: #2C66DD; flex-shrink: 0; }
+  .d6-option .d6-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+  .d6-option .d6-text .d6-title { font-size: 12.5px; font-weight: 600; color: #222; }
+  .d6-option .d6-text .d6-desc { font-size: 11.5px; color: #888; margin-top: 2px; line-height: 1.4; }
+  .d6-option .d6-badge { margin-left: auto; font-size: 10px; background: #E8F0FE; color: #2C66DD; border-radius: 20px; padding: 2px 8px; white-space: nowrap; align-self: center; font-weight: 500; }
+
+  /* ── DESIGN 7: Toolbar toggle buttons ── */
+  .d7-toolbar { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; margin-bottom: 14px; }
+  .d7-btn { display: flex; align-items: center; gap: 6px; height: 30px; padding: 0 14px; border: 1px solid #D1D5DB; border-radius: 20px; background: #fff; cursor: pointer; font-size: 12px; color: #555; font-family: inherit; transition: all .13s; user-select: none; }
+  .d7-btn:hover { border-color: #93BFFD; background: #F5F9FF; }
+  .d7-btn.active { border-color: #2C66DD; background: #EEF4FF; color: #2C66DD; font-weight: 600; }
+  .d7-body { padding: 12px 14px; background: #F8F9FB; border-radius: 6px; border: 1px solid #E5E7EB; font-size: 12px; color: #444; min-height: 52px; }
+
+  /* ── DESIGN 8: Source + content split card ── */
+  .d8-wrap { border: 1px solid #E5E7EB; border-radius: 6px; overflow: hidden; }
+  .d8-top { display: flex; background: #F4F6FA; border-bottom: 1px solid #E5E7EB; }
+  .d8-tab { flex: 1; padding: 9px 8px; text-align: center; font-size: 12px; color: #666; cursor: pointer; border-bottom: 2px solid transparent; transition: all .12s; user-select: none; }
+  .d8-tab:hover { color: #333; background: #EAECF2; }
+  .d8-tab.active { color: #2C66DD; font-weight: 600; background: #fff; border-bottom-color: #2C66DD; }
+  .d8-body { padding: 14px 16px; font-size: 12px; color: #444; min-height: 60px; }
+
+  /* shared input styles */
+  .inp { height: 30px; border: 1px solid #C4C4C4; border-radius: 3px; padding: 0 10px; font-size: 12px; color: #333; font-family: inherit; outline: none; background: #fff; }
+  .inp:focus { border-color: #2C66DD; }
+  .ta { width: 100%; border: 1px solid #C4C4C4; border-radius: 3px; padding: 8px 10px; font-size: 12px; color: #333; font-family: monospace; outline: none; background: #fff; line-height: 1.6; }
+  .ta:focus { border-color: #2C66DD; }
+  .file-btn { display: inline-flex; align-items: center; gap: 5px; height: 28px; padding: 0 12px; border: 1px solid #C4C4C4; border-radius: 3px; background: #fff; cursor: pointer; font-size: 12px; color: #333; }
+  .file-btn:hover { background: #F5F5F5; }
+  select.inp { cursor: pointer; }
+</style>
+</head>
+<body>
+
+<h1>Log Data Source — Design Options</h1>
+<p class="subtitle">8 design variations for selecting the preview log source (Options 1–8). Click options to see sub-panels.</p>
+
+<div class="grid">
+
+  <!-- ══ DESIGN 1: Segmented Pills ══ -->
+  <div class="card">
+    <div class="card-label">Option 1 <span class="tag">Segmented Pill Bar</span></div>
+    <div class="card-body">
+      <div class="d1-pills">
+        <label onclick="d1Select('live')"><input type="radio" name="d1" value="live" checked/><span>📅 Live Logs</span></label>
+        <label onclick="d1Select('import')"><input type="radio" name="d1" value="import"/><span>📁 Upload Logs</span></label>
+      </div>
+      <div class="d1-body" id="d1body">
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span style="font-size:12px;color:#555;">Time Range:</span>
+          <select class="inp" style="width:160px;">
+            <option>Last 7 Days</option><option>Last 24 Hours</option><option>Last 30 Days</option><option>Custom Range</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ DESIGN 2: Icon Cards ══ -->
+  <div class="card">
+    <div class="card-label">Option 2 <span class="tag">Clickable Icon Cards</span></div>
+    <div class="card-body">
+      <div class="d2-cards">
+        <div class="d2-card active" onclick="d2Select(this,'live')">
+          <div class="icon">📅</div>
+          <div class="title">Live Logs</div>
+          <div class="desc">Query from existing data</div>
+        </div>
+        <div class="d2-card" onclick="d2Select(this,'import')">
+          <div class="icon">📁</div>
+          <div class="title">Upload Logs</div>
+          <div class="desc">Upload a log file</div>
+        </div>
+      </div>
+      <div class="d2-body" id="d2body">
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span style="font-size:12px;color:#555;">Time Range:</span>
+          <select class="inp" style="width:160px;">
+            <option>Last 7 Days</option><option>Last 24 Hours</option><option>Last 30 Days</option><option>Custom Range</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ DESIGN 3: Vertical Tabs ══ -->
+  <div class="card">
+    <div class="card-label">Option 3 <span class="tag">Vertical Tabs</span></div>
+    <div class="card-body">
+      <div class="d3-wrap">
+        <div class="d3-tabs">
+          <div class="d3-tab active" onclick="d3Select(this,'live')">📅 Live Logs</div>
+          <div class="d3-tab" onclick="d3Select(this,'import')">📁 Upload Logs</div>
+        </div>
+        <div class="d3-panel" id="d3panel">
+          <div style="font-size:12px;font-weight:600;color:#333;margin-bottom:10px;">Live Log Query</div>
+          <div style="display:flex;align-items:center;gap:8px;">
+            <span style="font-size:12px;color:#555;">Time Range:</span>
+            <select class="inp" style="width:150px;">
+              <option>Last 7 Days</option><option>Last 24 Hours</option><option>Last 30 Days</option><option>Custom Range</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ DESIGN 4: Dropdown Select ══ -->
+  <div class="card">
+    <div class="card-label">Option 4 <span class="tag">Single Dropdown</span></div>
+    <div class="card-body">
+      <div class="d4-select-wrap">
+        <label>Log Source:</label>
+        <select class="inp" onchange="d4Select(this.value)">
+          <option value="live">📅 Live Logs — query from existing data</option>
+          <option value="import">📁 Upload Logs — upload a log file</option>
+        </select>
+      </div>
+      <div class="d4-body" id="d4body">
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span style="font-size:12px;color:#555;">Time Range:</span>
+          <select class="inp" style="width:160px;">
+            <option>Last 7 Days</option><option>Last 24 Hours</option><option>Last 30 Days</option><option>Custom Range</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ DESIGN 5: Accordion Steps ══ -->
+  <div class="card">
+    <div class="card-label">Option 5 <span class="tag">Accordion / Steps</span></div>
+    <div class="card-body">
+      <div class="d5-step">
+        <div class="d5-step-head active" onclick="d5Toggle(this)">
+          <div class="d5-num">1</div>
+          <div class="d5-title">📅 Live Logs</div>
+          <div class="d5-subdesc">query existing data</div>
+        </div>
+        <div class="d5-body open">
+          <div style="display:flex;align-items:center;gap:8px;">
+            <span style="font-size:12px;color:#555;">Time Range:</span>
+            <select class="inp" style="width:160px;">
+              <option>Last 7 Days</option><option>Last 24 Hours</option><option>Last 30 Days</option><option>Custom Range</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="d5-step">
+        <div class="d5-step-head" onclick="d5Toggle(this)">
+          <div class="d5-num">2</div>
+          <div class="d5-title">📁 Upload Logs</div>
+          <div class="d5-subdesc">upload a log file</div>
+        </div>
+        <div class="d5-body">
+          <label class="file-btn">
+            📎 Choose File
+            <input type="file" style="display:none;"/>
+          </label>
+          <span style="font-size:11.5px;color:#AAA;margin-left:8px;">No file chosen — .log, .txt, .csv, .json, .zip</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══ DESIGN 6: Horizontal List with Icons ══ -->
+  <div class="card">
+    <div class="card-label">Option 6 <span class="tag">Rich Radio List</span></div>
+    <div class="card-body">
+      <div class="d6-options">
+        <label class="d6-option active" onclick="d6Select(this,'live')">
+          <input type="radio" name="d6" checked/>
+          <div class="d6-icon">📅</div>
+          <div class="d6-text">
+            <div class="d6-title">Live Logs</div>
+            <div class="d6-desc">Query against real log data within a selected time range</div>
+          </div>
+          <div class="d6-badge">Recommended</div>
+        </label>
+        <label class="d6-option" onclick="d6Select(this,'import')">
+          <input type="radio" name="d6"/>
+          <div class="d6-icon">📁</div>
+          <div class="d6-text">
+            <div class="d6-title">Upload Logs</div>
+            <div class="d6-desc">Upload a .log, .txt, .csv, .json or .zip file to test rule against</div>
+          </div>
+        </label>
+      </div>
+      <div style="margin-top:12px;padding:10px 12px;background:#F8F9FB;border:1px solid #E5E7EB;border-radius:6px;font-size:12px;" id="d6body">
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span style="font-size:12px;color:#555;">Time Range:</span>
+          <select class="inp" style="width:160px;">
+            <option>Last 7 Days</option><option>Last 24 Hours</option><option>Last 30 Days</option><option>Custom Range</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ DESIGN 7: Pill Toggle Buttons (toolbar style) ══ -->
+  <div class="card">
+    <div class="card-label">Option 7 <span class="tag">Chip / Tag Toggle</span></div>
+    <div class="card-body">
+      <div style="font-size:12px;color:#666;margin-bottom:8px;font-weight:500;">Log Data Source:</div>
+      <div class="d7-toolbar">
+        <button class="d7-btn active" onclick="d7Select(this,'live')">📅 Live Logs</button>
+        <button class="d7-btn" onclick="d7Select(this,'import')">📁 Upload Logs</button>
+      </div>
+      <div class="d7-body" id="d7body">
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span style="font-size:12px;color:#555;">Time Range:</span>
+          <select class="inp" style="width:160px;">
+            <option>Last 7 Days</option><option>Last 24 Hours</option><option>Last 30 Days</option><option>Custom Range</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ DESIGN 8: Horizontal Tabs ══ -->
+  <div class="card">
+    <div class="card-label">Option 8 <span class="tag">Horizontal Tab Strip</span></div>
+    <div class="card-body">
+      <div class="d8-wrap">
+        <div class="d8-top">
+          <div class="d8-tab active" onclick="d8Select(this,'live')">📅 Live Logs</div>
+          <div class="d8-tab" onclick="d8Select(this,'import')">📁 Upload Logs</div>
+        </div>
+        <div class="d8-body" id="d8body">
+          <div style="display:flex;align-items:center;gap:8px;">
+            <span style="font-size:12px;color:#555;">Time Range:</span>
+            <select class="inp" style="width:160px;">
+              <option>Last 7 Days</option><option>Last 24 Hours</option><option>Last 30 Days</option><option>Custom Range</option>
+            </select>
+          </div>
+          <div style="margin-top:8px;font-size:11.5px;color:#AAA;">Chart and table will reload based on the selected time window.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /grid -->
+
+<h1 style="margin-top:48px;margin-bottom:6px;">More Design Options</h1>
+<p class="subtitle">Options 9 – 14</p>
+<div class="grid">
+
+  <!-- ══ DESIGN 9: Inline Banner ══ -->
+  <div class="card">
+    <div class="card-label">Option 9 <span class="tag">Inline Banner Cards</span></div>
+    <div class="card-body">
+      <div class="d9-banner">
+        <div class="d9-opt active" onclick="d9Select(this,'live')">
+          <div class="d9-ic">📅</div>
+          <div class="d9-lbl">Live Logs</div>
+          <div class="d9-sub">existing data</div>
+        </div>
+        <div class="d9-opt" onclick="d9Select(this,'import')">
+          <div class="d9-ic">📁</div>
+          <div class="d9-lbl">Upload Logs</div>
+          <div class="d9-sub">upload log</div>
+        </div>
+      </div>
+      <div class="d9-body" id="d9body">
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span style="font-size:12px;color:#555;">Time Range:</span>
+          <select class="inp" style="width:160px;"><option>Last 7 Days</option><option>Last 24 Hours</option><option>Last 30 Days</option><option>Custom Range</option></select>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ DESIGN 10: Floating Label Form ══ -->
+  <div class="card">
+    <div class="card-label">Option 10 <span class="tag">Floating Label Form</span></div>
+    <div class="card-body">
+      <div class="d10-wrap">
+        <div class="d10-field">
+          <label>Log Source</label>
+          <select onchange="d10Select(this.value)">
+            <option value="live">📅 Live Logs — query from existing data</option>
+            <option value="import">📁 Upload Logs — upload a log file</option>
+          </select>
+        </div>
+        <div id="d10body">
+          <div class="d10-field">
+            <label>Time Range</label>
+            <select><option>Last 7 Days</option><option>Last 24 Hours</option><option>Last 30 Days</option><option>Custom Range</option></select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ DESIGN 11: Split Left-Right ══ -->
+  <div class="card">
+    <div class="card-label">Option 11 <span class="tag">Split Left / Right</span></div>
+    <div class="card-body">
+      <div class="d11-wrap">
+        <div class="d11-left">
+          <div class="d11-btn active" onclick="d11Select(this,'live')">📅 Live Logs</div>
+          <div class="d11-btn" onclick="d11Select(this,'import')">📁 Upload Logs</div>
+        </div>
+        <div class="d11-right" id="d11body">
+          <div style="font-size:12px;font-weight:600;color:#333;margin-bottom:10px;">Live Log Query</div>
+          <div style="display:flex;align-items:center;gap:8px;">
+            <span style="font-size:12px;color:#555;">Time Range:</span>
+            <select class="inp" style="width:150px;"><option>Last 7 Days</option><option>Last 24 Hours</option><option>Last 30 Days</option><option>Custom Range</option></select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ DESIGN 12: Dark Terminal ══ -->
+  <div class="card">
+    <div class="card-label">Option 12 <span class="tag">Dark / Terminal</span></div>
+    <div class="card-body">
+      <div class="d12-wrap">
+        <div class="d12-tabs">
+          <div class="d12-tab active" onclick="d12Select(this,'live')">📅 Live Logs</div>
+          <div class="d12-tab" onclick="d12Select(this,'import')">📁 Upload Logs</div>
+        </div>
+        <div class="d12-body" id="d12body">
+          <div style="display:flex;align-items:center;gap:8px;">
+            <span style="font-size:12px;color:#8BE06A;">$</span>
+            <span style="color:#AAB;">time_range:</span>
+            <select><option>last_7d</option><option>last_24h</option><option>last_30d</option><option>custom</option></select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ DESIGN 13: Mini Wizard Stepper ══ -->
+  <div class="card">
+    <div class="card-label">Option 13 <span class="tag">Mini Wizard / Stepper</span></div>
+    <div class="card-body">
+      <div class="d13-steps">
+        <div class="d13-step active" id="d13s1" onclick="d13Select(1)">
+          <div class="d13-dot">1</div>
+          <div class="d13-steplabel">Live Logs</div>
+        </div>
+        <div class="d13-line"></div>
+        <div class="d13-step" id="d13s2" onclick="d13Select(2)">
+          <div class="d13-dot">2</div>
+          <div class="d13-steplabel">Upload Logs</div>
+        </div>
+      </div>
+      <div class="d13-body" id="d13body">
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span style="font-size:12px;color:#555;">Time Range:</span>
+          <select class="inp" style="width:160px;"><option>Last 7 Days</option><option>Last 24 Hours</option><option>Last 30 Days</option><option>Custom Range</option></select>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ DESIGN 14: Glassmorphism ══ -->
+  <div class="card">
+    <div class="card-label">Option 14 <span class="tag">Glassmorphism</span></div>
+    <div class="card-body">
+      <div class="d14-wrap">
+        <div class="d14-options">
+          <label class="d14-opt active" onclick="d14Select(this,'live')">
+            <input type="radio" name="d14" checked/>
+            <span class="d14-ic">📅</span>
+            <span class="d14-title">Live Logs</span>
+            <span class="d14-desc">query existing data</span>
+          </label>
+          <label class="d14-opt" onclick="d14Select(this,'import')">
+            <input type="radio" name="d14"/>
+            <span class="d14-ic">📁</span>
+            <span class="d14-title">Upload Logs</span>
+            <span class="d14-desc">upload log file</span>
+          </label>
+        </div>
+        <div class="d14-body" id="d14body">
+          <div style="display:flex;align-items:center;gap:8px;">
+            <span style="font-size:12px;color:#555;">Time Range:</span>
+            <select class="inp" style="width:160px;"><option>Last 7 Days</option><option>Last 24 Hours</option><option>Last 30 Days</option><option>Custom Range</option></select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ══ DESIGN 15: Option 12 White Theme ══ -->
+  <div class="card">
+    <div class="card-label">Option 15 <span class="tag">Pill Tabs — Light</span></div>
+    <div class="card-body">
+      <div class="d15-wrap">
+        <div class="d15-tabs">
+          <div class="d15-tab active" onclick="d15Select(this,'live')">&#128197; Live Logs</div>
+          <div class="d15-tab" onclick="d15Select(this,'import')">&#128193; Upload Logs</div>
+        </div>
+        <div class="d15-body" id="d15body">
+          <div class="d15-time-row">
+            <span class="d15-label">time_range:</span>
+            <select class="inp" style="width:150px;"><option>last_7d</option><option>last_24h</option><option>last_30d</option><option>custom</option></select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+/* shared sub-panel content */
+var panels = {
+  live: `<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+    <span style="font-size:12px;color:#555;">Time Range:</span>
+    <select class="inp" style="width:160px;"><option>Last 7 Days</option><option>Last 24 Hours</option><option>Last 30 Days</option><option>Custom Range</option></select>
+  </div>`,
+  import: `<div style="border:1px dashed #C9CDD4;border-radius:5px;padding:10px 12px;background:#FAFBFC;">
+    <textarea class="ta" rows="4" placeholder="Paste raw log lines here…" style="border:none;background:transparent;padding:0;font-size:12px;"></textarea>
+    <div style="text-align:center;margin:8px 0;font-size:11.5px;color:#AAA;">— or —</div>
+    <div style="display:flex;align-items:center;gap:10px;">
+      <label class="file-btn" style="display:inline-flex;align-items:center;gap:6px;cursor:pointer;">
+        📎 Choose file…<input type="file" onchange="this.parentElement.nextElementSibling.textContent=this.files[0]?this.files[0].name:'No file chosen'" style="display:none;"/>
+      </label>
+      <span style="font-size:12px;color:#AAA;">No file chosen</span>
+    </div>
+  </div>`,
+
+};
+
+/* D1 */
+function d1Select(val) {
+  document.querySelectorAll('.d1-pills input').forEach(i => i.checked = i.value===val);
+  document.getElementById('d1body').innerHTML = panels[val];
+}
+
+/* D2 */
+function d2Select(el, val) {
+  document.querySelectorAll('.d2-card').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('d2body').innerHTML = panels[val];
+}
+
+/* D3 */
+function d3Select(el, val) {
+  document.querySelectorAll('.d3-tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  var titles = {live:'Live Log Query', import:'Upload Logs'};
+  document.getElementById('d3panel').innerHTML =
+    `<div style="font-size:12px;font-weight:600;color:#333;margin-bottom:10px;">${titles[val]}</div>${panels[val]}`;
+}
+
+/* D4 */
+function d4Select(val) {
+  document.getElementById('d4body').innerHTML = panels[val];
+}
+
+/* D5 */
+function d5Toggle(head) {
+  var allHeads = document.querySelectorAll('.d5-step-head');
+  allHeads.forEach(h => {
+    h.classList.remove('active');
+    h.nextElementSibling.classList.remove('open');
+  });
+  head.classList.add('active');
+  head.nextElementSibling.classList.add('open');
+}
+
+/* D6 */
+function d6Select(el, val) {
+  document.querySelectorAll('.d6-option').forEach(o => o.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('d6body').innerHTML = panels[val];
+}
+
+/* D7 */
+function d7Select(el, val) {
+  document.querySelectorAll('.d7-btn').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('d7body').innerHTML = panels[val];
+}
+
+/* D8 */
+function d8Select(el, val) {
+  document.querySelectorAll('.d8-tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  var extra = val==='live' ? '<div style="margin-top:8px;font-size:11.5px;color:#AAA;">Chart and table will reload based on the selected time window.</div>' : '';
+  document.getElementById('d8body').innerHTML = panels[val] + extra;
+}
+
+/* D9 */
+function d9Select(el, val) {
+  document.querySelectorAll('.d9-opt').forEach(o => o.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('d9body').innerHTML = panels[val];
+}
+
+/* D10 */
+var d10panels = {
+  live: `<div class="d10-field"><label>Time Range</label><select><option>Last 7 Days</option><option>Last 24 Hours</option><option>Last 30 Days</option><option>Custom Range</option></select></div>`,
+  import: `<div class="d10-field"><label>Upload Logs</label>
+    <div style="border:1px dashed #C9CDD4;border-radius:5px;padding:10px 12px;background:#FAFBFC;">
+      <textarea rows="3" placeholder="Paste raw log lines here…" style="width:100%;border:none;background:transparent;padding:0;font-size:12px;font-family:inherit;outline:none;resize:vertical;"></textarea>
+      <div style="text-align:center;margin:8px 0;font-size:11.5px;color:#AAA;">— or —</div>
+      <div style="display:flex;align-items:center;gap:10px;">
+        <label class="file-btn" style="display:inline-flex;align-items:center;gap:6px;cursor:pointer;">
+          📎 Choose file…<input type="file" onchange="this.parentElement.nextElementSibling.textContent=this.files[0]?this.files[0].name:'No file chosen'" style="display:none;"/>
+        </label>
+        <span style="font-size:12px;color:#AAA;">No file chosen</span>
+      </div>
+    </div></div>`,
+
+};
+function d10Select(val) {
+  document.getElementById('d10body').innerHTML = d10panels[val];
+}
+
+/* D11 */
+var d11titles = {live:'Live Log Query', import:'Upload Logs'};
+function d11Select(el, val) {
+  document.querySelectorAll('.d11-btn').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('d11body').innerHTML = `<div style="font-size:12px;font-weight:600;color:#333;margin-bottom:10px;">${d11titles[val]}</div>${panels[val]}`;
+}
+
+/* D12 */
+var d12panels = {
+  live: `<div style="display:flex;align-items:center;gap:8px;"><span style="font-size:12px;color:#8BE06A;">$</span><span style="color:#AAB;">time_range:</span><select><option>last_7d</option><option>last_24h</option><option>last_30d</option><option>custom</option></select></div>`,
+  import: `<div style="border:1px dashed #3A4560;border-radius:5px;padding:10px 12px;background:#141824;">
+    <textarea style="width:100%;border:none;background:transparent;padding:0;font-size:12px;font-family:monospace;outline:none;resize:vertical;color:#8BE06A;" rows="4" placeholder="# paste raw log lines here…"></textarea>
+    <div style="text-align:center;margin:8px 0;font-size:11.5px;color:#555;">— or —</div>
+    <div style="display:flex;align-items:center;gap:10px;">
+      <label class="file-btn" style="display:inline-flex;align-items:center;gap:6px;cursor:pointer;background:#2A3347;border-color:#3A4560;color:#C8D0E0;">
+        📎 Choose file…<input type="file" onchange="this.parentElement.nextElementSibling.textContent=this.files[0]?this.files[0].name:'No file chosen'" style="display:none;"/>
+      </label>
+      <span style="font-size:12px;color:#555;">No file chosen</span>
+    </div>
+  </div>`,
+
+};
+function d12Select(el, val) {
+  document.querySelectorAll('.d12-tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('d12body').innerHTML = d12panels[val];
+}
+
+/* D13 */
+var d13vals = {1:'live', 2:'import'};
+function d13Select(n) {
+  for(var i=1;i<=2;i++) {
+    var s = document.getElementById('d13s'+i);
+    s.classList.remove('active','done');
+    if(i < n) s.classList.add('done');
+    if(i === n) s.classList.add('active');
+  }
+  document.getElementById('d13body').innerHTML = panels[d13vals[n]];
+}
+
+/* D14 */
+function d14Select(el, val) {
+  document.querySelectorAll('.d14-opt').forEach(o => o.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('d14body').innerHTML = panels[val];
+}
+
+/* D15 */
+function d15Select(el, val) {
+  document.querySelectorAll('.d15-tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  var extra = val === 'live'
+    ? `<div class="d15-time-row"><span class="d15-label">time_range:</span><select class="inp" style="width:150px;"><option>last_7d</option><option>last_24h</option><option>last_30d</option><option>custom</option></select></div>`
+    : `<div style="border:1px dashed #C9CDD4;border-radius:5px;padding:10px 12px;background:#FAFBFC;">
+        <textarea class="ta" rows="4" placeholder="Paste raw log lines here\u2026" style="border:none;background:transparent;padding:0;font-size:12px;width:100%;"></textarea>
+        <div style="text-align:center;margin:8px 0;font-size:11.5px;color:#AAA;">\u2014 or \u2014</div>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <label class="file-btn" style="display:inline-flex;align-items:center;gap:6px;cursor:pointer;">&#128206; Choose file\u2026<input type="file" onchange="this.parentElement.nextElementSibling.textContent=this.files[0]?this.files[0].name:'No file chosen'" style="display:none;"/></label>
+          <span style="font-size:12px;color:#AAA;">No file chosen</span>
+        </div>
+      </div>`;
+  document.getElementById('d15body').innerHTML = extra;
+}
+</script>
+</body>
+</html>

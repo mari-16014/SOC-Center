@@ -3520,7 +3520,7 @@
             <!-- Context steps -->
             <div style="display:grid;grid-template-columns:130px 1fr;gap:16px;align-items:start;">
               <label style="font-size:13px;font-weight:500;color:#374151;padding-top:10px;">Context</label>
-              <div id="rbStepsList" style="border:1.5px dashed #D1D5DB;border-radius:6px;padding:10px 12px;min-height:52px;"></div>
+              <div id="rbStepsList" style="border:1.5px dashed #D1D5DB;border-radius:6px;padding:10px 12px;min-height:60px;max-height:380px;overflow-y:auto;"></div>
             </div>
           </div>
           <!-- Footer -->
@@ -7355,9 +7355,18 @@
             <img src="./assets/icons/icon-chevron-left.svg" alt="" style="width:16px;height:16px;" />
           </button>
           <span style="font-size:15px;font-weight:600;color:#000;">Add Alert Profile</span>
+          <!-- Right side: Preview Alert -->
+          <div style="margin-left:auto;">
+            <button onclick="apOpenPreviewPanel()" id="apPreviewBtn" style="display:flex;align-items:center;gap:5px;height:28px;padding:0 12px;border:1px solid #C4C4C4;border-radius:3px;background:#fff;cursor:pointer;font-size:12.5px;color:#333;font-family:inherit;font-weight:500;" onmouseover="this.style.background='#F5F5F5'" onmouseout="this.style.background='#fff'">
+              Preview Alert
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+          </div>
         </div>
+        <!-- Content: form + preview side panel -->
+        <div id="apFormView" style="flex:1;display:flex;overflow:hidden;">
         <!-- Form body -->
-        <div style="flex:1;overflow:auto;padding:24px 32px;">
+        <div id="apFormBody" style="flex:1;min-width:540px;overflow:auto;padding:24px 32px;">
           <table style="width:100%;border-collapse:collapse;max-width:900px;">
             <colgroup><col style="width:200px;"/><col /></colgroup>
             <tbody>
@@ -8152,6 +8161,146 @@
           </div>
         </div>
 
+        <!-- Preview panel (right side) -->
+        <div id="apPreviewView" style="display:none;width:880px;flex-shrink:0;border-left:1px solid #E9E9E9;overflow-y:auto;overflow-x:hidden;padding:16px 20px;box-sizing:border-box;">
+            <!-- rule text box -->
+            <div style="background:#fff;border:1px solid #D1D5DB;border-radius:3px;padding:10px 12px;font-size:12px;color:#333;line-height:1.65;margin-bottom:0;display:flex;align-items:flex-start;gap:10px;">
+              <span style="flex:1;">Action 1: Logtype:Windows AND event_name=&quot;failed windows login&quot; | Action 2: Logtype:Windows AND event_name=&quot;successful windows login&quot; AND username = Action1.username | Action Sequence: Action1 followed by Action2 within 10m | select Action1.username, Action1.devicename</span>
+              <button onclick="apRunPreview()" title="Refresh preview with current settings" style="flex-shrink:0;width:26px;height:26px;border:1px solid #D1D5DB;border-radius:4px;background:#F9FAFB;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;margin-top:-1px;transition:background .13s;" onmouseover="this.style.background='#EEF4FF';this.style.borderColor='#2C66DD'" onmouseout="this.style.background='#F9FAFB';this.style.borderColor='#D1D5DB'">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+              </button>
+            </div>
+            <!-- log source options (Option 15 pill-tab style) -->
+            <!-- FULL form (shown before first run / when Change is clicked) -->
+            <div id="apLogSourceFull" style="background:#F8F9FB;border:1px solid #E5E7EB;border-radius:8px;padding:16px;margin-top:10px;margin-bottom:4px;">
+              <div style="display:flex;gap:6px;margin-bottom:14px;">
+                <div id="apTabLive" onclick="apToggleLogSource('live')" style="padding:5px 14px;border-radius:4px;font-size:12px;font-weight:600;cursor:pointer;user-select:none;border:1px solid #2C66DD;background:#2C66DD;color:#fff;transition:all .13s;">&#128197; Live Logs</div>
+                <div id="apTabUpload" onclick="apToggleLogSource('upload')" style="padding:5px 14px;border-radius:4px;font-size:12px;color:#888;cursor:pointer;user-select:none;border:1px solid transparent;background:none;transition:all .13s;">&#128193; Upload Logs</div>
+              </div>
+              <!-- Live Logs body -->
+              <div id="apLiveBody" style="background:#fff;border:1px solid #E5E7EB;border-radius:6px;padding:12px 14px;">
+                <div style="display:flex;align-items:center;gap:8px;">
+                  <span style="font-size:12px;color:#555;">Time Range:</span>
+                  <select id="apTimeRangeSelect" onchange="apTimeRangeChange(this.value);apMarkStale()" style="height:28px;border:1px solid #C4C4C4;border-radius:3px;background:#fff;padding:0 8px;font-size:12px;color:#333;outline:none;cursor:pointer;">
+                    <option value="last7d" selected>Last 7 Days</option>
+                    <option value="last24h">Last 24 Hours</option>
+                    <option value="last30d">Last 30 Days</option>
+                    <option value="custom">Custom Range</option>
+                  </select>
+                  <div id="apCustomDateRange" style="display:none;align-items:center;gap:6px;">
+                    <div style="display:flex;align-items:center;gap:4px;border:1px solid #C4C4C4;border-radius:3px;padding:0 8px;height:28px;background:#fff;font-size:12px;color:#333;">
+                      <span>2024-02-23 00:00:00</span>
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                    </div>
+                    <span style="font-size:11px;color:#888;">to</span>
+                    <div style="display:flex;align-items:center;gap:4px;border:1px solid #C4C4C4;border-radius:3px;padding:0 8px;height:28px;background:#fff;font-size:12px;color:#333;">
+                      <span>2024-02-29 23:54:33</span>
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Upload Logs body -->
+              <div id="apUploadBody" style="display:none;background:#fff;border:1px solid #E5E7EB;border-radius:6px;padding:12px 14px;">
+                <div style="border:1px dashed #C9CDD4;border-radius:5px;padding:10px 12px;background:#FAFBFC;">
+                  <textarea placeholder="Paste raw log lines here…" style="width:100%;border:none;background:transparent;padding:0;font-size:12px;font-family:monospace;outline:none;resize:vertical;min-height:80px;line-height:1.6;color:#333;"></textarea>
+                  <div style="text-align:center;margin:8px 0;font-size:11.5px;color:#AAA;">— or —</div>
+                  <div style="display:flex;align-items:center;gap:10px;">
+                    <label id="apImportLogLabel" style="display:flex;align-items:center;gap:6px;height:28px;padding:0 12px;border:1px solid #C4C4C4;border-radius:3px;background:#fff;cursor:pointer;font-size:12px;color:#333;" onmouseover="this.style.background='#F5F5F5'" onmouseout="this.style.background='#fff'">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                      Choose file…
+                      <input type="file" accept=".log,.txt,.csv,.json,.zip" style="display:none;" onchange="apImportLogFile(this)" />
+                    </label>
+                    <span id="apImportFileName" style="font-size:12px;color:#AAA;">No file chosen</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- COLLAPSED summary (shown after Run Preview) -->
+            <div id="apLogSourceSummary" style="display:none;background:#F8F9FB;border:1px solid #E5E7EB;border-radius:8px;padding:9px 14px;margin-top:10px;margin-bottom:4px;display:none;align-items:center;justify-content:space-between;">
+              <span id="apLogSourceSummaryText" style="font-size:12px;color:#444;"></span>
+              <a href="#" onclick="apExpandLogSource();return false;" style="font-size:12px;color:#2C66DD;text-decoration:none;font-weight:500;white-space:nowrap;margin-left:12px;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">&#9998; Change</a>
+            </div>
+            <!-- Run Preview button (sticky) -->
+            <div id="apRunPreviewWrap" style="position:sticky;bottom:0;background:#fff;padding:10px 0 4px;margin-top:8px;z-index:10;border-top:1px solid transparent;transition:border-color .2s;">
+              <button id="apRunPreviewBtn" onclick="apRunPreview()" style="height:32px;padding:0 20px;background:#2C66DD;color:#fff;border:none;border-radius:4px;font-size:12.5px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:7px;font-family:inherit;transition:background .15s;" onmouseover="this.style.background='#1A50C0'" onmouseout="if(!this.classList.contains('ap-stale'))this.style.background='#2C66DD'">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+                Run Preview
+              </button>
+              <span id="apStaleHint" style="display:none;margin-left:10px;font-size:11.5px;color:#B45309;background:#FEF3C7;border:1px solid #FDE68A;border-radius:4px;padding:3px 9px;">&#9888; Settings changed &mdash; re-run to update results</span>
+            </div>
+
+            <!-- Empty state (shown before first run) -->
+            <div id="apEmptyState" style="margin-top:12px;border:1.5px dashed #D1D5DB;border-radius:8px;background:#F8F9FB;padding:48px 24px;text-align:center;">
+              <svg width="52" height="52" viewBox="0 0 52 52" fill="none" style="margin-bottom:14px;">
+                <circle cx="26" cy="26" r="25" fill="#EEF4FF" stroke="#C7D9FF" stroke-width="1.5"/>
+                <circle cx="22" cy="22" r="9" stroke="#7BA4F0" stroke-width="2.5" fill="none"/>
+                <line x1="28.5" y1="28.5" x2="36" y2="36" stroke="#7BA4F0" stroke-width="2.5" stroke-linecap="round"/>
+                <path d="M18 22 Q22 17 26 22" stroke="#E07090" stroke-width="2" stroke-linecap="round" fill="none"/>
+              </svg>
+              <div style="font-size:14px;font-weight:600;color:#333;margin-bottom:6px;">No preview yet</div>
+              <div style="font-size:12.5px;color:#888;line-height:1.6;">Click <strong>Run Preview</strong> to see how this alert would match the selected logs.</div>
+            </div>
+
+            <!-- Results area (hidden until Run Preview clicked) -->
+            <div id="apResultsArea" style="display:none;margin-top:12px;">
+              <!-- toolbar row -->
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+                <div style="display:flex;align-items:center;gap:10px;">
+                  <button onclick="apRunPreview()" style="display:flex;align-items:center;gap:5px;height:28px;padding:0 12px;border:1px solid #C4C4C4;border-radius:3px;background:#fff;cursor:pointer;font-size:12px;color:#333;font-family:inherit;" onmouseover="this.style.background='#F5F5F5'" onmouseout="this.style.background='#fff'">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+                    Reload Preview
+                  </button>
+                  <span id="apMatchBadge" style="font-size:11.5px;font-weight:600;color:#166534;background:#DCFCE7;border:1px solid #BBF7D0;border-radius:20px;padding:2px 10px;">10 matches</span>
+                </div>
+                <a href="#" id="apHideGraphLink" onclick="apToggleGraph();return false;" style="font-size:12px;color:#555;text-decoration:none;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">Hide Graph</a>
+              </div>
+              <!-- chart area -->
+              <div id="apGraphArea" style="border:1px solid #E5E7EB;border-radius:3px;padding:14px 16px;margin-bottom:14px;background:#fff;">
+                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+                  <span style="font-size:11px;color:#888;">Count</span>
+                  <select style="height:26px;border:1px solid #D1D5DB;border-radius:3px;font-size:12px;color:#333;padding:0 8px;outline:none;background:#fff;"><option>1M</option><option>100K</option><option>10K</option></select>
+                </div>
+                <svg width="100%" height="160" viewBox="0 0 700 160" preserveAspectRatio="none" style="display:block;">
+                  <defs><linearGradient id="apChartFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#90CAF9" stop-opacity="0.5"/><stop offset="100%" stop-color="#90CAF9" stop-opacity="0.05"/></linearGradient></defs>
+                  <path d="M0,120 C40,115 60,108 100,95 C140,82 160,90 200,88 C240,86 260,92 300,90 C340,88 360,78 400,70 C440,62 480,60 520,55 C560,50 600,52 650,48 L700,45 L700,155 L0,155 Z" fill="url(#apChartFill)"/>
+                  <path d="M0,120 C40,115 60,108 100,95 C140,82 160,90 200,88 C240,86 260,92 300,90 C340,88 360,78 400,70 C440,62 480,60 520,55 C560,50 600,52 650,48 L700,45" fill="none" stroke="#2196F3" stroke-width="2"/>
+                  <circle cx="100" cy="95" r="4" fill="#2196F3"/><circle cx="200" cy="88" r="4" fill="#2196F3"/><circle cx="300" cy="90" r="4" fill="#2196F3"/><circle cx="400" cy="70" r="4" fill="#2196F3"/><circle cx="520" cy="55" r="4" fill="#2196F3"/><circle cx="650" cy="48" r="4" fill="#2196F3"/>
+                  <text x="0" y="158" font-size="10" fill="#999">09:00</text><text x="110" y="158" font-size="10" fill="#999">10:00</text><text x="230" y="158" font-size="10" fill="#999">11:00</text><text x="345" y="158" font-size="10" fill="#999">12:00</text><text x="460" y="158" font-size="10" fill="#999">01:00</text><text x="580" y="158" font-size="10" fill="#999">02:00</text>
+                  <text x="10" y="14" font-size="10" fill="#999">1M</text><text x="10" y="58" font-size="10" fill="#999">100K</text><text x="10" y="108" font-size="10" fill="#999">10k</text><text x="10" y="150" font-size="10" fill="#999">0</text>
+                </svg>
+                <div style="text-align:center;font-size:11px;color:#888;margin-top:4px;">Time</div>
+              </div>
+              <!-- data table -->
+              <table style="width:100%;border-collapse:collapse;font-size:12.5px;">
+                <thead>
+                  <tr style="background:#455A64;">
+                    <th style="padding:8px 14px;text-align:left;font-weight:600;color:#fff;border:1px solid #546E7A;">Time</th>
+                    <th style="padding:8px 14px;text-align:left;font-weight:600;color:#fff;border:1px solid #546E7A;">Username</th>
+                    <th style="padding:8px 14px;text-align:left;font-weight:600;color:#fff;border:1px solid #546E7A;">Devicename</th>
+                    <th style="padding:8px 14px;text-align:left;font-weight:600;color:#fff;border:1px solid #546E7A;">Remote IP Address</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td style="padding:7px 14px;border:1px solid #E5E7EB;">2024-05-30 23:59:49</td><td style="padding:7px 14px;border:1px solid #E5E7EB;">User1</td><td style="padding:7px 14px;border:1px solid #E5E7EB;">Device-1</td><td style="padding:7px 14px;border:1px solid #E5E7EB;">192.10.0.1</td></tr>
+                  <tr style="background:#FAFAFA;"><td style="padding:7px 14px;border:1px solid #E5E7EB;">2024-05-30 23:59:49</td><td style="padding:7px 14px;border:1px solid #E5E7EB;">User1</td><td style="padding:7px 14px;border:1px solid #E5E7EB;">Device-2</td><td style="padding:7px 14px;border:1px solid #E5E7EB;">192.10.0.2</td></tr>
+                  <tr><td style="padding:7px 14px;border:1px solid #E5E7EB;">2024-05-30 23:59:49</td><td style="padding:7px 14px;border:1px solid #E5E7EB;">administrator</td><td style="padding:7px 14px;border:1px solid #E5E7EB;">Device-3</td><td style="padding:7px 14px;border:1px solid #E5E7EB;">192.10.0.3</td></tr>
+                  <tr style="background:#FAFAFA;"><td style="padding:7px 14px;border:1px solid #E5E7EB;">2024-05-30 23:59:49</td><td style="padding:7px 14px;border:1px solid #E5E7EB;">administrator</td><td style="padding:7px 14px;border:1px solid #E5E7EB;">Device-4</td><td style="padding:7px 14px;border:1px solid #E5E7EB;">192.10.0.4</td></tr>
+                  <tr><td style="padding:7px 14px;border:1px solid #E5E7EB;">2024-05-30 23:59:49</td><td style="padding:7px 14px;border:1px solid #E5E7EB;">eventlog</td><td style="padding:7px 14px;border:1px solid #E5E7EB;">Device-5</td><td style="padding:7px 14px;border:1px solid #E5E7EB;">192.10.0.5</td></tr>
+                  <tr style="background:#FAFAFA;"><td style="padding:7px 14px;border:1px solid #E5E7EB;">2024-05-30 23:59:49</td><td style="padding:7px 14px;border:1px solid #E5E7EB;">eventlog</td><td style="padding:7px 14px;border:1px solid #E5E7EB;">Device-1</td><td style="padding:7px 14px;border:1px solid #E5E7EB;">192.10.0.6</td></tr>
+                  <tr><td style="padding:7px 14px;border:1px solid #E5E7EB;">2024-05-30 23:59:49</td><td style="padding:7px 14px;border:1px solid #E5E7EB;">eventlog</td><td style="padding:7px 14px;border:1px solid #E5E7EB;">Device-1</td><td style="padding:7px 14px;border:1px solid #E5E7EB;">192.10.0.7</td></tr>
+                  <tr style="background:#FAFAFA;"><td style="padding:7px 14px;border:1px solid #E5E7EB;">2024-05-30 23:59:49</td><td style="padding:7px 14px;border:1px solid #E5E7EB;">eventlog</td><td style="padding:7px 14px;border:1px solid #E5E7EB;">Device-1</td><td style="padding:7px 14px;border:1px solid #E5E7EB;">192.10.0.8</td></tr>
+                  <tr><td style="padding:7px 14px;border:1px solid #E5E7EB;">2024-05-30 23:59:49</td><td style="padding:7px 14px;border:1px solid #E5E7EB;">eventlog</td><td style="padding:7px 14px;border:1px solid #E5E7EB;">Device-1</td><td style="padding:7px 14px;border:1px solid #E5E7EB;">192.10.0.9</td></tr>
+                  <tr style="background:#FAFAFA;"><td style="padding:7px 14px;border:1px solid #E5E7EB;">2024-05-30 23:59:49</td><td style="padding:7px 14px;border:1px solid #E5E7EB;">eventlog</td><td style="padding:7px 14px;border:1px solid #E5E7EB;">Device-1</td><td style="padding:7px 14px;border:1px solid #E5E7EB;">192.10.0.10</td></tr>
+                </tbody>
+              </table>
+              <!-- bottom note -->
+              <div style="font-size:11.5px;color:#666;margin-top:12px;padding:8px 0;border-top:1px solid #E5E7EB;">
+                <strong>Note:</strong> Only 100 results will be loaded. Large timeframes or short intervals may cause preview timeouts—reduce timeframe or increase interval if needed.
+              </div>
+            </div><!-- /apResultsArea -->
+        </div><!-- /apPreviewView -->
+        </div><!-- /apFormView -->
       </div><!-- /thAddAlertProfilePage -->
 
     </main>
@@ -11383,17 +11532,128 @@ var _rbAllFns = ['extract_user','extract_ip','extract_hostname','extract_file_ha
 
 var _rbActiveStepIdx = 0;
 
+var _rbCustomFunctions = [
+  { value: '', label: '— Select Function —' },
+  /* ── Data Extraction ── */
+  { value: 'extract_email',           label: '📧  Extract Email & Identity' },
+  { value: 'extract_ip_entities',     label: '🌐  Extract IP Entities' },
+  { value: 'extract_url_domains',     label: '🔗  Extract URLs & Domains' },
+  { value: 'extract_file_artifacts',  label: '📄  Extract File Artifacts' },
+  { value: 'extract_registry_keys',   label: '🗝️  Extract Registry Keys' },
+  /* ── Enrichment ── */
+  { value: 'enrich_user_context',     label: '👤  Enrich User Context' },
+  { value: 'enrich_host_context',     label: '🖥️  Enrich Host Context' },
+  { value: 'geo_ip_lookup',           label: '📍  Geo IP Lookup' },
+  { value: 'whois_domain',            label: '🔍  WHOIS Domain Lookup' },
+  { value: 'dns_reverse_lookup',      label: '📡  DNS Reverse Lookup' },
+  /* ── Threat Intelligence ── */
+  { value: 'query_threat_intel',      label: '🛡️  Query Threat Intelligence' },
+  { value: 'check_file_hash',         label: '🔒  Check File Hash (VirusTotal)' },
+  { value: 'check_url_reputation',    label: '🚨  Check URL Reputation' },
+  { value: 'check_ip_reputation',     label: '⚠️  Check IP Reputation' },
+  { value: 'check_cve_details',       label: '📋  Lookup CVE Details' },
+  /* ── Log & Alert Analysis ── */
+  { value: 'parse_log_events',        label: '📊  Parse Log Events' },
+  { value: 'correlate_alerts',        label: '🔗  Correlate Alerts' },
+  { value: 'baseline_deviation',      label: '📈  Detect Baseline Deviation' },
+  { value: 'timeline_builder',        label: '🕒  Build Attack Timeline' },
+  { value: 'process_tree_analysis',   label: '🌳  Process Tree Analysis' },
+  /* ── Response & Reporting ── */
+  { value: 'generate_findings',       label: '📝  Generate Findings Report' },
+  { value: 'create_incident',         label: '🚒  Create Incident Ticket' },
+  { value: 'notify_stakeholders',     label: '📣  Notify Stakeholders' },
+  { value: 'quarantine_endpoint',     label: '🔐  Quarantine Endpoint' },
+  { value: 'block_ip_firewall',       label: '🛑  Block IP on Firewall' },
+  { value: 'reset_user_password',     label: '🔑  Reset User Password' },
+  { value: 'disable_user_account',    label: '🚫  Disable User Account' },
+  { value: 'revoke_oauth_tokens',     label: '❌  Revoke OAuth Tokens' }
+];
+var _rbConnections = [
+  { value: '', label: '— Select Connection —' },
+  /* ── Identity & Cloud ── */
+  { value: 'azure_ad',         label: '🔷  Azure Active Directory' },
+  { value: 'ms365',            label: '🟦  Microsoft 365' },
+  { value: 'ms_defender',      label: '🛡️  Microsoft Defender' },
+  { value: 'ms_sentinel',      label: '🔭  Microsoft Sentinel' },
+  { value: 'aws_cloudtrail',   label: '🟠  AWS CloudTrail' },
+  { value: 'aws_guardduty',    label: '🟠  AWS GuardDuty' },
+  { value: 'gcp_scc',          label: '🔵  GCP Security Command Center' },
+  { value: 'okta',             label: '🔑  Okta Identity' },
+  /* ── SIEM & Endpoint ── */
+  { value: 'splunk',           label: '🟢  Splunk SIEM' },
+  { value: 'qradar',           label: '⚫  IBM QRadar' },
+  { value: 'crowdstrike',      label: '🔴  CrowdStrike Falcon' },
+  { value: 'sentinelone',      label: '🟣  SentinelOne' },
+  { value: 'carbon_black',     label: '⚫  Carbon Black' },
+  { value: 'defender_edr',     label: '🔵  Microsoft Defender EDR' },
+  /* ── Threat Intelligence ── */
+  { value: 'virustotal',       label: '🦠  VirusTotal' },
+  { value: 'misp',             label: '🕷️  MISP Threat Intel' },
+  { value: 'threatconnect',    label: '🔗  ThreatConnect' },
+  { value: 'recorded_future',  label: '📡  Recorded Future' },
+  { value: 'alienvault_otx',   label: '👽  AlienVault OTX' },
+  /* ── ITSM & Ticketing ── */
+  { value: 'servicenow',       label: '🟩  ServiceNow' },
+  { value: 'jira',             label: '🔵  Jira' },
+  { value: 'pagerduty',        label: '🟡  PagerDuty' },
+  { value: 'freshservice',     label: '🌿  Freshservice' },
+  /* ── Communication ── */
+  { value: 'slack',            label: '💬  Slack' },
+  { value: 'teams',            label: '🟦  Microsoft Teams' },
+  { value: 'email_smtp',       label: '📧  Email (SMTP)' },
+  /* ── Network & Firewall ── */
+  { value: 'palo_alto',        label: '🔥  Palo Alto Networks' },
+  { value: 'fortinet',         label: '🔴  Fortinet FortiGate' },
+  { value: 'cisco_asa',        label: '🔵  Cisco ASA Firewall' }
+];
+
+function _rbFnOptions(sel) {
+  return _rbCustomFunctions.map(function(o){
+    return '<option value="'+o.value+'"'+(o.value===sel?' selected':'')+'>'+o.label+'</option>';
+  }).join('');
+}
+function _rbConnOptions(sel) {
+  return _rbConnections.map(function(o){
+    return '<option value="'+o.value+'"'+(o.value===sel?' selected':'')+'>'+o.label+'</option>';
+  }).join('');
+}
+
 function _rbRenderSteps() {
   var cont = document.getElementById('rbStepsList');
   if (!cont) return;
+  var selStyle = 'height:30px;border:1px solid #D1D5DB;border-radius:6px;font-size:12px;color:#333;padding:0 8px;outline:none;background:#fff;cursor:pointer;width:100%;box-sizing:border-box;';
   var rows = _rbEditSteps.map(function(s, idx) {
-    return '<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">'
-      + '<input type="text" value="'+_rbEsc(s.label)+'" oninput="_rbStepLabelChange('+idx+',this.value)" placeholder="Enter context step..." '
-      + 'style="flex:1;height:34px;border:1px solid #D1D5DB;border-radius:6px;font-size:13px;color:#333;padding:0 10px;outline:none;box-sizing:border-box;" '
-      + 'onfocus="this.style.borderColor=\'#1565C0\'" onblur="this.style.borderColor=\'#D1D5DB\'" />'
-      + '<button onclick="_rbRemoveStep('+idx+')" style="flex-shrink:0;width:24px;height:24px;border:none;background:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#aaa;font-size:18px;line-height:1;" title="Remove">'
-      + '<svg width="14" height="14" viewBox="0 0 18 18" fill="none"><path d="M14 4L4 14M4 4l10 10" stroke="#999" stroke-width="1.8" stroke-linecap="round"/></svg>'
+    return '<div style="border:1px solid #E5E7EB;border-radius:8px;padding:10px 12px;margin-bottom:10px;background:#FAFAFA;position:relative;">'
+      /* remove button */
+      + '<button onclick="_rbRemoveStep('+idx+')" title="Remove" style="position:absolute;top:8px;right:8px;width:20px;height:20px;border:none;background:none;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;">'
+      + '<svg width="13" height="13" viewBox="0 0 18 18" fill="none"><path d="M14 4L4 14M4 4l10 10" stroke="#aaa" stroke-width="1.8" stroke-linecap="round"/></svg>'
       + '</button>'
+      /* step number */
+      + '<div style="font-size:11px;font-weight:600;color:#888;margin-bottom:8px;text-transform:uppercase;letter-spacing:.4px;">Context '+(idx+1)+'</div>'
+      /* prompt row */
+      + '<div style="margin-bottom:8px;">'
+      + '<div style="font-size:11.5px;font-weight:600;color:#555;margin-bottom:4px;">Prompt</div>'
+      + '<input type="text" data-rb-prompt="'+idx+'" value="'+_rbEsc(s.label)+'" oninput="_rbStepLabelChange('+idx+',this.value)" placeholder="Describe what this step should do..." '
+      + 'style="width:100%;height:32px;border:1px solid #D1D5DB;border-radius:6px;font-size:12.5px;color:#333;padding:0 10px;outline:none;box-sizing:border-box;background:#fff;" '
+      + 'onfocus="this.style.borderColor=\'#1565C0\'" onblur="this.style.borderColor=\'#D1D5DB\'" />'
+      + '</div>'
+      /* function + connection row */
+      + '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">'
+      /* custom function */
+      + '<div>'
+      + '<div style="font-size:11.5px;font-weight:600;color:#555;margin-bottom:4px;">Custom Function</div>'
+      + '<select data-rb-fn="'+idx+'" onchange="_rbStepFnChange('+idx+',this.value)" style="'+selStyle+'">'
+      + _rbFnOptions(s.fn||'')
+      + '</select>'
+      + '</div>'
+      /* connection */
+      + '<div>'
+      + '<div style="font-size:11.5px;font-weight:600;color:#555;margin-bottom:4px;">Connection</div>'
+      + '<select data-rb-conn="'+idx+'" onchange="_rbStepConnChange('+idx+',this.value)" style="'+selStyle+'">'
+      + _rbConnOptions(s.connection||'')
+      + '</select>'
+      + '</div>'
+      + '</div>'
       + '</div>';
   }).join('');
   cont.innerHTML = rows
@@ -11403,8 +11663,10 @@ function _rbRenderSteps() {
 }
 
 function _rbStepLabelChange(idx, val) { if (_rbEditSteps[idx]) _rbEditSteps[idx].label = val; }
+function _rbStepFnChange(idx, val)    { if (_rbEditSteps[idx]) _rbEditSteps[idx].fn = val; }
+function _rbStepConnChange(idx, val)  { if (_rbEditSteps[idx]) _rbEditSteps[idx].connection = val; }
 function _rbRemoveStep(idx) { _rbEditSteps.splice(idx, 1); _rbRenderSteps(); }
-function rbAddStep() { _rbEditSteps.push({ id: _rbStepNextId++, fn: 'custom', label: '' }); _rbRenderSteps(); }
+function rbAddStep() { _rbEditSteps.push({ id: _rbStepNextId++, fn: '', connection: '', label: '' }); _rbRenderSteps(); }
 function _rbMakeActiveStep(idx) { _rbRenderSteps(); }
 function _rbMoveStep(idx, dir) { var n=idx+dir; if(n<0||n>=_rbEditSteps.length)return; var t=_rbEditSteps[idx];_rbEditSteps[idx]=_rbEditSteps[n];_rbEditSteps[n]=t; _rbRenderSteps(); }
 
@@ -11414,8 +11676,14 @@ function rbSaveEditor() {
   document.getElementById('rbFormName').style.borderColor='#D1D5DB';
   var desc = (document.getElementById('rbFormDesc').value||'').trim();
   /* sync any live inputs */
-  document.querySelectorAll('#rbStepsList input[type=text]').forEach(function(inp, idx){
+  document.querySelectorAll('#rbStepsList input[data-rb-prompt]').forEach(function(inp, idx){
     if (_rbEditSteps[idx]) _rbEditSteps[idx].label = inp.value.trim();
+  });
+  document.querySelectorAll('#rbStepsList select[data-rb-fn]').forEach(function(sel, idx){
+    if (_rbEditSteps[idx]) _rbEditSteps[idx].fn = sel.value;
+  });
+  document.querySelectorAll('#rbStepsList select[data-rb-conn]').forEach(function(sel, idx){
+    if (_rbEditSteps[idx]) _rbEditSteps[idx].connection = sel.value;
   });
   var steps = _rbEditSteps.filter(function(s){ return s.label.trim(); });
   if (_rbEditId!==null){
@@ -13252,6 +13520,112 @@ function sbExport(type) {
   }
 }
 /* ═══ END SANDBOX ═══ */
+
+function apOpenPreviewPanel() {
+  var pv = document.getElementById('apPreviewView');
+  if (!pv) return;
+  var open = pv.style.display === 'block';
+  pv.style.display = open ? 'none' : 'block';
+}
+function apClosePreviewPanel() {
+  var pv = document.getElementById('apPreviewView');
+  if (pv) pv.style.display = 'none';
+}
+var _apGraphVisible = true;
+function apToggleGraph() {
+  _apGraphVisible = !_apGraphVisible;
+  var g = document.getElementById('apGraphArea');
+  var lnk = document.getElementById('apHideGraphLink');
+  if (g) g.style.display = _apGraphVisible ? 'block' : 'none';
+  if (lnk) lnk.textContent = _apGraphVisible ? 'Hide Graph' : 'Show Graph';
+}
+function apMarkStale() {
+  var results = document.getElementById('apResultsArea');
+  if (!results || results.style.display === 'none') return; // only stale if results already shown
+  var btn = document.getElementById('apRunPreviewBtn');
+  var hint = document.getElementById('apStaleHint');
+  var wrap = document.getElementById('apRunPreviewWrap');
+  if (btn) { btn.style.background = '#B45309'; btn.style.borderColor = '#B45309'; btn.classList.add('ap-stale'); }
+  if (hint) hint.style.display = 'inline-flex';
+  if (wrap) wrap.style.borderTopColor = '#FDE68A';
+}
+function apRunPreview() {
+  var btn = document.getElementById('apRunPreviewBtn');
+  var empty = document.getElementById('apEmptyState');
+  var results = document.getElementById('apResultsArea');
+  if (!btn || !empty || !results) return;
+  // clear stale state
+  var hint = document.getElementById('apStaleHint');
+  var wrap = document.getElementById('apRunPreviewWrap');
+  if (hint) hint.style.display = 'none';
+  if (wrap) wrap.style.borderTopColor = 'transparent';
+  btn.classList.remove('ap-stale');
+  btn.disabled = true;
+  btn.style.background = '#1A50C0';
+  btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="animation:spin .7s linear infinite;"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg> Running…';
+  setTimeout(function() {
+    btn.disabled = false;
+    btn.style.background = '#2C66DD';
+    btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg> Run Preview';
+    empty.style.display = 'none';
+    results.style.display = 'block';
+    // collapse log source to summary
+    var full = document.getElementById('apLogSourceFull');
+    var summary = document.getElementById('apLogSourceSummary');
+    var summaryText = document.getElementById('apLogSourceSummaryText');
+    if (full && summary && summaryText) {
+      var isUpload = document.getElementById('apUploadBody') && document.getElementById('apUploadBody').style.display !== 'none';
+      var rangeEl = document.getElementById('apTimeRangeSelect');
+      var rangeLabel = rangeEl ? rangeEl.options[rangeEl.selectedIndex].text : 'Last 7 Days';
+      summaryText.innerHTML = isUpload
+        ? '<span style="background:#E8F0FE;color:#2C66DD;border-radius:3px;padding:2px 8px;font-size:11.5px;font-weight:600;margin-right:8px;">📁 Upload Logs</span>File or pasted input'
+        : '<span style="background:#E8F0FE;color:#2C66DD;border-radius:3px;padding:2px 8px;font-size:11.5px;font-weight:600;margin-right:8px;">📅 Live Logs</span>' + rangeLabel;
+      full.style.display = 'none';
+      summary.style.display = 'flex';
+    }
+  }, 900);
+}
+function apExpandLogSource() {
+  var full = document.getElementById('apLogSourceFull');
+  var summary = document.getElementById('apLogSourceSummary');
+  if (full) full.style.display = 'block';
+  if (summary) summary.style.display = 'none';
+  apMarkStale();
+}
+function apReloadPreview() { apRunPreview(); }
+function apToggleLogSource(val) {
+  var liveBody   = document.getElementById('apLiveBody');
+  var uploadBody = document.getElementById('apUploadBody');
+  var tabLive    = document.getElementById('apTabLive');
+  var tabUpload  = document.getElementById('apTabUpload');
+  if (liveBody)   liveBody.style.display   = val === 'live'   ? 'block' : 'none';
+  if (uploadBody) uploadBody.style.display = val === 'upload' ? 'block' : 'none';
+  if (tabLive) {
+    tabLive.style.background   = val === 'live'   ? '#2C66DD' : 'none';
+    tabLive.style.color        = val === 'live'   ? '#fff'    : '#888';
+    tabLive.style.border       = val === 'live'   ? '1px solid #2C66DD' : '1px solid transparent';
+    tabLive.style.fontWeight   = val === 'live'   ? '600'     : 'normal';
+  }
+  if (tabUpload) {
+    tabUpload.style.background = val === 'upload' ? '#2C66DD' : 'none';
+    tabUpload.style.color      = val === 'upload' ? '#fff'    : '#888';
+    tabUpload.style.border     = val === 'upload' ? '1px solid #2C66DD' : '1px solid transparent';
+    tabUpload.style.fontWeight = val === 'upload' ? '600'     : 'normal';
+  }
+  apMarkStale();
+}
+function apTimeRangeChange(val) {
+  var custom = document.getElementById('apCustomDateRange');
+  if (custom) custom.style.display = val === 'custom' ? 'flex' : 'none';
+}
+function apImportLogFile(input) {
+  var label = document.getElementById('apImportFileName');
+  if (label && input.files && input.files[0]) {
+    label.textContent = input.files[0].name;
+    label.style.color = '#333';
+    label.style.fontStyle = 'normal';
+  }
+}
 
 function thOpenAddAlertProfile() {
   _lockScroll();
