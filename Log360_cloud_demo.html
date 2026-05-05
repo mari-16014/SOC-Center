@@ -12375,7 +12375,7 @@ function rlcOpenTechnique(ci,ti,el){
     ? rules.map(function(r){
         return '<div style="display:flex;align-items:center;justify-content:space-between;padding:9px 12px;border:1px solid #E5E7EB;border-radius:6px;margin-bottom:6px;">'
           +'<div style="min-width:0;"><div style="font-size:12.5px;font-weight:600;color:#1a1a1a;">'+r.name+'</div><div style="font-size:11px;color:#888;margin-top:2px;">'+r.id+'</div></div>'
-          +'<div style="flex-shrink:0;margin-left:12px;text-align:right;"><div style="font-size:11px;color:#555;white-space:nowrap;">'+r.det+'</div><div style="font-size:10.5px;color:#aaa;">detections</div></div>'
+          +'<div style="flex-shrink:0;margin-left:12px;text-align:right;"><div style="font-size:14px;font-weight:700;color:#1a1a1a;">'+r.det+'</div><div style="font-size:10.5px;color:#aaa;">/30d</div></div>'
           +'</div>';
       }).join('')
     : '<div style="padding:24px 0;text-align:center;"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" style="margin:0 auto 8px;display:block;"><circle cx="12" cy="12" r="9" stroke="#D1D5DB" stroke-width="1.5"/><path d="M12 8v4M12 16h.01" stroke="#D1D5DB" stroke-width="1.8" stroke-linecap="round"/></svg><div style="font-size:13px;font-weight:600;color:#9CA3AF;">No detection rules mapped</div><div style="font-size:12px;color:#C0C0C0;margin-top:4px;">Create a rule to cover this technique</div></div>';
@@ -12390,7 +12390,11 @@ function rlcOpenTechnique(ci,ti,el){
     +'<div style="margin-top:16px;padding-top:14px;border-top:1px solid #F0F0F0;">'
     +'<a href="'+mitreUrl+'" target="_blank" style="display:inline-flex;align-items:center;gap:5px;font-size:12px;color:#1565C0;text-decoration:none;">'
     +'<svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" stroke="#1565C0" stroke-width="1.8" stroke-linecap="round"/><polyline points="15 3 21 3 21 9" stroke="#1565C0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><line x1="10" y1="14" x2="21" y2="3" stroke="#1565C0" stroke-width="1.8" stroke-linecap="round"/></svg>'
-    +'View on MITRE ATT&CK</a></div>';
+    +'View on MITRE ATT&CK</a></div>'
+    +'<div style="position:sticky;bottom:0;background:#fff;padding:14px 0 0;margin-top:18px;border-top:1px solid #E5E7EB;display:flex;gap:8px;">'
+    +'<button onclick="rlcCloseDrawer()" style="flex:1;height:36px;border:1px solid #D1D5DB;background:#fff;border-radius:6px;font-size:13px;font-weight:500;color:#374151;cursor:pointer;">Cancel</button>'
+    +'<button onclick="rlcCloseDrawer()" style="flex:1;height:36px;border:none;background:#1565C0;border-radius:6px;font-size:13px;font-weight:500;color:#fff;cursor:pointer;">Save</button>'
+    +'</div>';
   document.getElementById('rlcDrawerPanel').style.display='flex';
   document.getElementById('rlcDrawerBackdrop').style.display='block';
 }
