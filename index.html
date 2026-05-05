@@ -9578,273 +9578,359 @@ function addSelectedTab() {
 
 
 <!-- ═══ SANDBOX OVERLAY ═══ -->
-<div id="sandboxOverlay" style="display:none;position:fixed;top:80px;left:0;right:0;bottom:0;z-index:9999;background:#F0F2F5;flex-direction:column;font-family:inherit;">
+<style>
+/* ═══ SANDBOX GLOBAL ═══ */
+#sandboxOverlay *{box-sizing:border-box;}
+#sandboxOverlay{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;}
+/* Deep Search drawer */
+#sbDeepDrawer{position:fixed;top:80px;right:-520px;width:460px;bottom:0;z-index:10100;background:#fff;box-shadow:-6px 0 40px rgba(0,0,0,0.14);display:flex;flex-direction:column;transition:right .32s cubic-bezier(.4,0,.2,1);}
+#sbDeepDrawer.open{right:0;}
+#sbDeepBackdrop{display:none;position:fixed;inset:0;background:rgba(15,15,20,0.22);z-index:10099;backdrop-filter:blur(1px);}
+.sb-crit-tab{display:flex;align-items:center;gap:7px;flex:1;height:38px;border:1.5px solid #E4E6EA;border-radius:8px;padding:0 12px;background:#F8F9FB;color:#555;font-size:12px;font-weight:600;cursor:pointer;transition:all .15s;white-space:nowrap;}
+.sb-crit-tab svg{flex-shrink:0;}
+.sb-crit-tab.active{background:#fff;color:#6C2BD9;border-color:#6C2BD9;box-shadow:0 1px 6px rgba(108,43,217,0.14);}
+.sb-mode-pill{height:28px;padding:0 14px;border:1.5px solid #DCDCDC;border-radius:6px;background:#F7F7F7;color:#555;font-size:11px;font-weight:600;cursor:pointer;transition:background .15s,color .15s,border-color .15s;}
+.sb-mode-pill.active{background:#6C2BD9;color:#fff;border-color:#6C2BD9;}
+.sb-log-tab{height:28px;padding:0 16px;border:none;border-radius:6px;background:transparent;color:#666;font-size:12px;font-weight:600;cursor:pointer;transition:all .15s;}
+.sb-log-tab.active{background:#6C2BD9;color:#fff;box-shadow:0 1px 6px rgba(108,43,217,0.25);}
+.sb-rtab{flex:1;height:36px;border:none;background:transparent;font-size:12px;font-weight:500;color:#888;border-bottom:2.5px solid transparent;cursor:pointer;transition:all .15s;}
+.sb-rtab.sb-rtab-active{color:#6C2BD9;font-weight:700;border-bottom-color:#6C2BD9;}
+.sb-tmpl{display:inline-flex;align-items:center;gap:5px;height:26px;padding:0 10px;border:1px solid #DDD8FF;border-radius:14px;background:#F5F0FF;color:#6C2BD9;font-size:11px;font-weight:500;cursor:pointer;white-space:nowrap;transition:background .12s;}
+.sb-tmpl:hover{background:#EDE7FF;}
+.sb-chat-bubble-ai{display:flex;align-items:flex-start;gap:9px;}
+.sb-chat-bubble-ai .sb-bbl,.sb-chat-bubble-ai .sb-bubble{background:#F5F0FF;border:1px solid #E0D4FF;border-radius:4px 14px 14px 14px;padding:11px 14px;font-size:13px;color:#2a2a2a;line-height:1.65;max-width:88%;}
+.sb-chat-bubble-user{display:flex;justify-content:flex-end;}
+.sb-chat-bubble-user .sb-bbl,.sb-chat-bubble-user .sb-bubble{background:linear-gradient(135deg,#6C2BD9,#4F8EF7);color:#fff;border-radius:14px 14px 4px 14px;padding:11px 14px;font-size:13px;line-height:1.65;max-width:82%;}
+.sb-threat-ring{position:relative;width:88px;height:88px;flex-shrink:0;}
+.sb-threat-ring svg{transform:rotate(-90deg);}
+.sb-threat-ring-label{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+.sb-stat{display:flex;flex-direction:column;align-items:center;gap:2px;padding:10px 14px;border-radius:8px;background:#F8F9FB;border:1px solid #ECEDF0;min-width:80px;}
+.sb-sev{display:inline-flex;align-items:center;height:20px;padding:0 8px;border-radius:4px;font-size:10.5px;font-weight:700;letter-spacing:.02em;}
+.sb-sev-critical{background:#FEE2E2;color:#B91C1C;}
+.sb-sev-high{background:#FFEDD5;color:#C2410C;}
+.sb-sev-medium{background:#FEF9C3;color:#854D0E;}
+.sb-sev-low{background:#DCFCE7;color:#166534;}
+.sb-rule-card:hover{background:#F5F0FF!important;border-color:#C4B5FD!important;}
+.sb-step{display:flex;align-items:center;gap:5px;font-size:11.5px;font-weight:600;color:#BBB;}
+.sb-step.done{color:#22C55E;}.sb-step.active{color:#6C2BD9;}
+.sb-step-num{width:20px;height:20px;border-radius:50%;background:#ECEDF0;color:#888;font-size:10.5px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.sb-step.done .sb-step-num{background:#DCFCE7;color:#166534;}
+.sb-step.active .sb-step-num{background:#6C2BD9;color:#fff;}
+.sb-step-sep{width:24px;height:1.5px;background:#E0E0E0;flex-shrink:0;}
+#sb-dropzone:hover{border-color:#6C2BD9!important;background:#FAF8FF!important;}
+#sb-dropzone.drag-over{border-color:#6C2BD9!important;background:#F0EBFF!important;}
+@keyframes sb-pulse{0%,100%{box-shadow:0 0 0 0 rgba(108,43,217,0.4);}50%{box-shadow:0 0 0 8px rgba(108,43,217,0);}}
+.sb-run-btn:not(:disabled):hover{animation:sb-pulse 1.4s ease infinite;}
+</style>
 
-  <!-- Sub-header bar -->
-  <div style="display:flex;align-items:center;justify-content:space-between;padding:0 20px;height:44px;background:#fff;border-bottom:1px solid #E0E0E0;flex-shrink:0;">
-    <div style="display:flex;align-items:center;gap:8px;">
-      <button onclick="closeSandbox()" style="display:flex;align-items:center;justify-content:center;width:24px;height:24px;border:1px solid #DCDCDC;border-radius:2px;background:#fff;cursor:pointer;flex-shrink:0;" title="Back">
-        <img src="./assets/icons/icon-chevron-left.svg" alt="" style="width:14px;height:14px;" />
+<div id="sandboxOverlay" style="display:none;position:fixed;top:80px;left:0;right:0;bottom:0;z-index:9999;background:#F0F1F5;flex-direction:column;">
+
+  <!-- ── TOP BAR ── -->
+  <div style="display:flex;align-items:center;justify-content:space-between;padding:0 20px;height:52px;background:#fff;border-bottom:1px solid #E4E6EA;flex-shrink:0;box-shadow:0 1px 4px rgba(0,0,0,0.06);">
+    <div style="display:flex;align-items:center;gap:12px;">
+      <button onclick="closeSandbox()" style="display:flex;align-items:center;justify-content:center;width:30px;height:30px;border:1.5px solid #E4E6EA;border-radius:7px;background:#fff;cursor:pointer;" title="Back">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
       </button>
-      <div style="width:24px;height:24px;border-radius:5px;background:linear-gradient(135deg,#7B3FE4,#4F8EF7);display:flex;align-items:center;justify-content:center;">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18"/></svg>
+      <div style="width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,#6C2BD9,#4F8EF7);display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(108,43,217,0.28);flex-shrink:0;">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
       </div>
-      <span style="font-size:14px;font-weight:700;color:#1a1a1a;">AI Detection Sandbox</span>
+      <div>
+        <div style="font-size:14px;font-weight:700;color:#0F0F17;line-height:1.2;">AI Detection Sandbox</div>
+        <div style="font-size:10.5px;color:#9CA3AF;line-height:1.2;">Test detections against real or sample logs</div>
+      </div>
     </div>
-    <div style="display:flex;align-items:center;gap:6px;">
-      <button onclick="sbExport('pdf')" style="display:flex;align-items:center;gap:5px;height:28px;padding:0 12px;border:1px solid #DCDCDC;border-radius:4px;background:#fff;color:#333;cursor:pointer;font-size:12px;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>Export PDF</button>
-      <button onclick="sbExport('json')" style="display:flex;align-items:center;gap:5px;height:28px;padding:0 12px;border:1px solid #DCDCDC;border-radius:4px;background:#fff;color:#333;cursor:pointer;font-size:12px;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>Export JSON</button>
-      <div style="width:1px;height:20px;background:#E0E0E0;"></div>
-      <button onclick="closeSandbox()" style="width:28px;height:28px;border-radius:4px;border:1px solid #DCDCDC;background:#fff;color:#555;cursor:pointer;display:flex;align-items:center;justify-content:center;" title="Close">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    <!-- Step indicator -->
+    <div style="display:flex;align-items:center;gap:0;">
+      <div class="sb-step active" id="sbStep1"><div class="sb-step-num">1</div>Load Logs</div>
+      <div class="sb-step-sep"></div>
+      <div class="sb-step" id="sbStep2"><div class="sb-step-num">2</div>Set Criteria</div>
+      <div class="sb-step-sep"></div>
+      <div class="sb-step" id="sbStep3"><div class="sb-step-num">3</div>Run &amp; Analyze</div>
+    </div>
+    <!-- Actions -->
+    <div style="display:flex;align-items:center;gap:8px;">
+      <button onclick="sbOpenDeepSearch()" style="display:inline-flex;align-items:center;gap:7px;height:32px;padding:0 16px;border:none;border-radius:20px;background:linear-gradient(135deg,#6C2BD9,#4F8EF7);color:#fff;font-size:12px;font-weight:600;cursor:pointer;box-shadow:0 2px 10px rgba(108,43,217,0.35);transition:box-shadow .2s,transform .15s;" onmouseover="this.style.transform='translateY(-1px)'" onmouseout="this.style.transform=''">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        Deep Search
+        <span style="background:rgba(255,255,255,0.25);border-radius:10px;padding:1px 6px;font-size:10px;">AI</span>
+      </button>
+      <div style="width:1px;height:22px;background:#E4E6EA;"></div>
+      <button onclick="sbExport('pdf')" style="display:flex;align-items:center;gap:5px;height:32px;padding:0 12px;border:1.5px solid #E4E6EA;border-radius:7px;background:#fff;color:#444;cursor:pointer;font-size:12px;font-weight:500;" onmouseover="this.style.background='#F8F9FB'" onmouseout="this.style.background='#fff'">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        PDF
+      </button>
+      <button onclick="sbExport('json')" style="display:flex;align-items:center;gap:5px;height:32px;padding:0 12px;border:1.5px solid #E4E6EA;border-radius:7px;background:#fff;color:#444;cursor:pointer;font-size:12px;font-weight:500;" onmouseover="this.style.background='#F8F9FB'" onmouseout="this.style.background='#fff'">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        JSON
+      </button>
+      <button onclick="closeSandbox()" style="width:32px;height:32px;border-radius:7px;border:1.5px solid #E4E6EA;background:#fff;color:#666;cursor:pointer;display:flex;align-items:center;justify-content:center;" title="Close" onmouseover="this.style.background='#FEF2F2';this.style.borderColor='#FCA5A5'" onmouseout="this.style.background='#fff';this.style.borderColor='#E4E6EA'">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       </button>
     </div>
   </div>
 
-  <!-- 3-column body -->
-  <div style="display:flex;flex:1;overflow:hidden;gap:0;">
+  <!-- ── 2-COLUMN BODY ── -->
+  <div style="display:flex;flex:1;overflow:hidden;gap:10px;padding:10px 14px 12px;">
 
-    <!-- ── LEFT PANEL ── -->
-    <div style="width:320px;flex-shrink:0;background:#fff;border-right:1px solid #E0E0E0;display:flex;flex-direction:column;overflow:hidden;">
+    <!-- ══ LEFT: DETECTION METHOD + LOG INPUT ══ -->
+    <div style="width:400px;flex-shrink:0;display:flex;flex-direction:column;gap:0;overflow:hidden;">
 
-      <!-- Section header -->
-      <div style="padding:12px 16px 0;border-bottom:1px solid #EFEFEF;">
-        <div style="font-size:12px;font-weight:700;color:#1a1a1a;margin-bottom:10px;display:flex;align-items:center;gap:6px;">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#7B3FE4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
-          Detection Criteria
-        </div>
-        <!-- Mode selector tabs — pick ONE -->
-        <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:4px;margin-bottom:12px;">
-          <button id="sbTab-prompt"  onclick="sbSelectMode('prompt')"  style="height:28px;border:1px solid #7B3FE4;border-radius:4px;background:#7B3FE4;color:#fff;font-size:10px;font-weight:600;cursor:pointer;white-space:nowrap;">Prompt</button>
-          <button id="sbTab-action"  onclick="sbSelectMode('action')"  style="height:28px;border:1px solid #DCDCDC;border-radius:4px;background:#F5F5F5;color:#555;font-size:10px;font-weight:600;cursor:pointer;white-space:nowrap;">Action</button>
-          <button id="sbTab-rules"   onclick="sbSelectMode('rules')"   style="height:28px;border:1px solid #DCDCDC;border-radius:4px;background:#F5F5F5;color:#555;font-size:10px;font-weight:600;cursor:pointer;white-space:nowrap;">Rules</button>
-          <button id="sbTab-profiles" onclick="sbSelectMode('profiles')" style="height:28px;border:1px solid #DCDCDC;border-radius:4px;background:#F5F5F5;color:#555;font-size:10px;font-weight:600;cursor:pointer;white-space:nowrap;">Profiles</button>
+      <!-- ── Detection Method ── -->
+      <div style="background:#fff;border:1px solid #E4E6EA;border-radius:10px 10px 0 0;padding:12px 14px 10px;border-bottom:none;flex-shrink:0;">
+        <div style="font-size:10px;font-weight:700;color:#9CA3AF;text-transform:uppercase;letter-spacing:.7px;margin-bottom:9px;">Detection Method</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+          <button id="sbTab-prompt"   onclick="sbSelectMode('prompt')"   class="sb-crit-tab active">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>AI Prompt
+          </button>
+          <button id="sbTab-action"   onclick="sbSelectMode('action')"   class="sb-crit-tab">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>Filter
+          </button>
+          <button id="sbTab-rules"    onclick="sbSelectMode('rules')"    class="sb-crit-tab">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/></svg>Rules
+          </button>
+          <button id="sbTab-profiles" onclick="sbSelectMode('profiles')" class="sb-crit-tab">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>Profiles
+          </button>
         </div>
       </div>
 
-      <!-- MODE: Prompt -->
-      <div id="sbPane-prompt" style="flex:1;overflow-y:auto;padding:14px 16px;display:flex;flex-direction:column;">
-        <label style="font-size:10px;font-weight:600;color:#888;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:6px;">Custom Prompt / Criteria</label>
-        <textarea id="sb-prompt" placeholder="e.g. Detect brute-force with >5 failed logins in 60s from same IP..." style="width:100%;flex:1;min-height:120px;resize:none;border:1px solid #DCDCDC;border-radius:6px;padding:8px;font-size:11px;color:#333;line-height:1.5;box-sizing:border-box;outline:none;"></textarea>
+      <!-- Criteria pane content (fixed height) -->
+      <div style="background:#fff;border:1px solid #E4E6EA;border-top:1px solid #F0F0F2;height:170px;overflow:hidden;display:flex;flex-direction:column;flex-shrink:0;">
+        <!-- PROMPT pane -->
+        <div id="sbPane-prompt" style="flex:1;display:flex;flex-direction:column;overflow:hidden;padding:12px 14px;">
+          <textarea id="sb-prompt" placeholder="Describe what to detect in plain English&#10;&#10;e.g. Flag any source IP making more than 5 failed SSH logins within 60 seconds" style="flex:1;resize:none;border:1.5px solid #E4E6EA;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#1a1a2e;line-height:1.65;outline:none;background:#FAFBFF;min-height:0;transition:border-color .15s;" onfocus="this.style.borderColor='#6C2BD9';sbMarkStep(2)" onblur="this.style.borderColor='#E4E6EA'"></textarea>
+        </div>
+        <!-- ACTION pane -->
+        <div id="sbPane-action" style="flex:1;display:none;flex-direction:column;overflow-y:auto;padding:12px 14px;gap:8px;">
+          <div style="font-size:10px;font-weight:700;color:#9CA3AF;text-transform:uppercase;letter-spacing:.6px;margin-bottom:2px;">Filter Conditions</div>
+          <div id="sb-action-rows">
+            <div style="display:flex;align-items:center;gap:4px;margin-bottom:6px;">
+              <select style="flex:2;min-width:0;height:30px;border:1.5px solid #E4E6EA;border-radius:6px;padding:0 6px;font-size:11.5px;color:#333;background:#fff;outline:none;cursor:pointer;"><option>Severity</option><option>Log Source</option><option>Event Type</option><option>Username</option><option>Source IP</option></select>
+              <select style="flex:2;min-width:0;height:30px;border:1.5px solid #E4E6EA;border-radius:6px;padding:0 6px;font-size:11.5px;color:#333;background:#fff;outline:none;cursor:pointer;"><option>Equals</option><option>Not Equals</option><option>Contains</option><option>Starts With</option></select>
+              <select style="flex:2;min-width:0;height:30px;border:1.5px solid #E4E6EA;border-radius:6px;padding:0 6px;font-size:11.5px;color:#333;background:#fff;outline:none;cursor:pointer;"><option>Critical</option><option>High</option><option>Medium</option><option>Low</option></select>
+              <button onclick="sbAddActionRow(this)" style="width:30px;height:30px;flex-shrink:0;border:none;border-radius:6px;background:#22C55E;color:#fff;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1;">+</button>
+            </div>
+          </div>
+          <div style="padding:7px 10px;background:#F8F9FB;border:1px solid #E4E6EA;border-radius:6px;font-size:11.5px;color:#555;">Pattern: <span id="sb-action-pattern" style="font-weight:700;color:#6C2BD9;">(1)</span></div>
+        </div>
+        <!-- RULES pane -->
+        <div id="sbPane-rules" style="flex:1;display:none;flex-direction:column;overflow:hidden;padding:12px 14px;gap:8px;">
+          <div style="position:relative;flex-shrink:0;">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#AAA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="position:absolute;left:10px;top:50%;transform:translateY(-50%);"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input id="sb-rule-search" placeholder="Search rules..." oninput="sbFilterRules(this.value)" style="width:100%;height:32px;border:1.5px solid #E4E6EA;border-radius:7px;padding:0 10px 0 32px;font-size:12px;color:#333;background:#F9FAFB;outline:none;" onfocus="this.style.borderColor='#6C2BD9'" onblur="this.style.borderColor='#E4E6EA'" />
+          </div>
+          <div id="sb-rules-list" style="flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:4px;"></div>
+        </div>
+        <!-- PROFILES pane -->
+        <div id="sbPane-profiles" style="flex:1;display:none;flex-direction:column;overflow-y:auto;padding:12px 14px;gap:4px;">
+          <div style="font-size:10px;font-weight:700;color:#9CA3AF;text-transform:uppercase;letter-spacing:.6px;margin-bottom:4px;">Select a Profile</div>
+          <div id="sb-profiles-list" style="display:flex;flex-direction:column;gap:4px;"></div>
+        </div>
       </div>
 
-      <!-- MODE: Custom Action -->
-      <div id="sbPane-action" style="flex:1;overflow-y:auto;padding:14px 16px;display:none;flex-direction:column;">
-        <label style="font-size:10px;font-weight:600;color:#888;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:8px;">Custom Action</label>
-        <div id="sb-action-rows">
-          <div style="display:flex;align-items:center;gap:4px;margin-bottom:6px;">
-            <select style="flex:2;min-width:0;height:28px;border:1px solid #DCDCDC;border-radius:4px;padding:0 4px;font-size:11px;color:#333;background:#fff;outline:none;">
-              <option>Severity</option><option>Log Source</option><option>Event Type</option><option>Username</option><option>Source IP</option>
-            </select>
-            <select style="flex:2;min-width:0;height:28px;border:1px solid #DCDCDC;border-radius:4px;padding:0 4px;font-size:11px;color:#333;background:#fff;outline:none;">
-              <option>Equals</option><option>Not Equals</option><option>Contains</option><option>Starts With</option>
-            </select>
-            <select style="flex:2;min-width:0;height:28px;border:1px solid #DCDCDC;border-radius:4px;padding:0 4px;font-size:11px;color:#333;background:#fff;outline:none;">
-              <option>Emergency</option><option>Critical</option><option>High</option><option>Medium</option><option>Low</option>
-            </select>
-            <button onclick="sbAddActionRow(this)" style="width:28px;height:28px;flex-shrink:0;border:none;border-radius:4px;background:#28A745;color:#fff;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1;">+</button>
+      <!-- ── Divider: Log Input header ── -->
+      <div style="background:#fff;border:1px solid #E4E6EA;border-top:none;border-bottom:1px solid #F0F2F5;padding:8px 14px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;">
+        <div style="display:flex;align-items:center;gap:8px;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6C2BD9" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+          <span style="font-size:12px;font-weight:700;color:#0F0F17;">Log Input</span>
+          <span id="sbLineCount" style="font-size:11px;color:#9CA3AF;background:#F3F4F6;border-radius:10px;padding:1px 8px;display:none;">0 lines</span>
+        </div>
+        <div style="display:flex;align-items:center;background:#F3F4F6;border-radius:7px;padding:2px;gap:2px;">
+          <button id="sbLogMode-paste"    onclick="sbSetLogMode('paste')"    class="sb-log-tab active">Paste / Upload</button>
+          <button id="sbLogMode-historic" onclick="sbSetLogMode('historic')" class="sb-log-tab">Historic</button>
+        </div>
+      </div>
+
+      <!-- PASTE PANE -->
+      <div id="sbLogPane-paste" style="background:#fff;border:1px solid #E4E6EA;border-top:none;flex:1;display:flex;flex-direction:column;overflow:hidden;">
+        <!-- Sub toolbar -->
+        <div style="display:flex;align-items:center;gap:6px;padding:7px 12px;border-bottom:1px solid #F3F4F6;flex-shrink:0;">
+          <div style="position:relative;flex:1;">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#AAA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="position:absolute;left:9px;top:50%;transform:translateY(-50%);"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input id="sb-log-search" placeholder="Filter logs..." oninput="sbHighlightLog(this.value)" style="width:100%;height:26px;border:1.5px solid #E4E6EA;border-radius:6px;padding:0 8px 0 28px;font-size:11.5px;color:#333;background:#fff;outline:none;" onfocus="this.style.borderColor='#6C2BD9'" onblur="this.style.borderColor='#E4E6EA'" />
+          </div>
+          <button onclick="sbLoadRecentLogs()" style="display:flex;align-items:center;gap:4px;height:26px;padding:0 10px;border:1.5px solid #E4E6EA;border-radius:6px;background:#fff;cursor:pointer;font-size:11px;color:#555;font-weight:500;flex-shrink:0;white-space:nowrap;" onmouseover="this.style.background='#F8F9FB'" onmouseout="this.style.background='#fff'">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#6C2BD9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>Sample
+          </button>
+          <label style="display:flex;align-items:center;gap:4px;height:26px;padding:0 10px;border:1.5px solid #E4E6EA;border-radius:6px;background:#fff;cursor:pointer;font-size:11px;color:#555;font-weight:500;flex-shrink:0;white-space:nowrap;" onmouseover="this.style.background='#F8F9FB'" onmouseout="this.style.background='#fff'">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>Upload
+            <input type="file" accept=".log,.txt,.csv,.json,.syslog" onchange="sbLoadFile(event)" style="display:none;" />
+          </label>
+          <button onclick="sbClearLog()" title="Clear" style="height:26px;width:26px;flex-shrink:0;border:1.5px solid #E4E6EA;border-radius:6px;background:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;" onmouseover="this.style.background='#FEF2F2';this.style.borderColor='#FECACA'" onmouseout="this.style.background='#fff';this.style.borderColor='#E4E6EA'">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/></svg>
+          </button>
+        </div>
+        <!-- Drop zone + textarea -->
+        <div id="sb-dropzone" style="flex:1;position:relative;overflow:hidden;border:2px dashed transparent;transition:border-color .15s,background .15s;" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="this.classList.remove('drag-over');sbDropFile(event)">
+          <textarea id="sb-log-input" spellcheck="false" oninput="sbUpdateLineCount(this)" onfocus="sbMarkStep(1)" placeholder="Paste raw log lines here, drag &amp; drop a file, or click Sample...&#10;&#10;2026-04-30T09:12:44 WARN  sshd[2291]: Failed password for root from 185.234.217.19 port 22 ssh2&#10;2026-04-30T09:12:46 WARN  sshd[2291]: Failed password for root from 185.234.217.19 port 22 ssh2" style="position:absolute;inset:0;width:100%;height:100%;padding:12px 14px;font-family:'Cascadia Code','JetBrains Mono',Consolas,monospace;font-size:12px;line-height:1.7;color:#1a1a2e;border:none;resize:none;outline:none;background:transparent;"></textarea>
+        </div>
+        <!-- Footer -->
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:4px 12px;border-top:1px solid #F3F4F6;background:#FAFBFF;flex-shrink:0;">
+          <div style="font-size:10px;color:#9CA3AF;">.log &middot; .txt &middot; .csv &middot; .json &middot; .syslog &nbsp;·&nbsp; drag &amp; drop supported</div>
+          <span id="sbLineCount2" style="font-size:10px;color:#6C2BD9;font-weight:600;"></span>
+        </div>
+      </div>
+
+      <!-- HISTORIC PANE -->
+      <div id="sbLogPane-historic" style="background:#fff;border:1px solid #E4E6EA;border-top:none;flex:1;display:none;flex-direction:column;overflow:hidden;">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:14px;border-bottom:1px solid #F3F4F6;flex-shrink:0;">
+          <div>
+            <label style="font-size:10px;font-weight:700;color:#6B7280;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:5px;">Time Range</label>
+            <div style="position:relative;">
+              <select id="sb-hist-time" onchange="sbHistTimeChange(this.value)" style="width:100%;height:32px;border:1.5px solid #E4E6EA;border-radius:7px;padding:0 28px 0 10px;font-size:12px;color:#333;background:#fff;outline:none;appearance:none;cursor:pointer;" onfocus="this.style.borderColor='#6C2BD9'" onblur="this.style.borderColor='#E4E6EA'"><option value="today">Today</option><option value="yesterday">Yesterday</option><option value="last7" selected>Last 7 Days</option><option value="last30">Last 30 Days</option><option value="custom">Custom Range...</option></select>
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="position:absolute;right:9px;top:50%;transform:translateY(-50%);pointer-events:none;"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+            <div id="sb-hist-custom" style="display:none;margin-top:6px;gap:6px;align-items:center;flex-wrap:wrap;">
+              <input type="date" id="sb-hist-from" onchange="sbHistUpdateSummary()" style="flex:1;height:30px;border:1.5px solid #E4E6EA;border-radius:7px;padding:0 7px;font-size:11.5px;color:#333;outline:none;" />
+              <span style="font-size:11px;color:#9CA3AF;">to</span>
+              <input type="date" id="sb-hist-to" onchange="sbHistUpdateSummary()" style="flex:1;height:30px;border:1.5px solid #E4E6EA;border-radius:7px;padding:0 7px;font-size:11.5px;color:#333;outline:none;" />
+            </div>
+          </div>
+          <div>
+            <label style="font-size:10px;font-weight:700;color:#6B7280;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:5px;">Log Source</label>
+            <div style="position:relative;">
+              <select id="sb-hist-source" onchange="sbHistUpdateSummary()" style="width:100%;height:32px;border:1.5px solid #E4E6EA;border-radius:7px;padding:0 28px 0 10px;font-size:12px;color:#333;background:#fff;outline:none;appearance:none;cursor:pointer;" onfocus="this.style.borderColor='#6C2BD9'" onblur="this.style.borderColor='#E4E6EA'"><option value="all">All Sources</option><option value="syslog">Syslog</option><option value="windows">Windows Event Log</option><option value="firewall">Firewall</option><option value="ids">IDS / IPS</option><option value="cloud">Cloud (AWS/Azure/GCP)</option><option value="endpoint">Endpoint / EDR</option><option value="app">Application Logs</option><option value="db">Database Logs</option></select>
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="position:absolute;right:9px;top:50%;transform:translateY(-50%);pointer-events:none;"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
           </div>
         </div>
-        <div style="margin-top:4px;padding:6px 8px;background:#F7F7F7;border:1px solid #EFEFEF;border-radius:4px;font-size:11px;color:#555;">
-          Criteria Pattern : <span id="sb-action-pattern" style="font-weight:600;">(1)</span>
-          <svg onclick="" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#2C66DD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="cursor:pointer;margin-left:4px;vertical-align:middle;"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+        <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:20px;">
+          <div style="width:48px;height:48px;border-radius:14px;background:linear-gradient(135deg,#EDE9FF,#DBEAFE);display:flex;align-items:center;justify-content:center;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#6C2BD9" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </div>
+          <div style="text-align:center;">
+            <div id="sb-hist-summary" style="font-size:13px;font-weight:700;color:#0F0F17;">Last 7 Days &mdash; All Sources</div>
+            <div style="font-size:11.5px;color:#6B7280;margin-top:4px;">Logs fetched automatically on Run.</div>
+          </div>
+          <div style="display:flex;align-items:center;gap:6px;padding:6px 14px;background:#ECFDF5;border:1px solid #A7F3D0;border-radius:20px;font-size:11.5px;color:#059669;font-weight:600;">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Ready to run
+          </div>
         </div>
-      </div>
-
-      <!-- MODE: Existing Rules -->
-      <div id="sbPane-rules" style="flex:1;overflow-y:auto;padding:14px 16px;display:none;flex-direction:column;">
-        <label style="font-size:10px;font-weight:600;color:#888;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:8px;">Existing Rules</label>
-        <div style="position:relative;margin-bottom:8px;">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#AAAAAA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="position:absolute;left:8px;top:50%;transform:translateY(-50%);"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          <input id="sb-rule-search" placeholder="Search rules..." oninput="sbFilterRules(this.value)" style="width:100%;height:28px;border:1px solid #DCDCDC;border-radius:6px;padding:0 8px 0 28px;font-size:11px;color:#333;background:#F9F9F9;outline:none;box-sizing:border-box;" />
-        </div>
-        <div id="sb-rules-list" style="flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:2px;"></div>
-      </div>
-
-      <!-- MODE: Alert Profiles -->
-      <div id="sbPane-profiles" style="flex:1;overflow-y:auto;padding:14px 16px;display:none;flex-direction:column;">
-        <label style="font-size:10px;font-weight:600;color:#888;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:8px;">Alert Profiles</label>
-        <div id="sb-profiles-list" style="display:flex;flex-direction:column;gap:2px;"></div>
       </div>
 
       <!-- Run button -->
-      <div style="padding:12px 16px;border-top:1px solid #EFEFEF;flex-shrink:0;">
-        <button onclick="sbRunDetection()" style="width:100%;height:34px;border:none;border-radius:6px;background:linear-gradient(135deg,#7B3FE4,#4F8EF7);color:#fff;font-size:12px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;">
+      <div style="background:#fff;border:1px solid #E4E6EA;border-top:none;border-radius:0 0 10px 10px;padding:10px 14px;flex-shrink:0;">
+        <button onclick="sbRunDetection();sbMarkStep(3)" class="sb-run-btn" title="Ctrl+Enter to run" style="width:100%;height:38px;border:none;border-radius:9px;background:linear-gradient(135deg,#6C2BD9 0%,#4F8EF7 100%);color:#fff;font-size:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 3px 12px rgba(108,43,217,0.32);transition:box-shadow .2s;letter-spacing:.01em;">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
           Run AI Detection
+          <span style="font-size:10px;opacity:.7;font-weight:500;">Ctrl+Enter</span>
         </button>
       </div>
     </div>
 
-    <!-- ── CENTER PANEL ── -->
-    <div style="flex:1;display:flex;flex-direction:column;overflow:hidden;padding:16px;gap:12px;min-width:0;">
-
-      <!-- Log Input area -->
-      <div style="background:#fff;border:1px solid #E0E0E0;border-radius:8px;display:flex;flex-direction:column;flex:1;overflow:hidden;">
-
-        <!-- Header row: title + mode toggle -->
-        <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-bottom:1px solid #F0F0F0;flex-shrink:0;">
-          <div style="display:flex;align-items:center;gap:6px;">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#7B3FE4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
-            <span style="font-size:12px;font-weight:700;color:#1a1a1a;">Log Input</span>
+    <!-- ══ RIGHT: AI RESULTS (flex:1 — takes all remaining space) ══ -->
+    <div style="flex:1;min-width:0;display:flex;flex-direction:column;overflow:hidden;">
+      <!-- Results header -->
+      <div style="background:linear-gradient(135deg,#F5F0FF,#EEF5FF);border:1px solid #E4E6EA;border-radius:10px 10px 0 0;border-bottom:1px solid #EAE4FF;padding:12px 16px 10px;flex-shrink:0;">
+        <div style="display:flex;align-items:center;justify-content:space-between;">
+          <div style="display:flex;align-items:center;gap:8px;">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#6C2BD9" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            <span style="font-size:13px;font-weight:700;color:#0F0F17;">AI Detection Results</span>
           </div>
-          <!-- Mode pills -->
-          <div style="display:flex;align-items:center;background:#F3F3F3;border-radius:6px;padding:2px;gap:2px;">
-            <button id="sbLogMode-paste" onclick="sbSetLogMode('paste')" style="height:24px;padding:0 12px;border:none;border-radius:4px;background:#7B3FE4;color:#fff;font-size:11px;font-weight:600;cursor:pointer;">Paste / Upload</button>
-            <button id="sbLogMode-historic" onclick="sbSetLogMode('historic')" style="height:24px;padding:0 12px;border:none;border-radius:4px;background:transparent;color:#555;font-size:11px;font-weight:600;cursor:pointer;">Historic Log</button>
-          </div>
+          <span id="sbResultsStatus" style="font-size:11px;color:#9CA3AF;background:#fff;border-radius:10px;padding:2px 9px;border:1px solid #EAE4FF;">Awaiting analysis</span>
         </div>
-
-        <!-- ── PASTE / UPLOAD MODE ── -->
-        <div id="sbLogPane-paste" style="display:flex;flex-direction:column;flex:1;overflow:hidden;">
-          <!-- Sub-toolbar -->
-          <div style="display:flex;align-items:center;gap:6px;padding:7px 14px;border-bottom:1px solid #F5F5F5;flex-shrink:0;background:#FAFAFA;">
-            <div style="position:relative;flex:1;">
-              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#AAAAAA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="position:absolute;left:7px;top:50%;transform:translateY(-50%);"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-              <input id="sb-log-search" placeholder="Search logs..." oninput="sbHighlightLog(this.value)" style="width:100%;height:26px;border:1px solid #DCDCDC;border-radius:4px;padding:0 8px 0 26px;font-size:11px;color:#333;background:#fff;outline:none;box-sizing:border-box;" />
-            </div>
-            <label style="display:flex;align-items:center;gap:5px;height:26px;padding:0 10px;border:1px solid #DCDCDC;border-radius:4px;background:#fff;cursor:pointer;font-size:11px;color:#555;white-space:nowrap;flex-shrink:0;">
-              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-              Upload File
-              <input type="file" accept=".log,.txt,.csv,.json" onchange="sbLoadFile(event)" style="display:none;" />
-            </label>
-            <button onclick="sbClearLog()" title="Clear" style="height:26px;width:26px;flex-shrink:0;border:1px solid #DCDCDC;border-radius:4px;background:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;">
-              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/><path d="M10 11v6M14 11v6"/></svg>
-            </button>
-          </div>
-          <textarea id="sb-log-input" spellcheck="false" placeholder="Paste raw log lines here or upload a file…
-
-Example:
-2026-04-30T09:12:44 WARN  sshd[2291]: Failed password for root from 185.234.217.19 port 22 ssh2
-2026-04-30T09:12:46 WARN  sshd[2291]: Failed password for root from 185.234.217.19 port 22 ssh2
-2026-04-30T09:12:49 WARN  sshd[2291]: Failed password for root from 185.234.217.19 port 22 ssh2" style="flex:1;padding:12px 14px;font-family:monospace;font-size:11.5px;line-height:1.6;color:#1a1a1a;border:none;resize:none;outline:none;background:#FAFAFA;"></textarea>
-        </div>
-
-        <!-- ── HISTORIC LOG MODE ── -->
-        <div id="sbLogPane-historic" style="display:none;flex-direction:column;flex:1;overflow:hidden;">
-          <!-- Controls row -->
-          <div style="display:flex;align-items:flex-start;gap:12px;padding:14px 16px;border-bottom:1px solid #F0F0F0;flex-shrink:0;background:#FAFAFA;">
-            <!-- Time Range -->
-            <div style="flex:1;min-width:0;">
-              <label style="font-size:10px;font-weight:600;color:#888;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:5px;">Time Range</label>
-              <div style="position:relative;">
-                <select id="sb-hist-time" onchange="sbHistTimeChange(this.value)" style="width:100%;height:30px;border:1px solid #DCDCDC;border-radius:5px;padding:0 28px 0 8px;font-size:12px;color:#333;background:#fff;outline:none;appearance:none;cursor:pointer;">
-                  <option value="today">Today</option>
-                  <option value="yesterday">Yesterday</option>
-                  <option value="last7" selected>Last 7 Days</option>
-                  <option value="last30">Last 30 Days</option>
-                  <option value="custom">Custom Range…</option>
-                </select>
-                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="position:absolute;right:8px;top:50%;transform:translateY(-50%);pointer-events:none;"><polyline points="6 9 12 15 18 9"/></svg>
-              </div>
-              <!-- Custom date-range row -->
-              <div id="sb-hist-custom" style="display:none;margin-top:6px;display:none;gap:6px;align-items:center;">
-                <input type="date" id="sb-hist-from" onchange="sbHistUpdateSummary()" style="flex:1;height:28px;border:1px solid #DCDCDC;border-radius:4px;padding:0 6px;font-size:11px;color:#333;outline:none;" />
-                <span style="font-size:11px;color:#888;">to</span>
-                <input type="date" id="sb-hist-to" onchange="sbHistUpdateSummary()" style="flex:1;height:28px;border:1px solid #DCDCDC;border-radius:4px;padding:0 6px;font-size:11px;color:#333;outline:none;" />
-              </div>
-            </div>
-            <!-- Source -->
-            <div style="flex:1;min-width:0;">
-              <label style="font-size:10px;font-weight:600;color:#888;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:5px;">Log Source</label>
-              <div style="position:relative;">
-                <select id="sb-hist-source" onchange="sbHistUpdateSummary()" style="width:100%;height:30px;border:1px solid #DCDCDC;border-radius:5px;padding:0 28px 0 8px;font-size:12px;color:#333;background:#fff;outline:none;appearance:none;cursor:pointer;">
-                  <option value="all">All Sources</option>
-                  <option value="syslog">Syslog</option>
-                  <option value="windows">Windows Event Log</option>
-                  <option value="firewall">Firewall</option>
-                  <option value="ids">IDS / IPS</option>
-                  <option value="cloud">Cloud (AWS / Azure / GCP)</option>
-                  <option value="endpoint">Endpoint / EDR</option>
-                  <option value="app">Application Logs</option>
-                  <option value="db">Database Logs</option>
-                </select>
-                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="position:absolute;right:8px;top:50%;transform:translateY(-50%);pointer-events:none;"><polyline points="6 9 12 15 18 9"/></svg>
-              </div>
-            </div>
-          </div>
-          <!-- Selected summary card -->
-          <div style="flex:1;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;background:#FAFAFA;padding:20px;">
-            <div style="width:48px;height:48px;border-radius:12px;background:linear-gradient(135deg,#EDE9FF,#E6EEFF);display:flex;align-items:center;justify-content:center;">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7B3FE4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-            </div>
-            <div style="text-align:center;">
-              <div id="sb-hist-summary" style="font-size:13px;font-weight:600;color:#1a1a1a;">Last 7 Days — All Sources</div>
-              <div style="font-size:11px;color:#888;margin-top:3px;">Product logs will be fetched automatically when you run detection</div>
-            </div>
-            <div style="display:flex;align-items:center;gap:6px;padding:6px 14px;background:#F0EBFF;border-radius:20px;font-size:11px;color:#7B3FE4;font-weight:600;">
-              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-              Ready to run
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- Chat box -->
-      <div style="background:#fff;border:1px solid #E0E0E0;border-radius:8px;overflow:hidden;flex:1;display:flex;flex-direction:column;">
-        <div id="sb-chat-history" style="flex:1;overflow-y:auto;padding:10px 14px;display:flex;flex-direction:column;gap:8px;background:#FAFAFA;">
-          <!-- Initial AI greeting -->
-          <div style="display:flex;align-items:flex-start;gap:8px;">
-            <div style="width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,#7B3FE4,#4F8EF7);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 100 20A10 10 0 0012 2z"/><path d="M12 8v4l3 3"/></svg>
-            </div>
-            <div style="background:#fff;border:1px solid #E8E2FF;border-radius:0 10px 10px 10px;padding:10px 13px;max-width:85%;box-shadow:0 1px 4px rgba(123,63,228,0.07);">
-              <div style="font-size:12px;color:#333;line-height:1.6;">
-                👋 Hello! I'm your AI Detection Assistant.<br/>
-                <span style="color:#666;font-size:11.5px;">To get started, select a <b style="color:#333;">Detection Criteria</b>, provide your logs, then click <b style="color:#7B3FE4;">Run AI Detection</b> — or just ask me anything below.</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div style="display:flex;align-items:center;gap:8px;padding:8px 12px;border-top:1px solid #F0F0F0;">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#7B3FE4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
-          <input id="sb-chat-input" placeholder="Ask about this log, rule or criteria — e.g. &quot;What IPs were involved?&quot;" style="flex:1;height:30px;border:1px solid #E0E0E0;border-radius:20px;padding:0 14px;font-size:12px;color:#333;outline:none;" onkeydown="if(event.key==='Enter')sbSendChat()" />
-          <button onclick="sbSendChat()" style="width:30px;height:30px;border:none;border-radius:50%;background:linear-gradient(135deg,#7B3FE4,#4F8EF7);display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <!-- ── RIGHT PANEL ── -->
-    <div style="width:480px;flex-shrink:0;background:#fff;border-left:1px solid #E0E0E0;display:flex;flex-direction:column;overflow:hidden;">
-      <!-- Header -->
-      <div style="padding:12px 16px;border-bottom:1px solid #EFEFEF;background:linear-gradient(135deg,#F5F0FF,#EEF3FF);">
-        <div style="font-size:12px;font-weight:700;color:#1a1a1a;display:flex;align-items:center;gap:6px;">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#7B3FE4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-          AI Detection Results
-        </div>
-        <div style="font-size:10px;color:#888;margin-top:2px;">Run detection to see results</div>
       </div>
       <!-- Tabs -->
-      <div style="display:flex;border-bottom:1px solid #EFEFEF;">
-        <button class="sb-rtab active" data-tab="overview" onclick="sbSwitchTab('overview',this)" style="flex:1;height:32px;border:none;background:transparent;font-size:11px;font-weight:600;color:#7B3FE4;border-bottom:2px solid #7B3FE4;cursor:pointer;">Overview</button>
-        <button class="sb-rtab" data-tab="iocs" onclick="sbSwitchTab('iocs',this)" style="flex:1;height:32px;border:none;background:transparent;font-size:11px;font-weight:500;color:#888;border-bottom:2px solid transparent;cursor:pointer;">IOCs</button>
-        <button class="sb-rtab" data-tab="timeline" onclick="sbSwitchTab('timeline',this)" style="flex:1;height:32px;border:none;background:transparent;font-size:11px;font-weight:500;color:#888;border-bottom:2px solid transparent;cursor:pointer;">Timeline</button>
+      <div style="background:#fff;border:1px solid #E4E6EA;border-top:none;display:flex;flex-shrink:0;">
+        <button class="sb-rtab sb-rtab-active" onclick="sbSwitchTab('overview',this)">Overview</button>
+        <button class="sb-rtab" onclick="sbSwitchTab('iocs',this)">IOCs</button>
+        <button class="sb-rtab" onclick="sbSwitchTab('timeline',this)">Timeline</button>
       </div>
       <!-- Tab content -->
-      <div style="flex:1;overflow-y:auto;">
-        <!-- Overview -->
-        <div id="sb-tab-overview" style="padding:14px;display:flex;flex-direction:column;gap:10px;">
-          <div style="text-align:center;padding:40px 20px;color:#BDBDBD;">
-            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:10px;"><path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18"/></svg>
-            <div style="font-size:12px;">Paste logs and click<br><b style="color:#7B3FE4;">Run AI Detection</b></div>
+      <div style="background:#fff;border:1px solid #E4E6EA;border-top:none;border-radius:0 0 10px 10px;flex:1;overflow-y:auto;">
+        <!-- OVERVIEW -->
+        <div id="sb-tab-overview" style="display:flex;flex-direction:column;">
+          <div id="sbEmptyState" style="padding:52px 24px;display:flex;flex-direction:column;align-items:center;gap:14px;">
+            <div style="position:relative;">
+              <div style="width:68px;height:68px;border-radius:50%;background:linear-gradient(135deg,#EDE9FF,#DBEAFE);display:flex;align-items:center;justify-content:center;">
+                <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#A78BFA" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+              </div>
+              <div style="position:absolute;bottom:-2px;right:-2px;width:22px;height:22px;border-radius:50%;background:#6C2BD9;display:flex;align-items:center;justify-content:center;border:2px solid #fff;">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+              </div>
+            </div>
+            <div style="text-align:center;">
+              <div style="font-size:14px;font-weight:700;color:#374151;">No analysis yet</div>
+              <div style="font-size:12px;color:#9CA3AF;margin-top:5px;line-height:1.6;">Add your logs, set detection criteria,<br/>then click <b style="color:#6C2BD9;">Run AI Detection</b>.</div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:7px;width:100%;max-width:240px;">
+              <div style="display:flex;align-items:center;gap:9px;padding:9px 12px;background:#F9FAFB;border:1px solid #F3F4F6;border-radius:8px;">
+                <div style="width:24px;height:24px;border-radius:6px;background:#EDE9FF;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><span style="font-size:11px;font-weight:700;color:#6C2BD9;">1</span></div>
+                <span style="font-size:12px;color:#374151;">Paste or upload log data</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:9px;padding:9px 12px;background:#F9FAFB;border:1px solid #F3F4F6;border-radius:8px;">
+                <div style="width:24px;height:24px;border-radius:6px;background:#EDE9FF;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><span style="font-size:11px;font-weight:700;color:#6C2BD9;">2</span></div>
+                <span style="font-size:12px;color:#374151;">Choose detection method</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:9px;padding:9px 12px;background:#F9FAFB;border:1px solid #F3F4F6;border-radius:8px;">
+                <div style="width:24px;height:24px;border-radius:6px;background:#EDE9FF;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><span style="font-size:11px;font-weight:700;color:#6C2BD9;">3</span></div>
+                <span style="font-size:12px;color:#374151;">Run &amp; review AI results</span>
+              </div>
+            </div>
           </div>
         </div>
         <!-- IOCs -->
         <div id="sb-tab-iocs" style="padding:14px;display:none;flex-direction:column;gap:8px;">
-          <div style="text-align:center;padding:40px 20px;color:#BDBDBD;font-size:12px;">No IOCs detected yet</div>
+          <div style="text-align:center;padding:52px 24px;color:#9CA3AF;font-size:12.5px;">Run detection to see extracted indicators</div>
         </div>
         <!-- Timeline -->
         <div id="sb-tab-timeline" style="padding:14px;display:none;flex-direction:column;gap:6px;">
-          <div style="text-align:center;padding:40px 20px;color:#BDBDBD;font-size:12px;">No timeline events yet</div>
+          <div style="text-align:center;padding:52px 24px;color:#9CA3AF;font-size:12.5px;">Run detection to build the attack timeline</div>
         </div>
       </div>
     </div>
+
+  </div><!-- /body -->
+</div><!-- /sandboxOverlay -->
+
+<!-- DEEP SEARCH BACKDROP -->
+<div id="sbDeepBackdrop" onclick="sbCloseDeepSearch()"></div>
+
+<!-- DEEP SEARCH DRAWER -->
+<div id="sbDeepDrawer">
+  <div style="display:flex;align-items:center;justify-content:space-between;padding:16px 18px;border-bottom:1px solid #F0F0F5;flex-shrink:0;background:linear-gradient(135deg,#F5F0FF,#EEF3FF);">
+    <div style="display:flex;align-items:center;gap:10px;">
+      <div style="width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,#6C2BD9,#4F8EF7);display:flex;align-items:center;justify-content:center;box-shadow:0 3px 10px rgba(108,43,217,0.3);">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+      </div>
+      <div>
+        <div style="font-size:14px;font-weight:700;color:#0F0F17;">Deep Search</div>
+        <div style="font-size:11px;color:#9CA3AF;">AI-powered investigation assistant</div>
+      </div>
+    </div>
+    <button onclick="sbCloseDeepSearch()" style="width:30px;height:30px;border:1.5px solid #E4E6EA;border-radius:7px;background:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;" onmouseover="this.style.background='#FEF2F2'" onmouseout="this.style.background='#fff'">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <div id="sb-chat-history" style="flex:1;overflow-y:auto;padding:16px 18px;display:flex;flex-direction:column;gap:14px;background:#FAFBFF;">
+    <div class="sb-chat-bubble-ai">
+      <div style="width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#6C2BD9,#4F8EF7);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;box-shadow:0 2px 6px rgba(108,43,217,0.25);">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+      </div>
+      <div class="sb-bbl">
+        &#x1F44B; Hi! I&apos;m your <b>AI Detection Assistant</b>.<br/>
+        <span style="color:#555;font-size:12px;">Ask anything about logs, detections, IOCs, or MITRE techniques. Use the quick prompts below or type freely.</span>
+      </div>
+    </div>
+  </div>
+  <div style="padding:10px 18px 8px;border-top:1px solid #F0F0F5;background:#fff;flex-shrink:0;">
+    <div style="font-size:10px;font-weight:700;color:#9CA3AF;text-transform:uppercase;letter-spacing:.6px;margin-bottom:7px;">Quick Prompts</div>
+    <div style="display:flex;flex-wrap:wrap;gap:6px;">
+      <button onclick="sbQuickPrompt(this.textContent.trim())" style="height:28px;padding:0 12px;border:1.5px solid #DDD8FF;border-radius:14px;background:#F5F0FF;color:#6C2BD9;font-size:11.5px;font-weight:500;cursor:pointer;white-space:nowrap;" onmouseover="this.style.background='#EDE7FF'" onmouseout="this.style.background='#F5F0FF'">&#x1F310; What IPs were involved?</button>
+      <button onclick="sbQuickPrompt(this.textContent.trim())" style="height:28px;padding:0 12px;border:1.5px solid #DDD8FF;border-radius:14px;background:#F5F0FF;color:#6C2BD9;font-size:11.5px;font-weight:500;cursor:pointer;white-space:nowrap;" onmouseover="this.style.background='#EDE7FF'" onmouseout="this.style.background='#F5F0FF'">&#x1F4CB; Summarize findings</button>
+      <button onclick="sbQuickPrompt(this.textContent.trim())" style="height:28px;padding:0 12px;border:1.5px solid #DDD8FF;border-radius:14px;background:#F5F0FF;color:#6C2BD9;font-size:11.5px;font-weight:500;cursor:pointer;white-space:nowrap;" onmouseover="this.style.background='#EDE7FF'" onmouseout="this.style.background='#F5F0FF'">&#x1F3AF; Explain MITRE technique</button>
+      <button onclick="sbQuickPrompt(this.textContent.trim())" style="height:28px;padding:0 12px;border:1.5px solid #DDD8FF;border-radius:14px;background:#F5F0FF;color:#6C2BD9;font-size:11.5px;font-weight:500;cursor:pointer;white-space:nowrap;" onmouseover="this.style.background='#EDE7FF'" onmouseout="this.style.background='#F5F0FF'">&#x1F6E1;&#xFE0F; Recommended next steps</button>
+      <button onclick="sbQuickPrompt(this.textContent.trim())" style="height:28px;padding:0 12px;border:1.5px solid #DDD8FF;border-radius:14px;background:#F5F0FF;color:#6C2BD9;font-size:11.5px;font-weight:500;cursor:pointer;white-space:nowrap;" onmouseover="this.style.background='#EDE7FF'" onmouseout="this.style.background='#F5F0FF'">&#x23F1;&#xFE0F; Attack timeline</button>
+      <button onclick="sbQuickPrompt(this.textContent.trim())" style="height:28px;padding:0 12px;border:1.5px solid #DDD8FF;border-radius:14px;background:#F5F0FF;color:#6C2BD9;font-size:11.5px;font-weight:500;cursor:pointer;white-space:nowrap;" onmouseover="this.style.background='#EDE7FF'" onmouseout="this.style.background='#F5F0FF'">&#x1F4CA; Severity breakdown</button>
+    </div>
+  </div>
+  <div style="display:flex;align-items:flex-end;gap:10px;padding:10px 18px 16px;background:#fff;flex-shrink:0;border-top:1px solid #F0F0F5;">
+    <textarea id="sb-chat-input" rows="1" placeholder="Ask anything about this detection..." style="flex:1;min-height:40px;max-height:100px;border:1.5px solid #E4E6EA;border-radius:10px;padding:10px 14px;font-size:13px;color:#1a1a2e;outline:none;background:#FAFBFF;resize:none;line-height:1.5;font-family:inherit;transition:border-color .15s;" onfocus="this.style.borderColor='#6C2BD9'" onblur="this.style.borderColor='#E4E6EA'" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sbSendChat();}" oninput="this.style.height='auto';this.style.height=Math.min(this.scrollHeight,100)+'px'"></textarea>
+    <button onclick="sbSendChat()" style="width:40px;height:40px;border:none;border-radius:10px;background:linear-gradient(135deg,#6C2BD9,#4F8EF7);display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;box-shadow:0 2px 8px rgba(108,43,217,0.3);" onmouseover="this.style.boxShadow='0 4px 14px rgba(108,43,217,0.45)'" onmouseout="this.style.boxShadow='0 2px 8px rgba(108,43,217,0.3)'">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+    </button>
   </div>
 </div>
-
 <!-- Add Alert Profile Drawer -->
 <div class="drawer-backdrop" data-drawer="thAddProfileDrawer"></div>
 <div class="drawer drawer--md" id="thAddProfileDrawer">
@@ -12668,9 +12754,8 @@ function sbSelectMode(mode) {
     if (!pane || !tab) return;
     var active = (m === mode);
     pane.style.display = active ? 'flex' : 'none';
-    tab.style.background = active ? '#7B3FE4' : '#F5F5F5';
-    tab.style.color       = active ? '#fff'    : '#555';
-    tab.style.border      = active ? '1px solid #7B3FE4' : '1px solid #DCDCDC';
+    if (active) { tab.classList.add('active'); }
+    else        { tab.classList.remove('active'); }
   });
 }
 
@@ -12703,10 +12788,37 @@ function openSandbox() {
   el.style.display = 'flex';
   sbPopulateLists();
   sbSelectMode('prompt');
+  sbMarkStep(1);
+  // Ctrl+Enter runs detection
+  var ta = document.getElementById('sb-log-input');
+  if (ta && !ta._sbKeyBound) {
+    ta._sbKeyBound = true;
+    ta.addEventListener('keydown', function(e) {
+      if (e.ctrlKey && e.key === 'Enter') { e.preventDefault(); sbRunDetection(); sbMarkStep(3); }
+    });
+  }
 }
 function closeSandbox() {
   var el = document.getElementById('sandboxOverlay');
   if (el) el.style.display = 'none';
+  sbCloseDeepSearch();
+}
+function sbOpenDeepSearch() {
+  var d = document.getElementById('sbDeepDrawer');
+  var b = document.getElementById('sbDeepBackdrop');
+  if (d) d.classList.add('open');
+  if (b) { b.style.display = 'block'; }
+}
+function sbCloseDeepSearch() {
+  var d = document.getElementById('sbDeepDrawer');
+  var b = document.getElementById('sbDeepBackdrop');
+  if (d) d.classList.remove('open');
+  if (b) b.style.display = 'none';
+}
+function sbQuickPrompt(text) {
+  var inp = document.getElementById('sb-chat-input');
+  if (inp) { inp.value = text; inp.focus(); }
+  sbSendChat();
 }
 function sbPopulateLists() {
   var rl = document.getElementById('sb-rules-list');
@@ -12791,14 +12903,70 @@ function sbLoadRecentLogs() {
 function sbLoadFile(evt) {
   var file = evt.target.files[0]; if (!file) return;
   var reader = new FileReader();
-  reader.onload = function(e) { var el = document.getElementById('sb-log-input'); if (el) el.value = e.target.result; };
+  reader.onload = function(e) {
+    var el = document.getElementById('sb-log-input');
+    if (el) { el.value = e.target.result; sbUpdateLineCount(el); }
+  };
   reader.readAsText(file);
 }
 function sbClearLog() {
-  sbClearLast7();
+  var ta = document.getElementById('sb-log-input');
+  if (ta) { ta.value = ''; sbUpdateLineCount(ta); }
   var ls = document.getElementById('sb-log-search'); if (ls) ls.value = '';
 }
 function sbHighlightLog(q) { /* highlight matching text – visual only, no-op in demo */ }
+function sbMarkStep(n) {
+  [1,2,3].forEach(function(i) {
+    var el = document.getElementById('sbStep'+i);
+    if (!el) return;
+    el.className = 'sb-step' + (i < n ? ' done' : (i === n ? ' active' : ''));
+  });
+}
+function sbUpdateLineCount(ta) {
+  var lines = ta.value ? ta.value.split('\n').length : 0;
+  var bytes = new Blob([ta.value]).size;
+  var label = lines > 0 ? lines + ' line' + (lines !== 1 ? 's' : '') + ' \u00B7 ' + (bytes < 1024 ? bytes + ' B' : (bytes / 1024).toFixed(1) + ' KB') : '';
+  var lc1 = document.getElementById('sbLineCount');
+  var lc2 = document.getElementById('sbLineCount2');
+  if (lc1) { lc1.textContent = label; lc1.style.display = label ? '' : 'none'; }
+  if (lc2) lc2.textContent = label;
+  if (lines > 0) sbMarkStep(1);
+}
+function sbSetPromptTemplate(btn) {
+  var templates = {
+    'Brute Force': 'Detect any source IP that makes more than 5 failed authentication attempts within 60 seconds. Flag as a brute-force attack, include source IP, target account, and timestamps.',
+    'Cloud Anomaly': 'Identify unusual cloud API calls or resource creation events that deviate from baseline behavior, including off-hours activity, unexpected regions, or large data transfers.',
+    'Privilege Escalation': 'Detect any user account that gains elevated privileges (sudo, admin role assignment, group change) and correlate with prior suspicious activity in the same session.',
+    'Data Exfiltration': 'Identify large outbound data transfers (> 100 MB) to external IPs, especially outside business hours. Flag DNS beaconing patterns or repeated POST requests to unknown hosts.',
+    'Lateral Movement': 'Detect SMB connections, RDP sessions, or credential reuse across multiple internal hosts within a short timeframe, indicating lateral movement.',
+    'Malware C2': 'Identify beaconing behavior: repeated outbound connections to the same external IP/domain at regular intervals, especially with small payloads or unusual user agents.'
+  };
+  var key = btn.textContent.replace(/^[\s\S]*?\s/, '').trim();
+  var label = Object.keys(templates).find(function(k) { return btn.textContent.indexOf(k) !== -1; });
+  var el = document.getElementById('sb-prompt');
+  if (el && label) { el.value = templates[label]; el.focus(); sbMarkStep(2); }
+}
+function sbDropFile(evt) {
+  evt.preventDefault();
+  var file = evt.dataTransfer && evt.dataTransfer.files[0];
+  if (!file) return;
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    var el = document.getElementById('sb-log-input');
+    if (el) { el.value = e.target.result; sbUpdateLineCount(el); }
+  };
+  reader.readAsText(file);
+}
+function sbExport(fmt) {
+  var el = document.getElementById('sb-log-input');
+  var content = el ? el.value : '';
+  if (fmt === 'json') {
+    var blob = new Blob([JSON.stringify({logs: content, exported: new Date().toISOString()}, null, 2)], {type: 'application/json'});
+    var a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'detection-results.json'; a.click();
+  } else {
+    alert('PDF export: In production this would generate a formatted PDF report.');
+  }
+}
 function sbSwitchTab(tab, btn) {
   ['overview', 'iocs', 'timeline'].forEach(function(t) {
     var el = document.getElementById('sb-tab-' + t);
